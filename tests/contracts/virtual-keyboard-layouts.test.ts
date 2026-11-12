@@ -60,6 +60,9 @@ describe("script-aware virtual keyboard layouts", () => {
 
     const assamese = getVirtualKeyboardLayout(languageRegistry.assamese);
     expect(assamese.specialKeys?.keys.map((key) => key.output)).toContain("ৱ");
+    const gujarati = getVirtualKeyboardLayout(languageRegistry.gujarati);
+    expect(gujarati.specialKeys?.keys.map((key) => key.output)).toContain("ઞ");
+    expect(output("gujarati", "]", "shift")).toBe("઼");
   });
 
   it("exposes Malayalam chillu characters as explicit special keys", () => {
