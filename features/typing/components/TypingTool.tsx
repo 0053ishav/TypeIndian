@@ -272,26 +272,14 @@ export default function TypingTool({ language }: { language: Language }) {
     const textarea = e.currentTarget;
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
-    const words = pastedText.split(/\s+/).filter(Boolean);
+    const words = pastedText.split(/\\s+/).filter(Boolean);
+    const operationId = ++editorOperationIdRef.current;
+    cancelPendingSuggestions();
     setLoading(true);
-    suggestionRequestRef.current?.abort();
-    if (suggestionTimerRef.current) clearTimeout(suggestionTimerRef.current);
 
     try {
-      const results = await Promise.all(
-        words.map(async (word) => {
-          try {
-            const suggestions = await fetchSuggestions(
-              word,
-              language.transliteration.languageCode,
-              1,
-            );
-            return suggestions[0] || word;
-          } catch {
-            return word;
-          }
-        }),
-      );
+      const results = await transliterateWords(words);
+      if (operationId !== editorOperationIdRef.current) return;
 
       const translated = results.join(" ");
       const next = text.slice(0, start) + translated + text.slice(end);
@@ -308,7 +296,7 @@ export default function TypingTool({ language }: { language: Language }) {
         currentTextarea.setSelectionRange(cursor, cursor);
       });
     } finally {
-      setLoading(false);
+      if (operationId === editorOperationIdRef.current) setLoading(false);
     }
   };
 
@@ -322,26 +310,14 @@ export default function TypingTool({ language }: { language: Language }) {
     const textarea = e.currentTarget;
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
-    const words = droppedText.split(/\s+/).filter(Boolean);
+    const words = droppedText.split(/\\s+/).filter(Boolean);
+    const operationId = ++editorOperationIdRef.current;
+    cancelPendingSuggestions();
     setLoading(true);
-    suggestionRequestRef.current?.abort();
-    if (suggestionTimerRef.current) clearTimeout(suggestionTimerRef.current);
 
     try {
-      const results = await Promise.all(
-        words.map(async (word) => {
-          try {
-            const suggestions = await fetchSuggestions(
-              word,
-              language.transliteration.languageCode,
-              1,
-            );
-            return suggestions[0] || word;
-          } catch {
-            return word;
-          }
-        }),
-      );
+      const results = await transliterateWords(words);
+      if (operationId !== editorOperationIdRef.current) return;
 
       const translated = results.join(" ");
       const next = text.slice(0, start) + translated + text.slice(end);
@@ -358,7 +334,7 @@ export default function TypingTool({ language }: { language: Language }) {
         currentTextarea.setSelectionRange(cursor, cursor);
       });
     } finally {
-      setLoading(false);
+      if (operationId === editorOperationIdRef.current) setLoading(false);
     }
   };
 
