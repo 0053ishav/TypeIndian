@@ -58,7 +58,8 @@ export default function VirtualKeyboard({
         </div>
       </div>
 
-      <div className="space-y-1.5" role="group" aria-label="Virtual typing keys">
+      <div className="overflow-x-auto pb-1" role="group" aria-label="Virtual typing keys">
+        <div className="min-w-[464px] space-y-1.5 sm:min-w-0">
         {layout.rows.map((row, rowIndex) => (
           <div key={rowIndex} className="flex justify-center gap-1">
             {row.map((key) => {
@@ -72,7 +73,7 @@ export default function VirtualKeyboard({
                   title={active ? `${key.label} → ${output}` : key.label}
                   aria-label={active ? `${output} from ${key.label}` : `${key.label}, unavailable`}
                   onClick={() => output && onInsert(output)}
-                  className="flex min-h-11 min-w-0 flex-1 flex-col items-center justify-center rounded-md border border-[--color-border] bg-white px-1 py-1 text-center shadow-sm disabled:cursor-default disabled:opacity-25 active:translate-y-px sm:min-h-12"
+                  className="flex min-h-11 min-w-[32px] flex-1 flex-col items-center justify-center rounded-md border border-[--color-border] bg-white px-1 py-1 text-center shadow-sm disabled:cursor-default disabled:opacity-25 active:translate-y-px sm:min-h-12"
                 >
                   <span className="text-[9px] leading-none text-[--color-text-muted]">
                     {key.label.toUpperCase()}
@@ -111,6 +112,7 @@ export default function VirtualKeyboard({
           >
             Enter
           </button>
+        </div>
         </div>
       </div>
     </section>
