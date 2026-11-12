@@ -498,10 +498,7 @@ export default function TypingTool({ language }: { language: Language }) {
                 key={i}
                 dir={language.direction}
                 type="button"
-                onPointerDown={(e) => {
-                  e.preventDefault();
-                  insertSuggestion(s);
-                }}
+                onClick={() => insertSuggestion(s)}
                 className="suggestion-chip"
               >
                 {s}
