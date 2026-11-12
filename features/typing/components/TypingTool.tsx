@@ -623,9 +623,7 @@ export default function TypingTool({ language }: { language: Language }) {
       <div className="card p-6">
         <textarea
           ref={textareaRef}
-          role="combobox"
           aria-autocomplete="list"
-          aria-expanded={suggestions.length > 0}
           aria-controls="typing-suggestions"
           aria-activedescendant={
             activeSuggestionIndex >= 0
