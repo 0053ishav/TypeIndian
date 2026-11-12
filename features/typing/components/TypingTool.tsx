@@ -59,6 +59,10 @@ function downloadBlob(blob: Blob, filename: string) {
   window.setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
+function downloadTextFile(content: string, filename: string) {
+  downloadBlob(new Blob([content], { type: "text/plain;charset=utf-8" }), filename);
+}
+
 export default function TypingTool({ language }: { language: Language }) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
