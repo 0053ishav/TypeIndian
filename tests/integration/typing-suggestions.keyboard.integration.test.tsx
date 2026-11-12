@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -134,6 +134,9 @@ describe("TypingTool keyboard and editor history", () => {
     const editor = screen.getByRole("combobox") as HTMLTextAreaElement;
     expect(editor).toHaveAttribute("dir", "rtl");
     await user.type(editor, "abcd");
+    await waitFor(() => {
+      expect(fetchSuggestions).toHaveBeenCalledTimes(1);
+    });
     editor.setSelectionRange(2, 2);
     vi.mocked(fetchSuggestions).mockClear();
 
@@ -179,7 +182,11 @@ describe("TypingTool keyboard and editor history", () => {
     vi.mocked(fetchSuggestions).mockClear();
     vi.mocked(fetchSuggestions).mockImplementationOnce(async () => pendingPaste);
 
-    await user.paste(editor, "word");
+    fireEvent.paste(editor, {
+      clipboardData: {
+        getData: (type: string) => (type === "text" ? "word" : ""),
+      },
+    });
     await waitFor(() => {
       expect(fetchSuggestions).toHaveBeenCalledTimes(1);
     });
