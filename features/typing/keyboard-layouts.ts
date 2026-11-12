@@ -189,6 +189,7 @@ export function getVirtualKeyboardLayout(language: Language): VirtualKeyboardLay
     Object.entries(URDU_SHIFT).forEach(([key, value]) => {
       outputs.shift[key] = value;
     });
+    for (const digit of "0123456789") outputs.base[digit] = digit;
   } else {
     language.alphabet.vowels.forEach(({ letter }, index) => {
       addToken(outputs, vowelTokensFor(language.id)[index] ?? "", letter);
