@@ -31,34 +31,6 @@ const SHIFTED: Record<string, string> = {
   "[": "{", "]": "}", "\\": "|", ";": ":", "'": '"', ",": "<", ".": ">", "/": "?",
 };
 
-const SOUND_KEYS: Record<string, { key: string; layer: "base" | "shift" }> = {
-  ka: { key: "k", layer: "base" }, kha: { key: "k", layer: "shift" },
-  ga: { key: "i", layer: "base" }, gha: { key: "i", layer: "shift" },
-  nga: { key: "u", layer: "shift" }, "ṅa": { key: "u", layer: "shift" },
-  cha: { key: ";", layer: "base" }, ca: { key: ";", layer: "base" },
-  chha: { key: ";", layer: "shift" }, ja: { key: "p", layer: "base" },
-  jha: { key: "p", layer: "shift" }, nya: { key: "]", layer: "shift" },
-  "ña": { key: "]", layer: "shift" },
-  "ṭa": { key: "'", layer: "base" }, "ṭha": { key: "'", layer: "shift" },
-  "ḍa": { key: "[", layer: "base" }, "ḍha": { key: "[", layer: "shift" },
-  "ṇa": { key: "c", layer: "shift" },
-  ta: { key: "l", layer: "base" }, tha: { key: "l", layer: "shift" },
-  da: { key: "o", layer: "base" }, dha: { key: "o", layer: "shift" },
-  na: { key: "v", layer: "base" },
-  pa: { key: "h", layer: "base" }, pha: { key: "h", layer: "shift" },
-  ba: { key: "y", layer: "base" }, bha: { key: "y", layer: "shift" },
-  ma: { key: "c", layer: "base" },
-  ya: { key: "/", layer: "base" }, ra: { key: "j", layer: "base" },
-  la: { key: "n", layer: "base" }, va: { key: "b", layer: "base" },
-  wa: { key: "b", layer: "altGr" },
-  sha: { key: "m", layer: "shift" }, "śa": { key: "m", layer: "shift" },
-  "ṣha": { key: ",", layer: "shift" }, "ṣa": { key: ",", layer: "shift" },
-  sa: { key: "m", layer: "base" }, ha: { key: "u", layer: "base" },
-  "ḷa": { key: "n", layer: "shift" }, "zha": { key: "b", layer: "shift" },
-  "ṟa": { key: "j", layer: "shift" }, "ṉa": { key: "v", layer: "shift" },
-  "ṛa": { key: "j", layer: "shift" }, "ṛha": { key: "[", layer: "shift" },
-};
-
 const VOWEL_KEYS: Record<string, string> = {
   a: "d", aa: "e", "ā": "e", i: "f", ee: "r", "ī": "r",
   u: "g", oo: "t", "ū": "t", ri: "=", ru: "=", "r̥": "=",
