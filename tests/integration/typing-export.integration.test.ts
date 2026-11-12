@@ -72,6 +72,10 @@ async function readZipEntry(blob: Blob, entryName: string) {
   throw new Error(`DOCX entry not found: ${entryName}`);
 }
 
+function compactUnicode(value: string) {
+  return value.replace(/[\\s\\u200B\\u200C\\u200D\\uFEFF]/g, "");
+}
+
 describe("local typing exports", () => {
   it("exports UTF-8 TXT without changing paragraphs", async () => {
     const text = "नमस्ते\nभारत";
