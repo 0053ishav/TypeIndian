@@ -226,6 +226,8 @@ export function getVirtualKeyboardLayout(language: Language): VirtualKeyboardLay
       addToken(outputs, "V", "ਂ");
       addToken(outputs, "<", "ੳ");
       addToken(outputs, ">", "ੲ");
+      addToken(outputs, "N", "ਲ਼");
+      addToken(outputs, "M", "ਸ਼");
     }
 
     if (language.id === "bengali" || language.id === "assamese") {
