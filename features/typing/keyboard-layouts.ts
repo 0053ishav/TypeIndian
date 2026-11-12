@@ -148,8 +148,26 @@ export function getVirtualKeyboardLayout(language: Language): VirtualKeyboardLay
       add(outputs, "k", "altGr", "ൿ");
     }
     if (language.id === "odia") {
+      delete outputs.base.b;
       add(outputs, "b", "altGr", "ୱ");
     }
+
+    const conjuncts: Record<string, Record<string, string>> = {
+      hindi: { "3": "्र", "4": "र्", "5": "ज्ञ", "6": "त्र", "7": "क्ष", "8": "श्र" },
+      marathi: { "3": "्र", "4": "र्", "5": "ज्ञ", "6": "त्र", "7": "क्ष", "8": "श्र" },
+      nepali: { "3": "्र", "4": "र्", "5": "ज्ञ", "6": "त्र", "7": "क्ष", "8": "श्र" },
+      sanskrit: { "3": "्र", "4": "र्", "5": "ज्ञ", "6": "त्र", "7": "क्ष", "8": "श्र" },
+      gujarati: { "3": "્ર", "4": "ર્", "5": "જ્ઞ", "6": "ત્ર", "7": "ક્ષ", "8": "શ્ર" },
+      bengali: { "3": "্র", "4": "র্", "5": "জ্ঞ", "6": "ত্র", "7": "ক্ষ", "8": "শ্র" },
+      assamese: { "3": "্ৰ", "4": "ৰ্", "5": "জ্ঞ", "6": "ত্ৰ", "7": "ক্ষ", "8": "শ্ৰ" },
+      telugu: { "4": "ర్", "5": "జ్ఞ", "6": "త్ర", "7": "క్ష", "8": "శ్ర" },
+      kannada: { "4": "ರ್", "5": "ಜ್ಞ", "6": "ತ್ರ", "7": "ಕ್ಷ", "8": "ಶ್ರ" },
+      odia: { "3": "୍ର", "4": "ର୍", "5": "ଜ୍ଞ", "6": "ତ୍ର", "7": "କ୍ଷ", "8": "ଶ୍ର" },
+      tamil: { "7": "க்ஷ", "8": "ஷ்ர" },
+    };
+    Object.entries(conjuncts[language.id] ?? {}).forEach(([key, value]) => {
+      add(outputs, key, "shift", value);
+    });
   }
 
   const rows = ROWS.map((row) => row.map((code) => ({
