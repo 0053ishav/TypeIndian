@@ -73,7 +73,7 @@ describe("TypingTool suggestion keyboard interaction", () => {
     const user = userEvent.setup();
     render(<TypingTool language={languageRegistry.urdu} />);
 
-    const editor = screen.getByRole("textbox");
+    const editor = screen.getByRole("textbox") as HTMLTextAreaElement;
     expect(editor).toHaveAttribute("dir", "rtl");
     await user.type(editor, "abcd");
     editor.setSelectionRange(2, 2);
