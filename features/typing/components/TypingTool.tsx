@@ -20,6 +20,7 @@ export default function TypingTool({ language }: { language: Language }) {
   const suggestionRequestRef = useRef<AbortController | null>(null);
   const suggestionRequestIdRef = useRef(0);
   const wordRangeRef = useRef<{ start: number; end: number } | null>(null);
+  const editorOperationIdRef = useRef(0);
 
   const STORAGE_KEY = `typeindian-session-board-${language.transliteration.languageCode}`;
 
@@ -161,11 +162,46 @@ export default function TypingTool({ language }: { language: Language }) {
     }, 180);
   };
 
+  const cancelPendingSuggestions = () => {
+    suggestionRequestIdRef.current += 1;
+    suggestionRequestRef.current?.abort();
+    suggestionRequestRef.current = null;
+    if (suggestionTimerRef.current) clearTimeout(suggestionTimerRef.current);
+    suggestionTimerRef.current = null;
+    setLoading(false);
+  };
+
+  const transliterateWords = async (words: string[]) => {
+    const results: string[] = [];
+
+    // Keep large pastes from opening an unbounded number of requests at once.
+    for (let index = 0; index < words.length; index += 4) {
+      const batch = await Promise.all(
+        words.slice(index, index + 4).map(async (word) => {
+          try {
+            const suggestions = await fetchSuggestions(
+              word,
+              language.transliteration.languageCode,
+              1,
+            );
+            return suggestions[0] || word;
+          } catch {
+            return word;
+          }
+        }),
+      );
+      results.push(...batch);
+    }
+
+    return results;
+  };
+
   /* ---------------- textarea events ---------------- */
 
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
 
+    editorOperationIdRef.current += 1;
     setText(value);
     processInput(value, e.target.selectionStart);
   };
@@ -346,6 +382,8 @@ export default function TypingTool({ language }: { language: Language }) {
 
   const handleAddToBoard = () => {
     if (!text.trim()) return;
+    editorOperationIdRef.current += 1;
+    cancelPendingSuggestions();
     setBoardLines((prev) => [...prev, text.trim()]);
     setText("");
     setSuggestions([]);
@@ -373,6 +411,8 @@ export default function TypingTool({ language }: { language: Language }) {
 
     if (!confirmed) return;
 
+    editorOperationIdRef.current += 1;
+    cancelPendingSuggestions();
     setText("");
     setSuggestions([]);
     setCurrentWord("");
@@ -391,6 +431,8 @@ export default function TypingTool({ language }: { language: Language }) {
 
   const handleMoveToEditor = (index: number) => {
     const line = boardLines[index] + " ";
+    editorOperationIdRef.current += 1;
+    cancelPendingSuggestions();
 
     setBoardLines((prev) => prev.filter((_, i) => i !== index));
 
