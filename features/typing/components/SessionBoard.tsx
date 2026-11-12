@@ -71,7 +71,7 @@ export default function SessionBoard({
 
   return (
     <div className="mt-8 border-t pt-6">
-      <div className="flex items-center justify-between mb-3">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
         <h2 className="text-lg font-semibold text-[--color-text-heading]">
           Session Board
         </h2>
