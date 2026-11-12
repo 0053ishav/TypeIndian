@@ -297,6 +297,27 @@ describe("TypingTool keyboard and editor history", () => {
     expect(fetchSuggestions).not.toHaveBeenCalled();
   });
 
+  it("keeps virtual-keyboard deletion separate from the insertion group", async () => {
+    const user = userEvent.setup();
+    render(<TypingTool language={languageRegistry.hindi} />);
+
+    const editor = screen.getByRole("combobox") as HTMLTextAreaElement;
+    await user.click(screen.getByRole("button", { name: "Open virtual keyboard" }));
+    await user.click(screen.getByRole("button", { name: "Shift" }));
+    await user.click(screen.getByRole("button", { name: "अ from d" }));
+    expect(editor).toHaveValue("अ");
+
+    await user.click(screen.getByRole("button", { name: "Backspace" }));
+    expect(editor).toHaveValue("");
+
+    await user.click(screen.getAllByRole("button", { name: "Undo" })[0]);
+    expect(editor).toHaveValue("अ");
+
+    await user.click(screen.getAllByRole("button", { name: "Undo" })[0]);
+    expect(editor).toHaveValue("");
+    expect(fetchSuggestions).not.toHaveBeenCalled();
+  });
+
   it("does not let an in-flight paste overwrite a later undo", async () => {
     const user = userEvent.setup();
     render(<TypingTool language={languageRegistry.hindi} />);

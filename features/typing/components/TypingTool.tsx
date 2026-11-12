@@ -680,7 +680,7 @@ export default function TypingTool({ language }: { language: Language }) {
 
     editorOperationIdRef.current += 1;
     cancelPendingSuggestions();
-    commitText(next, deleteStart, deleteStart, "virtual-keyboard");
+    commitText(next, deleteStart, deleteStart, "deletion");
     setCurrentWord("");
     setSuggestions([]);
     setActiveSuggestionIndex(-1);
