@@ -68,4 +68,21 @@ describe("TypingTool suggestion keyboard interaction", () => {
     await user.keyboard("{Control>}{Shift>}z{/Shift}{/Control}");
     expect(editor).toHaveValue("ab");
   });
+
+  it("inserts an Urdu virtual-keyboard character at the current selection", async () => {
+    const user = userEvent.setup();
+    render(<TypingTool language={languageRegistry.urdu} />);
+
+    const editor = screen.getByRole("textbox");
+    expect(editor).toHaveAttribute("dir", "rtl");
+    await user.type(editor, "abcd");
+    editor.setSelectionRange(2, 2);
+
+    await user.click(screen.getByText("Open virtual keyboard"));
+    await user.click(await screen.findByRole("button", { name: "ا a" }));
+
+    await waitFor(() => {
+      expect(editor).toHaveValue("abاcd");
+    });
+  });
 });
