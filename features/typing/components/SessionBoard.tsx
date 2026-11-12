@@ -11,6 +11,7 @@ export default function SessionBoard({
   onCopyLine,
   onDeleteLine,
   onCopyAll,
+  onDownloadAll,
   onReorder,
 }: {
   lines: string[];
@@ -20,6 +21,7 @@ export default function SessionBoard({
   onCopyLine: (line: string) => void;
   onDeleteLine: (index: number) => void;
   onCopyAll: () => void;
+  onDownloadAll: () => void;
   onReorder: (from: number, to: number) => void;
 }) {
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
@@ -66,14 +68,24 @@ export default function SessionBoard({
           Session Board
         </h2>
 
-        <button
-          type="button"
-          onClick={onCopyAll}
-          disabled={lines.length === 0}
-          className="text-sm px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-40 cursor-pointer"
-        >
-          Copy All
-        </button>
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={onCopyAll}
+            disabled={lines.length === 0}
+            className="text-sm px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-40 cursor-pointer"
+          >
+            Copy All
+          </button>
+          <button
+            type="button"
+            onClick={onDownloadAll}
+            disabled={lines.length === 0}
+            className="text-sm px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-40 cursor-pointer"
+          >
+            Download TXT
+          </button>
+        </div>
       </div>
 
       {lines.length === 0 && (
