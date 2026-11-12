@@ -1,7 +1,7 @@
 "use client";
 
 import { LanguageDirection } from "@/types/language";
-import { useState } from "react";
+import { useState, type DragEvent } from "react";
 
 export default function SessionBoard({
   lines,
@@ -49,12 +49,14 @@ export default function SessionBoard({
     cancelEditing();
   };
 
-  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+  const handleDrop = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
-    const sourceIndex = Number(event.dataTransfer.getData("text/plain"));
-    const from = Number.isInteger(sourceIndex) && event.dataTransfer.getData("text/plain") !== ""
-      ? sourceIndex
-      : dragIndex;
+    const transferIndex = event.dataTransfer.getData("text/plain");
+    const sourceIndex = Number(transferIndex);
+    const from =
+      transferIndex !== "" && Number.isInteger(sourceIndex)
+        ? sourceIndex
+        : dragIndex;
 
     if (from === null || overIndex === null || from === overIndex) {
       setDragIndex(null);
@@ -87,7 +89,7 @@ export default function SessionBoard({
             type="button"
             onClick={onDownloadAll}
             disabled={lines.length === 0}
-            className="text-sm px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-40 cursor-pointer"
+            className="min-h-11 px-3 py-2 text-sm rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-40 cursor-pointer"
           >
             Download TXT
           </button>
@@ -140,7 +142,7 @@ export default function SessionBoard({
                     className="w-full border rounded p-2 text-sm focus:outline-none focus:ring"
                   />
 
-                  <div className="flex gap-2 mt-2">
+                  <div className="flex flex-wrap gap-2 mt-2">
                     <button type="button" onClick={saveEditing} className="btn-primary min-h-11">
                       Save
                     </button>
