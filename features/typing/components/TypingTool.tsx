@@ -509,10 +509,12 @@ export default function TypingTool({ language }: { language: Language }) {
   };
 
   const handleBeforeInput = (e: React.FormEvent<HTMLTextAreaElement>) => {
-    selectionBeforeInputRef.current = {
-      start: e.currentTarget.selectionStart,
-      end: e.currentTarget.selectionEnd,
-    };
+    if (!selectionBeforeInputRef.current) {
+      selectionBeforeInputRef.current = {
+        start: e.currentTarget.selectionStart,
+        end: e.currentTarget.selectionEnd,
+      };
+    }
     const nativeEvent = e.nativeEvent as InputEvent;
     if (nativeEvent.data === " ") {
       if (currentWord && suggestions.length) {
