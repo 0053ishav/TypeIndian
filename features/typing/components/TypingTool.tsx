@@ -590,7 +590,12 @@ export default function TypingTool({ language }: { language: Language }) {
   };
 
   const handleCopyLine = async (line: string) => {
-    await navigator.clipboard.writeText(line);
+    try {
+      await copyToClipboard(line);
+      toast.success("Sentence copied.");
+    } catch {
+      toast.error("Unable to copy sentence.");
+    }
   };
 
   const handleDeleteLine = (index: number) => {
@@ -598,7 +603,14 @@ export default function TypingTool({ language }: { language: Language }) {
   };
 
   const handleCopyAll = async () => {
-    await navigator.clipboard.writeText(boardLines.join("\n"));
+    if (boardLines.length === 0) return;
+
+    try {
+      await copyToClipboard(boardLines.join("\n"));
+      toast.success("Session Board copied.");
+    } catch {
+      toast.error("Unable to copy Session Board.");
+    }
   };
 
   const handleDownloadBoard = () => {
