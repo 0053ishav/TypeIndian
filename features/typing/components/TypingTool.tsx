@@ -8,10 +8,15 @@ import AlphabetGrid from "@/components/ui/AlphabetGrid";
 import { toast } from "sonner";
 import { copyToClipboard } from "@/lib/clipboard";
 
+type HistoryKind = "typing" | "deletion" | "virtual-keyboard" | "atomic";
+
 type EditorSnapshot = {
   text: string;
   selectionStart: number;
   selectionEnd: number;
+  kind?: HistoryKind;
+  timestamp?: number;
+  editStart?: number;
 };
 
 function getLocalDateStamp() {
@@ -161,6 +166,7 @@ export default function TypingTool({ language }: { language: Language }) {
     value: string,
     selectionStart = value.length,
     selectionEnd = selectionStart,
+    kind: HistoryKind = "atomic",
   ) => {
     const nextHistory = historyRef.current.slice(0, historyIndexRef.current + 1);
     const previous = nextHistory[nextHistory.length - 1];
@@ -170,7 +176,63 @@ export default function TypingTool({ language }: { language: Language }) {
       previous.selectionStart !== selectionStart ||
       previous.selectionEnd !== selectionEnd
     ) {
-      nextHistory.push({ text: value, selectionStart, selectionEnd });
+      const now = Date.now();
+      let editStart = 0;
+      let oldEnd = previous?.text.length ?? 0;
+      let newEnd = value.length;
+
+      if (previous) {
+        while (
+          editStart < previous.text.length &&
+          editStart < value.length &&
+          previous.text[editStart] === value[editStart]
+        ) editStart++;
+
+        while (
+          oldEnd > editStart &&
+          newEnd > editStart &&
+          previous.text[oldEnd - 1] === value[newEnd - 1]
+        ) {
+          oldEnd--;
+          newEnd--;
+        }
+      }
+
+      const removedLength = oldEnd - editStart;
+      const insertedLength = newEnd - editStart;
+      const groupable = kind === "typing" || kind === "deletion" || kind === "virtual-keyboard";
+      const previousCursor = previous?.selectionStart;
+      const adjacent =
+        previousCursor === editStart ||
+        previousCursor === oldEnd ||
+        (kind === "virtual-keyboard" && previousCursor === previous?.selectionEnd);
+
+      const canGroup =
+        groupable &&
+        previous?.kind === kind &&
+        typeof previous.timestamp === "number" &&
+        now - previous.timestamp <= (kind === "virtual-keyboard" ? 1200 : 750) &&
+        previous.selectionStart === previous.selectionEnd &&
+        selectionStart === selectionEnd &&
+        adjacent &&
+        ((kind === "typing" && removedLength === 0 && insertedLength > 0) ||
+          (kind === "deletion" && insertedLength === 0 && removedLength > 0) ||
+          kind === "virtual-keyboard");
+
+      const snapshot: EditorSnapshot = {
+        text: value,
+        selectionStart,
+        selectionEnd,
+        kind,
+        timestamp: now,
+        editStart,
+      };
+
+      if (canGroup) {
+        nextHistory[nextHistory.length - 1] = snapshot;
+      } else {
+        nextHistory.push(snapshot);
+      }
 
       if (nextHistory.length > 100) nextHistory.shift();
 
@@ -311,7 +373,14 @@ export default function TypingTool({ language }: { language: Language }) {
     const value = e.target.value;
 
     editorOperationIdRef.current += 1;
-    commitText(value, e.target.selectionStart, e.target.selectionEnd);
+    const inputType = (e.nativeEvent as InputEvent).inputType ?? "";
+    const historyKind: HistoryKind =
+      inputType.startsWith("delete")
+        ? "deletion"
+        : inputType === "insertText" || inputType === "insertCompositionText"
+          ? "typing"
+          : "atomic";
+    commitText(value, e.target.selectionStart, e.target.selectionEnd, historyKind);
     processInput(value, e.target.selectionStart);
   };
 
@@ -401,7 +470,7 @@ export default function TypingTool({ language }: { language: Language }) {
     const cursor = range.start + word.length + 1;
 
     editorOperationIdRef.current += 1;
-    commitText(next, cursor, cursor);
+    commitText(next, cursor, cursor, "atomic");
     setCurrentWord("");
     cancelPendingSuggestions();
     setSuggestions([]);
@@ -436,7 +505,7 @@ export default function TypingTool({ language }: { language: Language }) {
       const translated = results.join(" ");
       const next = text.slice(0, start) + translated + text.slice(end);
       const cursor = start + translated.length;
-      commitText(next, cursor, cursor);
+      commitText(next, cursor, cursor, "atomic");
       setSuggestions([]);
       setActiveSuggestionIndex(-1);
       setCurrentWord("");
@@ -503,7 +572,7 @@ export default function TypingTool({ language }: { language: Language }) {
 
     editorOperationIdRef.current += 1;
     cancelPendingSuggestions();
-    commitText(next, cursor, cursor);
+    commitText(next, cursor, cursor, "virtual-keyboard");
     setCurrentWord("");
     setSuggestions([]);
     setActiveSuggestionIndex(-1);
