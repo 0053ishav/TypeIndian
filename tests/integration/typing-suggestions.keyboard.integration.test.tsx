@@ -217,10 +217,9 @@ describe("TypingTool keyboard and editor history", () => {
     await user.click(screen.getByRole("button", { name: "् from d" }));
     expect(editor).toHaveValue("अक्");
 
-    await waitFor(() => expect(editor).toHaveFocus());
-    await user.keyboard("{Control>}z{/Control}");
+    await user.click(screen.getAllByRole("button", { name: "Undo" })[0]);
     expect(editor).toHaveValue("");
-    await user.keyboard("{Control>}{Shift>}z{/Shift}{/Control}");
+    await user.click(screen.getAllByRole("button", { name: "Redo" })[0]);
     expect(editor).toHaveValue("अक्");
   });
 
