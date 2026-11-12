@@ -37,9 +37,9 @@ export default function LearnPage({ language }: Props) {
       />
 
       <PageSchema
-        name={`${language.name} Typing`}
-        description={language.typing.seo.description}
-        path={`/typing/${language.slug}`}
+        name={`Learn ${language.name}`}
+        description={language.learn.meta.description}
+        path={`/learn/${language.slug}`}
       />
 
       <Script
