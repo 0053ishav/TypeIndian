@@ -169,7 +169,7 @@ function consonantToken(languageId: string, sound: string) {
 
   if (languageId === "odia") {
     if (sound === "ya") return "?";
-    if (sound === "wa") return "/";
+    if (sound === "wa") return "b";
   }
 
   if (languageId === "panjabi" && sound === "ṛa") return "J";
