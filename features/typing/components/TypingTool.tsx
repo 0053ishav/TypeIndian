@@ -819,7 +819,7 @@ export default function TypingTool({ language }: { language: Language }) {
           <button
             type="button"
             onClick={handleAddToBoard}
-            className="btn-primary flex-1"
+            className="btn-primary min-h-11 flex-1"
             aria-label="Add to Board"
           >
             ➕
