@@ -94,10 +94,11 @@ export default function SessionBoard({
         </div>
       )}
 
-      <div className="space-y-2" aria-label="Saved sentences">
+      <div className="space-y-2" role="list" aria-label="Saved sentences">
         {lines.map((line, i) => (
           <div
             key={i}
+            role="listitem"
             draggable={editingIndex === null}
             onDragStart={() => setDragIndex(i)}
             onDragOver={(e) => {
@@ -153,7 +154,7 @@ export default function SessionBoard({
                   disabled={i === 0}
                   aria-label={`Move sentence ${i + 1} up`}
                   title="Move up"
-                  className="text-sm px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                  className="min-h-[44px] min-w-[44px] text-sm px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
                 >
                   ↑
                 </button>
@@ -164,7 +165,7 @@ export default function SessionBoard({
                   disabled={i === lines.length - 1}
                   aria-label={`Move sentence ${i + 1} down`}
                   title="Move down"
-                  className="text-sm px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                  className="min-h-[44px] min-w-[44px] text-sm px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
                 >
                   ↓
                 </button>
@@ -174,7 +175,7 @@ export default function SessionBoard({
                   onClick={() => startEditing(i, line)}
                   aria-label={`Edit sentence ${i + 1}`}
                   title="Edit inline"
-                  className="text-sm px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 cursor-pointer"
+                  className="min-h-[44px] min-w-[44px] text-sm px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 cursor-pointer"
                 >
                   ✏️
                 </button>
@@ -184,7 +185,7 @@ export default function SessionBoard({
                   onClick={() => onMoveToEditor(i)}
                   aria-label={`Move sentence ${i + 1} to editor`}
                   title="Move to editor"
-                  className="text-sm px-2 py-1 rounded bg-blue-100 hover:bg-blue-200 cursor-pointer"
+                  className="min-h-[44px] min-w-[44px] text-sm px-2 py-1 rounded bg-blue-100 hover:bg-blue-200 cursor-pointer"
                 >
                   ↗
                 </button>
@@ -194,7 +195,7 @@ export default function SessionBoard({
                   onClick={() => onCopyLine(line)}
                   aria-label={`Copy sentence ${i + 1}`}
                   title="Copy"
-                  className="text-sm px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 cursor-pointer"
+                  className="min-h-[44px] min-w-[44px] text-sm px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 cursor-pointer"
                 >
                   📋
                 </button>
@@ -204,7 +205,7 @@ export default function SessionBoard({
                   onClick={() => onDeleteLine(i)}
                   aria-label={`Delete sentence ${i + 1}`}
                   title="Delete"
-                  className="text-sm px-2 py-1 rounded bg-red-100 hover:bg-red-200 text-red-700 cursor-pointer"
+                  className="min-h-[44px] min-w-[44px] text-sm px-2 py-1 rounded bg-red-100 hover:bg-red-200 text-red-700 cursor-pointer"
                 >
                   ✕
                 </button>
