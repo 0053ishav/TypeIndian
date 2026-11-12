@@ -30,7 +30,7 @@ export default function VirtualKeyboard({
 }) {
   const layout = useMemo(() => getVirtualKeyboardLayout(language), [language]);
   const [layer, setLayer] = useState<KeyboardLayer>("base");
-  const [position, setPosition] = useState<Position>({ x: 12, y: 112 });
+  const [position, setPosition] = useState<Position | null>(null);
   const keyboardRef = useRef<HTMLElement>(null);
   const dragRef = useRef<{
     pointerId: number;
@@ -41,10 +41,11 @@ export default function VirtualKeyboard({
   const startDragging = (event: PointerEvent<HTMLDivElement>) => {
     if ((event.target as HTMLElement).closest("button")) return;
     event.preventDefault();
+    const bounds = keyboardRef.current?.getBoundingClientRect();
     dragRef.current = {
       pointerId: event.pointerId,
-      offsetX: event.clientX - position.x,
-      offsetY: event.clientY - position.y,
+      offsetX: event.clientX - (bounds?.left ?? 12),
+      offsetY: event.clientY - (bounds?.top ?? window.innerHeight - 420),
     };
     event.currentTarget.setPointerCapture(event.pointerId);
   };
@@ -71,7 +72,12 @@ export default function VirtualKeyboard({
       ref={keyboardRef}
       id="typing-virtual-keyboard"
       className="fixed z-[1000] flex w-[min(760px,calc(100vw-24px))] flex-col overflow-hidden rounded-2xl border border-slate-300 bg-slate-100 shadow-[0_24px_80px_rgba(15,23,42,0.35)] ring-1 ring-black/10"
-      style={{ left: position.x, top: position.y, maxHeight: "calc(100dvh - 24px)" }}
+      style={{
+        ...(position
+          ? { left: position.x, top: position.y }
+          : { left: 12, bottom: 16 }),
+        maxHeight: "calc(100dvh - 24px)",
+      }}
       aria-label={`${language.name} on-screen keyboard`}
       dir="ltr"
     >
