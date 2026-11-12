@@ -16,6 +16,7 @@ export default function TypingTool({ language }: { language: Language }) {
   const [currentWord, setCurrentWord] = useState("");
   const [boardLines, setBoardLines] = useState<string[]>([]);
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(-1);
   const suggestionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const suggestionRequestRef = useRef<AbortController | null>(null);
   const suggestionRequestIdRef = useRef(0);
@@ -55,6 +56,7 @@ export default function TypingTool({ language }: { language: Language }) {
     setText("");
     setCurrentWord("");
     setSuggestions([]);
+    setActiveSuggestionIndex(-1);
     setLoading(false);
     wordRangeRef.current = null;
     suggestionRequestRef.current?.abort();
@@ -126,6 +128,7 @@ export default function TypingTool({ language }: { language: Language }) {
 
     setCurrentWord(lastWord);
     setSuggestions([]);
+    setActiveSuggestionIndex(-1);
     wordRangeRef.current = lastWord
       ? { start: cursor - lastWord.length, end: cursor }
       : null;
@@ -149,10 +152,12 @@ export default function TypingTool({ language }: { language: Language }) {
         );
         if (requestId === suggestionRequestIdRef.current) {
           setSuggestions(suggs);
+          setActiveSuggestionIndex(-1);
         }
       } catch {
         if (requestId === suggestionRequestIdRef.current) {
           setSuggestions([]);
+          setActiveSuggestionIndex(-1);
         }
       } finally {
         if (requestId === suggestionRequestIdRef.current) {
@@ -214,6 +219,36 @@ export default function TypingTool({ language }: { language: Language }) {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "ArrowDown" && suggestions.length > 0) {
+      e.preventDefault();
+      setActiveSuggestionIndex((current) =>
+        current < 0 ? 0 : Math.min(current + 1, suggestions.length - 1),
+      );
+      return;
+    }
+
+    if (e.key === "ArrowUp" && suggestions.length > 0) {
+      e.preventDefault();
+      setActiveSuggestionIndex((current) =>
+        current < 0 ? suggestions.length - 1 : Math.max(current - 1, 0),
+      );
+      return;
+    }
+
+    if (e.key === "Enter" && activeSuggestionIndex >= 0) {
+      e.preventDefault();
+      insertSuggestion(suggestions[activeSuggestionIndex]);
+      return;
+    }
+
+    if (e.key === "Escape" && (suggestions.length > 0 || loading)) {
+      e.preventDefault();
+      cancelPendingSuggestions();
+      setSuggestions([]);
+      setActiveSuggestionIndex(-1);
+      return;
+    }
+
     // Space → accept first suggestion
     if (e.key === " " && currentWord && suggestions.length > 0) {
       e.preventDefault();
@@ -487,6 +522,15 @@ export default function TypingTool({ language }: { language: Language }) {
       <div className="card p-6">
         <textarea
           ref={textareaRef}
+          role="combobox"
+          aria-autocomplete="list"
+          aria-expanded={suggestions.length > 0}
+          aria-controls="typing-suggestions"
+          aria-activedescendant={
+            activeSuggestionIndex >= 0
+              ? `typing-suggestion-${activeSuggestionIndex}`
+              : undefined
+          }
           rows={9}
           dir={language.direction}
           className="input-base"
@@ -504,7 +548,12 @@ export default function TypingTool({ language }: { language: Language }) {
         />
 
         {/* Suggestions */}
-        <div className="suggestion-bar">
+        <div
+          id="typing-suggestions"
+          className="suggestion-bar"
+          role="listbox"
+          aria-label="Transliteration suggestions"
+        >
           {loading &&
             Array.from({ length: 3 }).map((_, i) => (
               <div key={i} className="skeleton-chip" />
@@ -514,10 +563,13 @@ export default function TypingTool({ language }: { language: Language }) {
             suggestions.map((s, i) => (
               <button
                 key={i}
+                id={`typing-suggestion-${i}`}
+                role="option"
+                aria-selected={i === activeSuggestionIndex}
                 dir={language.direction}
                 type="button"
                 onClick={() => insertSuggestion(s)}
-                className="suggestion-chip"
+                className={`suggestion-chip ${i === activeSuggestionIndex ? "ring-2 ring-blue-500" : ""}`}
               >
                 {s}
               </button>
