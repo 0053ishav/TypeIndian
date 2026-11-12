@@ -188,8 +188,8 @@ describe("TypingTool keyboard and editor history", () => {
     editor.setSelectionRange(1, 1);
 
     await user.click(screen.getByText("Open virtual keyboard"));
-    await user.click(screen.getByRole("button", { name: "AltGr" }));
-    await user.click(await screen.findByRole("button", { name: "ਸ਼ from m" }));
+    await user.click(await screen.findByRole("button", { name: "ਸ from m" }));
+    await user.click(await screen.findByRole("button", { name: "਼ from ]" }));
 
     await waitFor(() => {
       expect(editor).toHaveValue("ਅਸ਼x");
