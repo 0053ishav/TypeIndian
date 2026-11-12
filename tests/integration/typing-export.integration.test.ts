@@ -105,9 +105,13 @@ describe("local typing exports", () => {
     const bytes = new Uint8Array(await blob.arrayBuffer());
     expect(new TextDecoder().decode(bytes.slice(0, 5))).toBe("%PDF-");
 
-    const extracted = extractText(bytes).map((page) => page.text).join("\n");
+    const pages = extractText(bytes, { includeRuns: true });
+    const extracted = pages.map((page) => page.text).join("\n");
+    const runText = pages.flatMap((page) => page.runs ?? []).map((run) => run.text).join("");
     for (const paragraph of text.split("\n")) {
-      expect(extracted).toContain(paragraph);
+      const compactParagraph = paragraph.replace(/\\s/g, "");
+      expect(extracted.replace(/\\s/g, "")).toContain(compactParagraph);
+      expect(runText.replace(/\\s/g, "")).toContain(compactParagraph);
     }
   });
 
