@@ -155,6 +155,9 @@ function vowelTokensFor(languageId: string) {
 }
 
 function consonantToken(languageId: string, sound: string) {
+  // Gujarati's published mapping uses Shift+] for both ઞ and nukta; expose ઞ separately.
+  if (languageId === "gujarati" && sound === "nya") return undefined;
+
   if (languageId === "nepali" || languageId === "sanskrit") {
     if (sound === "ca") return ";";
     if (sound === "cha") return ":";
@@ -322,6 +325,11 @@ export function getVirtualKeyboardLayout(language: Language): VirtualKeyboardLay
             label: "Assamese additional letter",
             keys: [{ label: "ৱ", output: "ৱ" }],
           }
-        : undefined,
+        : language.id === "gujarati"
+          ? {
+              label: "Additional letter",
+              keys: [{ label: "ઞ", output: "ઞ" }],
+            }
+          : undefined,
   };
 }
