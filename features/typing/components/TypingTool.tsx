@@ -5,6 +5,7 @@ import { fetchSuggestions } from "@/lib/transliteration/googleHttpTransliterate"
 import SessionBoard from "./SessionBoard";
 import { Language } from "@/types/language";
 import VirtualKeyboard from "./VirtualKeyboard";
+import AlphabetGrid from "@/components/ui/AlphabetGrid";
 import ExportDropdown from "./ExportDropdown";
 import { createTypingExport, type TypingExportFormat } from "@/lib/typing/export";
 import { toast } from "sonner";
@@ -1106,6 +1107,10 @@ export default function TypingTool({ language }: { language: Language }) {
         onDownloadAll={handleDownloadBoard}
         onReorder={handleReorder}
       />
+
+      <div className="mt-24">
+        <AlphabetGrid language={language} interactive onInsert={insertChar} />
+      </div>
 
       {isKeyboardOpen && (
         <VirtualKeyboard
