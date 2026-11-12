@@ -71,8 +71,14 @@ test("mobile editor exposes undo, redo, and a cursor-aware virtual keyboard", as
   await editor.fill("");
   await page.getByRole("button", { name: "Open virtual keyboard" }).click();
   await page.getByRole("button", { name: "Shift" }).click();
-  await page.getByRole("button", { name: "अ from d" }).click();
+  const nativeKey = page.getByRole("button", { name: "अ from d" });
+  const keyBox = await nativeKey.boundingBox();
+  expect(keyBox?.height).toBeGreaterThanOrEqual(44);
+  expect(keyBox?.width).toBeGreaterThanOrEqual(32);
+  await nativeKey.click();
   await expect(editor).toHaveValue("अ");
+  await page.getByRole("button", { name: "Close virtual keyboard" }).click();
+  await expect(page.getByRole("region", { name: "Hindi on-screen keyboard" })).toBeHidden();
 
   await page.getByRole("button", { name: "Export" }).click();
   const download = page.waitForEvent("download");
