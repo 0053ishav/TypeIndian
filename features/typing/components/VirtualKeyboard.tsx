@@ -90,6 +90,29 @@ export default function VirtualKeyboard({
           </div>
         ))}
 
+        {layout.specialKeys && (
+          <div
+            className="flex flex-wrap items-center gap-1 pt-2"
+            role="group"
+            aria-label={layout.specialKeys.label}
+          >
+            <span className="mr-1 text-xs font-medium text-[--color-text-muted]">
+              {layout.specialKeys.label}
+            </span>
+            {layout.specialKeys.keys.map((key) => (
+              <button
+                key={key.label}
+                type="button"
+                onClick={() => onInsert(key.output)}
+                aria-label={`${key.label} chillu`}
+                className="min-h-11 min-w-11 rounded-md border border-[--color-border] bg-white px-3 text-base font-semibold text-[--color-text-heading] active:translate-y-px"
+              >
+                {key.label}
+              </button>
+            ))}
+          </div>
+        )}
+
         <div className="flex gap-1 pt-1">
           <button
             type="button"
