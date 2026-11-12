@@ -79,5 +79,6 @@ describe("script-aware virtual keyboard layouts", () => {
     expect(output("hindi", "]", "base")).toBe("़");
     expect(output("urdu", "6", "shift")).toBe("ۂ");
     expect(output("urdu", "/", "shift")).toBe("؟");
+    expect(output("urdu", "1", "base")).toBe("1");
   });
 });
