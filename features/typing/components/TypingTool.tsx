@@ -380,17 +380,22 @@ export default function TypingTool({ language }: { language: Language }) {
   /* ---------------- letters click ---------------- */
 
   const insertChar = (char: string) => {
-    const next = text + char;
+    const textarea = textareaRef.current;
+    const start = textarea?.selectionStart ?? text.length;
+    const end = textarea?.selectionEnd ?? start;
+    const next = text.slice(0, start) + char + text.slice(end);
+    const cursor = start + char.length;
 
     editorOperationIdRef.current += 1;
     setText(next);
-    processInput(next, next.length);
+    processInput(next, cursor);
 
     requestAnimationFrame(() => {
-      textareaRef.current?.focus();
+      const currentTextarea = textareaRef.current;
+      if (!currentTextarea) return;
 
-      const end = next.length;
-      textareaRef.current?.setSelectionRange(end, end);
+      currentTextarea.focus();
+      currentTextarea.setSelectionRange(cursor, cursor);
     });
   };
 
@@ -690,9 +695,12 @@ export default function TypingTool({ language }: { language: Language }) {
         onReorder={handleReorder}
       />
 
-      <div className="mt-24">
-        <AlphabetGrid language={language} interactive onInsert={insertChar} />{" "}
-      </div>
+      <details className="mt-12 rounded-xl border border-[--color-border] p-4">
+        <summary className="cursor-pointer font-semibold text-[--color-text-heading]">
+          Open virtual keyboard
+        </summary>
+        <AlphabetGrid language={language} interactive onInsert={insertChar} />
+      </details>
     </div>
   );
 }
