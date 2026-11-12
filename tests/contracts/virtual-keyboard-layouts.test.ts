@@ -23,10 +23,17 @@ describe("script-aware virtual keyboard layouts", () => {
 
   it("uses distinct native outputs for each Brahmic script", () => {
     expect(output("panjabi", "d", "shift")).toBe("ਅ");
-    expect(output("panjabi", "x", "base")).toBe("ਂ");
+    expect(output("panjabi", "x", "base")).toBe("ਜ਼");
+    expect(output("panjabi", "v", "shift")).toBe("ਂ");
+    expect(output("panjabi", "z", "base")).toBe("ੰ");
+    expect(output("panjabi", "z", "shift")).toBe("ੱ");
     expect(output("gujarati", "d", "shift")).toBe("અ");
     expect(output("bengali", "d", "shift")).toBe("অ");
     expect(output("assamese", "j", "base")).toBe("ৰ");
+    expect(output("bengali", "/", "shift")).toBe("য");
+    expect(output("bengali", "/", "base")).toBe("য়");
+    expect(output("odia", "/", "shift")).toBe("ଯ");
+    expect(output("odia", "/", "base")).toBe("ୱ");
     expect(output("tamil", "d", "shift")).toBe("அ");
     expect(output("telugu", "d", "shift")).toBe("అ");
     expect(output("kannada", "d", "shift")).toBe("ಅ");
@@ -43,9 +50,22 @@ describe("script-aware virtual keyboard layouts", () => {
     expect(output("urdu", "a", "base")).toBe("ا");
   });
 
-  it("keeps alternate layers explicit instead of inventing missing keys", () => {
-    expect(output("malayalam", "j", "altGr")).toBe("ർ");
-    expect(output("malayalam", "n", "altGrShift")).toBe("ൾ");
-    expect(output("tamil", "q", "altGr")).toBeUndefined();
+  it("exposes Malayalam chillu characters as explicit special keys", () => {
+    const layout = getVirtualKeyboardLayout(languageRegistry.malayalam);
+    expect(layout.specialKeys?.label).toBe("Chillu letters");
+    expect(layout.specialKeys?.keys.map((key) => key.output)).toEqual([
+      "ൺ", "ൻ", "ർ", "ൽ", "ൾ", "ൿ",
+    ]);
+    expect(output("malayalam", "j", "altGr")).toBeUndefined();
+  });
+
+  it("maps script-specific vowels, nukta and Tamil Grantha keys", () => {
+    expect(output("tamil", "z", "shift")).toBe("எ");
+    expect(output("tamil", "s", "shift")).toBe("ஏ");
+    expect(output("tamil", "7", "shift")).toBe("க்ஷ");
+    expect(output("gujarati", "]", "shift")).toBe("઼");
+    expect(output("hindi", "]", "base")).toBe("़");
+    expect(output("urdu", "6", "shift")).toBe("ۂ");
+    expect(output("urdu", "/", "shift")).toBe("؟");
   });
 });
