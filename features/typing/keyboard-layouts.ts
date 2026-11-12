@@ -5,7 +5,6 @@ export type KeyboardLayer = "base" | "shift" | "altGr" | "altGrShift";
 export type VirtualKey = {
   code: string;
   label: string;
-  width?: "wide" | "space" | "enter";
   outputs: Partial<Record<KeyboardLayer, string>>;
 };
 
@@ -16,33 +15,35 @@ export type VirtualKeyboardLayout = {
   direction: "ltr" | "rtl";
   rows: VirtualKey[][];
   layers: KeyboardLayer[];
+  specialKeys?: {
+    label: string;
+    keys: { label: string; output: string }[];
+  };
 };
 
 const ROWS = [
-  ["`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "="],
+  ["\`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "="],
   ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\"],
   ["a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'"],
   ["z", "x", "c", "v", "b", "n", "m", ",", ".", "/"],
 ] as const;
 
 const SHIFTED: Record<string, string> = {
-  "`": "~", "1": "!", "2": "@", "3": "#", "4": "$", "5": "%",
+  "\`": "~", "1": "!", "2": "@", "3": "#", "4": "$", "5": "%",
   "6": "^", "7": "&", "8": "*", "9": "(", "0": ")", "-": "_", "=": "+",
   "[": "{", "]": "}", "\\": "|", ";": ":", "'": '"', ",": "<", ".": ">", "/": "?",
 };
 
-const VOWEL_KEYS: Record<string, string> = {
-  a: "d", "ô": "d", aa: "e", "ā": "e", i: "f", ee: "r", "ī": "r",
-  u: "g", oo: "t", "ū": "t", ri: "=", ru: "=", "r̥": "=",
-  e: "s", ai: "w", oi: "w", o: "a", au: "q", ou: "q",
-};
+const SHIFTED_PHYSICAL = Object.fromEntries(
+  Object.entries(SHIFTED).map(([physical, shifted]) => [shifted, physical]),
+);
 
 const SIGNS: Record<string, Record<string, string>> = {
   hindi: { aa: "ा", i: "ि", ee: "ी", u: "ु", oo: "ू", ri: "ृ", e: "े", ai: "ै", o: "ो", au: "ौ", virama: "्", anusvara: "ं", candrabindu: "ँ", visarga: "ः", shortE: "ॆ", shortO: "ॉ" },
   marathi: { aa: "ा", i: "ि", ee: "ी", u: "ु", oo: "ू", ri: "ृ", e: "े", ai: "ै", o: "ो", au: "ौ", virama: "्", anusvara: "ं", candrabindu: "ँ", visarga: "ः" },
   nepali: { aa: "ा", i: "ि", ee: "ी", u: "ु", oo: "ू", ri: "ृ", e: "े", ai: "ै", o: "ो", au: "ौ", virama: "्", anusvara: "ं", candrabindu: "ँ", visarga: "ः" },
   sanskrit: { aa: "ा", i: "ि", ee: "ी", u: "ु", oo: "ू", ri: "ृ", e: "े", ai: "ै", o: "ो", au: "ौ", virama: "्", anusvara: "ं", candrabindu: "ँ", visarga: "ः" },
-  panjabi: { aa: "ਾ", i: "ਿ", ee: "ੀ", u: "ੁ", oo: "ੂ", e: "ੇ", ai: "ੈ", o: "ੋ", au: "ੌ", virama: "੍", anusvara: "ਂ", tippi: "ੰ", addak: "ੱ", visarga: "ਃ" },
+  panjabi: { aa: "ਾ", i: "ਿ", ee: "ੀ", u: "ੁ", oo: "ੂ", e: "ੇ", ai: "ੈ", o: "ੋ", au: "ੌ", virama: "੍", anusvara: "ਂ", tippi: "ੰ", addak: "ੱ" },
   gujarati: { aa: "ા", i: "િ", ee: "ી", u: "ુ", oo: "ૂ", ri: "ૃ", e: "ે", ai: "ૈ", o: "ો", au: "ૌ", virama: "્", anusvara: "ં", candrabindu: "ઁ", visarga: "ઃ", shortE: "ૅ", shortO: "ૉ" },
   bengali: { aa: "া", i: "ি", ee: "ী", u: "ু", oo: "ূ", ri: "ৃ", e: "ে", ai: "ৈ", o: "ো", au: "ৌ", virama: "্", anusvara: "ং", candrabindu: "ঁ", visarga: "ঃ" },
   assamese: { aa: "া", i: "ি", ee: "ী", u: "ু", oo: "ূ", ri: "ৃ", e: "ে", ai: "ৈ", o: "ো", au: "ৌ", virama: "্", anusvara: "ং", candrabindu: "ঁ", visarga: "ঃ" },
@@ -53,27 +54,114 @@ const SIGNS: Record<string, Record<string, string>> = {
   odia: { aa: "ା", i: "ି", ee: "ୀ", u: "ୁ", oo: "ୂ", ri: "ୃ", e: "େ", ai: "ୈ", o: "ୋ", au: "ୌ", virama: "୍", anusvara: "ଂ", candrabindu: "ଁ", visarga: "ଃ" },
 };
 
+const VOWEL_TOKENS: Record<string, string[]> = {
+  hindi: ["D", "E", "F", "R", "G", "T", "+", "S", "W", "A", "Q", "x", "_"],
+  marathi: ["D", "E", "F", "R", "G", "T", "+", "", "", "", "S", "W", "A", "Q", "x", "_"],
+  nepali: ["D", "E", "F", "R", "G", "T", "+", "S", "W", "A", "Q"],
+  sanskrit: ["D", "E", "F", "R", "G", "T", "+", "", "", "", "S", "W", "A", "Q"],
+  panjabi: ["D", "E", "F", "R", "G", "T", "S", "W", "A", "Q"],
+  gujarati: ["D", "E", "F", "R", "G", "T", "+", "S", "W", "A", "Q", "x", "_", "!"],
+  bengali: ["D", "E", "F", "R", "G", "T", "+", "S", "W", "A", "Q"],
+  assamese: ["D", "E", "F", "R", "G", "T", "+", "S", "W", "A", "Q"],
+  tamil: ["D", "E", "F", "R", "G", "T", "Z", "S", "W", "~", "A", "Q"],
+  telugu: ["D", "E", "F", "R", "G", "T", "+", "", "", "", "Z", "S", "W", "~", "A", "Q"],
+  kannada: ["D", "E", "F", "R", "G", "T", "+", "", "", "", "Z", "S", "W", "~", "A", "Q"],
+  malayalam: ["D", "E", "F", "R", "G", "T", "+", "", "", "", "Z", "S", "W", "~", "A", "Q"],
+  odia: ["D", "E", "F", "R", "G", "T", "+", "", "", "", "S", "W", "A", "Q"],
+};
+
+const SOUND_KEYS: Record<string, string> = {
+  ka: "k", kha: "K", ga: "i", gha: "I", nga: "U", "ṅa": "U",
+  cha: ";", chha: ":", ca: ";", ja: "p", jha: "P", nya: "}", "ña": "}",
+  "ṭa": "'", "ṭha": '"', "ḍa": "[", "ḍha": "{", "ṇa": "C",
+  ta: "l", tha: "L", da: "o", dha: "O", na: "v",
+  pa: "h", pha: "H", ba: "y", bha: "Y", ma: "c",
+  ya: "/", ra: "j", la: "n", va: "b",
+  sha: "M", "śa": "M", "ṣha": "<", "ṣa": "<", sa: "m", ha: "u",
+  "ḷa": "N", "zha": "B", "ṟa": "J", "ṉa": "V",
+};
+
 const URDU_BASE: Record<string, string> = {
-  "`": "ٍ", q: "ق", w: "و", e: "ع", r: "ر", t: "ت", y: "ے", u: "ئ", i: "ی", o: "ہ", p: "پ",
+  "\`": "ٍ", q: "ق", w: "و", e: "ع", r: "ر", t: "ت", y: "ے", u: "ئ", i: "ی", o: "ہ", p: "پ",
   a: "ا", s: "س", d: "د", f: "ف", g: "گ", h: "ھ", j: "ج", k: "ک", l: "ل",
   z: "ز", x: "ش", c: "چ", v: "ط", b: "ب", n: "ن", m: "م",
   "-": "أ", "=": "ۤ", "[": "ٌ", "]": "ْ", ";": "؛", ",": "،", ".": "۔", "\\": "؎",
 };
+
 const URDU_SHIFT: Record<string, string> = {
   q: "ﷺ", w: "ؤ", e: "ؑ", r: "ڑ", t: "ٹ", y: "؁", u: "ء", i: "ٰ", o: "ۃ", p: "ُ",
   a: "آ", s: "ص", d: "ڈ", f: "ٖ", g: "غ", h: "ح", j: "ض", k: "خ", l: "ؓ",
   z: "ذ", x: "ژ", c: "ث", v: "ظ", b: "ؒ", n: "ں", m: "ؐ",
-  "`": "ً", "6": "ۂ", "9": ")", "0": "(", "-": "ـ", "=": "ٓ",
+  "\`": "ً", "6": "ۂ", "9": ")", "0": "(", "-": "ـ", "=": "ٓ",
   "[": "ٗ", "]": "ّ", ";": ":", ",": "ِ", ".": "َ", "/": "؟", "\\": "ؔ",
 };
 
-function add(
-  target: Record<KeyboardLayer, Record<string, string>>,
-  key: string,
-  layer: KeyboardLayer,
-  output: string,
+const NUKTA: Record<string, { token: string; output: string }> = {
+  hindi: { token: "]", output: "़" },
+  marathi: { token: "]", output: "़" },
+  nepali: { token: "]", output: "़" },
+  sanskrit: { token: "]", output: "़" },
+  panjabi: { token: "]", output: "਼" },
+  gujarati: { token: "}", output: "઼" },
+  bengali: { token: "]", output: "়" },
+  assamese: { token: "]", output: "়" },
+  odia: { token: "]", output: "଼" },
+};
+
+const CONJUNCTS: Record<string, Record<string, string>> = {
+  hindi: { "#": "्र", "$": "र्", "%": "ज्ञ", "^": "त्र", "&": "क्ष", "*": "श्र" },
+  marathi: { "#": "्र", "$": "र्", "%": "ज्ञ", "^": "त्र", "&": "क्ष", "*": "श्र" },
+  nepali: { "#": "्र", "$": "र्", "%": "ज्ञ", "^": "त्र", "&": "क्ष", "*": "श्र" },
+  sanskrit: { "#": "्र", "$": "र्", "%": "ज्ञ", "^": "त्र", "&": "क्ष", "*": "श्र" },
+  gujarati: { "#": "્ર", "$": "ર્", "%": "જ્ઞ", "^": "ત્ર", "&": "ક્ષ", "*": "શ્ર" },
+  bengali: { "#": "্র", "$": "র্", "%": "জ্ঞ", "^": "ত্র", "&": "ক্ষ", "*": "শ্র" },
+  assamese: { "#": "্ৰ", "$": "ৰ্", "%": "জ্ঞ", "^": "ত্ৰ", "&": "ক্ষ", "*": "শ্ৰ" },
+  tamil: { "&": "க்ஷ", "*": "ஷ்ர" },
+  telugu: { "#": "్ర", "$": "ర్", "%": "జ్ఞ", "^": "త్ర", "&": "క్ష", "*": "శ్ర" },
+  kannada: { "#": "್ರ", "$": "ರ್", "%": "ಜ್ಞ", "^": "ತ್ರ", "&": "ಕ್ಷ", "*": "ಶ್ರ" },
+};
+
+function tokenTarget(token: string): { key: string; layer: "base" | "shift" } {
+  if (SHIFTED_PHYSICAL[token]) return { key: SHIFTED_PHYSICAL[token], layer: "shift" };
+  if (/^[A-Z]$/.test(token)) return { key: token.toLowerCase(), layer: "shift" };
+  return { key: token, layer: "base" };
+}
+
+function addToken(
+  outputs: Record<KeyboardLayer, Record<string, string>>,
+  token: string,
+  value: string,
 ) {
-  if (output) target[layer][key] = output;
+  if (!token || !value) return;
+  const target = tokenTarget(token);
+  outputs[target.layer][target.key] = value;
+}
+
+function vowelTokensFor(languageId: string) {
+  return VOWEL_TOKENS[languageId] ?? VOWEL_TOKENS.hindi;
+}
+
+function consonantToken(languageId: string, sound: string) {
+  if (languageId === "nepali" || languageId === "sanskrit") {
+    if (sound === "ca") return ";";
+    if (sound === "cha") return ":";
+    if (sound === "ña") return "}";
+    if (sound === "ṅa") return "U";
+  }
+
+  if (languageId === "bengali" || languageId === "assamese") {
+    if (sound === "ya") return "?";
+    if (sound === "ẏa") return "/";
+  }
+
+  if (languageId === "odia") {
+    if (sound === "ya") return "?";
+    if (sound === "wa") return "/";
+  }
+
+  if (languageId === "panjabi" && sound === "ṛa") return "J";
+
+  return SOUND_KEYS[sound];
 }
 
 export function getVirtualKeyboardLayout(language: Language): VirtualKeyboardLayout {
@@ -82,93 +170,86 @@ export function getVirtualKeyboardLayout(language: Language): VirtualKeyboardLay
   };
 
   if (language.id === "urdu") {
-    Object.entries(URDU_BASE).forEach(([key, value]) => add(outputs, key, "base", value));
-    Object.entries(URDU_SHIFT).forEach(([key, value]) => add(outputs, key, "shift", value));
+    Object.entries(URDU_BASE).forEach(([key, value]) => {
+      outputs.base[key] = value;
+    });
+    Object.entries(URDU_SHIFT).forEach(([key, value]) => {
+      outputs.shift[key] = value;
+    });
   } else {
-    const sign = SIGNS[language.id] ?? {};
-    const signKeys: Record<string, string> = {
-      q: "au", w: "ai", e: "aa", r: "ee", t: "oo", a: "o", s: "e",
-      d: "virama", f: "i", g: "u", x: language.id === "panjabi" ? "anusvara" : "anusvara",
-      "-": "visarga", z: "shortE", "`": "shortO",
-    };
-    Object.entries(signKeys).forEach(([key, name]) => {
-      if (sign[name]) add(outputs, key, "base", sign[name]);
+    language.alphabet.vowels.forEach(({ letter }, index) => {
+      addToken(outputs, vowelTokensFor(language.id)[index] ?? "", letter);
     });
-    if (sign.candrabindu) add(outputs, "x", "shift", sign.candrabindu);
-    if (sign.tippi) add(outputs, "x", "shift", sign.tippi);
-    if (sign.addak) add(outputs, "3", "shift", sign.addak);
 
-    const vowelKeys: Record<string, string> = {
-      q: "au", w: "ai", e: "aa", r: "ee", t: "oo", a: "o", s: "e",
-      d: "a", f: "i", g: "u", "=": "ri", z: "shortE", "`": "shortO",
+    const signs = SIGNS[language.id] ?? {};
+    const signTokens: Record<string, string> = {
+      aa: "e", i: "f", ee: "r", u: "g", oo: "t", ri: "=",
+      e: "s", ai: "w", o: "a", au: "q", virama: "d",
+      anusvara: "x", candrabindu: "X",
     };
-    language.alphabet.vowels.forEach(({ letter, sound }) => {
-      const key = VOWEL_KEYS[sound];
-      if (key) add(outputs, key, "shift", letter);
+
+    const shortOKey = ["tamil", "telugu", "kannada", "malayalam"].includes(language.id)
+      ? "\`"
+      : "\\";
+    if (signs.shortE) signTokens.shortE = "z";
+    if (signs.shortO) signTokens.shortO = shortOKey;
+    if (signs.visarga) {
+      signTokens.visarga = language.id === "telugu" ? "-" : "_";
+    }
+
+    Object.entries(signTokens).forEach(([name, token]) => {
+      const value = signs[name];
+      if (value) addToken(outputs, token, value);
     });
-    Object.entries(vowelKeys).forEach(([key, name]) => {
-      const independent = language.alphabet.vowels.find((v) => {
-        const normalized = v.sound.toLowerCase();
-        return name === "a" ? normalized === "a" || normalized === "ô" :
-          name === "aa" ? normalized === "aa" || normalized === "ā" :
-          name === "i" ? normalized === "i" :
-          name === "ee" ? normalized === "ee" || normalized === "ī" :
-          name === "u" ? normalized === "u" :
-          name === "oo" ? normalized === "oo" || normalized === "ū" :
-          name === "ri" ? ["ri", "ru", "r̥"].includes(normalized) :
-          name === "e" ? normalized === "e" :
-          name === "ai" ? normalized === "ai" || normalized === "oi" :
-          name === "o" ? normalized === "o" :
-          name === "au" ? normalized === "au" || normalized === "ou" : false;
+
+    language.alphabet.consonants.forEach(({ letter, sound }) => {
+      const token = consonantToken(language.id, sound);
+      if (token) addToken(outputs, token, letter);
+    });
+
+    // Tamil's Grantha letters are direct InScript outputs, not nukta combinations.
+    if (language.id === "tamil") {
+      language.alphabet.extensions?.forEach(({ letter, sound }) => {
+        const token = consonantToken(language.id, sound);
+        if (token) addToken(outputs, token, letter);
       });
-      if (independent) add(outputs, key, "shift", independent.letter);
+    }
+
+    const nukta = NUKTA[language.id];
+    if (nukta) addToken(outputs, nukta.token, nukta.output);
+
+    if (language.id === "panjabi") {
+      addToken(outputs, "x", "ਜ਼");
+      addToken(outputs, "X", "ਫ਼");
+      addToken(outputs, "z", "ੰ");
+      addToken(outputs, "Z", "ੱ");
+      addToken(outputs, "V", "ਂ");
+      addToken(outputs, "<", "ੳ");
+      addToken(outputs, ">", "ੲ");
+    }
+
+    if (language.id === "bengali" || language.id === "assamese") {
+      addToken(outputs, "J", "ৎ");
+      addToken(outputs, "z", "ʼ");
+    }
+
+    if (language.id === "hindi") {
+      addToken(outputs, "\\", "ॉ");
+      addToken(outputs, "|", "ऑ");
+    }
+
+    if (language.id === "gujarati") {
+      addToken(outputs, "\\", "ૉ");
+      addToken(outputs, "|", "ઑ");
+    }
+
+    Object.entries(CONJUNCTS[language.id] ?? {}).forEach(([token, value]) => {
+      addToken(outputs, token, value);
     });
 
-    const assignConsonant = (sound: string, letter: string, layer: "base" | "shift" | "altGr") => {
-      const mapping = SOUND_KEYS[sound];
-      if (!mapping) return;
-      add(outputs, mapping.key, layer === "altGr" ? "altGr" : mapping.layer, letter);
-    };
-
-    language.alphabet.consonants.forEach(({ letter, sound }) => assignConsonant(sound, letter, "base"));
-    language.alphabet.extensions?.forEach(({ letter, sound }) => assignConsonant(sound, letter, "altGr"));
-
-    // Script-specific marks and letters which are not part of the alphabet chart.
-    if (language.id === "panjabi") {
-      add(outputs, "x", "base", "ਂ");
-      add(outputs, "x", "shift", "ੰ");
-      add(outputs, "3", "shift", "ੱ");
-      add(outputs, "g", "altGrShift", "ੲ");
-      add(outputs, "f", "altGrShift", "ੳ");
-    }
-    if (language.id === "malayalam") {
-      add(outputs, "v", "shift", "ൻ");
-      add(outputs, "x", "shift", "ൺ");
-      add(outputs, ">", "shift", "ൽ");
-      add(outputs, "j", "altGr", "ർ");
-      add(outputs, "n", "altGrShift", "ൾ");
-      add(outputs, "k", "altGr", "ൿ");
-    }
-    if (language.id === "odia") {
-      delete outputs.base.b;
-      add(outputs, "b", "altGr", "ୱ");
-    }
-
-    const conjuncts: Record<string, Record<string, string>> = {
-      hindi: { "3": "्र", "4": "र्", "5": "ज्ञ", "6": "त्र", "7": "क्ष", "8": "श्र" },
-      marathi: { "3": "्र", "4": "र्", "5": "ज्ञ", "6": "त्र", "7": "क्ष", "8": "श्र" },
-      nepali: { "3": "्र", "4": "र्", "5": "ज्ञ", "6": "त्र", "7": "क्ष", "8": "श्र" },
-      sanskrit: { "3": "्र", "4": "र्", "5": "ज्ञ", "6": "त्र", "7": "क्ष", "8": "श्र" },
-      gujarati: { "3": "્ર", "4": "ર્", "5": "જ્ઞ", "6": "ત્ર", "7": "ક્ષ", "8": "શ્ર" },
-      bengali: { "3": "্র", "4": "র্", "5": "জ্ঞ", "6": "ত্র", "7": "ক্ষ", "8": "শ্র" },
-      assamese: { "3": "্ৰ", "4": "ৰ্", "5": "জ্ঞ", "6": "ত্ৰ", "7": "ক্ষ", "8": "শ্ৰ" },
-      telugu: { "4": "ర్", "5": "జ్ఞ", "6": "త్ర", "7": "క్ష", "8": "శ్ర" },
-      kannada: { "4": "ರ್", "5": "ಜ್ಞ", "6": "ತ್ರ", "7": "ಕ್ಷ", "8": "ಶ್ರ" },
-      odia: { "3": "୍ର", "4": "ର୍", "5": "ଜ୍ଞ", "6": "ତ୍ର", "7": "କ୍ଷ", "8": "ଶ୍ର" },
-      tamil: { "7": "க்ஷ", "8": "ஷ்ர" },
-    };
-    Object.entries(conjuncts[language.id] ?? {}).forEach(([key, value]) => {
-      add(outputs, key, "shift", value);
+    // Standard InScript number-row mappings use the language's own numeral set.
+    language.alphabet.numerals.forEach(({ latin, native }) => {
+      addToken(outputs, latin, native);
     });
   }
 
@@ -190,25 +271,24 @@ export function getVirtualKeyboardLayout(language: Language): VirtualKeyboardLay
   return {
     id: language.id === "urdu" ? "urdu-phonetic" : "enhanced-inscript",
     name: language.id === "urdu" ? "Urdu Phonetic" : "Enhanced InScript",
-    standard: language.id === "urdu" ? "m17n Urdu Phonetic input convention" : "BIS Enhanced InScript (IS 16350:2016)",
+    standard: language.id === "urdu"
+      ? "m17n Urdu Phonetic input convention"
+      : "BIS Enhanced InScript (IS 16350:2016)",
     direction: language.direction,
     rows,
     layers,
+    specialKeys: language.id === "malayalam"
+      ? {
+          label: "Chillu letters",
+          keys: [
+            { label: "ൺ", output: "ൺ" },
+            { label: "ൻ", output: "ൻ" },
+            { label: "ർ", output: "ർ" },
+            { label: "ൽ", output: "ൽ" },
+            { label: "ൾ", output: "ൾ" },
+            { label: "ൿ", output: "ൿ" },
+          ],
+        }
+      : undefined,
   };
 }
-
-const SOUND_KEYS: Record<string, { key: string; layer: "base" | "shift" }> = {
-  ka: { key: "k", layer: "base" }, kha: { key: "k", layer: "shift" },
-  ga: { key: "i", layer: "base" }, gha: { key: "i", layer: "shift" },
-  nga: { key: "u", layer: "shift" }, "ṅa": { key: "u", layer: "shift" },
-  cha: { key: ";", layer: "base" }, ca: { key: ";", layer: "base" },
-  chha: { key: ";", layer: "shift" }, ja: { key: "p", layer: "base" },
-  jha: { key: "p", layer: "shift" }, nya: { key: "]", layer: "shift" }, "ña": { key: "]", layer: "shift" },
-  "ṭa": { key: "'", layer: "base" }, "ṭha": { key: "'", layer: "shift" },
-  "ḍa": { key: "[", layer: "base" }, "ḍha": { key: "[", layer: "shift" }, "ṇa": { key: "c", layer: "shift" },
-  ta: { key: "l", layer: "base" }, tha: { key: "l", layer: "shift" }, da: { key: "o", layer: "base" }, dha: { key: "o", layer: "shift" }, na: { key: "v", layer: "base" },
-  pa: { key: "h", layer: "base" }, pha: { key: "h", layer: "shift" }, ba: { key: "y", layer: "base" }, bha: { key: "y", layer: "shift" }, ma: { key: "c", layer: "base" },
-  ya: { key: "/", layer: "base" }, ra: { key: "j", layer: "base" }, la: { key: "n", layer: "base" }, va: { key: "b", layer: "base" }, wa: { key: "b", layer: "base" },
-  sha: { key: "m", layer: "shift" }, "śa": { key: "m", layer: "shift" }, "ṣha": { key: ",", layer: "shift" }, "ṣa": { key: ",", layer: "shift" },
-  sa: { key: "m", layer: "base" }, ha: { key: "u", layer: "base" }, "ḷa": { key: "n", layer: "shift" }, "zha": { key: "b", layer: "shift" }, "ṟa": { key: "j", layer: "shift" }, "ṉa": { key: "v", layer: "shift" }, "ṛa": { key: "j", layer: "shift" }, "ṛha": { key: "[", layer: "shift" },
-};
