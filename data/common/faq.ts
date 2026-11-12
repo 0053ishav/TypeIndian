@@ -14,7 +14,7 @@ export const COMMON_FAQ: FAQItem[] = [
   {
     question: "Does TypeIndian store or track my text?",
     answer:
-      "No. Your privacy is paramount. Everything you type stays in your browser&apos;s memory and is never sent to our servers or stored anywhere. We don&apos;t track what you type, collect analytics on your content, or share any information. When you close the browser tab, your text is gone forever unless you&apos;ve saved it yourself.",
+      "TypeIndian does not store your typing in a TypeIndian account or cloud document database. However, when you use transliteration suggestions, the word you submit is sent to Google Input Tools for processing. Avoid entering passwords, financial details, or other sensitive information into the transliteration tool.",
   },
   {
     question: "Can I paste full paragraphs and convert them?",
@@ -24,7 +24,7 @@ export const COMMON_FAQ: FAQItem[] = [
   {
     question: "How accurate is the transliteration?",
     answer:
-      "TypeIndian uses advanced phonetic mapping to provide highly accurate transliteration. For common words and phrases, accuracy is excellent. The tool also provides suggestions for ambiguous words, allowing you to choose the most appropriate option. As with any automated tool, reviewing your text for context-specific nuances is always a good practice.",
+      "TypeIndian requests transliteration suggestions from Google Input Tools. Results can vary by language, word, spelling, and context. You can choose from the suggestions and edit the output manually; review the result for context-specific nuances.",
   },
   {
     question: "Is this a translation tool?",
