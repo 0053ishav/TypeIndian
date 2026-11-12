@@ -1103,6 +1103,7 @@ export default function TypingTool({ language }: { language: Language }) {
         {isKeyboardOpen && (
           <div id="typing-virtual-keyboard">
             <VirtualKeyboard
+              key={language.id}
               language={language}
               onInsert={insertChar}
               onBackspace={handleVirtualBackspace}
