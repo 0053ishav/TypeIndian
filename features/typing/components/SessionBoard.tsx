@@ -49,14 +49,20 @@ export default function SessionBoard({
     cancelEditing();
   };
 
-  const handleDrop = () => {
-    if (dragIndex === null || overIndex === null || dragIndex === overIndex) {
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    const sourceIndex = Number(event.dataTransfer.getData("text/plain"));
+    const from = Number.isInteger(sourceIndex) && event.dataTransfer.getData("text/plain") !== ""
+      ? sourceIndex
+      : dragIndex;
+
+    if (from === null || overIndex === null || from === overIndex) {
       setDragIndex(null);
       setOverIndex(null);
       return;
     }
 
-    onReorder(dragIndex, overIndex);
+    onReorder(from, overIndex);
     setDragIndex(null);
     setOverIndex(null);
   };
@@ -73,7 +79,7 @@ export default function SessionBoard({
             type="button"
             onClick={onCopyAll}
             disabled={lines.length === 0}
-            className="text-sm px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-40 cursor-pointer"
+            className="min-h-11 px-3 py-2 text-sm rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-40 cursor-pointer"
           >
             Copy All
           </button>
@@ -100,9 +106,14 @@ export default function SessionBoard({
             key={i}
             role="listitem"
             draggable={editingIndex === null}
-            onDragStart={() => setDragIndex(i)}
+            onDragStart={(e) => {
+              e.dataTransfer.setData("text/plain", String(i));
+              e.dataTransfer.effectAllowed = "move";
+              setDragIndex(i);
+            }}
             onDragOver={(e) => {
               e.preventDefault();
+              e.dataTransfer.dropEffect = "move";
               setOverIndex(i);
             }}
             onDrop={handleDrop}
@@ -111,7 +122,7 @@ export default function SessionBoard({
               setOverIndex(null);
             }}
             className={`
-              flex items-start justify-between gap-3 p-3 border rounded bg-white
+              flex flex-col sm:flex-row items-start justify-between gap-3 p-3 border rounded bg-white
               transition
               ${dragIndex === i ? "opacity-40" : ""}
               ${overIndex === i && dragIndex !== i ? "ring-2 ring-orange-300" : ""}
@@ -130,11 +141,11 @@ export default function SessionBoard({
                   />
 
                   <div className="flex gap-2 mt-2">
-                    <button type="button" onClick={saveEditing} className="btn-primary">
+                    <button type="button" onClick={saveEditing} className="btn-primary min-h-11">
                       Save
                     </button>
 
-                    <button type="button" onClick={cancelEditing} className="btn-secondary">
+                    <button type="button" onClick={cancelEditing} className="btn-secondary min-h-11">
                       Cancel
                     </button>
                   </div>
@@ -147,7 +158,7 @@ export default function SessionBoard({
             </div>
 
             {editingIndex !== i && (
-              <div className="flex flex-wrap items-center justify-end gap-2">
+              <div className="w-full sm:w-auto flex flex-wrap items-center justify-start sm:justify-end gap-2">
                 <button
                   type="button"
                   onClick={() => onReorder(i, i - 1)}
