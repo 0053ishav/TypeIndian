@@ -27,7 +27,7 @@ export default function TypingTool({ language }: { language: Language }) {
     { text: "", selectionStart: 0, selectionEnd: 0 },
   ]);
   const historyIndexRef = useRef(0);
-  const [, setHistoryVersion] = useState(0);
+  const [historyIndex, setHistoryIndex] = useState(0);
   const suggestionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const suggestionRequestRef = useRef<AbortController | null>(null);
   const suggestionRequestIdRef = useRef(0);
@@ -67,14 +67,12 @@ export default function TypingTool({ language }: { language: Language }) {
     setText("");
     historyRef.current = [{ text: "", selectionStart: 0, selectionEnd: 0 }];
     historyIndexRef.current = 0;
-    setHistoryVersion((version) => version + 1);
+    setHistoryIndex(0);
     setCurrentWord("");
+    cancelPendingSuggestions();
     setSuggestions([]);
     setActiveSuggestionIndex(-1);
-    setLoading(false);
     wordRangeRef.current = null;
-    suggestionRequestRef.current?.abort();
-    if (suggestionTimerRef.current) clearTimeout(suggestionTimerRef.current);
   }, [language.transliteration.languageCode]);
 
   useEffect(() => {
@@ -150,7 +148,7 @@ export default function TypingTool({ language }: { language: Language }) {
 
       historyRef.current = nextHistory;
       historyIndexRef.current = nextHistory.length - 1;
-      setHistoryVersion((version) => version + 1);
+      setHistoryIndex(nextHistory.length - 1);
     }
 
     setText(value);
@@ -161,7 +159,7 @@ export default function TypingTool({ language }: { language: Language }) {
     if (!snapshot) return;
 
     historyIndexRef.current = nextIndex;
-    setHistoryVersion((version) => version + 1);
+    setHistoryIndex(nextIndex);
     setText(snapshot.text);
     cancelPendingSuggestions();
     setSuggestions([]);
@@ -413,7 +411,7 @@ export default function TypingTool({ language }: { language: Language }) {
       const cursor = start + translated.length;
       commitText(next, cursor, cursor);
       setSuggestions([]);
-    setActiveSuggestionIndex(-1);
+      setActiveSuggestionIndex(-1);
       setCurrentWord("");
       wordRangeRef.current = null;
 
@@ -477,8 +475,12 @@ export default function TypingTool({ language }: { language: Language }) {
     const cursor = start + char.length;
 
     editorOperationIdRef.current += 1;
+    cancelPendingSuggestions();
     commitText(next, cursor, cursor);
-    processInput(next, cursor);
+    setCurrentWord("");
+    setSuggestions([]);
+    setActiveSuggestionIndex(-1);
+    wordRangeRef.current = null;
 
     requestAnimationFrame(() => {
       const currentTextarea = textareaRef.current;
@@ -635,6 +637,18 @@ export default function TypingTool({ language }: { language: Language }) {
 
   const handleReorder = (from: number, to: number) => {
     setBoardLines((prev) => {
+      if (
+        !Number.isInteger(from) ||
+        !Number.isInteger(to) ||
+        from < 0 ||
+        to < 0 ||
+        from >= prev.length ||
+        to >= prev.length ||
+        from === to
+      ) {
+        return prev;
+      }
+
       const copy = [...prev];
       const [moved] = copy.splice(from, 1);
       copy.splice(to, 0, moved);
@@ -645,17 +659,21 @@ export default function TypingTool({ language }: { language: Language }) {
   /* ---------------- render ---------------- */
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
+    <div className="max-w-3xl mx-auto p-4 sm:p-6">
       <h1 className="text-3xl font-bold mb-2 text-[--color-text-heading]">
         {language.typing.title}
       </h1>
       <p className="mb-4 text-[--color-text-body]">
         {language.typing.subtitle}
       </p>
-      <div className="card p-6">
+      <div className="card p-4 sm:p-6">
         <textarea
           ref={textareaRef}
+          role="combobox"
+          aria-label={`Typing input for ${language.name}`}
           aria-autocomplete="list"
+          aria-haspopup="listbox"
+          aria-expanded={loading || suggestions.length > 0}
           aria-controls="typing-suggestions"
           aria-activedescendant={
             activeSuggestionIndex >= 0
@@ -664,7 +682,7 @@ export default function TypingTool({ language }: { language: Language }) {
           }
           rows={9}
           dir={language.direction}
-          className="input-base"
+          className="input-base min-h-48 resize-y"
           placeholder="Type here in English..."
           value={text}
           onChange={handleInput}
@@ -706,6 +724,13 @@ export default function TypingTool({ language }: { language: Language }) {
               </button>
             ))}
         </div>
+        <p className="sr-only" role="status" aria-live="polite">
+          {loading
+            ? "Loading transliteration suggestions"
+            : suggestions.length > 0
+              ? `${suggestions.length} suggestions available`
+              : ""}
+        </p>
       </div>
 
       <div className="mt-4 grid md:grid-cols-[1fr_auto] gap-4 items-start">
@@ -715,7 +740,7 @@ export default function TypingTool({ language }: { language: Language }) {
             type="button"
             onClick={handleUndo}
             className="btn-secondary"
-            disabled={historyIndexRef.current === 0}
+            disabled={historyIndex === 0}
             aria-label="Undo"
           >
             ↶ Undo
@@ -725,7 +750,7 @@ export default function TypingTool({ language }: { language: Language }) {
             type="button"
             onClick={handleRedo}
             className="btn-secondary"
-            disabled={historyIndexRef.current >= historyRef.current.length - 1}
+            disabled={historyIndex >= historyRef.current.length - 1}
             aria-label="Redo"
           >
             ↷ Redo
@@ -761,8 +786,29 @@ export default function TypingTool({ language }: { language: Language }) {
         </div>
 
         {/* Mobile Actions */}
-        <div className="flex sm:hidden gap-2">
+        <div className="flex sm:hidden flex-wrap gap-2">
           <button
+            type="button"
+            onClick={handleUndo}
+            className="btn-secondary min-h-11 flex-1"
+            disabled={historyIndex === 0}
+            aria-label="Undo"
+          >
+            ↶
+          </button>
+
+          <button
+            type="button"
+            onClick={handleRedo}
+            className="btn-secondary min-h-11 flex-1"
+            disabled={historyIndex >= historyRef.current.length - 1}
+            aria-label="Redo"
+          >
+            ↷
+          </button>
+
+          <button
+            type="button"
             onClick={handleAddToBoard}
             className="btn-primary flex-1"
             aria-label="Add to Board"
@@ -771,8 +817,9 @@ export default function TypingTool({ language }: { language: Language }) {
           </button>
 
           <button
+            type="button"
             onClick={handleCopyText}
-            className="btn-secondary flex-1"
+            className="btn-secondary min-h-11 flex-1"
             disabled={!text.trim()}
             aria-label="Copy"
           >
@@ -780,8 +827,9 @@ export default function TypingTool({ language }: { language: Language }) {
           </button>
 
           <button
+            type="button"
             onClick={handleDownloadText}
-            className="btn-secondary flex-1"
+            className="btn-secondary min-h-11 flex-1"
             disabled={!text.trim()}
             aria-label="Download text file"
           >
@@ -789,8 +837,9 @@ export default function TypingTool({ language }: { language: Language }) {
           </button>
 
           <button
+            type="button"
             onClick={handleClearText}
-            className="btn-secondary flex-1"
+            className="btn-secondary min-h-11 flex-1"
             disabled={!text.trim()}
             aria-label="Clear"
           >
@@ -815,7 +864,16 @@ export default function TypingTool({ language }: { language: Language }) {
               <kbd className="font-mono">Ctrl/Cmd + Shift + Z</kbd> → redo
             </li>
             <li>
-              <kbd className="font-mono">Tab</kbd> → select word
+              <kbd className="font-mono">↑ / ↓</kbd> → navigate suggestions
+            </li>
+            <li>
+              <kbd className="font-mono">Enter</kbd> → accept selected suggestion
+            </li>
+            <li>
+              <kbd className="font-mono">Escape</kbd> → dismiss suggestions
+            </li>
+            <li>
+              <kbd className="font-mono">Tab</kbd> → move to next control
             </li>
             <li>
               <kbd className="font-mono">Ctrl + Y</kbd> → redo
@@ -845,11 +903,16 @@ export default function TypingTool({ language }: { language: Language }) {
         onReorder={handleReorder}
       />
 
-      <details className="mt-12 rounded-xl border border-[--color-border] p-4">
-        <summary className="cursor-pointer font-semibold text-[--color-text-heading]">
+      <details className="mt-8 rounded-xl border border-[--color-border] p-3 sm:p-4">
+        <summary className="min-h-11 flex items-center cursor-pointer font-semibold text-[--color-text-heading]">
           Open virtual keyboard
         </summary>
-        <AlphabetGrid language={language} interactive onInsert={insertChar} />
+        <AlphabetGrid
+          language={language}
+          interactive
+          compact
+          onInsert={insertChar}
+        />
       </details>
     </div>
   );
