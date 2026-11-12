@@ -271,6 +271,14 @@ export default function TypingTool({ language }: { language: Language }) {
     const snapshot = historyRef.current[nextIndex];
     if (!snapshot) return;
 
+    // Undo/redo is a hard grouping boundary: the next edit starts a new operation.
+    historyRef.current[nextIndex] = {
+      ...snapshot,
+      kind: undefined,
+      timestamp: undefined,
+      editStart: undefined,
+    };
+
     editorOperationIdRef.current += 1;
     historyIndexRef.current = nextIndex;
     setHistoryIndex(nextIndex);
