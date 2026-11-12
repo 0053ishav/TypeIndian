@@ -91,7 +91,12 @@ export default function TypingTool({ language }: { language: Language }) {
     historyIndexRef.current = 0;
     setHistoryIndex(0);
     setCurrentWord("");
-    cancelPendingSuggestions();
+    suggestionRequestIdRef.current += 1;
+    suggestionRequestRef.current?.abort();
+    suggestionRequestRef.current = null;
+    if (suggestionTimerRef.current) clearTimeout(suggestionTimerRef.current);
+    suggestionTimerRef.current = null;
+    setLoading(false);
     setSuggestions([]);
     setActiveSuggestionIndex(-1);
     wordRangeRef.current = null;
