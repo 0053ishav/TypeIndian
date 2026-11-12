@@ -126,3 +126,20 @@ Reviewer:
 Date:
 
 Approved:
+---
+
+# Milestone 3 — Typing UX physical-device verification
+
+**Status: Outstanding.** CI covers Chromium desktop/mobile viewports and touch emulation. No physical Android or iOS device has been used for this PR.
+
+Before merging, complete and record:
+
+- [ ] Android Chrome: open/close the on-screen keyboard and use native-script keys by touch
+- [ ] Android Chrome: verify 44px touch targets, cursor insertion, selection replacement, Backspace and Enter
+- [ ] Android Chrome: verify TXT, DOCX and PDF downloads open in their intended apps
+- [ ] iOS Safari (if supported): repeat keyboard, editor and export checks
+- [ ] Urdu: verify RTL cursor movement, punctuation, insertion and Backspace
+- [ ] Inspect PDF rendering visually for every supported script, including conjuncts and combining marks
+- [ ] Open DOCX in Microsoft Word or LibreOffice and verify script rendering and Urdu paragraph direction
+
+Record device model, OS version, browser version, and results in the PR before sign-off.
