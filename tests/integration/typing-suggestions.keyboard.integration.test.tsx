@@ -3,22 +3,24 @@ import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { languageRegistry } from "@/lib/languages/registry";
+import { fetchSuggestions } from "@/lib/transliteration/googleHttpTransliterate";
 import TypingTool from "@/features/typing/components/TypingTool";
 
 vi.mock("@/lib/transliteration/googleHttpTransliterate", () => ({
   fetchSuggestions: vi.fn().mockResolvedValue(["नमस्ते"]),
 }));
 
-describe("TypingTool suggestion keyboard interaction", () => {
+describe("TypingTool keyboard and editor history", () => {
   beforeEach(() => {
     localStorage.clear();
+    vi.mocked(fetchSuggestions).mockClear();
   });
 
   it("accepts a focused suggestion with Enter after tabbing to it", async () => {
     const user = userEvent.setup();
     render(<TypingTool language={languageRegistry.hindi} />);
 
-    const editor = screen.getByRole("textbox");
+    const editor = screen.getByRole("combobox");
     await user.type(editor, "namaste");
 
     const suggestion = await screen.findByRole("option", { name: "नमस्ते" });
@@ -37,7 +39,7 @@ describe("TypingTool suggestion keyboard interaction", () => {
     const user = userEvent.setup();
     render(<TypingTool language={languageRegistry.hindi} />);
 
-    const editor = screen.getByRole("textbox");
+    const editor = screen.getByRole("combobox");
     await user.type(editor, "namaste");
     await screen.findByRole("option", { name: "नमस्ते" });
 
@@ -55,11 +57,26 @@ describe("TypingTool suggestion keyboard interaction", () => {
     });
   });
 
+  it("dismisses suggestions with Escape without changing editor text", async () => {
+    const user = userEvent.setup();
+    render(<TypingTool language={languageRegistry.hindi} />);
+
+    const editor = screen.getByRole("combobox");
+    await user.type(editor, "namaste");
+    await screen.findByRole("option", { name: "नमस्ते" });
+
+    await user.keyboard("{Escape}");
+
+    expect(editor).toHaveValue("namaste");
+    expect(editor).toHaveAttribute("aria-expanded", "false");
+    expect(screen.queryByRole("option")).not.toBeInTheDocument();
+  });
+
   it("supports undo and redo without losing the editor value", async () => {
     const user = userEvent.setup();
     render(<TypingTool language={languageRegistry.hindi} />);
 
-    const editor = screen.getByRole("textbox");
+    const editor = screen.getByRole("combobox");
     await user.type(editor, "ab");
 
     await user.keyboard("{Control>}z{/Control}");
@@ -69,11 +86,52 @@ describe("TypingTool suggestion keyboard interaction", () => {
     expect(editor).toHaveValue("ab");
   });
 
+  it("undoes and redoes a replacement over the current selection", async () => {
+    const user = userEvent.setup();
+    render(<TypingTool language={languageRegistry.hindi} />);
+
+    const editor = screen.getByRole("combobox") as HTMLTextAreaElement;
+    await user.type(editor, "abcd");
+
+    editor.focus();
+    editor.setSelectionRange(1, 3);
+    await user.keyboard("X");
+    expect(editor).toHaveValue("aXd");
+
+    await user.keyboard("{Control>}z{/Control}");
+    expect(editor).toHaveValue("abcd");
+
+    await user.keyboard("{Control>}{Shift>}z{/Shift}{/Control}");
+    expect(editor).toHaveValue("aXd");
+  });
+
+  it("resets editor history when the selected language changes", async () => {
+    const user = userEvent.setup();
+    const { container, rerender } = render(
+      <TypingTool language={languageRegistry.hindi} />,
+    );
+
+    const editor = screen.getByRole("combobox");
+    await user.type(editor, "namaste");
+
+    rerender(<TypingTool language={languageRegistry.urdu} />);
+
+    await waitFor(() => {
+      expect(editor).toHaveValue("");
+    });
+
+    const undoButtons = container.querySelectorAll<HTMLButtonElement>(
+      'button[aria-label="Undo"]',
+    );
+    expect(undoButtons.length).toBeGreaterThan(0);
+    expect([...undoButtons].every((button) => button.disabled)).toBe(true);
+  });
+
   it("inserts an Urdu virtual-keyboard character at the current selection", async () => {
     const user = userEvent.setup();
     render(<TypingTool language={languageRegistry.urdu} />);
 
-    const editor = screen.getByRole("textbox") as HTMLTextAreaElement;
+    const editor = screen.getByRole("combobox") as HTMLTextAreaElement;
     expect(editor).toHaveAttribute("dir", "rtl");
     await user.type(editor, "abcd");
     editor.setSelectionRange(2, 2);
@@ -84,5 +142,6 @@ describe("TypingTool suggestion keyboard interaction", () => {
     await waitFor(() => {
       expect(editor).toHaveValue("abاcd");
     });
+    expect(fetchSuggestions).not.toHaveBeenCalled();
   });
 });
