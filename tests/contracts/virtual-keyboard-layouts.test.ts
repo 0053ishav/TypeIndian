@@ -52,6 +52,15 @@ describe("script-aware virtual keyboard layouts", () => {
     expect(output("urdu", "a", "base")).toBe("ا");
   });
 
+  it("provides verified AltGr layers and script-specific extra-letter rows", () => {
+    expect(output("hindi", "f", "altGrShift")).toBe("ऌ");
+    expect(output("gujarati", "x", "altGrShift")).toBe("ૐ");
+    expect(output("odia", "b", "altGr")).toBe("୵");
+
+    const assamese = getVirtualKeyboardLayout(languageRegistry.assamese);
+    expect(assamese.specialKeys?.keys.map((key) => key.output)).toContain("ৱ");
+  });
+
   it("exposes Malayalam chillu characters as explicit special keys", () => {
     const layout = getVirtualKeyboardLayout(languageRegistry.malayalam);
     expect(layout.specialKeys?.label).toBe("Chillu letters");
