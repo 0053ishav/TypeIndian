@@ -76,6 +76,7 @@ describe("typing editor export menu", () => {
     expect(screen.getByRole("region", { name: /Hindi on-screen keyboard/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Close virtual keyboard" })).toBeInTheDocument();
     expect(screen.getByRole("group", { name: "Virtual typing keys" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: languageRegistry.hindi.labels.alphabet.title })).toBeInTheDocument();
   });
 
   it("disables export when the editor has no content", () => {
