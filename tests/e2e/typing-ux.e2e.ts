@@ -79,16 +79,16 @@ test("mobile editor exposes undo, redo, and a cursor-aware virtual keyboard", as
   await page.getByRole("menuitem", { name: /TXT/ }).click();
   expect((await download).suggestedFilename()).toMatch(/hindi-typing-.*\.txt/);
 
-  await editor.fill("नमस्ते\\nभारत");
+  await editor.fill("नमस्ते\nभारत");
   await page.getByRole("button", { name: "Export" }).click();
   const docxDownload = page.waitForEvent("download");
   await page.getByRole("menuitem", { name: /DOCX/ }).click();
-  expect((await docxDownload).suggestedFilename()).toMatch(/hindi-typing-.*\\.docx/);
+  expect((await docxDownload).suggestedFilename()).toMatch(/hindi-typing-.*\.docx/);
 
   await page.getByRole("button", { name: "Export" }).click();
   const pdfDownload = page.waitForEvent("download");
   await page.getByRole("menuitem", { name: /PDF/ }).click();
-  expect((await pdfDownload).suggestedFilename()).toMatch(/hindi-typing-.*\\.pdf/);
+  expect((await pdfDownload).suggestedFilename()).toMatch(/hindi-typing-.*\.pdf/);
 });
 
 test("Urdu virtual keyboard inserts native text in an RTL editor", async ({
