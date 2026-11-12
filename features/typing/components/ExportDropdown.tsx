@@ -62,6 +62,7 @@ export default function ExportDropdown({
   const handleSelect = (format: TypingExportFormat) => {
     setOpen(false);
     onExport(format);
+    triggerRef.current?.focus();
   };
 
   return (
