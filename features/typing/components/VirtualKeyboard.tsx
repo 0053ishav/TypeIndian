@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Language } from "@/types/language";
 import {
   getVirtualKeyboardLayout,
@@ -25,6 +25,10 @@ export default function VirtualKeyboard({
 }) {
   const layout = useMemo(() => getVirtualKeyboardLayout(language), [language]);
   const [layer, setLayer] = useState<KeyboardLayer>("base");
+
+  useEffect(() => {
+    setLayer("base");
+  }, [language.id]);
 
   const changeLayer = (next: KeyboardLayer) => setLayer(next);
 
