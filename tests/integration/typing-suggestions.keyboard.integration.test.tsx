@@ -188,7 +188,8 @@ describe("TypingTool keyboard and editor history", () => {
     editor.setSelectionRange(1, 1);
 
     await user.click(screen.getByText("Open virtual keyboard"));
-    await user.click(await screen.findByRole("button", { name: "ਸ਼ sha" }));
+    await user.click(screen.getByRole("button", { name: "AltGr" }));
+    await user.click(await screen.findByRole("button", { name: "ਸ਼ from m" }));
 
     await waitFor(() => {
       expect(editor).toHaveValue("ਅਸ਼x");
@@ -196,6 +197,45 @@ describe("TypingTool keyboard and editor history", () => {
     await waitFor(() => {
       expect(editor.selectionStart).toBe("ਅਸ਼".length);
     });
+  });
+
+  it("uses the Devanagari InScript layout and inserts native text without transliteration", async () => {
+    const user = userEvent.setup();
+    render(<TypingTool language={languageRegistry.hindi} />);
+
+    const editor = screen.getByRole("combobox") as HTMLTextAreaElement;
+    await user.click(screen.getByText("Open virtual keyboard"));
+    expect(screen.getByText(/BIS Enhanced InScript/)).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "Shift" }));
+    await user.click(screen.getByRole("button", { name: "अ from d" }));
+    expect(editor).toHaveValue("अ");
+    expect(fetchSuggestions).not.toHaveBeenCalled();
+
+    await user.click(screen.getByRole("button", { name: "Base" }));
+    await user.click(screen.getByRole("button", { name: "क from k" }));
+    await user.click(screen.getByRole("button", { name: "् from d" }));
+    expect(editor).toHaveValue("अक्");
+
+    await user.keyboard("{Control>}z{/Control}");
+    expect(editor).toHaveValue("अ");
+    await user.keyboard("{Control>}{Shift>}z{/Shift}{/Control}");
+    expect(editor).toHaveValue("अक्");
+  });
+
+  it("selects the Gurmukhi-specific layer output and deletes a grapheme as one unit", async () => {
+    const user = userEvent.setup();
+    render(<TypingTool language={languageRegistry.panjabi} />);
+
+    const editor = screen.getByRole("combobox") as HTMLTextAreaElement;
+    await user.click(screen.getByText("Open virtual keyboard"));
+    await user.click(screen.getByRole("button", { name: "AltGr" }));
+    await user.click(screen.getByRole("button", { name: "ਸ਼ from m" }));
+    expect(editor).toHaveValue("ਸ਼");
+
+    await user.click(screen.getByRole("button", { name: "Backspace" }));
+    expect(editor).toHaveValue("");
+    expect(fetchSuggestions).not.toHaveBeenCalled();
   });
 
   it("does not let an in-flight paste overwrite a later undo", async () => {
@@ -228,7 +268,7 @@ describe("TypingTool keyboard and editor history", () => {
 
     resolvePaste(["शब्द"]);
     await waitFor(() => {
-      expect(editor).toHaveValue("ab");
+      expect(editor).toHaveValue("");
     });
   });
 });
