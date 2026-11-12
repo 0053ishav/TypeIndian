@@ -70,7 +70,7 @@ test("mobile editor exposes undo, redo, and a cursor-aware virtual keyboard", as
 
   await editor.fill("");
   await page.getByRole("button", { name: "Open virtual keyboard" }).click();
-  await page.getByRole("button", { name: "Shift" }).click();
+  await page.getByRole("button", { name: "Shift", exact: true }).click();
   const nativeKey = page.getByRole("button", { name: "अ from d" });
   const keyBox = await nativeKey.boundingBox();
   expect(keyBox?.height).toBeGreaterThanOrEqual(44);
@@ -132,7 +132,7 @@ test("mobile touch can open the keyboard and insert native characters", async ({
     });
 
     await page.getByRole("button", { name: "Open virtual keyboard" }).tap();
-    await page.getByRole("button", { name: "Shift" }).tap();
+    await page.getByRole("button", { name: "Shift", exact: true }).tap();
     await page.getByRole("button", { name: "अ from d" }).tap();
     await expect(editor).toHaveValue("अ");
 
