@@ -73,7 +73,7 @@ async function readZipEntry(blob: Blob, entryName: string) {
 }
 
 function compactUnicode(value: string) {
-  return value.replace(/[\\s\\u200B\\u200C\\u200D\\uFEFF]/g, "");
+  return value.replace(/[\s\u200B\u200C\u200D\uFEFF]/g, "");
 }
 
 describe("local typing exports", () => {
