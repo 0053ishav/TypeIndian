@@ -49,7 +49,7 @@ export function createTxtBlob(text: string) {
 export async function createDocxBlob(text: string, language: Language) {
   if (!text.trim()) throw new Error("There is no text to export.");
 
-  const { AlignmentType, Document, Packer, Paragraph, TextRun } = await import("docx");
+  const { AlignmentType, Document, HeadingLevel, Packer, Paragraph, TextRun } = await import("docx");
   const font = DOCX_FONT_BY_LANGUAGE[language.id] ?? "Arial";
   const rtl = language.direction === "rtl";
   const paragraphs = splitParagraphs(text).map((line) =>
@@ -69,8 +69,27 @@ export async function createDocxBlob(text: string, language: Language) {
   );
 
   const document = new Document({
-    title: `${language.name} typing export`,
-    sections: [{ children: paragraphs }],
+    title: `TypeIndian — ${language.name} typing export`,
+    subject: "Indian language typing document",
+    creator: "TypeIndian",
+    sections: [{
+      children: [
+        new Paragraph({
+          text: "TypeIndian",
+          heading: HeadingLevel.TITLE,
+          alignment: AlignmentType.LEFT,
+        }),
+        new Paragraph({
+          children: [new TextRun({
+            text: `${language.name} typing export · Created with typeindian.com`,
+            color: "64748B",
+            size: 20,
+          })],
+          alignment: AlignmentType.LEFT,
+        }),
+        ...paragraphs,
+      ],
+    }],
   });
 
   return Packer.toBlob(document);
@@ -115,17 +134,28 @@ export async function createPdfBlob(text: string, language: Language) {
   );
 
   const direction = language.direction;
-  const blocks = splitParagraphs(text).map((line) => ({
+  const blocks = [
+    { type: "heading" as const, text: "TypeIndian", level: 1 },
+    {
+      type: "paragraph" as const,
+      text: `${language.name} typing export · Created with typeindian.com`,
+      color: "#64748B",
+      fontSize: 9,
+    },
+    { type: "spacer" as const, height: 14 },
+    ...splitParagraphs(text).map((line) => ({
     type: "paragraph" as const,
     text: line,
     direction,
     align: direction === "rtl" ? ("right" as const) : ("left" as const),
-  }));
+    })),
+  ];
 
   const bytes = pdf.buildDocumentPDFBytes(
     {
-      title: `${language.name} typing export`,
+      title: `TypeIndian — ${language.name} typing export`,
       blocks,
+      footerText: "Created with TypeIndian · typeindian.com",
       fontEntries,
     },
     { direction },
