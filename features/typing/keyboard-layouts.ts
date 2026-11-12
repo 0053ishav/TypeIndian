@@ -81,6 +81,19 @@ const SOUND_KEYS: Record<string, string> = {
   "ḷa": "N", "zha": "B", "ṟa": "J", "ṉa": "V",
 };
 
+const ALTGR_KEYS: Record<string, Record<string, string>> = {
+  hindi: { F: "ऌ", N: "ळ", ">": "ऽ", "=": "ॄ", X: "ॐ", "+": "ॠ", R: "ॡ", f: "ॢ", r: "ॣ", ".": "॥", ",": "॰", "$": "₹", k: "क़", K: "ख़", i: "ग़", p: "ज़", "[": "ड़", "{": "ढ़" },
+  marathi: { F: "ऌ", N: "ळ", ">": "ऽ", "=": "ॄ", X: "ॐ", "+": "ॠ", R: "ॡ", f: "ॢ", r: "ॣ", ".": "॥", ",": "॰", "$": "₹", k: "क़", K: "ख़", i: "ग़", p: "ज़", "[": "ड़", "{": "ढ़" },
+  nepali: { F: "ऌ", N: "ळ", ">": "ऽ", "=": "ॄ", X: "ॐ", "+": "ॠ", R: "ॡ", f: "ॢ", r: "ॣ", ".": "॥", ",": "॰", "$": "₹", k: "क़", K: "ख़", i: "ग़", p: "ज़", "[": "ड़", "{": "ढ़" },
+  sanskrit: { F: "ऌ", N: "ळ", ">": "ऽ", "=": "ॄ", X: "ॐ", "+": "ॠ", R: "ॡ", f: "ॢ", r: "ॣ", ".": "॥", ",": "॰", "$": "₹" },
+  gujarati: { F: "ઌ", ">": "ઽ", "=": "ૄ", X: "ૐ", "+": "ૠ", R: "ૡ", f: "ૢ", r: "ૣ", ".": "૥", "<": "૱", "$": "₹" },
+  bengali: { F: "ঌ", ">": "ঽ", "=": "ৠ", "+": "ৠ", R: "ৡ", f: "ৢ", r: "ৣ", ".": "৥", x: "৺", "<": "৲", ",": "৳", "$": "৸", "^": "৹", "?": "৻" },
+  assamese: { F: "ঌ", ">": "ঽ", "=": "ৠ", "+": "ৠ", R: "ৡ", f: "ৢ", r: "ৣ", ".": "৥", x: "৺", "<": "৲", ",": "৳", "$": "৸", "^": "৹", "?": "৻" },
+  telugu: { F: "ఌ", "=": "ౄ", "+": "ౠ", R: "ౡ", f: "ౢ", r: "ౣ", ".": "౥", ",": "౹", "<": "౿", "$": "₹" },
+  kannada: { F: "ಌ", "=": "ೄ", "+": "ೠ", R: "ೡ", f: "ೢ", r: "ೣ", ".": "೥", ",": "೰", "<": "ೱ", "$": "₹" },
+  odia: { F: "ଌ", b: "୵", ">": "ଽ", "=": "ୄ", "+": "ୠ", R: "ୡ", f: "ୢ", r: "ୣ", ".": "୥", x: "୰", "<": "୲", ",": "୳", "$": "₹" },
+};
+
 const URDU_BASE: Record<string, string> = {
   "\`": "ٍ", q: "ق", w: "و", e: "ع", r: "ر", t: "ت", y: "ے", u: "ئ", i: "ی", o: "ہ", p: "پ",
   a: "ا", s: "س", d: "د", f: "ف", g: "گ", h: "ھ", j: "ج", k: "ک", l: "ل",
@@ -238,6 +251,15 @@ export function getVirtualKeyboardLayout(language: Language): VirtualKeyboardLay
       });
     }
 
+    if (language.id === "odia") {
+      addToken(outputs, "/", "ୟ");
+    }
+
+    Object.entries(ALTGR_KEYS[language.id] ?? {}).forEach(([token, value]) => {
+      const target = tokenTarget(token);
+      outputs[target.layer === "shift" ? "altGrShift" : "altGr"][target.key] = value;
+    });
+
     if (language.id === "hindi") {
       addToken(outputs, "\\", "ॉ");
       addToken(outputs, "|", "ऑ");
@@ -294,6 +316,11 @@ export function getVirtualKeyboardLayout(language: Language): VirtualKeyboardLay
             { label: "ൿ", output: "ൿ" },
           ],
         }
-      : undefined,
+      : language.id === "assamese"
+        ? {
+            label: "Assamese additional letter",
+            keys: [{ label: "ৱ", output: "ৱ" }],
+          }
+        : undefined,
   };
 }
