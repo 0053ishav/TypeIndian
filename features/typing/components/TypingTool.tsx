@@ -440,6 +440,18 @@ export default function TypingTool({ language }: { language: Language }) {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (
+      !e.ctrlKey &&
+      !e.metaKey &&
+      !e.altKey &&
+      (e.key.length === 1 || e.key === "Backspace" || e.key === "Delete")
+    ) {
+      selectionBeforeInputRef.current = {
+        start: e.currentTarget.selectionStart,
+        end: e.currentTarget.selectionEnd,
+      };
+    }
+
     if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "z") {
       e.preventDefault();
       if (e.shiftKey) handleRedo();
