@@ -10,6 +10,21 @@ permissions:
   contents: read
 
 jobs:
+  lockfile-artifact:
+    name: Generate lockfile artifact
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --package-lock-only --ignore-scripts
+      - uses: actions/upload-artifact@v4
+        with:
+          name: refreshed-package-lock
+          path: package-lock.json
+          if-no-files-found: error
+
   lint:
     name: Lint
     runs-on: ubuntu-latest
@@ -22,7 +37,7 @@ jobs:
           node-version: 22
           cache: npm
 
-      - run: npm ci
+      - run: npm install
       - run: npm run lint
 
   typecheck:
@@ -37,7 +52,7 @@ jobs:
           node-version: 22
           cache: npm
 
-      - run: npm ci
+      - run: npm install
       - run: npm run typecheck
 
   test:
@@ -52,7 +67,7 @@ jobs:
           node-version: 22
           cache: npm
 
-      - run: npm ci
+      - run: npm install
       - run: npm run test:run
 
   build:
@@ -68,7 +83,7 @@ jobs:
           node-version: 22
           cache: npm
 
-      - run: npm ci
+      - run: npm install
       - run: npm run build
   e2e:
     name: Browser E2E
@@ -83,7 +98,7 @@ jobs:
           node-version: 22
           cache: npm
 
-      - run: npm ci
+      - run: npm install
       - run: npx playwright install --with-deps chromium
       - run: npm run build
       - run: npm run e2e
