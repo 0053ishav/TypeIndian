@@ -119,13 +119,7 @@ For every new language:
 
 ---
 
-# Final Sign-off
 
-Reviewer:
-
-Date:
-
-Approved:
 ---
 
 # Milestone 3 — Typing UX physical-device verification
@@ -143,3 +137,11 @@ Before merging, complete and record:
 - [ ] Open DOCX in Microsoft Word or LibreOffice and verify script rendering and Urdu paragraph direction
 
 Record device model, OS version, browser version, and results in the PR before sign-off.
+
+# Final Sign-off
+
+Reviewer:
+
+Date:
+
+Approved:
