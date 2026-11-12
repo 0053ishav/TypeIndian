@@ -231,6 +231,9 @@ export function getVirtualKeyboardLayout(language: Language): VirtualKeyboardLay
     if (language.id === "bengali" || language.id === "assamese") {
       addToken(outputs, "J", "ৎ");
       addToken(outputs, "z", "ʼ");
+      language.alphabet.extensions?.forEach(({ letter, sound }) => {
+        if (sound === "ẏa") addToken(outputs, "/", letter);
+      });
     }
 
     if (language.id === "hindi") {
