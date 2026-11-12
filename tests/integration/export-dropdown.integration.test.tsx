@@ -65,6 +65,19 @@ describe("typing editor export menu", () => {
     expect(screen.queryByRole("menu")).not.toBeInTheDocument();
   });
 
+  it("opens the draggable virtual keyboard from the editor toolbar", async () => {
+    const user = userEvent.setup();
+    render(<TypingTool language={languageRegistry.hindi} />);
+
+    const toggle = screen.getByRole("button", { name: "Virtual keyboard" });
+    expect(toggle).toHaveAttribute("title", "Virtual keyboard");
+    await user.click(toggle);
+
+    expect(screen.getByRole("region", { name: /Hindi on-screen keyboard/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Close virtual keyboard" })).toBeInTheDocument();
+    expect(screen.getByRole("group", { name: "Virtual typing keys" })).toBeInTheDocument();
+  });
+
   it("disables export when the editor has no content", () => {
     render(<TypingTool language={languageRegistry.hindi} />);
     expect(screen.getByRole("button", { name: /Export/ })).toBeDisabled();
