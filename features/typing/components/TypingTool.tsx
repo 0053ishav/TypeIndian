@@ -27,7 +27,7 @@ export default function TypingTool({ language }: { language: Language }) {
     { text: "", selectionStart: 0, selectionEnd: 0 },
   ]);
   const historyIndexRef = useRef(0);
-  const [historyVersion, setHistoryVersion] = useState(0);
+  const [, setHistoryVersion] = useState(0);
   const suggestionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const suggestionRequestRef = useRef<AbortController | null>(null);
   const suggestionRequestIdRef = useRef(0);
