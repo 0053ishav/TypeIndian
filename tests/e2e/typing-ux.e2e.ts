@@ -84,6 +84,19 @@ test("mobile editor exposes undo, redo, and a cursor-aware virtual keyboard", as
   expect(afterDrag!.y).toBeLessThan(beforeDrag!.y);
   await expect(editor).toBeVisible();
 
+  const resizeHandle = page.getByRole("button", { name: "Resize virtual keyboard" });
+  const beforeResize = await floatingKeyboard.boundingBox();
+  const resizeBox = await resizeHandle.boundingBox();
+  expect(beforeResize).not.toBeNull();
+  expect(resizeBox).not.toBeNull();
+  await page.mouse.move(resizeBox!.x + resizeBox!.width / 2, resizeBox!.y + resizeBox!.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(resizeBox!.x + resizeBox!.width / 2 - 16, resizeBox!.y + resizeBox!.height / 2 - 24);
+  await page.mouse.up();
+  const afterResize = await floatingKeyboard.boundingBox();
+  expect(afterResize!.width).toBeLessThan(beforeResize!.width);
+  expect(afterResize!.height).toBeLessThan(beforeResize!.height);
+
   await page.getByRole("button", { name: "Shift", exact: true }).click();
   const nativeKey = page.getByRole("button", { name: "अ from d" });
   const keyBox = await nativeKey.boundingBox();
