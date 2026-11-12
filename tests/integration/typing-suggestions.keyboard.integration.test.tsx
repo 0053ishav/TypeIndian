@@ -163,7 +163,9 @@ describe("TypingTool keyboard and editor history", () => {
     await waitFor(() => {
       expect(editor).toHaveValue("ਅਸ਼x");
     });
-    expect(editor.selectionStart).toBe("ਅਸ਼".length);
+    await waitFor(() => {
+      expect(editor.selectionStart).toBe("ਅਸ਼".length);
+    });
   });
 
   it("does not let an in-flight paste overwrite a later undo", async () => {
