@@ -180,6 +180,7 @@ export default function VirtualKeyboard({
             <button
               type="button"
               onClick={onBackspace}
+              aria-label="Backspace"
               className="min-h-12 flex-1 cursor-pointer rounded-lg border border-slate-400 border-b-[4px] border-b-slate-500 bg-gradient-to-b from-slate-200 to-slate-300 px-2 text-xs font-bold text-slate-800 shadow-sm transition hover:from-slate-300 hover:to-slate-200 active:translate-y-[2px] active:border-b-2"
             >
               ← Backspace
