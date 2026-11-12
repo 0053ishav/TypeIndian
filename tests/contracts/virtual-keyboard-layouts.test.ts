@@ -35,7 +35,8 @@ describe("script-aware virtual keyboard layouts", () => {
     expect(output("bengali", "/", "shift")).toBe("য");
     expect(output("bengali", "/", "base")).toBe("য়");
     expect(output("odia", "/", "shift")).toBe("ଯ");
-    expect(output("odia", "/", "base")).toBe("ୱ");
+    expect(output("odia", "/", "base")).toBe("ୟ");
+    expect(output("odia", "b", "base")).toBe("ୱ");
     expect(output("tamil", "d", "shift")).toBe("அ");
     expect(output("telugu", "d", "shift")).toBe("అ");
     expect(output("kannada", "d", "shift")).toBe("ಅ");
