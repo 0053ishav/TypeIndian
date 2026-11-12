@@ -146,6 +146,23 @@ describe("TypingTool keyboard and editor history", () => {
     expect(fetchSuggestions).not.toHaveBeenCalled();
   });
 
+  it("preserves the cursor after inserting a multi-code-unit Gurmukhi cluster", async () => {
+    const user = userEvent.setup();
+    render(<TypingTool language={languageRegistry.panjabi} />);
+
+    const editor = screen.getByRole("combobox") as HTMLTextAreaElement;
+    await user.type(editor, "ਅx");
+    editor.setSelectionRange(1, 1);
+
+    await user.click(screen.getByText("Open virtual keyboard"));
+    await user.click(await screen.findByRole("button", { name: "ਸ਼ sha" }));
+
+    await waitFor(() => {
+      expect(editor).toHaveValue("ਅਸ਼x");
+    });
+    expect(editor.selectionStart).toBe("ਅਸ਼".length);
+  });
+
   it("does not let an in-flight paste overwrite a later undo", async () => {
     const user = userEvent.setup();
     render(<TypingTool language={languageRegistry.hindi} />);
