@@ -5,6 +5,8 @@ import { fetchSuggestions } from "@/lib/transliteration/googleHttpTransliterate"
 import SessionBoard from "./SessionBoard";
 import { Language } from "@/types/language";
 import VirtualKeyboard from "./VirtualKeyboard";
+import ExportDropdown from "./ExportDropdown";
+import { createTypingExport, type TypingExportFormat } from "@/lib/typing/export";
 import { toast } from "sonner";
 import { copyToClipboard } from "@/lib/clipboard";
 
@@ -44,8 +46,7 @@ function previousGraphemeStart(value: string, cursor: number) {
   return Math.max(0, cursor - (codePoint && codePoint > 0xffff ? 2 : 1));
 }
 
-function downloadTextFile(content: string, filename: string) {
-  const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+function downloadBlob(blob: Blob, filename: string) {
   const url = URL.createObjectURL(blob);
   const anchor = document.createElement("a");
 
@@ -656,15 +657,21 @@ export default function TypingTool({ language }: { language: Language }) {
     }
   };
 
-  const handleDownloadText = () => {
+  const handleExport = async (format: TypingExportFormat) => {
     if (!text.trim()) return;
 
-    downloadTextFile(
-      text,
-      `${language.slug}-typing-${getLocalDateStamp()}.txt`,
-    );
-
-    toast.success("Text file downloaded.");
+    try {
+      const blob = await createTypingExport(text, language, format);
+      downloadBlob(
+        blob,
+        `${language.slug}-typing-${getLocalDateStamp()}.${format}`,
+      );
+      toast.success(`${format.toUpperCase()} document downloaded.`);
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : "Unable to export this document.",
+      );
+    }
   };
 
   const handleClearText = () => {
@@ -793,6 +800,9 @@ export default function TypingTool({ language }: { language: Language }) {
         {language.typing.subtitle}
       </p>
       <div className="card p-4 sm:p-6">
+        <div className="mb-3 flex justify-end">
+          <ExportDropdown disabled={!text.trim()} onExport={handleExport} />
+        </div>
         <textarea
           ref={textareaRef}
           role="combobox"
@@ -895,14 +905,6 @@ export default function TypingTool({ language }: { language: Language }) {
           </button>
 
           <button
-            onClick={handleDownloadText}
-            className="btn-secondary"
-            disabled={!text.trim()}
-          >
-            ↓ Download TXT
-          </button>
-
-          <button
             onClick={handleClearText}
             className="btn-secondary"
             disabled={!text.trim()}
@@ -950,16 +952,6 @@ export default function TypingTool({ language }: { language: Language }) {
             aria-label="Copy"
           >
             📋
-          </button>
-
-          <button
-            type="button"
-            onClick={handleDownloadText}
-            className="btn-secondary min-h-11 flex-1"
-            disabled={!text.trim()}
-            aria-label="Download text file"
-          >
-            ↓
           </button>
 
           <button
