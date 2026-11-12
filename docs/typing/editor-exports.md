@@ -27,6 +27,7 @@ Assamese uses the Bengali font module because Assamese and Bengali share the Ben
 
 ## Fidelity boundaries
 
+- TXT is plain Unicode text and has no explicit paragraph-direction metadata; RTL characters retain their Unicode bidirectional properties, and mixed-direction layout is left to the text viewer.
 - PDF font data is embedded, and generated PDFs are tested by extracting the resulting text back from the PDF. Tests include conjuncts, vowel signs, paragraphs and Urdu RTL. Urdu PDF uses the embedded Noto Arabic font data (Naskh-style shaping), not a Nastaliq-specific font; the text remains Unicode and right-to-left.
 - DOCX stores the original Unicode text and sets paragraph/run direction for Urdu. The DOCX file does **not** embed font files; Word uses the named font if installed and otherwise applies its font fallback. Character data remains intact even when the viewing machine lacks that preferred font.
 - The export menu is disabled for empty/whitespace-only editor content. Generation errors are reported in the UI; no text is sent to a document service or backend.
