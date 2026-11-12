@@ -135,6 +135,7 @@ describe("TypingTool keyboard and editor history", () => {
     expect(editor).toHaveAttribute("dir", "rtl");
     await user.type(editor, "abcd");
     editor.setSelectionRange(2, 2);
+    vi.mocked(fetchSuggestions).mockClear();
 
     await user.click(screen.getByText("Open virtual keyboard"));
     await user.click(await screen.findByRole("button", { name: "ا a" }));
@@ -143,5 +144,35 @@ describe("TypingTool keyboard and editor history", () => {
       expect(editor).toHaveValue("abاcd");
     });
     expect(fetchSuggestions).not.toHaveBeenCalled();
+  });
+
+  it("does not let an in-flight paste overwrite a later undo", async () => {
+    const user = userEvent.setup();
+    render(<TypingTool language={languageRegistry.hindi} />);
+
+    const editor = screen.getByRole("combobox");
+    await user.type(editor, "abc");
+    await screen.findByRole("option", { name: "नमस्ते" });
+
+    let resolvePaste!: (suggestions: string[]) => void;
+    const pendingPaste = new Promise<string[]>((resolve) => {
+      resolvePaste = resolve;
+    });
+
+    vi.mocked(fetchSuggestions).mockClear();
+    vi.mocked(fetchSuggestions).mockImplementationOnce(async () => pendingPaste);
+
+    await user.paste(editor, "word");
+    await waitFor(() => {
+      expect(fetchSuggestions).toHaveBeenCalledTimes(1);
+    });
+
+    await user.keyboard("{Control>}z{/Control}");
+    expect(editor).toHaveValue("ab");
+
+    resolvePaste(["शब्द"]);
+    await waitFor(() => {
+      expect(editor).toHaveValue("ab");
+    });
   });
 });
