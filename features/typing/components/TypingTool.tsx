@@ -290,6 +290,7 @@ export default function TypingTool({ language }: { language: Language }) {
       editStart: undefined,
     };
 
+    selectionBeforeInputRef.current = null;
     editorOperationIdRef.current += 1;
     historyIndexRef.current = nextIndex;
     setHistoryIndex(nextIndex);
