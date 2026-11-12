@@ -18,6 +18,7 @@ describe("SessionBoard accessible reordering", () => {
         onCopyLine={vi.fn()}
         onDeleteLine={vi.fn()}
         onCopyAll={vi.fn()}
+        onDownloadAll={vi.fn()}
         onReorder={onReorder}
       />,
     );
