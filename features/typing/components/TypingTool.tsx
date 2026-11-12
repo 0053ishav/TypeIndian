@@ -287,6 +287,7 @@ export default function TypingTool({ language }: { language: Language }) {
     setText(next);
     setCurrentWord("");
     setSuggestions([]);
+    setActiveSuggestionIndex(-1);
     setLoading(false);
     wordRangeRef.current = null;
     suggestionRequestRef.current?.abort();
@@ -322,6 +323,7 @@ export default function TypingTool({ language }: { language: Language }) {
       const cursor = start + translated.length;
       setText(next);
       setSuggestions([]);
+    setActiveSuggestionIndex(-1);
       setCurrentWord("");
       wordRangeRef.current = null;
 
@@ -360,6 +362,7 @@ export default function TypingTool({ language }: { language: Language }) {
       const cursor = start + translated.length;
       setText(next);
       setSuggestions([]);
+    setActiveSuggestionIndex(-1);
       setCurrentWord("");
       wordRangeRef.current = null;
 
@@ -400,6 +403,7 @@ export default function TypingTool({ language }: { language: Language }) {
     setBoardLines((prev) => [...prev, text.trim()]);
     setText("");
     setSuggestions([]);
+    setActiveSuggestionIndex(-1);
     setCurrentWord("");
   };
 
@@ -446,6 +450,7 @@ export default function TypingTool({ language }: { language: Language }) {
     cancelPendingSuggestions();
     setText("");
     setSuggestions([]);
+    setActiveSuggestionIndex(-1);
     setCurrentWord("");
 
     requestAnimationFrame(() => {
@@ -469,6 +474,7 @@ export default function TypingTool({ language }: { language: Language }) {
 
     setText(line);
     setSuggestions([]);
+    setActiveSuggestionIndex(-1);
     setCurrentWord("");
 
     requestAnimationFrame(() => {
