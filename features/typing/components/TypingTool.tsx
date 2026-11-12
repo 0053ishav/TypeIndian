@@ -8,6 +8,12 @@ import AlphabetGrid from "@/components/ui/AlphabetGrid";
 import { toast } from "sonner";
 import { copyToClipboard } from "@/lib/clipboard";
 
+type EditorSnapshot = {
+  text: string;
+  selectionStart: number;
+  selectionEnd: number;
+};
+
 export default function TypingTool({ language }: { language: Language }) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -17,6 +23,11 @@ export default function TypingTool({ language }: { language: Language }) {
   const [boardLines, setBoardLines] = useState<string[]>([]);
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(-1);
+  const historyRef = useRef<EditorSnapshot[]>([
+    { text: "", selectionStart: 0, selectionEnd: 0 },
+  ]);
+  const historyIndexRef = useRef(0);
+  const [historyVersion, setHistoryVersion] = useState(0);
   const suggestionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const suggestionRequestRef = useRef<AbortController | null>(null);
   const suggestionRequestIdRef = useRef(0);
@@ -54,6 +65,9 @@ export default function TypingTool({ language }: { language: Language }) {
 
   useEffect(() => {
     setText("");
+    historyRef.current = [{ text: "", selectionStart: 0, selectionEnd: 0 }];
+    historyIndexRef.current = 0;
+    setHistoryVersion((version) => version + 1);
     setCurrentWord("");
     setSuggestions([]);
     setActiveSuggestionIndex(-1);
@@ -114,6 +128,69 @@ export default function TypingTool({ language }: { language: Language }) {
       window.removeEventListener("keydown", handleGlobalKeyDown);
     };
   }, []);
+
+  /* ---------------- editor history ---------------- */
+
+  const commitText = (
+    value: string,
+    selectionStart = value.length,
+    selectionEnd = selectionStart,
+  ) => {
+    const nextHistory = historyRef.current.slice(0, historyIndexRef.current + 1);
+    const previous = nextHistory[nextHistory.length - 1];
+
+    if (
+      previous?.text !== value ||
+      previous.selectionStart !== selectionStart ||
+      previous.selectionEnd !== selectionEnd
+    ) {
+      nextHistory.push({ text: value, selectionStart, selectionEnd });
+
+      if (nextHistory.length > 100) nextHistory.shift();
+
+      historyRef.current = nextHistory;
+      historyIndexRef.current = nextHistory.length - 1;
+      setHistoryVersion((version) => version + 1);
+    }
+
+    setText(value);
+  };
+
+  const restoreHistorySnapshot = (nextIndex: number) => {
+    const snapshot = historyRef.current[nextIndex];
+    if (!snapshot) return;
+
+    historyIndexRef.current = nextIndex;
+    setHistoryVersion((version) => version + 1);
+    setText(snapshot.text);
+    cancelPendingSuggestions();
+    setSuggestions([]);
+    setActiveSuggestionIndex(-1);
+    setCurrentWord("");
+    wordRangeRef.current = null;
+
+    requestAnimationFrame(() => {
+      const textarea = textareaRef.current;
+      if (!textarea) return;
+
+      textarea.focus();
+      const start = Math.min(snapshot.selectionStart, snapshot.text.length);
+      const end = Math.min(snapshot.selectionEnd, snapshot.text.length);
+      textarea.setSelectionRange(start, end);
+    });
+  };
+
+  const handleUndo = () => {
+    if (historyIndexRef.current > 0) {
+      restoreHistorySnapshot(historyIndexRef.current - 1);
+    }
+  };
+
+  const handleRedo = () => {
+    if (historyIndexRef.current < historyRef.current.length - 1) {
+      restoreHistorySnapshot(historyIndexRef.current + 1);
+    }
+  };
 
   /* ---------------- helpers ---------------- */
 
@@ -207,7 +284,7 @@ export default function TypingTool({ language }: { language: Language }) {
     const value = e.target.value;
 
     editorOperationIdRef.current += 1;
-    setText(value);
+    commitText(value, e.target.selectionStart, e.target.selectionEnd);
     processInput(value, e.target.selectionStart);
   };
 
@@ -219,6 +296,19 @@ export default function TypingTool({ language }: { language: Language }) {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "z") {
+      e.preventDefault();
+      if (e.shiftKey) handleRedo();
+      else handleUndo();
+      return;
+    }
+
+    if (e.ctrlKey && !e.metaKey && e.key.toLowerCase() === "y") {
+      e.preventDefault();
+      handleRedo();
+      return;
+    }
+
     if (e.key === "ArrowDown" && suggestions.length > 0) {
       e.preventDefault();
       setActiveSuggestionIndex((current) =>
@@ -284,7 +374,7 @@ export default function TypingTool({ language }: { language: Language }) {
     const cursor = range.start + word.length + 1;
 
     editorOperationIdRef.current += 1;
-    setText(next);
+    commitText(next, cursor, cursor);
     setCurrentWord("");
     setSuggestions([]);
     setActiveSuggestionIndex(-1);
@@ -321,7 +411,7 @@ export default function TypingTool({ language }: { language: Language }) {
       const translated = results.join(" ");
       const next = text.slice(0, start) + translated + text.slice(end);
       const cursor = start + translated.length;
-      setText(next);
+      commitText(next, cursor, cursor);
       setSuggestions([]);
     setActiveSuggestionIndex(-1);
       setCurrentWord("");
@@ -387,7 +477,7 @@ export default function TypingTool({ language }: { language: Language }) {
     const cursor = start + char.length;
 
     editorOperationIdRef.current += 1;
-    setText(next);
+    commitText(next, cursor, cursor);
     processInput(next, cursor);
 
     requestAnimationFrame(() => {
@@ -406,7 +496,7 @@ export default function TypingTool({ language }: { language: Language }) {
     editorOperationIdRef.current += 1;
     cancelPendingSuggestions();
     setBoardLines((prev) => [...prev, text.trim()]);
-    setText("");
+    commitText("", 0, 0);
     setSuggestions([]);
     setActiveSuggestionIndex(-1);
     setCurrentWord("");
@@ -477,7 +567,7 @@ export default function TypingTool({ language }: { language: Language }) {
 
     setBoardLines((prev) => prev.filter((_, i) => i !== index));
 
-    setText(line);
+    commitText(line, line.length, line.length);
     setSuggestions([]);
     setActiveSuggestionIndex(-1);
     setCurrentWord("");
@@ -591,6 +681,26 @@ export default function TypingTool({ language }: { language: Language }) {
       <div className="mt-4 grid md:grid-cols-[1fr_auto] gap-4 items-start">
         {/* Desktop Actions */}
         <div className="hidden sm:flex flex-wrap gap-3">
+          <button
+            type="button"
+            onClick={handleUndo}
+            className="btn-secondary"
+            disabled={historyIndexRef.current === 0}
+            aria-label="Undo"
+          >
+            ↶ Undo
+          </button>
+
+          <button
+            type="button"
+            onClick={handleRedo}
+            className="btn-secondary"
+            disabled={historyIndexRef.current >= historyRef.current.length - 1}
+            aria-label="Redo"
+          >
+            ↷ Redo
+          </button>
+
           <button onClick={handleAddToBoard} className="btn-primary">
             ➕ Add to Board
           </button>
@@ -669,7 +779,16 @@ export default function TypingTool({ language }: { language: Language }) {
               <kbd className="font-mono">Space</kbd> → convert word
             </li>
             <li>
+              <kbd className="font-mono">Ctrl/Cmd + Z</kbd> → undo
+            </li>
+            <li>
+              <kbd className="font-mono">Ctrl/Cmd + Shift + Z</kbd> → redo
+            </li>
+            <li>
               <kbd className="font-mono">Tab</kbd> → select word
+            </li>
+            <li>
+              <kbd className="font-mono">Ctrl + Y</kbd> → redo
             </li>
             <li>
               <kbd className="font-mono">Ctrl/Cmd + C</kbd> → copy
