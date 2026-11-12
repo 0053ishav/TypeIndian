@@ -5,8 +5,8 @@ The main typing editor exports locally in the browser. The Session Board keeps i
 ## Formats
 
 - **TXT** — UTF-8 plain text; the original text and line endings are preserved.
-- **DOCX** — generated with `docx` in the browser. Each source line becomes a Word paragraph. Urdu paragraphs and runs are marked right-to-left.
-- **PDF** — generated with `pdfnative` in the browser. Script font data is loaded lazily and embedded in the PDF. The Indic OpenType engine shapes Devanagari, Gurmukhi, Gujarati, Bengali, Tamil, Telugu, Kannada, Malayalam and Odia; Arabic shaping and the Unicode bidirectional algorithm handle Urdu.
+- **DOCX** — generated with `docx` in the browser. Each source line becomes a Word paragraph beneath a TypeIndian title and language-specific subtitle. The document metadata identifies TypeIndian as the title creator. Urdu paragraphs and runs are marked right-to-left.
+- **PDF** — generated with `pdfnative` in the browser. Each export has a visible TypeIndian heading, language-specific subtitle and branded footer, with matching PDF document metadata. Script font data is loaded lazily and embedded in the PDF. The Indic OpenType engine shapes Devanagari, Gurmukhi, Gujarati, Bengali, Tamil, Telugu, Kannada, Malayalam and Odia; Arabic shaping and the Unicode bidirectional algorithm handle Urdu.
 
 ## Script/font routing
 
@@ -41,3 +41,9 @@ Assamese uses the Bengali font module because Assamese and Bengali share the Ben
 - `pdfnative` 32-script Indic font/shaping support: https://github.com/Nizoka/pdfnative
 - `pdfnative` RTL and BiDi behavior: https://pdfnative.dev/guides/rtl.html
 - `pdfnative` text extraction API: https://pdfnative.dev/guides/text-extraction.html
+
+
+## Floating virtual keyboard
+
+- The virtual keyboard can be moved by dragging its title bar.
+- Drag the resize handle in the lower-right corner to change both its width and height. Dimensions are bounded to the viewport, and the key area scrolls when the panel is made smaller.
