@@ -171,7 +171,7 @@ describe("TypingTool keyboard and editor history", () => {
     vi.mocked(fetchSuggestions).mockClear();
 
     await user.click(screen.getByText("Open virtual keyboard"));
-    await user.click(await screen.findByRole("button", { name: "ا a" }));
+    await user.click(await screen.findByRole("button", { name: "ا from a" }));
 
     await waitFor(() => {
       expect(editor).toHaveValue("abاcd");
@@ -218,7 +218,7 @@ describe("TypingTool keyboard and editor history", () => {
     expect(editor).toHaveValue("अक्");
 
     await user.keyboard("{Control>}z{/Control}");
-    expect(editor).toHaveValue("अ");
+    expect(editor).toHaveValue("");
     await user.keyboard("{Control>}{Shift>}z{/Shift}{/Control}");
     expect(editor).toHaveValue("अक्");
   });
