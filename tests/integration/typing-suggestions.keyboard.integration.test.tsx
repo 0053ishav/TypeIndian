@@ -21,7 +21,7 @@ describe("TypingTool suggestion keyboard interaction", () => {
     const editor = screen.getByRole("textbox");
     await user.type(editor, "namaste");
 
-    const suggestion = await screen.findByRole("button", { name: "नमस्ते" });
+    const suggestion = await screen.findByRole("option", { name: "नमस्ते" });
     await user.tab();
 
     expect(suggestion).toHaveFocus();
@@ -31,5 +31,41 @@ describe("TypingTool suggestion keyboard interaction", () => {
     await waitFor(() => {
       expect(editor).toHaveValue("नमस्ते ");
     });
+  });
+
+  it("navigates suggestions with arrow keys and accepts the active option", async () => {
+    const user = userEvent.setup();
+    render(<TypingTool language={languageRegistry.hindi} />);
+
+    const editor = screen.getByRole("textbox");
+    await user.type(editor, "namaste");
+    await screen.findByRole("option", { name: "नमस्ते" });
+
+    await user.keyboard("{ArrowDown}");
+
+    expect(editor).toHaveAttribute(
+      "aria-activedescendant",
+      "typing-suggestion-0",
+    );
+
+    await user.keyboard("{Enter}");
+
+    await waitFor(() => {
+      expect(editor).toHaveValue("नमस्ते ");
+    });
+  });
+
+  it("supports undo and redo without losing the editor value", async () => {
+    const user = userEvent.setup();
+    render(<TypingTool language={languageRegistry.hindi} />);
+
+    const editor = screen.getByRole("textbox");
+    await user.type(editor, "ab");
+
+    await user.keyboard("{Control>}z{/Control}");
+    expect(editor).toHaveValue("a");
+
+    await user.keyboard("{Control>}{Shift>}z{/Shift}{/Control}");
+    expect(editor).toHaveValue("ab");
   });
 });
