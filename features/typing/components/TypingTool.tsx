@@ -14,6 +14,28 @@ type EditorSnapshot = {
   selectionEnd: number;
 };
 
+function getLocalDateStamp() {
+  const date = new Date();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${date.getFullYear()}-${month}-${day}`;
+}
+
+function downloadTextFile(content: string, filename: string) {
+  const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+
+  anchor.href = url;
+  anchor.download = filename;
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
 export default function TypingTool({ language }: { language: Language }) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -508,7 +530,8 @@ export default function TypingTool({ language }: { language: Language }) {
     if (!text.trim()) return;
 
     try {
-      await copyToClipboard(text);
+      const copied = await copyToClipboard(text);
+      if (!copied) throw new Error("Clipboard write failed");
 
       toast.success("Copied to clipboard.");
     } catch {
@@ -519,17 +542,10 @@ export default function TypingTool({ language }: { language: Language }) {
   const handleDownloadText = () => {
     if (!text.trim()) return;
 
-    const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const anchor = document.createElement("a");
-    const date = new Date().toISOString().slice(0, 10);
-
-    anchor.href = url;
-    anchor.download = `${language.slug}-typing-${date}.txt`;
-    document.body.appendChild(anchor);
-    anchor.click();
-    anchor.remove();
-    URL.revokeObjectURL(url);
+    downloadTextFile(
+      text,
+      `${language.slug}-typing-${getLocalDateStamp()}.txt`,
+    );
 
     toast.success("Text file downloaded.");
   };
@@ -593,7 +609,8 @@ export default function TypingTool({ language }: { language: Language }) {
 
   const handleCopyLine = async (line: string) => {
     try {
-      await copyToClipboard(line);
+      const copied = await copyToClipboard(line);
+      if (!copied) throw new Error("Clipboard write failed");
       toast.success("Sentence copied.");
     } catch {
       toast.error("Unable to copy sentence.");
@@ -608,7 +625,8 @@ export default function TypingTool({ language }: { language: Language }) {
     if (boardLines.length === 0) return;
 
     try {
-      await copyToClipboard(boardLines.join("\n"));
+      const copied = await copyToClipboard(boardLines.join("\n"));
+      if (!copied) throw new Error("Clipboard write failed");
       toast.success("Session Board copied.");
     } catch {
       toast.error("Unable to copy Session Board.");
@@ -618,19 +636,10 @@ export default function TypingTool({ language }: { language: Language }) {
   const handleDownloadBoard = () => {
     if (boardLines.length === 0) return;
 
-    const blob = new Blob([boardLines.join("\n")], {
-      type: "text/plain;charset=utf-8",
-    });
-    const url = URL.createObjectURL(blob);
-    const anchor = document.createElement("a");
-    const date = new Date().toISOString().slice(0, 10);
-
-    anchor.href = url;
-    anchor.download = `${language.slug}-session-board-${date}.txt`;
-    document.body.appendChild(anchor);
-    anchor.click();
-    anchor.remove();
-    URL.revokeObjectURL(url);
+    downloadTextFile(
+      boardLines.join("\n"),
+      `${language.slug}-session-board-${getLocalDateStamp()}.txt`,
+    );
 
     toast.success("Session Board downloaded.");
   };
