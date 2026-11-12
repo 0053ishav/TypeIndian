@@ -95,7 +95,9 @@ describe("local typing exports", () => {
     const documentXml = await readZipEntry(blob, "word/document.xml");
     expect(documentXml).toContain(text.split("\n")[0]);
     expect(documentXml).toContain(text.split("\n")[1]);
-    expect((documentXml.match(/<w:p(?:\s|>)/g) ?? []).length).toBe(2);
+    expect(documentXml).toContain("TypeIndian");
+    expect(documentXml).toContain("Created with typeindian.com");
+    expect((documentXml.match(/<w:p(?:\s|>)/g) ?? []).length).toBe(4);
 
     if (languageId === "urdu") {
       expect(documentXml).toContain("<w:bidi");
@@ -114,6 +116,8 @@ describe("local typing exports", () => {
 
     const pages = extractText(bytes, { includeRuns: true });
     const extracted = pages.map((page) => page.text).join("\n");
+    expect(extracted).toContain("TypeIndian");
+    expect(extracted).toContain("typeindian.com");
     const runText = pages.flatMap((page) => page.runs ?? []).map((run) => run.text).join("");
     for (const paragraph of text.split("\n")) {
       const compactParagraph = compactUnicode(paragraph);
