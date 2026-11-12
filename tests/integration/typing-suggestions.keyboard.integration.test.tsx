@@ -135,13 +135,17 @@ describe("TypingTool keyboard and editor history", () => {
 
     await user.keyboard("{Control>}z{/Control}");
     expect(editor).toHaveValue("abcd");
-    expect(editor.selectionStart).toBe(1);
-    expect(editor.selectionEnd).toBe(3);
+    await waitFor(() => {
+      expect(editor.selectionStart).toBe(1);
+      expect(editor.selectionEnd).toBe(3);
+    });
 
     await user.keyboard("{Control>}{Shift>}z{/Shift}{/Control}");
     expect(editor).toHaveValue("aXd");
-    expect(editor.selectionStart).toBe(2);
-    expect(editor.selectionEnd).toBe(2);
+    await waitFor(() => {
+      expect(editor.selectionStart).toBe(2);
+      expect(editor.selectionEnd).toBe(2);
+    });
   });
 
   it("records a transliterated paste as one undoable operation", async () => {
@@ -181,6 +185,7 @@ describe("TypingTool keyboard and editor history", () => {
 
     await user.keyboard("{Control>}z{/Control}");
     expect(editor).toHaveValue("ab");
+    await waitFor(() => expect(editor.selectionStart).toBe(1));
     editor.setSelectionRange(2, 2);
     await user.type(editor, "c");
     expect(editor).toHaveValue("abc");
