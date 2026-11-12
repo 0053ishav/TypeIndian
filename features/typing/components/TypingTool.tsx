@@ -86,6 +86,7 @@ export default function TypingTool({ language }: { language: Language }) {
   /* ---------------- lifecycle ---------------- */
 
   useEffect(() => {
+    editorOperationIdRef.current += 1;
     setText("");
     historyRef.current = [{ text: "", selectionStart: 0, selectionEnd: 0 }];
     historyIndexRef.current = 0;
@@ -185,6 +186,7 @@ export default function TypingTool({ language }: { language: Language }) {
     const snapshot = historyRef.current[nextIndex];
     if (!snapshot) return;
 
+    editorOperationIdRef.current += 1;
     historyIndexRef.current = nextIndex;
     setHistoryIndex(nextIndex);
     setText(snapshot.text);
@@ -401,12 +403,10 @@ export default function TypingTool({ language }: { language: Language }) {
     editorOperationIdRef.current += 1;
     commitText(next, cursor, cursor);
     setCurrentWord("");
+    cancelPendingSuggestions();
     setSuggestions([]);
     setActiveSuggestionIndex(-1);
-    setLoading(false);
     wordRangeRef.current = null;
-    suggestionRequestRef.current?.abort();
-    if (suggestionTimerRef.current) clearTimeout(suggestionTimerRef.current);
 
     requestAnimationFrame(() => {
       const textarea = textareaRef.current;
