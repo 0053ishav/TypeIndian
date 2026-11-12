@@ -69,7 +69,21 @@ test("mobile editor exposes undo, redo, and a cursor-aware virtual keyboard", as
   await expect(editor).toHaveValue("namaste");
 
   await editor.fill("");
-  await page.getByRole("button", { name: "Open virtual keyboard" }).click();
+  await page.getByRole("button", { name: "Virtual keyboard" }).click();
+  const floatingKeyboard = page.getByRole("region", { name: "Hindi on-screen keyboard" });
+  const dragHandle = page.locator('[title="Drag to move keyboard"]');
+  const beforeDrag = await floatingKeyboard.boundingBox();
+  const handleBox = await dragHandle.boundingBox();
+  expect(beforeDrag).not.toBeNull();
+  expect(handleBox).not.toBeNull();
+  await page.mouse.move(handleBox!.x + handleBox!.width / 2, handleBox!.y + handleBox!.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(handleBox!.x + handleBox!.width / 2 + 20, handleBox!.y + handleBox!.height / 2 - 60);
+  await page.mouse.up();
+  const afterDrag = await floatingKeyboard.boundingBox();
+  expect(afterDrag!.y).toBeLessThan(beforeDrag!.y);
+  await expect(editor).toBeVisible();
+
   await page.getByRole("button", { name: "Shift", exact: true }).click();
   const nativeKey = page.getByRole("button", { name: "अ from d" });
   const keyBox = await nativeKey.boundingBox();
@@ -108,7 +122,7 @@ test("Urdu virtual keyboard inserts native text in an RTL editor", async ({
   });
   await expect(editor).toHaveAttribute("dir", "rtl");
 
-  await page.getByRole("button", { name: "Open virtual keyboard" }).click();
+  await page.getByRole("button", { name: "Virtual keyboard" }).click();
   await page.getByRole("button", { name: "ا from a" }).click();
 
   await expect(editor).toHaveValue("ا");
@@ -131,7 +145,7 @@ test("mobile touch can open the keyboard and insert native characters", async ({
       name: "Typing input for Hindi",
     });
 
-    await page.getByRole("button", { name: "Open virtual keyboard" }).tap();
+    await page.getByRole("button", { name: "Virtual keyboard" }).tap();
     await page.getByRole("button", { name: "Shift", exact: true }).tap();
     await page.getByRole("button", { name: "अ from d" }).tap();
     await expect(editor).toHaveValue("अ");
