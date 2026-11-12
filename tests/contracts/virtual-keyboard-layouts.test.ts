@@ -27,6 +27,8 @@ describe("script-aware virtual keyboard layouts", () => {
     expect(output("panjabi", "v", "shift")).toBe("ਂ");
     expect(output("panjabi", "z", "base")).toBe("ੰ");
     expect(output("panjabi", "z", "shift")).toBe("ੱ");
+    expect(output("panjabi", "m", "shift")).toBe("ਸ਼");
+    expect(output("panjabi", "n", "shift")).toBe("ਲ਼");
     expect(output("gujarati", "d", "shift")).toBe("અ");
     expect(output("bengali", "d", "shift")).toBe("অ");
     expect(output("assamese", "j", "base")).toBe("ৰ");
