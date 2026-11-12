@@ -72,18 +72,48 @@ describe("TypingTool keyboard and editor history", () => {
     expect(screen.queryByRole("option")).not.toBeInTheDocument();
   });
 
-  it("supports undo and redo without losing the editor value", async () => {
+  it("groups consecutive typing into one undo step", async () => {
     const user = userEvent.setup();
     render(<TypingTool language={languageRegistry.hindi} />);
 
     const editor = screen.getByRole("combobox");
-    await user.type(editor, "ab");
+    await user.type(editor, "namaste");
 
     await user.keyboard("{Control>}z{/Control}");
-    expect(editor).toHaveValue("a");
+    expect(editor).toHaveValue("");
 
     await user.keyboard("{Control>}{Shift>}z{/Shift}{/Control}");
-    expect(editor).toHaveValue("ab");
+    expect(editor).toHaveValue("namaste");
+  });
+
+  it("groups consecutive backspaces into one undo step", async () => {
+    const user = userEvent.setup();
+    render(<TypingTool language={languageRegistry.hindi} />);
+
+    const editor = screen.getByRole("combobox");
+    await user.type(editor, "namaste");
+    await user.keyboard("{Backspace}{Backspace}{Backspace}");
+
+    expect(editor).toHaveValue("nama");
+
+    await user.keyboard("{Control>}z{/Control}");
+    expect(editor).toHaveValue("namaste");
+  });
+
+  it("invalidates redo after undo followed by a new edit", async () => {
+    const user = userEvent.setup();
+    render(<TypingTool language={languageRegistry.hindi} />);
+
+    const editor = screen.getByRole("combobox");
+    await user.type(editor, "abc");
+    await user.keyboard("{Control>}z{/Control}");
+    expect(editor).toHaveValue("");
+
+    await user.type(editor, "x");
+    expect(editor).toHaveValue("x");
+
+    await user.keyboard("{Control>}{Shift>}z{/Shift}{/Control}");
+    expect(editor).toHaveValue("x");
   });
 
   it("undoes and redoes a replacement over the current selection", async () => {
