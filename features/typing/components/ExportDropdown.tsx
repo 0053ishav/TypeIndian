@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { KeyboardEvent, PointerEvent } from "react";
+import type { KeyboardEvent } from "react";
 import type { TypingExportFormat } from "@/lib/typing/export";
 
 const FORMATS: { id: TypingExportFormat; label: string; description: string }[] = [
