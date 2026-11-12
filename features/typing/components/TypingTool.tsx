@@ -83,6 +83,7 @@ export default function TypingTool({ language }: { language: Language }) {
   const suggestionRequestIdRef = useRef(0);
   const wordRangeRef = useRef<{ start: number; end: number } | null>(null);
   const editorOperationIdRef = useRef(0);
+  const selectionBeforeInputRef = useRef<{ start: number; end: number } | null>(null);
 
   const STORAGE_KEY = `typeindian-session-board-${language.transliteration.languageCode}`;
 
@@ -265,6 +266,16 @@ export default function TypingTool({ language }: { language: Language }) {
     }
 
     setText(value);
+  };
+
+  const updateCurrentHistorySelection = (start: number, end: number) => {
+    const current = historyRef.current[historyIndexRef.current];
+    if (!current) return;
+    historyRef.current[historyIndexRef.current] = {
+      ...current,
+      selectionStart: start,
+      selectionEnd: end,
+    };
   };
 
   const restoreHistorySnapshot = (nextIndex: number) => {
@@ -480,6 +491,10 @@ export default function TypingTool({ language }: { language: Language }) {
   };
 
   const handleBeforeInput = (e: React.FormEvent<HTMLTextAreaElement>) => {
+    selectionBeforeInputRef.current = {
+      start: e.currentTarget.selectionStart,
+      end: e.currentTarget.selectionEnd,
+    };
     const nativeEvent = e.nativeEvent as InputEvent;
     if (nativeEvent.data === " ") {
       if (currentWord && suggestions.length) {
@@ -492,6 +507,11 @@ export default function TypingTool({ language }: { language: Language }) {
   const insertSuggestion = (word: string) => {
     const range = wordRangeRef.current;
     if (!range) return;
+    const textarea = textareaRef.current;
+    if (textarea) {
+      updateCurrentHistorySelection(textarea.selectionStart, textarea.selectionEnd);
+    }
+    selectionBeforeInputRef.current = null;
 
     const next =
       text.slice(0, range.start) +
@@ -524,6 +544,8 @@ export default function TypingTool({ language }: { language: Language }) {
     const textarea = e.currentTarget;
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
+    updateCurrentHistorySelection(start, end);
+    selectionBeforeInputRef.current = null;
     const words = pastedText.split(/\s+/).filter(Boolean);
     const operationId = ++editorOperationIdRef.current;
     cancelPendingSuggestions();
@@ -563,6 +585,8 @@ export default function TypingTool({ language }: { language: Language }) {
     const textarea = e.currentTarget;
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
+    updateCurrentHistorySelection(start, end);
+    selectionBeforeInputRef.current = null;
     const words = droppedText.split(/\s+/).filter(Boolean);
     const operationId = ++editorOperationIdRef.current;
     cancelPendingSuggestions();
@@ -598,6 +622,8 @@ export default function TypingTool({ language }: { language: Language }) {
     const textarea = textareaRef.current;
     const start = textarea?.selectionStart ?? text.length;
     const end = textarea?.selectionEnd ?? start;
+    updateCurrentHistorySelection(start, end);
+    selectionBeforeInputRef.current = null;
     const next = text.slice(0, start) + char + text.slice(end);
     const cursor = start + char.length;
 
@@ -623,6 +649,8 @@ export default function TypingTool({ language }: { language: Language }) {
     const start = textarea?.selectionStart ?? text.length;
     const end = textarea?.selectionEnd ?? start;
     if (start === 0 && end === 0) return;
+    updateCurrentHistorySelection(start, end);
+    selectionBeforeInputRef.current = null;
 
     const deleteStart = start === end ? previousGraphemeStart(text, start) : start;
     const next = text.slice(0, deleteStart) + text.slice(end);
@@ -647,6 +675,9 @@ export default function TypingTool({ language }: { language: Language }) {
 
   const handleAddToBoard = () => {
     if (!text.trim()) return;
+    const textarea = textareaRef.current;
+    if (textarea) updateCurrentHistorySelection(textarea.selectionStart, textarea.selectionEnd);
+    selectionBeforeInputRef.current = null;
     editorOperationIdRef.current += 1;
     cancelPendingSuggestions();
     setBoardLines((prev) => [...prev, text.trim()]);
@@ -695,6 +726,9 @@ export default function TypingTool({ language }: { language: Language }) {
 
     if (!confirmed) return;
 
+    const textarea = textareaRef.current;
+    if (textarea) updateCurrentHistorySelection(textarea.selectionStart, textarea.selectionEnd);
+    selectionBeforeInputRef.current = null;
     editorOperationIdRef.current += 1;
     cancelPendingSuggestions();
     commitText("", 0, 0);
@@ -716,6 +750,9 @@ export default function TypingTool({ language }: { language: Language }) {
 
   const handleMoveToEditor = (index: number) => {
     const line = boardLines[index] + " ";
+    const textarea = textareaRef.current;
+    if (textarea) updateCurrentHistorySelection(textarea.selectionStart, textarea.selectionEnd);
+    selectionBeforeInputRef.current = null;
     editorOperationIdRef.current += 1;
     cancelPendingSuggestions();
 
