@@ -450,9 +450,9 @@ export default function TypingTool({ language }: { language: Language }) {
       const translated = results.join(" ");
       const next = text.slice(0, start) + translated + text.slice(end);
       const cursor = start + translated.length;
-      setText(next);
+      commitText(next, cursor, cursor);
       setSuggestions([]);
-    setActiveSuggestionIndex(-1);
+      setActiveSuggestionIndex(-1);
       setCurrentWord("");
       wordRangeRef.current = null;
 
@@ -543,7 +543,7 @@ export default function TypingTool({ language }: { language: Language }) {
 
     editorOperationIdRef.current += 1;
     cancelPendingSuggestions();
-    setText("");
+    commitText("", 0, 0);
     setSuggestions([]);
     setActiveSuggestionIndex(-1);
     setCurrentWord("");
