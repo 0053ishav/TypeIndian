@@ -229,7 +229,7 @@ describe("TypingTool keyboard and editor history", () => {
     editor.setSelectionRange(2, 2);
     vi.mocked(fetchSuggestions).mockClear();
 
-    await user.click(screen.getByText("Open virtual keyboard"));
+    await user.click(screen.getByRole("button", { name: "Virtual keyboard" }));
     await user.click(await screen.findByRole("button", { name: "ا from a" }));
 
     await waitFor(() => {
@@ -246,7 +246,7 @@ describe("TypingTool keyboard and editor history", () => {
     await user.type(editor, "ਅx");
     editor.setSelectionRange(1, 1);
 
-    await user.click(screen.getByText("Open virtual keyboard"));
+    await user.click(screen.getByRole("button", { name: "Virtual keyboard" }));
     await user.click(await screen.findByRole("button", { name: "ਸ from m" }));
     await user.click(await screen.findByRole("button", { name: "਼ from ]" }));
 
@@ -263,7 +263,7 @@ describe("TypingTool keyboard and editor history", () => {
     render(<TypingTool language={languageRegistry.hindi} />);
 
     const editor = screen.getByRole("combobox") as HTMLTextAreaElement;
-    await user.click(screen.getByText("Open virtual keyboard"));
+    await user.click(screen.getByRole("button", { name: "Virtual keyboard" }));
     expect(screen.getByText(/BIS Enhanced InScript/)).toBeInTheDocument();
 
     await user.click(screen.getByRole("button", { name: "Shift" }));
@@ -287,7 +287,7 @@ describe("TypingTool keyboard and editor history", () => {
     render(<TypingTool language={languageRegistry.panjabi} />);
 
     const editor = screen.getByRole("combobox") as HTMLTextAreaElement;
-    await user.click(screen.getByText("Open virtual keyboard"));
+    await user.click(screen.getByRole("button", { name: "Virtual keyboard" }));
     await user.click(screen.getByRole("button", { name: "ਸ from m" }));
     await user.click(screen.getByRole("button", { name: "਼ from ]" }));
     expect(editor).toHaveValue("ਸ਼");
@@ -302,7 +302,7 @@ describe("TypingTool keyboard and editor history", () => {
     render(<TypingTool language={languageRegistry.hindi} />);
 
     const editor = screen.getByRole("combobox") as HTMLTextAreaElement;
-    await user.click(screen.getByRole("button", { name: "Open virtual keyboard" }));
+    await user.click(screen.getByRole("button", { name: "Virtual keyboard" }));
     await user.click(screen.getByRole("button", { name: "Shift" }));
     await user.click(screen.getByRole("button", { name: "अ from d" }));
     expect(editor).toHaveValue("अ");
