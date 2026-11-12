@@ -440,11 +440,13 @@ export default function TypingTool({ language }: { language: Language }) {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    const isCut = (e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "x";
     if (
-      !e.ctrlKey &&
-      !e.metaKey &&
-      !e.altKey &&
-      (e.key.length === 1 || e.key === "Backspace" || e.key === "Delete")
+      isCut ||
+      (!e.ctrlKey &&
+        !e.metaKey &&
+        !e.altKey &&
+        (e.key.length === 1 || e.key === "Backspace" || e.key === "Delete"))
     ) {
       selectionBeforeInputRef.current = {
         start: e.currentTarget.selectionStart,
