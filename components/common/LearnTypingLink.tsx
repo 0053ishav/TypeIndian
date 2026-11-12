@@ -20,7 +20,7 @@ export default function LearnTypingLink({
 
         <Link
           href={href}
-          className="btn-secondary whitespace-nowrap self-start sm:self-auto"
+          className="btn-secondary w-full sm:w-auto whitespace-normal sm:whitespace-nowrap text-center"
         >
           {label} →
         </Link>
