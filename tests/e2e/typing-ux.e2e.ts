@@ -13,13 +13,41 @@ test("typing page stays usable across supported responsive widths", async ({
   for (const width of [320, 360, 390, 430, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 900 });
 
-    await expect
-      .poll(() =>
-        page.evaluate(
-          () => document.documentElement.scrollWidth <= window.innerWidth,
-        ),
+    const dimensions = await page.evaluate(() => {
+      const overflowingElements = Array.from(
+        document.querySelectorAll<HTMLElement>("body *"),
       )
-      .toBe(true);
+        .map((element) => {
+          const rect = element.getBoundingClientRect();
+
+          return {
+            tag: element.tagName,
+            className:
+              typeof element.className === "string" ? element.className : "",
+            text: element.textContent?.trim().slice(0, 48) ?? "",
+            left: Math.round(rect.left),
+            right: Math.round(rect.right),
+            width: Math.round(rect.width),
+          };
+        })
+        .filter(
+          (element) =>
+            element.right > window.innerWidth + 1 || element.left < -1,
+        )
+        .slice(0, 12);
+
+      return {
+        viewport: window.innerWidth,
+        documentWidth: document.documentElement.scrollWidth,
+        bodyWidth: document.body.scrollWidth,
+        overflowingElements,
+      };
+    });
+
+    expect(
+      dimensions.documentWidth,
+      `Horizontal overflow at ${width}px: ${JSON.stringify(dimensions)}`,
+    ).toBeLessThanOrEqual(width);
   }
 });
 
