@@ -380,6 +380,24 @@ export default function TypingTool({ language }: { language: Language }) {
     }
   };
 
+  const handleDownloadText = () => {
+    if (!text.trim()) return;
+
+    const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    const date = new Date().toISOString().slice(0, 10);
+
+    anchor.href = url;
+    anchor.download = `${language.slug}-typing-${date}.txt`;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    URL.revokeObjectURL(url);
+
+    toast.success("Text file downloaded.");
+  };
+
   const handleClearText = () => {
     if (!text.trim()) return;
 
@@ -523,6 +541,14 @@ export default function TypingTool({ language }: { language: Language }) {
           </button>
 
           <button
+            onClick={handleDownloadText}
+            className="btn-secondary"
+            disabled={!text.trim()}
+          >
+            ↓ Download TXT
+          </button>
+
+          <button
             onClick={handleClearText}
             className="btn-secondary"
             disabled={!text.trim()}
@@ -548,6 +574,15 @@ export default function TypingTool({ language }: { language: Language }) {
             aria-label="Copy"
           >
             📋
+          </button>
+
+          <button
+            onClick={handleDownloadText}
+            className="btn-secondary flex-1"
+            disabled={!text.trim()}
+            aria-label="Download text file"
+          >
+            ↓
           </button>
 
           <button
