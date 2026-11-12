@@ -8,7 +8,7 @@ The on-screen keyboard is a separate typing control. The alphabet chart remains 
 |---|---|---|
 | Hindi, Marathi, Nepali, Sanskrit | Devanagari Enhanced InScript | Shared because these languages use Devanagari and the same script-level layout convention. |
 | Panjabi | Gurmukhi InScript | Includes Gurmukhi-specific vowel carriers, bindi, tippi and addak keys. |
-| Gujarati | Gujarati Enhanced InScript | Gujarati output map; it is not a Devanagari character substitution. |
+| Gujarati | Gujarati Enhanced InScript | Gujarati output map; it is not a Devanagari character substitution. ઞ is exposed in a labelled additional-letter row because the reference mapping reuses Shift+] for both ઞ and nukta. |
 | Bengali | Bengali InScript | Bengali-specific output map. |
 | Assamese | Assamese Enhanced InScript | Shares the Bengali-script family, but uses its own output map for Assamese letters. |
 | Tamil | Tamil InScript | Tamil's smaller native consonant inventory and Grantha extensions are not padded with invented letters. |
@@ -37,7 +37,7 @@ References:
 - A key inserts its native Unicode output directly at the current selection. It does not invoke Google transliteration.
 - Shift and AltGr layers expose only verified characters. Unmapped keys are disabled rather than guessed.
 - The Odia layout exposes its mapped ଯ/ୟ and wa/୵ variants on their standard and extended layers.
-- Bengali/Assamese y-fused letters, Gurmukhi addak/tippi/bindi, script nukta marks, script conjunct shortcuts, and Malayalam chillu shortcuts use their documented script-specific keys or dedicated special-key row.
+- Bengali/Assamese y-fused letters, Gurmukhi addak/tippi/bindi, script nukta marks, script conjunct shortcuts, Gujarati ઞ, Assamese ৱ and Malayalam chillu shortcuts use their documented script-specific keys or dedicated special-key row.
 - The editor stores Unicode code points and combining sequences. Backspace uses grapheme segmentation where the browser supports `Intl.Segmenter`.
 - Urdu is a character-entry layout, not a full Nastaliq composition engine. Joining forms and glyph shaping are delegated to the browser's text renderer and installed fonts. If the selected font does not provide Urdu Nastaliq shaping, the keyboard cannot repair that typography by itself.
 - The on-screen keyboard is an input aid; physical mobile-device verification remains a separate QA task.
