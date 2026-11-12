@@ -32,9 +32,9 @@ const SHIFTED: Record<string, string> = {
 };
 
 const VOWEL_KEYS: Record<string, string> = {
-  a: "d", aa: "e", "ā": "e", i: "f", ee: "r", "ī": "r",
+  a: "d", "ô": "d", aa: "e", "ā": "e", i: "f", ee: "r", "ī": "r",
   u: "g", oo: "t", "ū": "t", ri: "=", ru: "=", "r̥": "=",
-  e: "s", ai: "w", o: "a", au: "q",
+  e: "s", ai: "w", oi: "w", o: "a", au: "q", ou: "q",
 };
 
 const SIGNS: Record<string, Record<string, string>> = {
@@ -107,7 +107,7 @@ export function getVirtualKeyboardLayout(language: Language): VirtualKeyboardLay
     Object.entries(vowelKeys).forEach(([key, name]) => {
       const independent = language.alphabet.vowels.find((v) => {
         const normalized = v.sound.toLowerCase();
-        return name === "a" ? normalized === "a" :
+        return name === "a" ? normalized === "a" || normalized === "ô" :
           name === "aa" ? normalized === "aa" || normalized === "ā" :
           name === "i" ? normalized === "i" :
           name === "ee" ? normalized === "ee" || normalized === "ī" :
@@ -115,9 +115,9 @@ export function getVirtualKeyboardLayout(language: Language): VirtualKeyboardLay
           name === "oo" ? normalized === "oo" || normalized === "ū" :
           name === "ri" ? ["ri", "ru", "r̥"].includes(normalized) :
           name === "e" ? normalized === "e" :
-          name === "ai" ? normalized === "ai" :
+          name === "ai" ? normalized === "ai" || normalized === "oi" :
           name === "o" ? normalized === "o" :
-          name === "au" ? normalized === "au" : false;
+          name === "au" ? normalized === "au" || normalized === "ou" : false;
       });
       if (independent) add(outputs, key, "shift", independent.letter);
     });
