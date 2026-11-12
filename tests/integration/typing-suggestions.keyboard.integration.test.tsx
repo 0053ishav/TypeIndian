@@ -223,14 +223,14 @@ describe("TypingTool keyboard and editor history", () => {
     expect(editor).toHaveValue("अक्");
   });
 
-  it("selects the Gurmukhi-specific layer output and deletes a grapheme as one unit", async () => {
+  it("composes a Gurmukhi nukta letter and deletes the grapheme as one unit", async () => {
     const user = userEvent.setup();
     render(<TypingTool language={languageRegistry.panjabi} />);
 
     const editor = screen.getByRole("combobox") as HTMLTextAreaElement;
     await user.click(screen.getByText("Open virtual keyboard"));
-    await user.click(screen.getByRole("button", { name: "AltGr" }));
-    await user.click(screen.getByRole("button", { name: "ਸ਼ from m" }));
+    await user.click(screen.getByRole("button", { name: "ਸ from m" }));
+    await user.click(screen.getByRole("button", { name: "਼ from ]" }));
     expect(editor).toHaveValue("ਸ਼");
 
     await user.click(screen.getByRole("button", { name: "Backspace" }));
