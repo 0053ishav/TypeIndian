@@ -233,41 +233,44 @@ export default function TypingTool({ language }: { language: Language }) {
     if (!pastedText.trim()) return;
 
     e.preventDefault();
+    const textarea = e.currentTarget;
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const words = pastedText.split(/\s+/).filter(Boolean);
     setLoading(true);
+    suggestionRequestRef.current?.abort();
+    if (suggestionTimerRef.current) clearTimeout(suggestionTimerRef.current);
 
     try {
-      const words = pastedText.split(/\s+/).filter(Boolean);
-      const results: string[] = [];
+      const results = await Promise.all(
+        words.map(async (word) => {
+          try {
+            const suggestions = await fetchSuggestions(
+              word,
+              language.transliteration.languageCode,
+              1,
+            );
+            return suggestions[0] || word;
+          } catch {
+            return word;
+          }
+        }),
+      );
 
-      for (const word of words) {
-        try {
-          const s = await fetchSuggestions(
-            word,
-            language.transliteration.languageCode,
-            1,
-          );
-          results.push(s[0] || word);
-        } catch {
-          results.push(word);
-        }
-      }
-
-      const translated = results.join(" ") + " ";
-      const next = text + translated;
-
+      const translated = results.join(" ");
+      const next = text.slice(0, start) + translated + text.slice(end);
+      const cursor = start + translated.length;
       setText(next);
-      requestAnimationFrame(() => {
-        const textarea = textareaRef.current;
-        if (!textarea) return;
-
-        if (textarea && document.activeElement === textarea) {
-          textarea.setSelectionRange(next.length, next.length);
-        }
-        const end = next.length;
-        textarea.setSelectionRange(end, end);
-      });
       setSuggestions([]);
       setCurrentWord("");
+      wordRangeRef.current = null;
+
+      requestAnimationFrame(() => {
+        const currentTextarea = textareaRef.current;
+        if (!currentTextarea) return;
+        currentTextarea.focus();
+        currentTextarea.setSelectionRange(cursor, cursor);
+      });
     } finally {
       setLoading(false);
     }
@@ -280,42 +283,44 @@ export default function TypingTool({ language }: { language: Language }) {
 
     if (!droppedText.trim()) return;
 
+    const textarea = e.currentTarget;
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const words = droppedText.split(/\s+/).filter(Boolean);
     setLoading(true);
+    suggestionRequestRef.current?.abort();
+    if (suggestionTimerRef.current) clearTimeout(suggestionTimerRef.current);
 
     try {
-      const words = droppedText.split(/\s+/).filter(Boolean);
-      const results: string[] = [];
+      const results = await Promise.all(
+        words.map(async (word) => {
+          try {
+            const suggestions = await fetchSuggestions(
+              word,
+              language.transliteration.languageCode,
+              1,
+            );
+            return suggestions[0] || word;
+          } catch {
+            return word;
+          }
+        }),
+      );
 
-      for (const word of words) {
-        try {
-          const s = await fetchSuggestions(
-            word,
-            language.transliteration.languageCode,
-            1,
-          );
-          results.push(s[0] || word);
-        } catch {
-          results.push(word);
-        }
-      }
-
-      const next = text + results.join(" ") + " ";
-
+      const translated = results.join(" ");
+      const next = text.slice(0, start) + translated + text.slice(end);
+      const cursor = start + translated.length;
       setText(next);
-
-      requestAnimationFrame(() => {
-        const textarea = textareaRef.current;
-
-        if (!textarea) return;
-
-        if (textarea && document.activeElement === textarea) {
-          textarea.setSelectionRange(next.length, next.length);
-        }
-        const end = next.length;
-        textarea.setSelectionRange(end, end);
-      });
       setSuggestions([]);
       setCurrentWord("");
+      wordRangeRef.current = null;
+
+      requestAnimationFrame(() => {
+        const currentTextarea = textareaRef.current;
+        if (!currentTextarea) return;
+        currentTextarea.focus();
+        currentTextarea.setSelectionRange(cursor, cursor);
+      });
     } finally {
       setLoading(false);
     }
