@@ -69,8 +69,9 @@ test("mobile editor exposes undo, redo, and a cursor-aware virtual keyboard", as
   await expect(editor).toHaveValue("namaste");
 
   await editor.fill("");
-  await page.getByText("Open virtual keyboard").click();
-  await page.getByRole("button", { name: "अ a" }).click();
+  await page.getByRole("button", { name: "Open virtual keyboard" }).click();
+  await page.getByRole("button", { name: "Shift" }).click();
+  await page.getByRole("button", { name: "अ from d" }).tap();
   await expect(editor).toHaveValue("अ");
 
   const download = page.waitForEvent("download");
@@ -89,8 +90,8 @@ test("Urdu virtual keyboard inserts native text in an RTL editor", async ({
   });
   await expect(editor).toHaveAttribute("dir", "rtl");
 
-  await page.getByText("Open virtual keyboard").click();
-  await page.getByRole("button", { name: /ا/ }).first().click();
+  await page.getByRole("button", { name: "Open virtual keyboard" }).click();
+  await page.getByRole("button", { name: "ا from a" }).click();
 
   await expect(editor).toHaveValue("ا");
 });
