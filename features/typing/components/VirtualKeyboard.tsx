@@ -137,7 +137,7 @@ export default function VirtualKeyboard({
           </svg>
           <div className="min-w-0">
             <h3 className="truncate text-sm font-bold">{language.name} keyboard</h3>
-            <p className="truncate text-[10px] text-slate-300">{layout.name} · {layout.standard} · Drag to move</p>
+            <p className="truncate text-[10px] text-slate-300">{layout.name} · {layout.standard} · Drag to move · Resize corner</p>
           </div>
         </div>
         <button
