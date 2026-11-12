@@ -1,5 +1,6 @@
 import type { Language } from "@/types/language";
 import { AlignmentType, Document, Packer, Paragraph, TextRun } from "docx";
+import type { FontData } from "pdfnative";
 
 export type TypingExportFormat = "txt" | "docx" | "pdf";
 
@@ -84,18 +85,20 @@ export async function createPdfBlob(text: string, language: Language) {
   }
 
   const pdf = await import("pdfnative");
+  const fontLoader = (loader: () => Promise<unknown>) =>
+    loader().then((module) => module as FontData);
   pdf.registerFonts({
-    latin: () => import("pdfnative/fonts/noto-sans-data.js"),
-    ar: () => import("pdfnative/fonts/noto-arabic-data.js"),
-    bn: () => import("pdfnative/fonts/noto-bengali-data.js"),
-    gu: () => import("pdfnative/fonts/noto-gujarati-data.js"),
-    hi: () => import("pdfnative/fonts/noto-devanagari-data.js"),
-    kn: () => import("pdfnative/fonts/noto-kannada-data.js"),
-    ml: () => import("pdfnative/fonts/noto-malayalam-data.js"),
-    or: () => import("pdfnative/fonts/noto-oriya-data.js"),
-    pa: () => import("pdfnative/fonts/noto-gurmukhi-data.js"),
-    ta: () => import("pdfnative/fonts/noto-tamil-data.js"),
-    te: () => import("pdfnative/fonts/noto-telugu-data.js"),
+    latin: () => fontLoader(() => import("pdfnative/fonts/noto-sans-data.js")),
+    ar: () => fontLoader(() => import("pdfnative/fonts/noto-arabic-data.js")),
+    bn: () => fontLoader(() => import("pdfnative/fonts/noto-bengali-data.js")),
+    gu: () => fontLoader(() => import("pdfnative/fonts/noto-gujarati-data.js")),
+    hi: () => fontLoader(() => import("pdfnative/fonts/noto-devanagari-data.js")),
+    kn: () => fontLoader(() => import("pdfnative/fonts/noto-kannada-data.js")),
+    ml: () => fontLoader(() => import("pdfnative/fonts/noto-malayalam-data.js")),
+    or: () => fontLoader(() => import("pdfnative/fonts/noto-oriya-data.js")),
+    pa: () => fontLoader(() => import("pdfnative/fonts/noto-gurmukhi-data.js")),
+    ta: () => fontLoader(() => import("pdfnative/fonts/noto-tamil-data.js")),
+    te: () => fontLoader(() => import("pdfnative/fonts/noto-telugu-data.js")),
   });
 
   const fontCodes = [...new Set(["latin", scriptCode])];
@@ -128,7 +131,11 @@ export async function createPdfBlob(text: string, language: Language) {
     { direction },
   );
 
-  return new Blob([bytes], { type: "application/pdf" });
+  const arrayBuffer = bytes.buffer.slice(
+    bytes.byteOffset,
+    bytes.byteOffset + bytes.byteLength,
+  ) as ArrayBuffer;
+  return new Blob([arrayBuffer], { type: "application/pdf" });
 }
 
 export async function createTypingExport(
