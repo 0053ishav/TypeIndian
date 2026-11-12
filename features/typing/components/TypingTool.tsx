@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { fetchSuggestions } from "@/lib/transliteration/googleHttpTransliterate";
 import SessionBoard from "./SessionBoard";
 import { Language } from "@/types/language";
-import AlphabetGrid from "@/components/ui/AlphabetGrid";
+import VirtualKeyboard from "./VirtualKeyboard";
 import { toast } from "sonner";
 import { copyToClipboard } from "@/lib/clipboard";
 
@@ -25,6 +25,23 @@ function getLocalDateStamp() {
   const day = String(date.getDate()).padStart(2, "0");
 
   return `${date.getFullYear()}-${month}-${day}`;
+}
+
+function previousGraphemeStart(value: string, cursor: number) {
+  if (cursor <= 0) return 0;
+
+  if (typeof Intl.Segmenter === "function") {
+    const segments = new Intl.Segmenter(undefined, { granularity: "grapheme" }).segment(value);
+    let previous = 0;
+    for (const segment of segments) {
+      if (segment.index + segment.segment.length >= cursor) return segment.index;
+      previous = segment.index + segment.segment.length;
+    }
+    return previous;
+  }
+
+  const codePoint = value.codePointAt(cursor - 1);
+  return Math.max(0, cursor - (codePoint && codePoint > 0xffff ? 2 : 1));
 }
 
 function downloadTextFile(content: string, filename: string) {
@@ -50,6 +67,7 @@ export default function TypingTool({ language }: { language: Language }) {
   const [boardLines, setBoardLines] = useState<string[]>([]);
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(-1);
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
   const historyRef = useRef<EditorSnapshot[]>([
     { text: "", selectionStart: 0, selectionEnd: 0 },
   ]);
@@ -587,6 +605,31 @@ export default function TypingTool({ language }: { language: Language }) {
     });
   };
 
+  const handleVirtualBackspace = () => {
+    const textarea = textareaRef.current;
+    const start = textarea?.selectionStart ?? text.length;
+    const end = textarea?.selectionEnd ?? start;
+    if (start === 0 && end === 0) return;
+
+    const deleteStart = start === end ? previousGraphemeStart(text, start) : start;
+    const next = text.slice(0, deleteStart) + text.slice(end);
+
+    editorOperationIdRef.current += 1;
+    cancelPendingSuggestions();
+    commitText(next, deleteStart, deleteStart, "virtual-keyboard");
+    setCurrentWord("");
+    setSuggestions([]);
+    setActiveSuggestionIndex(-1);
+    wordRangeRef.current = null;
+
+    requestAnimationFrame(() => {
+      const currentTextarea = textareaRef.current;
+      if (!currentTextarea) return;
+      currentTextarea.focus();
+      currentTextarea.setSelectionRange(deleteStart, deleteStart);
+    });
+  };
+
   /* ---------------- board ---------------- */
 
   const handleAddToBoard = () => {
@@ -986,17 +1029,26 @@ export default function TypingTool({ language }: { language: Language }) {
         onReorder={handleReorder}
       />
 
-      <details className="mt-8 rounded-xl border border-[--color-border] p-3 sm:p-4">
-        <summary className="min-h-11 flex items-center cursor-pointer font-semibold text-[--color-text-heading]">
-          Open virtual keyboard
-        </summary>
-        <AlphabetGrid
-          language={language}
-          interactive
-          compact
-          onInsert={insertChar}
-        />
-      </details>
+      <div className="mt-8">
+        <button
+          type="button"
+          aria-expanded={isKeyboardOpen}
+          aria-controls="typing-virtual-keyboard"
+          onClick={() => setIsKeyboardOpen((open) => !open)}
+          className="btn-secondary min-h-11 w-full sm:w-auto"
+        >
+          {isKeyboardOpen ? "Close virtual keyboard" : "Open virtual keyboard"}
+        </button>
+        {isKeyboardOpen && (
+          <div id="typing-virtual-keyboard">
+            <VirtualKeyboard
+              language={language}
+              onInsert={insertChar}
+              onBackspace={handleVirtualBackspace}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
