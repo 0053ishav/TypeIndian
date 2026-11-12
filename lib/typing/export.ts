@@ -135,7 +135,7 @@ export async function createPdfBlob(text: string, language: Language) {
 
   const direction = language.direction;
   const blocks = [
-    { type: "heading" as const, text: "TypeIndian", level: 1 },
+    { type: "heading" as const, text: "TypeIndian", level: 1 as const },
     {
       type: "paragraph" as const,
       text: `${language.name} typing export · Created with typeindian.com`,
