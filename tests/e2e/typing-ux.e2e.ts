@@ -138,7 +138,9 @@ test("mobile touch can open the keyboard and insert native characters", async ({
 
     await page.getByRole("button", { name: "Close virtual keyboard" }).tap();
     await page.getByRole("button", { name: "Export" }).tap();
+    const download = page.waitForEvent("download");
     await page.getByRole("menuitem", { name: /TXT/ }).tap();
+    expect((await download).suggestedFilename()).toMatch(/hindi-typing-.*\.txt/);
   } finally {
     await context.close();
   }
