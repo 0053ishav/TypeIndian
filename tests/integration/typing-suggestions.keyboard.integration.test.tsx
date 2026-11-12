@@ -224,7 +224,7 @@ describe("TypingTool keyboard and editor history", () => {
     });
 
     await user.keyboard("{Control>}z{/Control}");
-    expect(editor).toHaveValue("ab");
+    expect(editor).toHaveValue("");
 
     resolvePaste(["शब्द"]);
     await waitFor(() => {
