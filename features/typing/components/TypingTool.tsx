@@ -233,7 +233,7 @@ export default function TypingTool({ language }: { language: Language }) {
       if (currentWord && suggestions.length) {
         e.preventDefault();
         handleWordCompletion();
-    }
+      }
     }
   };
 
@@ -248,6 +248,7 @@ export default function TypingTool({ language }: { language: Language }) {
       text.slice(range.end);
     const cursor = range.start + word.length + 1;
 
+    editorOperationIdRef.current += 1;
     setText(next);
     setCurrentWord("");
     setSuggestions([]);
@@ -340,11 +341,12 @@ export default function TypingTool({ language }: { language: Language }) {
 
   /* ---------------- letters click ---------------- */
 
-  const insertChar = async (char: string) => {
+  const insertChar = (char: string) => {
     const next = text + char;
 
+    editorOperationIdRef.current += 1;
     setText(next);
-    await processInput(next);
+    processInput(next, next.length);
 
     requestAnimationFrame(() => {
       textareaRef.current?.focus();
