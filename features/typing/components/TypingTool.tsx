@@ -601,6 +601,26 @@ export default function TypingTool({ language }: { language: Language }) {
     await navigator.clipboard.writeText(boardLines.join("\n"));
   };
 
+  const handleDownloadBoard = () => {
+    if (boardLines.length === 0) return;
+
+    const blob = new Blob([boardLines.join("\n")], {
+      type: "text/plain;charset=utf-8",
+    });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    const date = new Date().toISOString().slice(0, 10);
+
+    anchor.href = url;
+    anchor.download = `${language.slug}-session-board-${date}.txt`;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    URL.revokeObjectURL(url);
+
+    toast.success("Session Board downloaded.");
+  };
+
   const handleReorder = (from: number, to: number) => {
     setBoardLines((prev) => {
       const copy = [...prev];
@@ -809,6 +829,7 @@ export default function TypingTool({ language }: { language: Language }) {
         onCopyLine={handleCopyLine}
         onDeleteLine={handleDeleteLine}
         onCopyAll={handleCopyAll}
+        onDownloadAll={handleDownloadBoard}
         onReorder={handleReorder}
       />
 
