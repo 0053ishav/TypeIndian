@@ -33,6 +33,11 @@ describe("TypingTool keyboard and editor history", () => {
     await waitFor(() => {
       expect(editor).toHaveValue("नमस्ते ");
     });
+
+    await user.click(screen.getAllByRole("button", { name: "Undo" })[0]);
+    expect(editor).toHaveValue("namaste");
+    await user.click(screen.getAllByRole("button", { name: "Redo" })[0]);
+    expect(editor).toHaveValue("नमस्ते ");
   });
 
   it("navigates suggestions with arrow keys and accepts the active option", async () => {
@@ -130,9 +135,58 @@ describe("TypingTool keyboard and editor history", () => {
 
     await user.keyboard("{Control>}z{/Control}");
     expect(editor).toHaveValue("abcd");
+    expect(editor.selectionStart).toBe(1);
+    expect(editor.selectionEnd).toBe(3);
 
     await user.keyboard("{Control>}{Shift>}z{/Shift}{/Control}");
     expect(editor).toHaveValue("aXd");
+    expect(editor.selectionStart).toBe(2);
+    expect(editor.selectionEnd).toBe(2);
+  });
+
+  it("records a transliterated paste as one undoable operation", async () => {
+    const user = userEvent.setup();
+    render(<TypingTool language={languageRegistry.hindi} />);
+
+    const editor = screen.getByRole("combobox") as HTMLTextAreaElement;
+    await user.type(editor, "abc");
+    await waitFor(() => expect(fetchSuggestions).toHaveBeenCalled());
+
+    vi.mocked(fetchSuggestions).mockClear();
+    fireEvent.paste(editor, {
+      clipboardData: {
+        getData: (type: string) => (type === "text" ? "hello world" : ""),
+      },
+    });
+
+    await waitFor(() => {
+      expect(editor).toHaveValue("abcनमस्ते नमस्ते");
+    });
+
+    await user.click(screen.getAllByRole("button", { name: "Undo" })[0]);
+    expect(editor).toHaveValue("abc");
+    await user.click(screen.getAllByRole("button", { name: "Redo" })[0]);
+    expect(editor).toHaveValue("abcनमस्ते नमस्ते");
+  });
+
+  it("starts a fresh history group when editing after a partial undo", async () => {
+    const user = userEvent.setup();
+    render(<TypingTool language={languageRegistry.hindi} />);
+
+    const editor = screen.getByRole("combobox") as HTMLTextAreaElement;
+    await user.type(editor, "ab");
+    editor.setSelectionRange(1, 2);
+    await user.keyboard("X");
+    expect(editor).toHaveValue("aX");
+
+    await user.keyboard("{Control>}z{/Control}");
+    expect(editor).toHaveValue("ab");
+    editor.setSelectionRange(2, 2);
+    await user.type(editor, "c");
+    expect(editor).toHaveValue("abc");
+
+    await user.keyboard("{Control>}z{/Control}");
+    expect(editor).toHaveValue("ab");
   });
 
   it("resets editor history when the selected language changes", async () => {
