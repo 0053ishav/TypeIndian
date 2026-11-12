@@ -71,7 +71,7 @@ test("mobile editor exposes undo, redo, and a cursor-aware virtual keyboard", as
   await editor.fill("");
   await page.getByRole("button", { name: "Open virtual keyboard" }).click();
   await page.getByRole("button", { name: "Shift" }).click();
-  await page.getByRole("button", { name: "अ from d" }).tap();
+  await page.getByRole("button", { name: "अ from d" }).click();
   await expect(editor).toHaveValue("अ");
 
   const download = page.waitForEvent("download");
