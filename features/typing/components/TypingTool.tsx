@@ -873,7 +873,7 @@ export default function TypingTool({ language }: { language: Language }) {
         {language.typing.subtitle}
       </p>
       <div className="card p-4 sm:p-6">
-        <div className="mb-3 flex items-center justify-end gap-2">
+        <div role="toolbar" aria-label="Editor tools" className="mb-3 flex items-center justify-end gap-2">
           <button
             type="button"
             title="Virtual keyboard"
@@ -881,7 +881,7 @@ export default function TypingTool({ language }: { language: Language }) {
             aria-expanded={isKeyboardOpen}
             aria-controls="typing-virtual-keyboard"
             onClick={() => setIsKeyboardOpen((open) => !open)}
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-orange-200 bg-gradient-to-br from-orange-50 to-amber-100 px-3 text-orange-800 shadow-sm transition-all hover:-translate-y-0.5 hover:border-orange-300 hover:from-orange-100 hover:to-amber-200 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
+            className="inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-lg border border-orange-200 bg-gradient-to-br from-orange-50 to-amber-100 px-3 text-orange-800 shadow-sm transition-all hover:-translate-y-0.5 hover:border-orange-300 hover:from-orange-100 hover:to-amber-200 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
           >
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-5 w-5" stroke="currentColor" strokeWidth="1.8">
               <rect x="2.5" y="5" width="19" height="14" rx="2.5" />
