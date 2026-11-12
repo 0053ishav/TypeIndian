@@ -67,6 +67,7 @@ export default function SessionBoard({
         </h2>
 
         <button
+          type="button"
           onClick={onCopyAll}
           disabled={lines.length === 0}
           className="text-sm px-3 py-1 rounded bg-gray-200 hover:bg-gray-300 disabled:opacity-40 cursor-pointer"
@@ -81,7 +82,7 @@ export default function SessionBoard({
         </div>
       )}
 
-      <div className="space-y-2">
+      <div className="space-y-2" aria-label="Saved sentences">
         {lines.map((line, i) => (
           <div
             key={i}
@@ -92,6 +93,10 @@ export default function SessionBoard({
               setOverIndex(i);
             }}
             onDrop={handleDrop}
+            onDragEnd={() => {
+              setDragIndex(null);
+              setOverIndex(null);
+            }}
             className={`
               flex items-start justify-between gap-3 p-3 border rounded bg-white
               transition
@@ -99,38 +104,63 @@ export default function SessionBoard({
               ${overIndex === i && dragIndex !== i ? "ring-2 ring-orange-300" : ""}
             `}
           >
-            {/* LEFT SIDE */}
-            <div className="flex-1">
+            <div className="flex-1 min-w-0">
               {editingIndex === i ? (
                 <>
                   <textarea
-                  dir={direction}
+                    dir={direction}
                     value={draft}
                     onChange={(e) => setDraft(e.target.value)}
                     rows={2}
+                    aria-label={`Edit saved sentence ${i + 1}`}
                     className="w-full border rounded p-2 text-sm focus:outline-none focus:ring"
                   />
 
                   <div className="flex gap-2 mt-2">
-                    <button onClick={saveEditing} className="btn-primary">
+                    <button type="button" onClick={saveEditing} className="btn-primary">
                       Save
                     </button>
 
-                    <button onClick={cancelEditing} className="btn-secondary">
+                    <button type="button" onClick={cancelEditing} className="btn-secondary">
                       Cancel
                     </button>
                   </div>
                 </>
               ) : (
-                <div dir={direction} className="text-[--color-text-body]">{line}</div>
+                <div dir={direction} className="text-[--color-text-body] break-words">
+                  {line}
+                </div>
               )}
             </div>
 
-            {/* RIGHT ACTIONS */}
             {editingIndex !== i && (
-              <div className="flex flex-row gap-2">
+              <div className="flex flex-wrap items-center justify-end gap-2">
                 <button
+                  type="button"
+                  onClick={() => onReorder(i, i - 1)}
+                  disabled={i === 0}
+                  aria-label={`Move sentence ${i + 1} up`}
+                  title="Move up"
+                  className="text-sm px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                >
+                  ↑
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => onReorder(i, i + 1)}
+                  disabled={i === lines.length - 1}
+                  aria-label={`Move sentence ${i + 1} down`}
+                  title="Move down"
+                  className="text-sm px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                >
+                  ↓
+                </button>
+
+                <button
+                  type="button"
                   onClick={() => startEditing(i, line)}
+                  aria-label={`Edit sentence ${i + 1}`}
                   title="Edit inline"
                   className="text-sm px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 cursor-pointer"
                 >
@@ -138,7 +168,9 @@ export default function SessionBoard({
                 </button>
 
                 <button
+                  type="button"
                   onClick={() => onMoveToEditor(i)}
+                  aria-label={`Move sentence ${i + 1} to editor`}
                   title="Move to editor"
                   className="text-sm px-2 py-1 rounded bg-blue-100 hover:bg-blue-200 cursor-pointer"
                 >
@@ -146,7 +178,9 @@ export default function SessionBoard({
                 </button>
 
                 <button
+                  type="button"
                   onClick={() => onCopyLine(line)}
+                  aria-label={`Copy sentence ${i + 1}`}
                   title="Copy"
                   className="text-sm px-2 py-1 rounded bg-gray-100 hover:bg-gray-200 cursor-pointer"
                 >
@@ -154,13 +188,17 @@ export default function SessionBoard({
                 </button>
 
                 <button
+                  type="button"
                   onClick={() => onDeleteLine(i)}
+                  aria-label={`Delete sentence ${i + 1}`}
                   title="Delete"
                   className="text-sm px-2 py-1 rounded bg-red-100 hover:bg-red-200 text-red-700 cursor-pointer"
                 >
                   ✕
                 </button>
+
                 <span
+                  aria-hidden="true"
                   title="Drag to reorder"
                   className="cursor-grab text-gray-400 px-2"
                 >
