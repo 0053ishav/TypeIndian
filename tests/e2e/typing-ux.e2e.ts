@@ -113,3 +113,33 @@ test("Urdu virtual keyboard inserts native text in an RTL editor", async ({
 
   await expect(editor).toHaveValue("ا");
 });
+
+test("mobile touch can open the keyboard and insert native characters", async ({
+  browser,
+}) => {
+  const context = await browser.newContext({
+    viewport: { width: 360, height: 800 },
+    isMobile: true,
+    hasTouch: true,
+  });
+
+  try {
+    const page = await context.newPage();
+    await page.goto("/typing/hindi");
+
+    const editor = page.getByRole("combobox", {
+      name: "Typing input for Hindi",
+    });
+
+    await page.getByRole("button", { name: "Open virtual keyboard" }).tap();
+    await page.getByRole("button", { name: "Shift" }).tap();
+    await page.getByRole("button", { name: "अ from d" }).tap();
+    await expect(editor).toHaveValue("अ");
+
+    await page.getByRole("button", { name: "Close virtual keyboard" }).tap();
+    await page.getByRole("button", { name: "Export" }).tap();
+    await page.getByRole("menuitem", { name: /TXT/ }).tap();
+  } finally {
+    await context.close();
+  }
+});
