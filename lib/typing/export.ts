@@ -1,5 +1,4 @@
 import type { Language } from "@/types/language";
-import { AlignmentType, Document, Packer, Paragraph, TextRun } from "docx";
 import type { FontData } from "pdfnative";
 
 export type TypingExportFormat = "txt" | "docx" | "pdf";
@@ -50,6 +49,7 @@ export function createTxtBlob(text: string) {
 export async function createDocxBlob(text: string, language: Language) {
   if (!text.trim()) throw new Error("There is no text to export.");
 
+  const { AlignmentType, Document, Packer, Paragraph, TextRun } = await import("docx");
   const font = DOCX_FONT_BY_LANGUAGE[language.id] ?? "Arial";
   const rtl = language.direction === "rtl";
   const paragraphs = splitParagraphs(text).map((line) =>
