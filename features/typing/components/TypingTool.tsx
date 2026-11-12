@@ -414,6 +414,12 @@ export default function TypingTool({ language }: { language: Language }) {
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
 
+    const previousSelection = selectionBeforeInputRef.current;
+    if (previousSelection) {
+      updateCurrentHistorySelection(previousSelection.start, previousSelection.end);
+    }
+    selectionBeforeInputRef.current = null;
+
     editorOperationIdRef.current += 1;
     const inputType = (e.nativeEvent as InputEvent).inputType ?? "";
     const historyKind: HistoryKind =
