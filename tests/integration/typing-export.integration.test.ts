@@ -109,9 +109,9 @@ describe("local typing exports", () => {
     const extracted = pages.map((page) => page.text).join("\n");
     const runText = pages.flatMap((page) => page.runs ?? []).map((run) => run.text).join("");
     for (const paragraph of text.split("\n")) {
-      const compactParagraph = paragraph.replace(/\\s/g, "");
-      expect(extracted.replace(/\\s/g, "")).toContain(compactParagraph);
-      expect(runText.replace(/\\s/g, "")).toContain(compactParagraph);
+      const compactParagraph = paragraph.replace(/\s/g, "");
+      expect(extracted.replace(/\s/g, "")).toContain(compactParagraph);
+      expect(runText.replace(/\s/g, "")).toContain(compactParagraph);
     }
   });
 
