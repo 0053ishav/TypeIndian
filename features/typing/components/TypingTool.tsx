@@ -272,7 +272,7 @@ export default function TypingTool({ language }: { language: Language }) {
     const textarea = e.currentTarget;
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
-    const words = pastedText.split(/\\s+/).filter(Boolean);
+    const words = pastedText.split(/\s+/).filter(Boolean);
     const operationId = ++editorOperationIdRef.current;
     cancelPendingSuggestions();
     setLoading(true);
@@ -310,7 +310,7 @@ export default function TypingTool({ language }: { language: Language }) {
     const textarea = e.currentTarget;
     const start = textarea.selectionStart;
     const end = textarea.selectionEnd;
-    const words = droppedText.split(/\\s+/).filter(Boolean);
+    const words = droppedText.split(/\s+/).filter(Boolean);
     const operationId = ++editorOperationIdRef.current;
     cancelPendingSuggestions();
     setLoading(true);
