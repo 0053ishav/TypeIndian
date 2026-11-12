@@ -16,6 +16,7 @@ const LAYER_LABELS: Record<KeyboardLayer, string> = {
 };
 
 type Position = { x: number; y: number };
+type Dimensions = { width: number; height: number };
 
 export default function VirtualKeyboard({
   language,
@@ -31,7 +32,15 @@ export default function VirtualKeyboard({
   const layout = useMemo(() => getVirtualKeyboardLayout(language), [language]);
   const [layer, setLayer] = useState<KeyboardLayer>("base");
   const [position, setPosition] = useState<Position | null>(null);
+  const [dimensions, setDimensions] = useState<Dimensions | null>(null);
   const keyboardRef = useRef<HTMLElement>(null);
+  const resizeRef = useRef<{
+    pointerId: number;
+    startX: number;
+    startY: number;
+    startWidth: number;
+    startHeight: number;
+  } | null>(null);
   const dragRef = useRef<{
     pointerId: number;
     offsetX: number;
@@ -59,6 +68,37 @@ export default function VirtualKeyboard({
     setPosition({ x, y });
   };
 
+  const startResizing = (event: PointerEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const bounds = keyboardRef.current?.getBoundingClientRect();
+    if (!bounds) return;
+    resizeRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      startWidth: bounds.width,
+      startHeight: bounds.height,
+    };
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const resizeKeyboard = (event: PointerEvent<HTMLButtonElement>) => {
+    const start = resizeRef.current;
+    if (!start || start.pointerId !== event.pointerId) return;
+    const width = Math.max(320, Math.min(window.innerWidth - 16, start.startWidth + event.clientX - start.startX));
+    const height = Math.max(240, Math.min(window.innerHeight - 16, start.startHeight + event.clientY - start.startY));
+    setDimensions({ width, height });
+  };
+
+  const stopResizing = (event: PointerEvent<HTMLButtonElement>) => {
+    if (resizeRef.current?.pointerId !== event.pointerId) return;
+    resizeRef.current = null;
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+  };
+
   const stopDragging = (event: PointerEvent<HTMLDivElement>) => {
     if (dragRef.current?.pointerId !== event.pointerId) return;
     dragRef.current = null;
@@ -76,7 +116,8 @@ export default function VirtualKeyboard({
         ...(position
           ? { left: position.x, top: position.y }
           : { left: 12, bottom: 16 }),
-        maxHeight: "calc(100dvh - 24px)",
+        ...(dimensions ? { width: dimensions.width, height: dimensions.height } : {}),
+        maxHeight: "calc(100dvh - 16px)",
       }}
       aria-label={`${language.name} on-screen keyboard`}
       dir="ltr"
@@ -127,7 +168,7 @@ export default function VirtualKeyboard({
         </div>
       </div>
 
-      <div className="overflow-auto p-2.5 sm:p-3" role="group" aria-label="Virtual typing keys">
+      <div className="min-h-0 flex-1 overflow-auto p-2.5 pb-8 sm:p-3" role="group" aria-label="Virtual typing keys">
         <div className="min-w-[440px] space-y-2">
           {layout.rows.map((row, rowIndex) => (
             <div key={rowIndex} className="flex justify-center gap-1.5">
@@ -202,6 +243,21 @@ export default function VirtualKeyboard({
           </div>
         </div>
       </div>
+
+      <button
+        type="button"
+        aria-label="Resize virtual keyboard"
+        title="Drag to resize keyboard"
+        onPointerDown={startResizing}
+        onPointerMove={resizeKeyboard}
+        onPointerUp={stopResizing}
+        onPointerCancel={stopResizing}
+        className="absolute bottom-0 right-0 z-10 flex h-7 w-7 cursor-nwse-resize touch-none items-center justify-center rounded-tl-lg bg-slate-300/90 text-slate-600 transition hover:bg-orange-200 hover:text-orange-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-orange-600"
+      >
+        <svg aria-hidden="true" viewBox="0 0 16 16" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <path d="M14 2v12H2M14 8 8 14M14 2 2 14" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
     </section>
   );
 }
