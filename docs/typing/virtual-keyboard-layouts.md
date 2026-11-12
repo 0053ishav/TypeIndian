@@ -35,7 +35,8 @@ References:
 ## Input behavior and limitations
 
 - A key inserts its native Unicode output directly at the current selection. It does not invoke Google transliteration.
-- Shift and other mapped layers expose only verified characters. Unmapped keys are disabled rather than guessed.
+- Shift and AltGr layers expose only verified characters. Unmapped keys are disabled rather than guessed.
+- The Odia layout exposes its mapped ଯ/ୟ and wa/୵ variants on their standard and extended layers.
 - Bengali/Assamese y-fused letters, Gurmukhi addak/tippi/bindi, script nukta marks, script conjunct shortcuts, and Malayalam chillu shortcuts use their documented script-specific keys or dedicated special-key row.
 - The editor stores Unicode code points and combining sequences. Backspace uses grapheme segmentation where the browser supports `Intl.Segmenter`.
 - Urdu is a character-entry layout, not a full Nastaliq composition engine. Joining forms and glyph shaping are delegated to the browser's text renderer and installed fonts. If the selected font does not provide Urdu Nastaliq shaping, the keyboard cannot repair that typography by itself.
