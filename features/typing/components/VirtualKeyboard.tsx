@@ -115,8 +115,9 @@ export default function VirtualKeyboard({
       style={{
         ...(position
           ? { left: position.x, top: position.y }
-          : { left: 12, bottom: 16, height: "min(420px, calc(100dvh - 32px))" }),
-        ...(dimensions ? { width: dimensions.width, height: dimensions.height } : {}),
+          : { left: 12, bottom: 16 }),
+        ...(dimensions ? { width: dimensions.width } : {}),
+        height: dimensions?.height ?? "min(420px, calc(100dvh - 32px))",
         maxHeight: "calc(100dvh - 16px)",
       }}
       aria-label={`${language.name} on-screen keyboard`}
@@ -252,9 +253,9 @@ export default function VirtualKeyboard({
         onPointerMove={resizeKeyboard}
         onPointerUp={stopResizing}
         onPointerCancel={stopResizing}
-        className="absolute bottom-0 right-0 z-10 flex h-7 w-7 cursor-nwse-resize touch-none items-center justify-center rounded-tl-lg bg-slate-300/90 text-slate-600 transition hover:bg-orange-200 hover:text-orange-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-orange-600"
+        className="absolute bottom-0 right-0 z-10 flex h-[clamp(1rem,7cqh,1.75rem)] w-[clamp(1rem,7cqh,1.75rem)] cursor-nwse-resize touch-none items-center justify-center rounded-tl-lg bg-slate-300/90 text-slate-600 transition hover:bg-orange-200 hover:text-orange-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-orange-600"
       >
-        <svg aria-hidden="true" viewBox="0 0 16 16" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <svg aria-hidden="true" viewBox="0 0 16 16" className="h-[clamp(0.625rem,4cqh,1rem)] w-[clamp(0.625rem,4cqh,1rem)]" fill="none" stroke="currentColor" strokeWidth="1.5">
           <path d="M14 2v12H2M14 8 8 14M14 2 2 14" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
