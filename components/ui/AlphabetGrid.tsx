@@ -7,12 +7,15 @@ interface Props {
 
   interactive?: boolean;
 
+  compact?: boolean;
+
   onInsert?: (char: string) => void;
 }
 
 export default function AlphabetGrid({
   language,
   interactive = false,
+  compact = false,
   onInsert,
 }: Props) {
   const { alphabet, labels } = language;
@@ -24,19 +27,20 @@ export default function AlphabetGrid({
     if (!items?.length) return null;
 
     return (
-      <section className="mb-10">
-        <h3 className="font-semibold text-xl mb-4">{title}</h3>
+      <section className={compact ? "mb-6" : "mb-10"}>
+        <h3 className={`font-semibold mb-3 ${compact ? "text-lg" : "text-xl"}`}>{title}</h3>
 
-        <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3">
+        <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2 sm:gap-3">
           {items.map(({ letter, sound }) => (
             <button
               key={letter}
               dir={language.direction}
+              type="button"
               disabled={!interactive}
               onClick={() => onInsert?.(letter)}
-              className="card p-4 text-center hover-lift disabled:cursor-default"
+              className={`card text-center hover-lift disabled:cursor-default ${compact ? "min-h-11 p-2 sm:p-3" : "p-4"}`}
             >
-              <div className="text-2xl font-bold">{letter}</div>
+              <div className={`font-bold ${compact ? "text-xl sm:text-2xl" : "text-2xl"}`}>{letter}</div>
 
               <div className="text-xs text-(--color-text-muted) mt-1">
                 {sound}
@@ -49,12 +53,12 @@ export default function AlphabetGrid({
   };
 
   return (
-    <section className="mt-24 max-w-5xl mx-auto">
-      <h2 className="text-3xl font-bold text-(--color-text-heading) mb-4">
+    <section className={`mx-auto ${compact ? "mt-4 max-w-full" : "mt-24 max-w-5xl"}`}>
+      <h2 className={`font-bold text-(--color-text-heading) mb-3 ${compact ? "text-xl" : "text-3xl"}`}>
         {labels.alphabet.title}
       </h2>
 
-      <p className="text-(--color-text-body) mb-10 max-w-3xl">
+      <p className={`text-(--color-text-body) mb-6 max-w-3xl ${compact ? "text-sm" : ""}`}>
         {labels.alphabet.description}
       </p>
 
@@ -81,7 +85,7 @@ export default function AlphabetGrid({
         )}
 
       <section>
-        <h3 className="font-semibold text-xl mb-4">
+        <h3 className={`font-semibold mb-3 ${compact ? "text-lg" : "text-xl"}`}>
           {labels.alphabet.numerals}
         </h3>
 
@@ -89,12 +93,13 @@ export default function AlphabetGrid({
           {alphabet.numerals.map(({ latin, native }) => (
             <button
               key={latin}
+              type="button"
               dir={language.direction}
               disabled={!interactive}
               onClick={() => onInsert?.(native)}
-              className="card p-4 text-center hover-lift disabled:cursor-default"
+              className={`card text-center hover-lift disabled:cursor-default ${compact ? "min-h-11 p-2 sm:p-3" : "p-4"}`}
             >
-              <div className="text-2xl font-bold">{native}</div>
+              <div className={`font-bold ${compact ? "text-xl sm:text-2xl" : "text-2xl"}`}>{native}</div>
 
               <div className="text-xs text-(--color-text-muted) mt-1">
                 {latin}

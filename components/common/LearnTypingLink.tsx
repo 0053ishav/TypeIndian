@@ -11,8 +11,8 @@ export default function LearnTypingLink({
 }) {
   return (
     <div className="max-w-3xl mx-auto px-6 mt-6">
-      <div className="flex items-center justify-between gap-4 rounded-xl border bg-white p-4 hover-lift">
-        <div>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 rounded-xl border bg-white p-4 hover-lift">
+        <div className="min-w-0 flex-1">
           <p className="text-sm text-[--color-text-muted]">
             {description ?? "New here?"}
           </p>
@@ -20,7 +20,7 @@ export default function LearnTypingLink({
 
         <Link
           href={href}
-          className="btn-secondary whitespace-nowrap"
+          className="btn-secondary w-full sm:w-auto whitespace-normal sm:whitespace-nowrap text-center"
         >
           {label} →
         </Link>
