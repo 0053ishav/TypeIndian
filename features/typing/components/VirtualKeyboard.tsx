@@ -54,15 +54,15 @@ export default function VirtualKeyboard({
     dragRef.current = {
       pointerId: event.pointerId,
       offsetX: event.clientX - (bounds?.left ?? 12),
-      offsetY: event.clientY - (bounds?.top ?? window.innerHeight - 420),
+      offsetY: event.clientY - (bounds?.top ?? window.innerHeight - 280),
     };
     event.currentTarget.setPointerCapture(event.pointerId);
   };
 
   const moveKeyboard = (event: PointerEvent<HTMLDivElement>) => {
     if (!dragRef.current || dragRef.current.pointerId !== event.pointerId) return;
-    const width = keyboardRef.current?.offsetWidth ?? 720;
-    const height = keyboardRef.current?.offsetHeight ?? 420;
+    const width = keyboardRef.current?.offsetWidth ?? 540;
+    const height = keyboardRef.current?.offsetHeight ?? 280;
     const x = Math.max(8, Math.min(window.innerWidth - width - 8, event.clientX - dragRef.current.offsetX));
     const y = Math.max(8, Math.min(window.innerHeight - Math.min(height, window.innerHeight - 16) - 8, event.clientY - dragRef.current.offsetY));
     setPosition({ x, y });
@@ -111,13 +111,13 @@ export default function VirtualKeyboard({
     <section
       ref={keyboardRef}
       id="typing-virtual-keyboard"
-      className="fixed z-[1000] [container-type:size] flex w-[min(600px,calc(100vw-24px))] flex-col overflow-hidden rounded-2xl border border-slate-300 bg-slate-100 shadow-[0_24px_80px_rgba(15,23,42,0.35)] ring-1 ring-black/10"
+      className="fixed z-[1000] [container-type:size] flex w-[min(540px,calc(100vw-24px))] flex-col overflow-hidden rounded-2xl border border-slate-300 bg-slate-100 shadow-[0_24px_80px_rgba(15,23,42,0.35)] ring-1 ring-black/10"
       style={{
         ...(position
           ? { left: position.x, top: position.y }
           : { left: 12, bottom: 16 }),
         ...(dimensions ? { width: dimensions.width } : {}),
-        height: dimensions?.height ?? "min(420px, calc(100dvh - 32px))",
+        height: dimensions?.height ?? "min(280px, calc(100dvh - 32px))",
         maxHeight: "calc(100dvh - 16px)",
       }}
       aria-label={`${language.name} on-screen keyboard`}
