@@ -86,7 +86,7 @@ export default function VirtualKeyboard({
   const resizeKeyboard = (event: PointerEvent<HTMLButtonElement>) => {
     const start = resizeRef.current;
     if (!start || start.pointerId !== event.pointerId) return;
-    const width = Math.max(320, Math.min(window.innerWidth - 16, start.startWidth + event.clientX - start.startX));
+    const width = Math.max(280, Math.min(window.innerWidth - 16, start.startWidth + event.clientX - start.startX));
     const height = Math.max(240, Math.min(window.innerHeight - 16, start.startHeight + event.clientY - start.startY));
     setDimensions({ width, height });
   };
@@ -111,11 +111,11 @@ export default function VirtualKeyboard({
     <section
       ref={keyboardRef}
       id="typing-virtual-keyboard"
-      className="fixed z-[1000] flex w-[min(760px,calc(100vw-24px))] flex-col overflow-hidden rounded-2xl border border-slate-300 bg-slate-100 shadow-[0_24px_80px_rgba(15,23,42,0.35)] ring-1 ring-black/10"
+      className="fixed z-[1000] flex w-[min(600px,calc(100vw-24px))] flex-col overflow-hidden rounded-2xl border border-slate-300 bg-slate-100 shadow-[0_24px_80px_rgba(15,23,42,0.35)] ring-1 ring-black/10"
       style={{
         ...(position
           ? { left: position.x, top: position.y }
-          : { left: 12, bottom: 16 }),
+          : { left: 12, bottom: 16, height: "min(420px, calc(100dvh - 32px))" }),
         ...(dimensions ? { width: dimensions.width, height: dimensions.height } : {}),
         maxHeight: "calc(100dvh - 16px)",
       }}
@@ -123,7 +123,7 @@ export default function VirtualKeyboard({
       dir="ltr"
     >
       <div
-        className="flex min-h-12 cursor-grab touch-none items-center justify-between gap-3 border-b border-slate-300 bg-gradient-to-r from-slate-800 to-slate-700 px-3 py-2 text-white active:cursor-grabbing"
+        className="flex min-h-10 cursor-grab touch-none items-center justify-between gap-2 border-b border-slate-300 bg-gradient-to-r from-slate-800 to-slate-700 px-2.5 py-1.5 text-white active:cursor-grabbing"
         onPointerDown={startDragging}
         onPointerMove={moveKeyboard}
         onPointerUp={stopDragging}
@@ -131,7 +131,7 @@ export default function VirtualKeyboard({
         title="Drag to move keyboard"
       >
         <div className="flex min-w-0 items-center gap-2">
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-5 w-5 shrink-0 text-orange-300" stroke="currentColor" strokeWidth="1.8">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-4 w-4 shrink-0 text-orange-300" stroke="currentColor" strokeWidth="1.8">
             <rect x="2.5" y="5" width="19" height="14" rx="2.5" />
             <path d="M6 9h1.5M10 9h1.5M14 9h1.5M18 9h.1M6 12h1.5M10 12h1.5M14 12h1.5M18 12h.1M8 15.5h8" strokeLinecap="round" />
           </svg>
@@ -151,7 +151,7 @@ export default function VirtualKeyboard({
         </button>
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-300 bg-slate-200 px-3 py-2">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-300 bg-slate-200 px-2.5 py-1.5">
         <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-slate-500">Keyboard layer</span>
         <div className="flex flex-wrap gap-1" role="group" aria-label="Keyboard layer">
           {layout.layers.map((item) => (
@@ -160,7 +160,7 @@ export default function VirtualKeyboard({
               type="button"
               aria-pressed={layer === item}
               onClick={() => setLayer(item)}
-              className={`min-h-8 cursor-pointer rounded-md border px-2.5 text-[11px] font-semibold transition ${layer === item ? "border-orange-600 bg-orange-600 text-white shadow-sm" : "border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-50"}`}
+              className={`min-h-7 cursor-pointer rounded-md border px-2 text-[10px] font-semibold transition ${layer === item ? "border-orange-600 bg-orange-600 text-white shadow-sm" : "border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-50"}`}
             >
               {LAYER_LABELS[item]}
             </button>
@@ -168,10 +168,10 @@ export default function VirtualKeyboard({
         </div>
       </div>
 
-      <div className="min-h-0 flex-1 overflow-auto p-2.5 pb-8 sm:p-3" role="group" aria-label="Virtual typing keys">
-        <div className="min-w-[440px] space-y-2">
+      <div className="min-h-0 flex-1 overflow-auto p-2 pb-7" role="group" aria-label="Virtual typing keys">
+        <div className="min-w-[440px] space-y-1.5">
           {layout.rows.map((row, rowIndex) => (
-            <div key={rowIndex} className="flex justify-center gap-1.5">
+            <div key={rowIndex} className="flex justify-center gap-1">
               {row.map((key) => {
                 const output = key.outputs[layer];
                 const active = Boolean(output);
@@ -183,14 +183,14 @@ export default function VirtualKeyboard({
                     title={active ? `${key.label} → ${output}` : key.label}
                     aria-label={active ? `${output} from ${key.label}` : `${key.label}, unavailable`}
                     onClick={() => output && onInsert(output)}
-                    className="group flex min-h-14 min-w-[30px] flex-1 cursor-pointer flex-col items-center justify-center rounded-lg border border-slate-300 border-b-[4px] border-b-slate-400 bg-gradient-to-b from-white to-slate-50 px-1 py-1 text-center text-slate-800 shadow-[0_2px_3px_rgba(15,23,42,0.12)] transition-all hover:-translate-y-0.5 hover:border-orange-300 hover:border-b-orange-400 hover:from-orange-50 hover:to-white hover:shadow-md active:translate-y-[2px] active:border-b-2 active:border-b-slate-400 disabled:cursor-not-allowed disabled:opacity-30 sm:min-h-[60px]"
+                    className="group flex min-h-11 min-w-[28px] flex-1 cursor-pointer flex-col items-center justify-center rounded-md border border-slate-300 border-b-[3px] border-b-slate-400 bg-gradient-to-b from-white to-slate-50 px-0.5 py-0.5 text-center text-slate-800 shadow-[0_2px_3px_rgba(15,23,42,0.12)] transition-all hover:-translate-y-0.5 hover:border-orange-300 hover:border-b-orange-400 hover:from-orange-50 hover:to-white hover:shadow-md active:translate-y-[2px] active:border-b-2 active:border-b-slate-400 disabled:cursor-not-allowed disabled:opacity-30 sm:min-h-11"
                   >
                     <span className="text-[9px] font-semibold uppercase leading-none tracking-wide text-slate-400 group-hover:text-orange-600">
                       {key.label.toUpperCase()}
                     </span>
                     <span
                       dir={language.direction}
-                      className="mt-1 min-h-6 text-lg font-bold leading-tight text-slate-900 sm:text-xl"
+                      className="mt-0.5 min-h-5 text-base font-bold leading-tight text-slate-900 sm:text-lg"
                     >
                       {output ?? " "}
                     </span>
@@ -209,7 +209,7 @@ export default function VirtualKeyboard({
                   type="button"
                   onClick={() => onInsert(key.output)}
                   aria-label={`${key.label} special character`}
-                  className="min-h-10 min-w-10 cursor-pointer rounded-lg border border-slate-300 border-b-[3px] border-b-slate-400 bg-white px-3 text-lg font-bold text-slate-800 shadow-sm transition hover:border-orange-300 hover:bg-orange-50 active:translate-y-px"
+                  className="min-h-9 min-w-9 cursor-pointer rounded-md border border-slate-300 border-b-[3px] border-b-slate-400 bg-white px-3 text-lg font-bold text-slate-800 shadow-sm transition hover:border-orange-300 hover:bg-orange-50 active:translate-y-px"
                 >
                   {key.label}
                 </button>
@@ -222,14 +222,14 @@ export default function VirtualKeyboard({
               type="button"
               onClick={onBackspace}
               aria-label="Backspace"
-              className="min-h-12 flex-1 cursor-pointer rounded-lg border border-slate-400 border-b-[4px] border-b-slate-500 bg-gradient-to-b from-slate-200 to-slate-300 px-2 text-xs font-bold text-slate-800 shadow-sm transition hover:from-slate-300 hover:to-slate-200 active:translate-y-[2px] active:border-b-2"
+              className="min-h-10 flex-1 cursor-pointer rounded-lg border border-slate-400 border-b-[4px] border-b-slate-500 bg-gradient-to-b from-slate-200 to-slate-300 px-2 text-xs font-bold text-slate-800 shadow-sm transition hover:from-slate-300 hover:to-slate-200 active:translate-y-[2px] active:border-b-2"
             >
               ← Backspace
             </button>
             <button
               type="button"
               onClick={() => onInsert(" ")}
-              className="min-h-12 flex-[3] cursor-pointer rounded-lg border border-slate-300 border-b-[4px] border-b-slate-400 bg-gradient-to-b from-white to-slate-100 px-2 text-xs font-bold text-slate-700 shadow-sm transition hover:border-orange-300 hover:from-orange-50 hover:to-white active:translate-y-[2px] active:border-b-2"
+              className="min-h-10 flex-[3] cursor-pointer rounded-lg border border-slate-300 border-b-[4px] border-b-slate-400 bg-gradient-to-b from-white to-slate-100 px-2 text-xs font-bold text-slate-700 shadow-sm transition hover:border-orange-300 hover:from-orange-50 hover:to-white active:translate-y-[2px] active:border-b-2"
             >
               Space
             </button>
