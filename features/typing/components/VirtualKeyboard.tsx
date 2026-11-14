@@ -111,7 +111,7 @@ export default function VirtualKeyboard({
     <section
       ref={keyboardRef}
       id="typing-virtual-keyboard"
-      className="fixed z-[1000] flex w-[min(600px,calc(100vw-24px))] flex-col overflow-hidden rounded-2xl border border-slate-300 bg-slate-100 shadow-[0_24px_80px_rgba(15,23,42,0.35)] ring-1 ring-black/10"
+      className="fixed z-[1000] [container-type:size] flex w-[min(600px,calc(100vw-24px))] flex-col overflow-hidden rounded-2xl border border-slate-300 bg-slate-100 shadow-[0_24px_80px_rgba(15,23,42,0.35)] ring-1 ring-black/10"
       style={{
         ...(position
           ? { left: position.x, top: position.y }
@@ -123,7 +123,7 @@ export default function VirtualKeyboard({
       dir="ltr"
     >
       <div
-        className="flex min-h-10 cursor-grab touch-none items-center justify-between gap-2 border-b border-slate-300 bg-gradient-to-r from-slate-800 to-slate-700 px-2.5 py-1.5 text-white active:cursor-grabbing"
+        className="flex min-h-0 shrink-0 cursor-grab touch-none items-center justify-between gap-2 border-b border-slate-300 bg-gradient-to-r from-slate-800 to-slate-700 px-[1.5cqh] py-[0.8cqh] text-white active:cursor-grabbing"
         onPointerDown={startDragging}
         onPointerMove={moveKeyboard}
         onPointerUp={stopDragging}
@@ -131,13 +131,13 @@ export default function VirtualKeyboard({
         title="Drag to move keyboard"
       >
         <div className="flex min-w-0 items-center gap-2">
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-4 w-4 shrink-0 text-orange-300" stroke="currentColor" strokeWidth="1.8">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="h-[clamp(0.75rem,4cqh,1rem)] w-[clamp(0.75rem,4cqh,1rem)] shrink-0 text-orange-300" stroke="currentColor" strokeWidth="1.8">
             <rect x="2.5" y="5" width="19" height="14" rx="2.5" />
             <path d="M6 9h1.5M10 9h1.5M14 9h1.5M18 9h.1M6 12h1.5M10 12h1.5M14 12h1.5M18 12h.1M8 15.5h8" strokeLinecap="round" />
           </svg>
           <div className="min-w-0">
-            <h3 className="truncate text-sm font-bold">{language.name} keyboard</h3>
-            <p className="truncate text-[10px] text-slate-300">{layout.name} · {layout.standard} · Drag to move · Resize corner</p>
+            <h3 className="truncate text-[clamp(0.65rem,3.5cqh,0.875rem)] font-bold">{language.name} keyboard</h3>
+            <p className="truncate text-[clamp(0.45rem,2.4cqh,0.625rem)] text-slate-300">{layout.name} · {layout.standard} · Drag to move · Resize corner</p>
           </div>
         </div>
         <button
@@ -145,22 +145,22 @@ export default function VirtualKeyboard({
           onClick={onClose}
           aria-label="Close virtual keyboard"
           title="Close keyboard"
-          className="inline-flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-lg border border-white/20 bg-white/10 text-lg text-white transition hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-300"
+          className="inline-flex h-[clamp(1.25rem,7cqh,2rem)] w-[clamp(1.25rem,7cqh,2rem)] shrink-0 cursor-pointer items-center justify-center rounded-lg border border-white/20 bg-white/10 text-[clamp(0.75rem,4cqh,1.125rem)] text-white transition hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-300"
         >
           ×
         </button>
       </div>
 
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-300 bg-slate-200 px-2.5 py-1.5">
-        <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-slate-500">Keyboard layer</span>
-        <div className="flex flex-wrap gap-1" role="group" aria-label="Keyboard layer">
+      <div className="flex shrink-0 flex-wrap items-center justify-between gap-x-2 gap-y-[0.5cqh] border-b border-slate-300 bg-slate-200 px-[1.5cqh] py-[0.8cqh]">
+        <span className="text-[clamp(0.45rem,2.4cqh,0.625rem)] font-bold uppercase tracking-[0.14em] text-slate-500">Keyboard layer</span>
+        <div className="flex flex-wrap gap-[0.5cqh]" role="group" aria-label="Keyboard layer">
           {layout.layers.map((item) => (
             <button
               key={item}
               type="button"
               aria-pressed={layer === item}
               onClick={() => setLayer(item)}
-              className={`min-h-7 cursor-pointer rounded-md border px-2 text-[10px] font-semibold transition ${layer === item ? "border-orange-600 bg-orange-600 text-white shadow-sm" : "border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-50"}`}
+              className={`min-h-0 cursor-pointer rounded-md border px-[1cqh] py-[0.5cqh] text-[clamp(0.45rem,2.4cqh,0.625rem)] font-semibold transition ${layer === item ? "border-orange-600 bg-orange-600 text-white shadow-sm" : "border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-50"}`}
             >
               {LAYER_LABELS[item]}
             </button>
@@ -168,10 +168,10 @@ export default function VirtualKeyboard({
         </div>
       </div>
 
-      <div className="min-h-0 flex-1 overflow-auto p-2 pb-7" role="group" aria-label="Virtual typing keys">
-        <div className="min-w-[440px] space-y-1.5">
+      <div className="min-h-0 flex-1 overflow-hidden p-[1cqh]" role="group" aria-label="Virtual typing keys">
+        <div className="flex h-full min-w-0 flex-col justify-evenly gap-[0.7cqh]">
           {layout.rows.map((row, rowIndex) => (
-            <div key={rowIndex} className="flex justify-center gap-1">
+            <div key={rowIndex} className="flex min-h-0 flex-1 justify-center gap-[0.5cqh]">
               {row.map((key) => {
                 const output = key.outputs[layer];
                 const active = Boolean(output);
@@ -183,14 +183,14 @@ export default function VirtualKeyboard({
                     title={active ? `${key.label} → ${output}` : key.label}
                     aria-label={active ? `${output} from ${key.label}` : `${key.label}, unavailable`}
                     onClick={() => output && onInsert(output)}
-                    className="group flex min-h-11 min-w-[28px] flex-1 cursor-pointer flex-col items-center justify-center rounded-md border border-slate-300 border-b-[3px] border-b-slate-400 bg-gradient-to-b from-white to-slate-50 px-0.5 py-0.5 text-center text-slate-800 shadow-[0_2px_3px_rgba(15,23,42,0.12)] transition-all hover:-translate-y-0.5 hover:border-orange-300 hover:border-b-orange-400 hover:from-orange-50 hover:to-white hover:shadow-md active:translate-y-[2px] active:border-b-2 active:border-b-slate-400 disabled:cursor-not-allowed disabled:opacity-30 sm:min-h-11"
+                    className="group flex min-h-0 min-w-0 flex-1 cursor-pointer flex-col items-center justify-center rounded-md border border-slate-300 border-b-[2px] border-b-slate-400 bg-gradient-to-b from-white to-slate-50 px-0 py-0 text-center text-slate-800 shadow-[0_2px_3px_rgba(15,23,42,0.12)] transition-colors hover:border-orange-300 hover:border-b-orange-400 hover:from-orange-50 hover:to-white disabled:cursor-not-allowed disabled:opacity-30"
                   >
-                    <span className="text-[9px] font-semibold uppercase leading-none tracking-wide text-slate-400 group-hover:text-orange-600">
+                    <span className="text-[clamp(0.35rem,1.8cqh,0.5625rem)] font-semibold uppercase leading-none tracking-wide text-slate-400 group-hover:text-orange-600">
                       {key.label.toUpperCase()}
                     </span>
                     <span
                       dir={language.direction}
-                      className="mt-0.5 min-h-5 text-base font-bold leading-tight text-slate-900 sm:text-lg"
+                      className="mt-[0.3cqh] min-h-0 text-[clamp(0.6rem,3.5cqh,1.125rem)] font-bold leading-tight text-slate-900"
                     >
                       {output ?? " "}
                     </span>
@@ -201,15 +201,15 @@ export default function VirtualKeyboard({
           ))}
 
           {layout.specialKeys && (
-            <div className="flex flex-wrap items-center gap-1.5 rounded-lg border border-dashed border-slate-300 bg-slate-200/70 p-2" role="group" aria-label={layout.specialKeys.label}>
-              <span className="mr-1 text-[10px] font-bold uppercase tracking-wide text-slate-500">{layout.specialKeys.label}</span>
+            <div className="flex shrink-0 flex-wrap items-center gap-[0.5cqh] rounded-lg border border-dashed border-slate-300 bg-slate-200/70 p-[0.5cqh]" role="group" aria-label={layout.specialKeys.label}>
+              <span className="mr-1 text-[clamp(0.4rem,2cqh,0.625rem)] font-bold uppercase tracking-wide text-slate-500">{layout.specialKeys.label}</span>
               {layout.specialKeys.keys.map((key) => (
                 <button
                   key={key.label}
                   type="button"
                   onClick={() => onInsert(key.output)}
                   aria-label={`${key.label} special character`}
-                  className="min-h-9 min-w-9 cursor-pointer rounded-md border border-slate-300 border-b-[3px] border-b-slate-400 bg-white px-3 text-lg font-bold text-slate-800 shadow-sm transition hover:border-orange-300 hover:bg-orange-50 active:translate-y-px"
+                  className="min-h-0 min-w-0 cursor-pointer rounded-md border border-slate-300 border-b-[2px] border-b-slate-400 bg-white px-[1cqh] py-[0.5cqh] text-[clamp(0.55rem,3cqh,1.125rem)] font-bold text-slate-800 shadow-sm transition hover:border-orange-300 hover:bg-orange-50"
                 >
                   {key.label}
                 </button>
@@ -217,26 +217,26 @@ export default function VirtualKeyboard({
             </div>
           )}
 
-          <div className="flex gap-1.5 pt-1">
+          <div className="flex shrink-0 gap-[0.5cqh] pt-[0.3cqh]">
             <button
               type="button"
               onClick={onBackspace}
               aria-label="Backspace"
-              className="min-h-10 flex-1 cursor-pointer rounded-lg border border-slate-400 border-b-[4px] border-b-slate-500 bg-gradient-to-b from-slate-200 to-slate-300 px-2 text-xs font-bold text-slate-800 shadow-sm transition hover:from-slate-300 hover:to-slate-200 active:translate-y-[2px] active:border-b-2"
+              className="min-h-0 flex-1 cursor-pointer rounded-md border border-slate-400 border-b-[2px] border-b-slate-500 bg-gradient-to-b from-slate-200 to-slate-300 px-[1cqh] py-[0.5cqh] text-[clamp(0.45rem,2.5cqh,0.75rem)] font-bold text-slate-800 shadow-sm transition hover:from-slate-300 hover:to-slate-200"
             >
               ← Backspace
             </button>
             <button
               type="button"
               onClick={() => onInsert(" ")}
-              className="min-h-10 flex-[3] cursor-pointer rounded-lg border border-slate-300 border-b-[4px] border-b-slate-400 bg-gradient-to-b from-white to-slate-100 px-2 text-xs font-bold text-slate-700 shadow-sm transition hover:border-orange-300 hover:from-orange-50 hover:to-white active:translate-y-[2px] active:border-b-2"
+              className="min-h-0 flex-[3] cursor-pointer rounded-md border border-slate-300 border-b-[2px] border-b-slate-400 bg-gradient-to-b from-white to-slate-100 px-[1cqh] py-[0.5cqh] text-[clamp(0.45rem,2.5cqh,0.75rem)] font-bold text-slate-700 shadow-sm transition hover:border-orange-300 hover:from-orange-50 hover:to-white"
             >
               Space
             </button>
             <button
               type="button"
               onClick={() => onInsert("\n")}
-              className="min-h-12 flex-1 cursor-pointer rounded-lg border border-slate-400 border-b-[4px] border-b-slate-500 bg-gradient-to-b from-slate-200 to-slate-300 px-2 text-xs font-bold text-slate-800 shadow-sm transition hover:from-slate-300 hover:to-slate-200 active:translate-y-[2px] active:border-b-2"
+              className="min-h-0 flex-1 cursor-pointer rounded-md border border-slate-400 border-b-[2px] border-b-slate-500 bg-gradient-to-b from-slate-200 to-slate-300 px-[1cqh] py-[0.5cqh] text-[clamp(0.45rem,2.5cqh,0.75rem)] font-bold text-slate-800 shadow-sm transition hover:from-slate-300 hover:to-slate-200"
             >
               Enter ↵
             </button>
