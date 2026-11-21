@@ -145,7 +145,7 @@ export default function TermsPage() {
           </h2>
 
           <p>
-            You may enter text into TypeIndian's browser-based tools and use
+            You may enter text into TypeIndian&apos;s browser-based tools and use
             available transliteration suggestions. You are responsible for the
             text you enter and for reviewing and deciding how to use the
             resulting output.
@@ -164,7 +164,7 @@ export default function TermsPage() {
             TypeIndian does not claim ownership of the text you enter or of
             the text you create using the typing tools. You remain responsible
             for ensuring that your use of source material and output does not
-            infringe another person's rights.
+            infringe another person&apos;s rights.
           </p>
 
           <p className="mt-4">
@@ -266,7 +266,7 @@ export default function TermsPage() {
           </h2>
 
           <p>
-            Unless otherwise stated, TypeIndian's original branding, website
+            Unless otherwise stated, TypeIndian&apos;s original branding, website
             design, software, original written content, and original graphics
             are owned by TypeIndian or its respective rights holders.
           </p>
@@ -276,7 +276,7 @@ export default function TermsPage() {
             These Terms do not transfer ownership of TypeIndian's intellectual
             property to you, and you must not copy, redistribute, or exploit
             protected parts of the service except where permitted by law or
-            with the relevant rights holder's permission.
+            with the relevant rights holder&apos;s permission.
           </p>
 
           <p className="mt-4">
@@ -301,7 +301,7 @@ export default function TermsPage() {
           <p className="mt-4">
             Text in the current typing editor is not saved as a cloud document
             by the typing tool. Text that you add to the Session Board is
-            stored in your browser's local storage on that device and browser.
+            stored in your browser&apos;s local storage on that device and browser.
             You are responsible for managing that locally stored content,
             including clearing it when using a shared device. Browser data
             may be removed by clearing site data or browser storage.
@@ -321,7 +321,7 @@ export default function TermsPage() {
           </h2>
 
           <p>
-            TypeIndian's typing tools, transliteration suggestions, and
+            TypeIndian&apos;s typing tools, transliteration suggestions, and
             educational information are provided for general informational
             and practical use.
           </p>
@@ -436,14 +436,14 @@ export default function TermsPage() {
 
           <p>
             To the extent permitted by applicable law, TypeIndian is provided
-            on an "as is" and "as available" basis, without warranties that
+            on an &quot;as is&quot; and &quot;as available&quot; basis, without warranties that
             cannot be excluded by law.
           </p>
 
           <p className="mt-4">
             We do not warrant that the service will be uninterrupted,
             error-free, secure in every circumstance, or that its content and
-            output will meet every user's requirements.
+            output will meet every user&apos;s requirements.
           </p>
 
           <p className="mt-4">
@@ -506,7 +506,7 @@ export default function TermsPage() {
             We may update these Terms to reflect changes to TypeIndian,
             applicable requirements, or the way the service operates. The
             revised version will be published on this page with an updated
-            "Last updated" date.
+            &quot;Last updated&quot; date.
           </p>
 
           <p className="mt-4">
