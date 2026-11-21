@@ -19,7 +19,7 @@ export const HINDI_FAQ: FAQItem[] = [
   {
     question: "Is the Hindi typing tool free?",
     answer:
-      "Yes. TypeIndian’s Hindi typing tool is completely free with no limits, subscriptions, or sign-ups required.",
+      "Yes. TypeIndian is currently free to use and does not require an account or subscription. This does not mean usage is unlimited: availability may be affected by technical constraints or limits imposed by third-party providers.",
   },
   {
     question: "Can I paste English text and convert it to Hindi?",
@@ -39,7 +39,7 @@ export const HINDI_FAQ: FAQItem[] = [
   {
     question: "Does TypeIndian save my Hindi text?",
     answer:
-      "No. Everything you type stays in your browser. TypeIndian does not store, track, or log your text in any way.",
+      "The typing editor does not save your text as a cloud document. However, when you use transliteration suggestions, the relevant input is sent to Google Input Tools for processing. Text you add to the Session Board is stored in your browser's local storage on that device. Vercel Analytics may collect website usage information. See the Privacy Policy for details, and avoid submitting sensitive or confidential text for transliteration.",
   },
   {
     question: "Can I use this Hindi typing tool for professional or commercial work?",
@@ -49,7 +49,7 @@ export const HINDI_FAQ: FAQItem[] = [
   {
     question: "Can I type long paragraphs, lyrics, or documents in Hindi?",
     answer:
-      "Yes. TypeIndian supports typing and converting long paragraphs, lyrics, articles, and documents without any restrictions.",
+      "Yes. You can use the editor for messages, notes, articles, and longer passages. Transliteration requests are sent to Google Input Tools and may be subject to provider or technical limits. For large passages, work in smaller sections, and avoid submitting sensitive or confidential text.",
   },
 ];
 
