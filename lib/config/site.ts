@@ -1,3 +1,5 @@
-export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  "http://localhost:3000";
+const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+
+export const SITE_URL = (
+  configuredSiteUrl || "https://typeindian.com"
+).replace(/\/+$/, "");
