@@ -39,12 +39,12 @@ export const URDU_FAQ: FAQItem[] = [
   {
     question: "Can I type Urdu paragraphs and documents?",
     answer:
-      "Yes. The editor can be used for longer Urdu writing such as messages, articles, notes, assignments, and other documents.",
+      "Yes. You can use the editor for messages, notes, articles, and longer passages. Transliteration requests are sent to Google Input Tools and may be subject to provider or technical limits. For large passages, work in smaller sections, and avoid submitting sensitive or confidential text.",
   },
   {
     question: "Does TypeIndian store my Urdu text?",
     answer:
-      "No. TypeIndian is designed so that the text you type remains in your browser and is not stored as personal typing content.",
+      "The typing editor does not save your text as a cloud document. However, when you use transliteration suggestions, the relevant input is sent to Google Input Tools for processing. Text you add to the Session Board is stored in your browser's local storage on that device. Vercel Analytics may collect website usage information. See the Privacy Policy for details, and avoid submitting sensitive or confidential text for transliteration.",
   },
   {
     question: "Can I use the Urdu text created with TypeIndian commercially?",
