@@ -287,14 +287,14 @@ export default function PrivacyPage() {
           </h2>
 
           <p>
-            TypeIndian may use Google AdSense for advertising after the site
-            has been approved and advertising has been intentionally enabled.
-            The AdSense script is configured to load only when the production
-            environment has both a publisher ID and an explicit advertising
-            enable setting. Configuring these values does not itself mean that
-            Google has approved the site or that ads will be displayed.
-            If advertising is active, Google and its advertising partners may
-            process information as described below.
+            TypeIndian uses Google AdSense site code when it is explicitly
+            enabled for site connection or verification during the AdSense
+            review process, or when advertising is activated after approval.
+            The script loads only when the production environment has both a
+            publisher ID and an explicit enable setting. Loading this script
+            does not itself mean that Google has approved the site or that ads
+            are being displayed. If advertising is active, Google and its
+            advertising partners may process information as described below.
           </p>
 
           <p className="mt-4">
