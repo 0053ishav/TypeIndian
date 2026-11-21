@@ -59,7 +59,9 @@ export default function TypingIndexPage() {
 
             <span className="badge badge-success">🔒 No account required</span>
 
-            <span className="badge badge-success">✨ Free</span>\n\n            <Link href="/privacy" className="badge badge-success hover:underline">Third-party processing disclosed</Link>
+            <span className="badge badge-success">✨ Free</span>
+
+            <Link href="/privacy" className="badge badge-success hover:underline">Third-party processing disclosed</Link>
           </div>
         </div>
       </section>
