@@ -30,7 +30,7 @@ export const PANJABI_FAQ: FAQItem[] = [
   {
     question: "Is this Panjabi (Punjabi) typing tool free to use?",
     answer:
-      "Yes. The Panjabi typing tool on TypeIndian is completely free. There are no subscriptions, no daily limits, and no hidden charges.",
+      "Yes. TypeIndian is currently free to use and does not require an account or subscription. This does not mean usage is unlimited: availability may be affected by technical constraints or limits imposed by third-party providers.",
   },
   {
     question: "Can I paste English text and convert it to Panjabi (Punjabi)?",
@@ -50,7 +50,7 @@ export const PANJABI_FAQ: FAQItem[] = [
   {
     question: "Is my typed Panjabi (Punjabi) text stored anywhere?",
     answer:
-      "No. Your text is never stored on our servers. Everything stays in your browser. When you refresh or close the page, your text is gone unless you copy or save it yourself.",
+      "The typing editor does not save your text as a cloud document. However, when you use transliteration suggestions, the relevant input is sent to Google Input Tools for processing. Text you add to the Session Board is stored in your browser's local storage on that device. Vercel Analytics may collect website usage information. See the Privacy Policy for details, and avoid submitting sensitive or confidential text for transliteration.",
   },
   {
     question: "Can I use this Panjabi (Punjabi) typing tool for songs, lyrics, or captions?",
@@ -60,7 +60,7 @@ export const PANJABI_FAQ: FAQItem[] = [
   {
     question: "Can I use the Panjabi (Punjabi) typing tool for commercial purposes?",
     answer:
-      "Yes. You are free to use the Panjabi text you create for personal, educational, or commercial use without any restrictions.",
+      "Yes. You may use the text you create for personal, educational, or commercial purposes, subject to applicable laws and any rights in the content you provide.",
   },
 
 ];
