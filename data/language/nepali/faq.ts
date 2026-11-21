@@ -29,7 +29,7 @@ export const NEPALI_FAQ: FAQItem[] = [
   {
     question: "Can I type Nepali messages and documents?",
     answer:
-      "Yes. You can use the editor for messages, notes, assignments, articles, documents, and other longer Nepali text.",
+      "Yes. You can use the editor for messages, notes, articles, and longer passages. Transliteration requests are sent to Google Input Tools and may be subject to provider or technical limits. For large passages, work in smaller sections, and avoid submitting sensitive or confidential text.",
   },
   {
     question: "Can I type Nepali without knowing the Devanagari keyboard?",
@@ -39,7 +39,7 @@ export const NEPALI_FAQ: FAQItem[] = [
   {
     question: "Does TypeIndian save my Nepali text?",
     answer:
-      "No. Your typed text remains in your browser. TypeIndian does not store, track, or log the Nepali text you enter.",
+      "The typing editor does not save your text as a cloud document. However, when you use transliteration suggestions, the relevant input is sent to Google Input Tools for processing. Text you add to the Session Board is stored in your browser's local storage on that device. Vercel Analytics may collect website usage information. See the Privacy Policy for details, and avoid submitting sensitive or confidential text for transliteration.",
   },
   {
     question: "Can I use the Nepali text for professional or commercial work?",
