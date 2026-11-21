@@ -273,7 +273,7 @@ export default function TermsPage() {
 
           <p className="mt-4">
             You may access and use the service for its intended purposes.
-            These Terms do not transfer ownership of TypeIndian's intellectual
+            These Terms do not transfer ownership of TypeIndian&apos;s intellectual
             property to you, and you must not copy, redistribute, or exploit
             protected parts of the service except where permitted by law or
             with the relevant rights holder&apos;s permission.
