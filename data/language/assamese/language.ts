@@ -27,7 +27,7 @@ export const assamese: Language = {
       "Type in English and convert instantly to অসমীয়া",
 
     intro:
-      "Write Assamese naturally using English letters with TypeIndian's Assamese typing tool. Simply type phonetically in English and instantly convert your words into the Assamese script. No keyboard installation, no login - fast, accurate, and privacy-first Assamese transliteration directly in your browser.",
+      "Write Assamese naturally using English letters with TypeIndian's Assamese typing tool. Simply type phonetically in English and instantly convert your words into the Assamese script. No keyboard installation, no login - fast, accurate, and browser-based Assamese transliteration directly in your browser.",
 
     learnLink: {
       href: "/learn/assamese",
@@ -68,7 +68,7 @@ export const assamese: Language = {
         title: "Assamese Typing Tool - TypeIndian",
 
         description:
-          "Fast, free, and privacy-first English to Assamese typing.",
+          "Fast, free, and browser-based English to Assamese typing.",
       },
     },
   },
