@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "TypeIndian - English to Indian Language Typing Tool",
     description:
-      "Type in English and write in Indian languages instantly. Free, fast, and privacy-first typing tool for Panjabi (Also known as Punjabi), Hindi, and more.",
+      "Type in English and write in Indian languages instantly with free, browser-based typing tools. No account required.",
     url: SITE_URL,
     siteName: "TypeIndian",
     locale: "en_IN",
