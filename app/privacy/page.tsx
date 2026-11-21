@@ -143,11 +143,23 @@ export default function PrivacyPage() {
           </p>
 
           <p className="mt-4">
-            This means the text used for a transliteration request is processed
-            by Google, not exclusively on your device. Other typing and learning
-            interactions that do not invoke this third-party transliteration
-            service may be handled in your browser. Do not assume that text
-            submitted for transliteration remains private to your device.
+            Transliteration requests are made directly from your browser to
+            Google&apos;s service; TypeIndian does not route these requests
+            through its own application server. The typing tool requests
+            suggestions for the current word as you type. When you paste or
+            convert longer text, the tool may send separate requests for
+            individual words. The request also includes the language
+            configuration and other parameters needed by the service.
+          </p>
+
+          <p className="mt-4">
+            The application may temporarily cache returned suggestions in
+            browser memory to avoid repeating the same request. This
+            in-memory cache is temporary and is not the same as saving your
+            typing history to a TypeIndian account or cloud document.
+            Transliteration text is nevertheless processed by Google, not
+            exclusively on your device. Do not assume that text submitted for
+            transliteration remains private to your device.
           </p>
 
           <p className="mt-4">
@@ -193,8 +205,12 @@ export default function PrivacyPage() {
           </p>
 
           <p className="mt-4">
-            This information is stored by your browser or device and is not
-            the same as a TypeIndian user account or cloud database.
+            In the typing tool, entries that you add to the Session Board are
+            saved in your browser&apos;s localStorage for the selected
+            language, so they can be available when you return using the same
+            browser. This is browser-local storage, not a TypeIndian user
+            account or cloud database. The current editor text is not saved
+            as a cloud document by this feature.
           </p>
 
           <p className="mt-4">
@@ -271,11 +287,14 @@ export default function PrivacyPage() {
           </h2>
 
           <p>
-            TypeIndian is preparing to use Google AdSense. Google AdSense
-            advertising will be used only if the website is approved and the
-            advertising service is enabled. If ads are displayed, Google and
-            its advertising partners may process information as described
-            below.
+            TypeIndian may use Google AdSense for advertising after the site
+            has been approved and advertising has been intentionally enabled.
+            The AdSense script is configured to load only when the production
+            environment has both a publisher ID and an explicit advertising
+            enable setting. Configuring these values does not itself mean that
+            Google has approved the site or that ads will be displayed.
+            If advertising is active, Google and its advertising partners may
+            process information as described below.
           </p>
 
           <p className="mt-4">
