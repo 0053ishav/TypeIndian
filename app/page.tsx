@@ -244,7 +244,7 @@ export default function Home() {
 
             <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm text-(--color-text-muted)">
               <span>✓ Real-time</span>
-              <span>✓ Privacy-first</span>
+              <span>✓ Third-party processing disclosed</span>
               <span>✓ No installation</span>
               <span>✓ Works in your browser</span>
             </div>
@@ -455,7 +455,7 @@ export default function Home() {
 
                     <span className="badge badge-success">Browser based</span>
 
-                    <span className="badge badge-success">Privacy-first</span>
+                    <span className="badge badge-success">Third-party disclosure</span>
                   </div>
                 </div>
 
