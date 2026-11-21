@@ -43,7 +43,7 @@ export const panjabi: Language = {
       title: "Panjabi Typing Tool (English to Panjabi)",
 
       description:
-        "Free English to Panjabi (Punjabi) typing tool. Type in English and instantly write in Panjabi (Punjabi) using the Gurmukhi script. No login. Fast, accurate, and privacy-first transliteration.",
+        "Free English to Panjabi (Punjabi) typing tool. Type in English and instantly write in Panjabi (Punjabi) using the Gurmukhi script. No login. Fast, accurate, and browser-based transliteration.",
 
       keywords: [
         "English to Panjabi typing",
@@ -75,7 +75,7 @@ export const panjabi: Language = {
         title: "Panjabi Typing Tool - TypeIndian",
 
         description:
-          "English to Panjabi (Punjabi) typing made simple. Free, fast, and privacy-first.",
+          "English to Panjabi (Punjabi) typing made simple. Free, fast, and browser-based.",
       },
     },
   },
