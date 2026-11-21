@@ -27,7 +27,7 @@ export const marathi: Language = {
       "Type in English and convert instantly to मराठी",
 
     intro:
-      "Write Marathi naturally using English letters with TypeIndian's Marathi typing tool. Simply type phonetically in English and instantly convert your words into the Devanagari script. No keyboard installation, no login - fast, accurate, and privacy-first Marathi transliteration directly in your browser.",
+      "Write Marathi naturally using English letters with TypeIndian's Marathi typing tool. Simply type phonetically in English and instantly convert your words into the Devanagari script. No keyboard installation, no login - fast, accurate, and browser-based Marathi transliteration directly in your browser.",
 
     learnLink: {
       href: "/learn/marathi",
@@ -70,7 +70,7 @@ export const marathi: Language = {
         title: "Marathi Typing Tool - TypeIndian",
 
         description:
-          "Fast, free, and privacy-first English to Marathi typing.",
+          "Fast, free, and browser-based English to Marathi typing.",
       },
     },
   },
