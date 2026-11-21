@@ -93,9 +93,9 @@ export default function RootLayout({
       >
         <SiteSchema />
         <Navbar />
-        <main id="main-content" className="min-h-screen">
+        <div id="main-content" className="min-h-screen">
           {children}
-        </main>
+        </div>
         <Footer />
         <Toaster
           position="bottom-center"
