@@ -55,11 +55,11 @@ export default function TypingIndexPage() {
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <span className="badge badge-success">⚡ Real-time</span>
 
-            <span className="badge badge-success">🌐 Browser based</span>
+            <span className="badge badge-success">🌐 Browser-based typing</span>
 
-            <span className="badge badge-success">🔒 Privacy first</span>
+            <span className="badge badge-success">🔒 No account required</span>
 
-            <span className="badge badge-success">✨ Free</span>
+            <span className="badge badge-success">✨ Free</span>\n\n            <Link href="/privacy" className="badge badge-success hover:underline">Third-party processing disclosed</Link>
           </div>
         </div>
       </section>
