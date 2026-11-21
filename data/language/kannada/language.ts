@@ -27,7 +27,7 @@ export const kannada: Language = {
       "Type in English and convert instantly to ಕನ್ನಡ",
 
     intro:
-      "Write Kannada naturally using English letters with TypeIndian's Kannada typing tool. Simply type phonetically in English and instantly convert your words into the Kannada script. No keyboard installation, no login - fast, accurate, and privacy-first Kannada transliteration directly in your browser.",
+      "Write Kannada naturally using English letters with TypeIndian's Kannada typing tool. Simply type phonetically in English and instantly convert your words into the Kannada script. No keyboard installation, no login - fast, accurate, and browser-based Kannada transliteration directly in your browser.",
 
     learnLink: {
       href: "/learn/kannada",
@@ -69,7 +69,7 @@ export const kannada: Language = {
         title: "Kannada Typing Tool - TypeIndian",
 
         description:
-          "Fast, free, and privacy-first English to Kannada typing.",
+          "Fast, free, and browser-based English to Kannada typing.",
       },
     },
   },
