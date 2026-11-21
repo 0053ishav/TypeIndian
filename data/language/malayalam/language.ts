@@ -30,7 +30,7 @@ export const malayalam: Language = {
       "Type in English and convert instantly to മലയാളം",
 
     intro:
-      "Write Malayalam naturally using English letters with TypeIndian's Malayalam typing tool. Simply type phonetically in English and instantly convert your words into the Malayalam script. No keyboard installation, no login - fast, accurate, and privacy-first Malayalam transliteration directly in your browser.",
+      "Write Malayalam naturally using English letters with TypeIndian's Malayalam typing tool. Simply type phonetically in English and instantly convert your words into the Malayalam script. No keyboard installation, no login - fast, accurate, and browser-based Malayalam transliteration directly in your browser.",
 
     learnLink: {
       href: "/learn/malayalam",
@@ -72,7 +72,7 @@ export const malayalam: Language = {
         title: "Malayalam Typing Tool - TypeIndian",
 
         description:
-          "Fast, free, and privacy-first English to Malayalam typing.",
+          "Fast, free, and browser-based English to Malayalam typing.",
       },
     },
   },
