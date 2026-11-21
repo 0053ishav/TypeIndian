@@ -68,7 +68,7 @@ export const odia: Language = {
         title: "Odia Typing Tool - TypeIndian",
 
         description:
-          "Fast, free, and privacy-first English to Odia typing.",
+          "Fast, free, and browser-based English to Odia typing.",
       },
     },
   },
