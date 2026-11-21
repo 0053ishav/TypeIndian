@@ -190,11 +190,11 @@ export default function Footer() {
                 />
               </Link>
               <p className="text-sm font-semibold text-(--color-text-heading)">
-                Growing with Indian languages
+                Indian languages, one typing platform
               </p>
 
               <p className="mt-1 text-sm text-(--color-text-muted)">
-                More languages are being added to TypeIndian.
+                Explore typing tools across 14 supported Indian languages.
               </p>
             </div>
 
