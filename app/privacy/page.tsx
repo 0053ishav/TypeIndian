@@ -158,6 +158,15 @@ export default function PrivacyPage() {
           </p>
 
           <p className="mt-4">
+            TypeIndian does not currently provide speech-to-text functionality
+            or process audio recordings for speech recognition. If speech
+            features are introduced, this policy will be updated to explain
+            what audio or related data is processed, whether processing happens
+            on your device or through a service provider, and the applicable
+            data practices.
+          </p>
+
+          <p className="mt-4">
             For more information, please review{" "}
             <a
               href="https://policies.google.com/privacy"
