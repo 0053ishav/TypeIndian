@@ -74,7 +74,7 @@ export const tamil: Language = {
         title: "Tamil Typing Tool - TypeIndian",
 
         description:
-          "Fast, free, and privacy-first English to Tamil typing.",
+          "Fast, free, and browser-based English to Tamil typing.",
       },
     },
   },

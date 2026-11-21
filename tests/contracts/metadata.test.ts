@@ -13,7 +13,6 @@ describe("Metadata Contract", () => {
 
                 expect(metadata.title).toBeTruthy();
                 expect(metadata.description).toBeTruthy();
-
                 expect(metadata.alternates?.canonical).toContain(language.slug);
 
                 expect(metadata.openGraph?.title).toBeTruthy();
@@ -28,6 +27,8 @@ describe("Metadata Contract", () => {
 
                 expect(metadata.title).toBeTruthy();
                 expect(metadata.description).toBeTruthy();
+                expect(metadata.title).toBe(language.learn.seo.title);
+                expect(metadata.description).toBe(language.learn.seo.description);
 
                 expect(metadata.alternates?.canonical).toContain(language.slug);
 

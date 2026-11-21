@@ -9,7 +9,7 @@ describe("Privacy FAQ accuracy", () => {
     );
 
     expect(privacyQuestion).toBeDefined();
-    expect(privacyQuestion?.answer).toContain("sent to Google Input Tools");
+    expect(privacyQuestion?.answer).toMatch(/sent directly from your browser to Google Input Tools/);
     expect(privacyQuestion?.answer).not.toContain("never sent");
   });
 });

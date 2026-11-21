@@ -27,7 +27,7 @@ export const urdu: Language = {
       "Type in English and convert instantly to اردو",
 
     intro:
-      "Write Urdu naturally using English letters with TypeIndian's Urdu typing tool. Type words phonetically in Roman Urdu and convert them into اردو using the Perso-Arabic script. No keyboard installation, no login - a fast, convenient, and privacy-first Urdu transliteration tool.",
+      "Write Urdu naturally using English letters with TypeIndian's Urdu typing tool. Type words phonetically in Roman Urdu and convert them into اردو using the Perso-Arabic script. No keyboard installation, no login - a fast, convenient, and browser-based Urdu transliteration tool.",
 
     learnLink: {
       href: "/learn/urdu",

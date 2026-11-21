@@ -27,7 +27,7 @@ export const bengali: Language = {
       "Type in English and convert instantly to বাংলা",
 
     intro:
-      "Write Bengali naturally using English letters with TypeIndian's Bengali typing tool. Simply type phonetically in English and instantly convert your words into the Bengali script. No keyboard installation, no login - fast, accurate, and privacy-first Bengali transliteration directly in your browser.",
+      "Write Bengali naturally using English letters with TypeIndian's Bengali typing tool. Simply type phonetically in English and instantly convert your words into the Bengali script. No keyboard installation, no login - fast, accurate, and browser-based Bengali transliteration directly in your browser.",
 
     learnLink: {
       href: "/learn/bengali",
@@ -71,7 +71,7 @@ export const bengali: Language = {
         title: "Bengali Typing Tool - TypeIndian",
 
         description:
-          "Fast, free, and privacy-first English to Bengali typing.",
+          "Fast, free, and browser-based English to Bengali typing.",
       },
     },
   },

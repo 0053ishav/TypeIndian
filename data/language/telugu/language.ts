@@ -70,7 +70,7 @@ export const telugu: Language = {
         title: "Telugu Typing Tool - TypeIndian",
 
         description:
-          "Fast, free, and privacy-first English to Telugu typing.",
+          "Fast, free, and browser-based English to Telugu typing.",
       },
     },
   },

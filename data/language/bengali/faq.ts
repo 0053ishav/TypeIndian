@@ -19,7 +19,7 @@ export const BENGALI_FAQ: FAQItem[] = [
   {
     question: "Is the Bengali typing tool free?",
     answer:
-      "Yes. TypeIndian's Bengali typing tool is completely free to use with no sign-up, subscription, or usage limits.",
+      "Yes. TypeIndian is currently free to use and does not require an account or subscription. This does not mean usage is unlimited: availability may be affected by technical constraints or limits imposed by third-party providers.",
   },
   {
     question: "Can I paste English text and convert it to Bengali?",
@@ -39,7 +39,7 @@ export const BENGALI_FAQ: FAQItem[] = [
   {
     question: "Does TypeIndian save my Bengali text?",
     answer:
-      "No. Everything you type stays in your browser. TypeIndian does not store, track, or log your text.",
+      "The typing editor does not save your text as a cloud document. However, when you use transliteration suggestions, the relevant input is sent to Google Input Tools for processing. Text you add to the Session Board is stored in your browser's local storage on that device. Vercel Analytics may collect website usage information. See the Privacy Policy for details, and avoid submitting sensitive or confidential text for transliteration.",
   },
   {
     question: "Can I use this Bengali typing tool for professional or commercial work?",
@@ -49,7 +49,7 @@ export const BENGALI_FAQ: FAQItem[] = [
   {
     question: "Can I type long paragraphs, articles, or documents in Bengali?",
     answer:
-      "Yes. TypeIndian supports writing long paragraphs, articles, emails, assignments, and documents in Bengali without restrictions.",
+      "Yes. You can use the editor for messages, notes, articles, and longer passages. Transliteration requests are sent to Google Input Tools and may be subject to provider or technical limits. For large passages, work in smaller sections, and avoid submitting sensitive or confidential text.",
   },
 ];
 

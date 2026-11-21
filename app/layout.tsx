@@ -9,7 +9,7 @@ import { Toaster } from "sonner";
 import { SITE_URL } from "@/lib/config/site";
 import SiteSchema from "@/components/common/SiteSchema";
 import Script from "next/script";
-import { ADSENSE_PUBLISHER_ID } from "@/lib/config/adsense";
+import { ADSENSE_ENABLED, ADSENSE_PUBLISHER_ID } from "@/lib/config/adsense";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "TypeIndian - English to Indian Language Typing Tool",
     description:
-      "Type in English and write in Indian languages instantly. Free, fast, and privacy-first typing tool for Panjabi (Also known as Punjabi), Hindi, and more.",
+      "Type in English and write in Indian languages instantly with free, browser-based typing tools. No account required.",
     url: SITE_URL,
     siteName: "TypeIndian",
     locale: "en_IN",
@@ -75,23 +75,27 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <meta name="google-adsense-account" content={ADSENSE_PUBLISHER_ID} />
-        <Script
-          id="adsense"
-          strategy="afterInteractive"
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUBLISHER_ID}`}
-          crossOrigin="anonymous"
-        />
+        {ADSENSE_ENABLED && (
+          <>
+            <meta name="google-adsense-account" content={ADSENSE_PUBLISHER_ID} />
+            <Script
+              id="adsense"
+              strategy="afterInteractive"
+              async
+              src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUBLISHER_ID}`}
+              crossOrigin="anonymous"
+            />
+          </>
+        )}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SiteSchema />
         <Navbar />
-        <main id="main-content" className="min-h-screen">
+        <div id="main-content" className="min-h-screen">
           {children}
-        </main>
+        </div>
         <Footer />
         <Toaster
           position="bottom-center"

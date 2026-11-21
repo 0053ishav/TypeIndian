@@ -39,7 +39,7 @@ export const SANSKRIT_FAQ: FAQItem[] = [
   {
     question: "Does TypeIndian save my Sanskrit text?",
     answer:
-      "No. Your typed text remains in your browser. TypeIndian does not store, track, or log the Sanskrit text you enter.",
+      "The typing editor does not save your text as a cloud document. However, when you use transliteration suggestions, the relevant input is sent to Google Input Tools for processing. Text you add to the Session Board is stored in your browser's local storage on that device. Vercel Analytics may collect website usage information. See the Privacy Policy for details, and avoid submitting sensitive or confidential text for transliteration.",
   },
   {
     question: "Can I use the Sanskrit text for educational or professional work?",
@@ -49,7 +49,7 @@ export const SANSKRIT_FAQ: FAQItem[] = [
   {
     question: "Can I type long Sanskrit passages?",
     answer:
-      "Yes. The TypeIndian editor can be used for longer Sanskrit passages, verses, articles, notes, and documents.",
+      "Yes. You can use the editor for messages, notes, articles, and longer passages. Transliteration requests are sent to Google Input Tools and may be subject to provider or technical limits. For large passages, work in smaller sections, and avoid submitting sensitive or confidential text.",
   },
 ];
 

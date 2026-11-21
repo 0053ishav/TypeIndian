@@ -6,10 +6,10 @@ import PageSchema from "@/components/common/PageSchema";
 
 import { SITE_URL } from "@/lib/config/site";
 
-const LAST_UPDATED = "September 2, 2026";
+const LAST_UPDATED = "November 21, 2026";
 
 const DESCRIPTION =
-  "Read the Terms of Service governing use of TypeIndian's Indian-language typing, transliteration, learning, and related browser-based tools.";
+  "Read the Terms of Service for using TypeIndian's Indian-language typing, transliteration, learning resources, and browser-based tools.";
 
 export const metadata: Metadata = {
   title: "Terms of Service | TypeIndian",
@@ -69,8 +69,8 @@ export default function TermsPage() {
         </h1>
 
         <p className="mt-5 text-lg text-(--color-text-body) leading-relaxed">
-          These Terms of Service explain the basic terms that apply when you
-          access or use TypeIndian and its browser-based Indian-language tools.
+          These Terms of Service apply when you access or use TypeIndian and
+          its browser-based Indian-language typing and learning tools.
         </p>
 
         <p className="mt-4 text-sm text-(--color-text-muted)">
@@ -86,16 +86,16 @@ export default function TermsPage() {
           </h2>
 
           <p>
-            TypeIndian is a browser-based platform focused on making Indian
-            languages easier to type, learn, and use digitally.
+            TypeIndian is a browser-based platform focused on helping people
+            type and learn Indian languages digitally.
           </p>
 
           <p className="mt-4">
-            Current functionality includes English-to-Indian-language phonetic
-            typing, transliteration-based typing suggestions, language
-            learning resources, alphabet and script information,
-            language-specific educational content, FAQs, and browser-based
-            copying of generated text.
+            Depending on the language and feature, the service may include
+            phonetic typing, transliteration suggestions, language-learning
+            resources, alphabet and script information, virtual keyboards,
+            and tools to copy or export text. Features may differ between
+            supported languages and may change over time.
           </p>
         </section>
 
@@ -106,40 +106,34 @@ export default function TermsPage() {
           </h2>
 
           <p>
-            By accessing or using TypeIndian, you agree to use the service in
-            accordance with these Terms of Service and applicable laws.
-          </p>
-
-          <p className="mt-4">
-            If you do not agree with these Terms, please do not use the
-            service.
+            By accessing or using TypeIndian, you agree to these Terms of
+            Service and to comply with applicable laws. If you do not agree
+            with these Terms, do not use the service.
           </p>
         </section>
 
         {/* 3 */}
         <section>
           <h2 className="text-2xl md:text-3xl font-bold text-(--color-text-heading) mb-5">
-            3. Use of the Service
+            3. Acceptable Use
           </h2>
 
           <p>
-            You may use TypeIndian&apos;s publicly available typing and learning
-            tools for lawful purposes.
+            You may use TypeIndian for lawful personal, educational, and
+            business purposes, subject to these Terms.
           </p>
 
-          <p className="mt-4">You must not use TypeIndian to:</p>
+          <p className="mt-4">You must not:</p>
 
           <ul className="mt-5 list-disc pl-6 space-y-3">
-            <li>violate applicable laws or regulations;</li>
-            <li>interfere with or disrupt the service;</li>
-            <li>attempt unauthorized access to systems or infrastructure;</li>
-            <li>abuse, attack, or intentionally overload the service;</li>
+            <li>use the service in violation of applicable laws or regulations;</li>
+            <li>attempt unauthorized access to the website or its infrastructure;</li>
+            <li>interfere with, disrupt, damage, or intentionally overload the service;</li>
+            <li>probe, scan, or test systems for vulnerabilities without authorization;</li>
+            <li>circumvent reasonable technical restrictions or safeguards; or</li>
             <li>
-              circumvent reasonable technical restrictions or safeguards; or
-            </li>
-            <li>
-              use automated methods that materially interfere with the service
-              unless expressly permitted.
+              use bots, scripts, scraping, or other automated methods in a way
+              that materially burdens or interferes with the service.
             </li>
           </ul>
         </section>
@@ -151,29 +145,39 @@ export default function TermsPage() {
           </h2>
 
           <p>
-            TypeIndian allows users to enter text into browser-based typing
-            tools and receive transliteration or typing suggestions.
+            You may enter text into TypeIndian&apos;s browser-based tools and use
+            available transliteration suggestions. You are responsible for the
+            text you enter and for reviewing and deciding how to use the
+            resulting output.
           </p>
 
           <p className="mt-4">
-            You are responsible for the text you enter and for how you use
-            generated or transliterated output.
+            Transliteration suggestions are automated and may be inaccurate,
+            incomplete, or unsuitable for a particular context. TypeIndian
+            does not guarantee that generated text will be grammatically,
+            linguistically, or contextually correct. Review output carefully
+            before using it, especially for formal, legal, medical, financial,
+            academic, or other important purposes.
           </p>
 
           <p className="mt-4">
-            Transliteration suggestions and generated text may contain errors.
-            TypeIndian does not guarantee that generated text will always be
-            grammatically, linguistically, or contextually correct.
+            TypeIndian does not claim ownership of the text you enter or of
+            the text you create using the typing tools. You remain responsible
+            for ensuring that your use of source material and output does not
+            infringe another person&apos;s rights.
           </p>
 
           <p className="mt-4">
-            You should review generated text before relying on it, particularly
-            where accuracy is important.
-          </p>
-
-          <p className="mt-4">
-            TypeIndian does not claim ownership of text that you enter into the
-            typing interface.
+            When you use transliteration suggestions, text is sent to Google
+            Input Tools for processing. Pasted or dropped text may be
+            processed as separate word requests. See the{" "}
+            <Link
+              href="/privacy"
+              className="font-medium text-(--color-primary) hover:underline"
+            >
+              Privacy Policy
+            </Link>{" "}
+            for details.
           </p>
         </section>
 
@@ -184,21 +188,17 @@ export default function TermsPage() {
           </h2>
 
           <p>
-            TypeIndian provides educational and informational material relating
-            to Indian languages, scripts, alphabets, pronunciation, typing,
-            and related language information.
+            TypeIndian may provide educational and informational material
+            about Indian languages, scripts, alphabets, pronunciation, and
+            typing.
           </p>
 
           <p className="mt-4">
-            This material is provided for general informational and practical
-            purposes. We do not guarantee that every educational detail is
-            complete, error-free, or suitable as an authoritative linguistic
-            reference.
-          </p>
-
-          <p className="mt-4">
-            Where accuracy is important, users should independently verify
-            relevant information.
+            This material is provided for general educational and practical
+            purposes. We do not represent it as a complete or authoritative
+            linguistic reference, and we do not guarantee that every detail
+            is current or error-free. Independently verify information where
+            accuracy is important.
           </p>
         </section>
 
@@ -209,42 +209,41 @@ export default function TermsPage() {
           </h2>
 
           <p>
-            Some TypeIndian typing functionality depends on third-party
-            transliteration infrastructure, including Google Input Tools, to
-            generate typing suggestions.
+            Some typing functionality relies on third-party services,
+            including Google Input Tools, to provide transliteration
+            suggestions. These services are operated independently of
+            TypeIndian.
           </p>
 
           <p className="mt-4">
-            Because this functionality depends on third-party services, its
-            availability and behavior may change.
+            Their availability, functionality, terms, and policies may change.
+            TypeIndian does not control or guarantee the availability,
+            accuracy, or continued operation of third-party services.
           </p>
 
           <p className="mt-4">
-            TypeIndian does not control third-party services and does not
-            guarantee their availability, accuracy, or continued operation.
-          </p>
-
-          <p className="mt-4">
-            TypeIndian is not an official Google product and does not imply
-            endorsement or sponsorship by Google.
+            TypeIndian is not an official Google product and is not sponsored
+            or endorsed by Google.
           </p>
         </section>
 
         {/* 7 */}
         <section>
           <h2 className="text-2xl md:text-3xl font-bold text-(--color-text-heading) mb-5">
-            7. Analytics and Other Third-Party Services
+            7. Analytics, Advertising, and Other Third-Party Services
           </h2>
 
           <p>
-            TypeIndian uses certain third-party services as part of operating
-            and improving the website. The current implementation includes
-            Vercel Analytics and Google advertising services.
+            TypeIndian uses third-party services to host, measure, and support
+            the website. These currently include Vercel hosting and analytics,
+            Google services used for transliteration, and Google advertising
+            services where enabled.
           </p>
 
           <p className="mt-4">
-            For information about how information is handled through these
-            services, please refer to the{" "}
+            Third-party services may collect or process information under
+            their own terms and privacy policies. For information about the
+            data involved and the technologies used on TypeIndian, read our{" "}
             <Link
               href="/privacy"
               className="font-medium text-(--color-primary) hover:underline"
@@ -255,7 +254,8 @@ export default function TermsPage() {
           </p>
 
           <p className="mt-4">
-            Third-party services may change independently of TypeIndian.
+            The providers and configuration of third-party services may
+            change as the website develops.
           </p>
         </section>
 
@@ -266,29 +266,30 @@ export default function TermsPage() {
           </h2>
 
           <p>
-            TypeIndian&apos;s original branding, website design, software,
-            original written content, graphics, and original educational
-            materials are owned by TypeIndian or their respective rights
-            holders unless otherwise stated.
+            Unless otherwise stated, TypeIndian&apos;s original branding, website
+            design, software, original written content, and original graphics
+            are owned by TypeIndian or its respective rights holders.
           </p>
 
           <p className="mt-4">
-            You receive permission to access and use the service for its
-            intended purposes. This does not transfer ownership of TypeIndian&apos;s
-            intellectual property to you.
+            You may access and use the service for its intended purposes.
+            These Terms do not transfer ownership of TypeIndian&apos;s intellectual
+            property to you, and you must not copy, redistribute, or exploit
+            protected parts of the service except where permitted by law or
+            with the relevant rights holder&apos;s permission.
           </p>
 
           <p className="mt-4">
-            Third-party scripts, language standards, fonts, datasets, services,
-            and other third-party materials remain subject to their respective
-            rights and licenses.
+            Third-party software, scripts, fonts, language standards,
+            datasets, and other materials remain subject to their respective
+            licenses and terms.
           </p>
         </section>
 
         {/* 9 */}
         <section>
           <h2 className="text-2xl md:text-3xl font-bold text-(--color-text-heading) mb-5">
-            9. User Content
+            9. User Content and Browser Storage
           </h2>
 
           <p>
@@ -298,44 +299,46 @@ export default function TermsPage() {
           </p>
 
           <p className="mt-4">
-            If you enter text into a TypeIndian typing tool, you remain
-            responsible for that content and for how you use the resulting
-            output.
+            Text in the current typing editor is not saved as a cloud document
+            by the typing tool. Text that you add to the Session Board is
+            stored in your browser&apos;s local storage on that device and browser.
+            You are responsible for managing that locally stored content,
+            including clearing it when using a shared device. Browser data
+            may be removed by clearing site data or browser storage.
           </p>
 
           <p className="mt-4">
-            TypeIndian does not obtain ownership of your entered text merely
-            because you use the typing interface.
+            You remain responsible for your content and how you use it.
+            TypeIndian does not acquire ownership of your text merely because
+            you use the service.
           </p>
         </section>
 
         {/* 10 */}
         <section>
           <h2 className="text-2xl md:text-3xl font-bold text-(--color-text-heading) mb-5">
-            10. Accuracy and Disclaimer
+            10. Accuracy and Service Disclaimer
           </h2>
 
           <p>
             TypeIndian&apos;s typing tools, transliteration suggestions, and
-            educational information are provided for general informational and
-            practical use.
+            educational information are provided for general informational
+            and practical use.
           </p>
 
           <p className="mt-4">We do not guarantee:</p>
 
           <ul className="mt-5 list-disc pl-6 space-y-3">
-            <li>perfect transliteration;</li>
-            <li>perfect spelling;</li>
-            <li>perfect pronunciation;</li>
-            <li>perfect language suggestions;</li>
-            <li>perfect educational information;</li>
-            <li>complete language coverage; or</li>
-            <li>uninterrupted availability.</li>
+            <li>perfect transliteration, spelling, or pronunciation;</li>
+            <li>that suggestions will reflect every dialect or regional usage;</li>
+            <li>that educational information will be complete or error-free;</li>
+            <li>that every feature will be available for every language; or</li>
+            <li>uninterrupted or error-free operation of the service.</li>
           </ul>
 
           <p className="mt-5">
-            Important information should be independently verified before being
-            relied upon.
+            You should independently verify important information before
+            relying on it.
           </p>
         </section>
 
@@ -346,16 +349,15 @@ export default function TermsPage() {
           </h2>
 
           <p>
-            TypeIndian may modify features, improve the service, temporarily
-            suspend parts of the service, remove outdated functionality, add
-            or remove supported languages, perform maintenance, or change how
-            particular features operate.
+            We may add, change, suspend, or remove features; update supported
+            languages; perform maintenance; or temporarily restrict access
+            when reasonably necessary.
           </p>
 
           <p className="mt-4">
-            We do not promise a specific uptime or service level, and we do not
-            promise that any particular feature or language will remain
-            available permanently.
+            TypeIndian is provided without a guaranteed uptime or service
+            level. We do not promise that a particular feature, language, or
+            third-party integration will remain available indefinitely.
           </p>
         </section>
 
@@ -365,22 +367,18 @@ export default function TermsPage() {
             12. Pricing and Advertising
           </h2>
 
-          <p>TypeIndian is currently available without charge.</p>
-
-          <p className="mt-4">
-            This does not constitute a promise that all TypeIndian features
-            will remain free indefinitely.
+          <p>
+            TypeIndian is currently available without charge. This does not
+            mean that every feature will remain free indefinitely. If paid
+            features or charges are introduced, the applicable terms and
+            pricing will be presented before they apply.
           </p>
 
           <p className="mt-4">
             TypeIndian may display advertising through third-party advertising
-            services, including Google advertising services. The availability,
-            format, and behavior of advertising may change over time.
-          </p>
-
-          <p className="mt-4">
-            Advertising-related technologies and information practices are
-            described in the{" "}
+            services, including Google advertising services. The availability
+            and format of advertising may change. Advertising-related data
+            practices are explained in the{" "}
             <Link
               href="/privacy"
               className="font-medium text-(--color-primary) hover:underline"
@@ -398,14 +396,15 @@ export default function TermsPage() {
           </h2>
 
           <p>
-            TypeIndian may link to or use external services required for
-            particular functionality.
+            TypeIndian may link to external websites or rely on external
+            services for certain functionality. Those websites and services
+            are not operated by TypeIndian and are governed by their own terms
+            and privacy policies.
           </p>
 
           <p className="mt-4">
-            These services operate under their own terms and privacy policies.
-            TypeIndian does not control third-party services and is not
-            responsible for services or websites that it does not operate.
+            You are responsible for reviewing the applicable terms before
+            using third-party websites or services.
           </p>
         </section>
 
@@ -416,10 +415,10 @@ export default function TermsPage() {
           </h2>
 
           <p>
-            Your use of TypeIndian is also subject to our Privacy Policy. The
-            Privacy Policy explains how information may be processed through
-            the website, browser storage, analytics, transliteration services,
-            advertising technologies, and other third-party services.
+            Your use of TypeIndian is also subject to our Privacy Policy. It
+            explains how information may be processed through the website,
+            browser storage, transliteration requests, analytics, advertising
+            technologies, and other third-party services.
           </p>
 
           <div className="mt-6">
@@ -436,18 +435,20 @@ export default function TermsPage() {
           </h2>
 
           <p>
-            TypeIndian is provided on an &quot;as available&quot; basis.
+            To the extent permitted by applicable law, TypeIndian is provided
+            on an &quot;as is&quot; and &quot;as available&quot; basis, without warranties that
+            cannot be excluded by law.
           </p>
 
           <p className="mt-4">
-            To the extent permitted by applicable law, we do not guarantee that
-            the service will always be error-free, continuously available,
-            completely accurate, or uninterrupted.
+            We do not warrant that the service will be uninterrupted,
+            error-free, secure in every circumstance, or that its content and
+            output will meet every user&apos;s requirements.
           </p>
 
           <p className="mt-4">
-            Nothing in these Terms is intended to exclude or limit rights or
-            protections that cannot lawfully be excluded or limited.
+            Nothing in these Terms excludes or limits a right or protection
+            that cannot lawfully be excluded or limited.
           </p>
         </section>
 
@@ -458,22 +459,22 @@ export default function TermsPage() {
           </h2>
 
           <p>
-            To the extent permitted by applicable law, TypeIndian and its
-            operators will not be responsible for losses arising from reliance
-            on automated output, educational content, temporary service
-            interruptions, third-party services, or use of the service.
+            To the extent permitted by applicable law, TypeIndian and the
+            people or entities operating it will not be liable for indirect,
+            incidental, special, or consequential loss arising from or
+            relating to use of, or inability to use, the service.
           </p>
 
           <p className="mt-4">
-            This section is intended to operate only to the extent permitted
-            under applicable law and should not be interpreted as removing
-            rights that cannot legally be excluded.
+            This includes, to the extent permitted by law, loss arising from
+            reliance on transliteration output or educational content,
+            temporary interruptions, or the acts or availability of
+            third-party services.
           </p>
 
-          <p className="mt-4 text-sm text-(--color-text-muted)">
-            This provision should be reviewed for the jurisdiction and legal
-            structure applicable to TypeIndian before relying on it as a final
-            legal provision.
+          <p className="mt-4">
+            Nothing in this section excludes liability or remedies that cannot
+            be excluded or limited under applicable law.
           </p>
         </section>
 
@@ -484,15 +485,14 @@ export default function TermsPage() {
           </h2>
 
           <p>
-            TypeIndian may restrict or suspend access to the service when
-            reasonably necessary, including in response to abuse, security
-            threats, attempts to disrupt the service, violations of these
-            Terms, or legal requirements.
+            We may restrict or suspend access to TypeIndian when reasonably
+            necessary to address abuse, security threats, attempts to disrupt
+            the service, violations of these Terms, or legal requirements.
           </p>
 
           <p className="mt-4">
-            Because TypeIndian currently does not use user accounts, this does
-            not create an account-termination process.
+            TypeIndian currently does not use user accounts, so access
+            restrictions do not constitute an account-termination process.
           </p>
         </section>
 
@@ -503,12 +503,17 @@ export default function TermsPage() {
           </h2>
 
           <p>
-            We may update these Terms as TypeIndian develops and changes.
+            We may update these Terms to reflect changes to TypeIndian,
+            applicable requirements, or the way the service operates. The
+            revised version will be published on this page with an updated
+            &quot;Last updated&quot; date.
           </p>
 
           <p className="mt-4">
-            When changes are made, the updated version will be published on
-            this page with a revised &quot;Last updated&quot; date.
+            Your continued use of TypeIndian after revised Terms are published
+            constitutes acceptance of the revised Terms to the extent
+            permitted by applicable law. If you do not agree, stop using the
+            service.
           </p>
         </section>
 
@@ -519,7 +524,7 @@ export default function TermsPage() {
           </h2>
 
           <p>
-            Questions about these Terms can be directed to TypeIndian using
+            If you have questions about these Terms, contact TypeIndian using
             the official contact method published on our Contact page.
           </p>
 

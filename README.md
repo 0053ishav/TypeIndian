@@ -1,6 +1,6 @@
 # TypeIndian
 
-TypeIndian is a privacy-first English → Indian language typing tool.
+TypeIndian is a browser-based English → Indian language typing and learning platform.
 
 It allows users to type naturally in English and instantly convert text into Indian scripts using phonetic transliteration.
 
@@ -68,12 +68,14 @@ Routes:
 
 
 
-### 🔐 Privacy First
-- No login
-- No user accounts
-- No server-side storage of text
-- Everything runs in-browser
-- Session Board stored locally
+### 🔐 Privacy and Data Handling
+- No account or login required
+- Typing tools run in the browser
+- Transliteration requests send entered text to Google Input Tools
+- Vercel Analytics is used for website analytics
+- Google advertising technology may load when AdSense is enabled
+- Session Board content is stored in browser local storage
+- See the Privacy Policy for third-party processing details
 
 
 

@@ -46,8 +46,8 @@ export default function Footer() {
 
             <div className="mt-6 flex flex-wrap gap-2">
               <span className="badge badge-success">Free</span>
-              <span className="badge badge-gradient">No Login</span>
-              <span className="badge badge-success">Privacy-first</span>
+              <span className="badge badge-gradient">No account required</span>
+              <Link href="/privacy" className="badge badge-success hover:underline">Third-party processing disclosed</Link>
             </div>
           </div>
 
@@ -190,11 +190,11 @@ export default function Footer() {
                 />
               </Link>
               <p className="text-sm font-semibold text-(--color-text-heading)">
-                Growing with Indian languages
+                Indian languages, one typing platform
               </p>
 
               <p className="mt-1 text-sm text-(--color-text-muted)">
-                More languages are being added to TypeIndian.
+                Explore typing tools across 14 supported Indian languages.
               </p>
             </div>
 

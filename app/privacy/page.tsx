@@ -6,7 +6,7 @@ import Breadcrumbs from "@/components/common/Breadcrumbs";
 import PageSchema from "@/components/common/PageSchema";
 import { EMAIL } from "@/lib/config/email";
 
-const LAST_UPDATED = "September 2, 2026";
+const LAST_UPDATED = "November 21, 2026";
 
 const DESCRIPTION =
   "Learn how TypeIndian handles information, browser storage, analytics, third-party transliteration services, and advertising technologies.";
@@ -126,10 +126,11 @@ export default function PrivacyPage() {
           </p>
 
           <p className="mt-4">
-            Some transliteration functionality uses Google Input Tools. When
-            this functionality is used, entered text and the relevant language
-            configuration may be sent to Google&apos;s transliteration service
-            at{" "}
+            TypeIndian currently uses Google Input Tools for certain
+            transliteration suggestions. When you request transliteration or
+            use a feature that generates suggestions, the relevant text you
+            enter and the language configuration needed for that request are
+            sent to Google&apos;s transliteration service at{" "}
             <a
               href="https://inputtools.google.com/request"
               target="_blank"
@@ -142,9 +143,23 @@ export default function PrivacyPage() {
           </p>
 
           <p className="mt-4">
-            Because third-party services are involved, TypeIndian cannot
-            describe all typing or transliteration activity as remaining
-            entirely within your browser.
+            Transliteration requests are made directly from your browser to
+            Google&apos;s service; TypeIndian does not route these requests
+            through its own application server. The typing tool requests
+            suggestions for the current word as you type. When you paste or
+            convert longer text, the tool may send separate requests for
+            individual words. The request also includes the language
+            configuration and other parameters needed by the service.
+          </p>
+
+          <p className="mt-4">
+            The application may temporarily cache returned suggestions in
+            browser memory to avoid repeating the same request. This
+            in-memory cache is temporary and is not the same as saving your
+            typing history to a TypeIndian account or cloud document.
+            Transliteration text is nevertheless processed by Google, not
+            exclusively on your device. Do not assume that text submitted for
+            transliteration remains private to your device.
           </p>
 
           <p className="mt-4">
@@ -152,6 +167,15 @@ export default function PrivacyPage() {
             sensitive information into typing or transliteration features if
             you do not want that information processed by a third-party
             transliteration service.
+          </p>
+
+          <p className="mt-4">
+            TypeIndian does not currently provide speech-to-text functionality
+            or process audio recordings for speech recognition. If speech
+            features are introduced, this policy will be updated to explain
+            what audio or related data is processed, whether processing happens
+            on your device or through a service provider, and the applicable
+            data practices.
           </p>
 
           <p className="mt-4">
@@ -181,8 +205,12 @@ export default function PrivacyPage() {
           </p>
 
           <p className="mt-4">
-            This information is stored by your browser or device and is not
-            the same as a TypeIndian user account or cloud database.
+            In the typing tool, entries that you add to the Session Board are
+            saved in your browser&apos;s localStorage for the selected
+            language, so they can be available when you return using the same
+            browser. This is browser-local storage, not a TypeIndian user
+            account or cloud database. The current editor text is not saved
+            as a cloud document by this feature.
           </p>
 
           <p className="mt-4">
@@ -259,8 +287,14 @@ export default function PrivacyPage() {
           </h2>
 
           <p>
-            TypeIndian uses Google advertising services, including Google
-            AdSense, as part of its monetization and advertising setup.
+            TypeIndian uses Google AdSense site code when it is explicitly
+            enabled for site connection or verification during the AdSense
+            review process, or when advertising is activated after approval.
+            The script loads only when the production environment has both a
+            publisher ID and an explicit enable setting. Loading this script
+            does not itself mean that Google has approved the site or that ads
+            are being displayed. If advertising is active, Google and its
+            advertising partners may process information as described below.
           </p>
 
           <p className="mt-4">
@@ -346,8 +380,9 @@ export default function PrivacyPage() {
           </p>
 
           <p className="mt-4">
-            Google advertising services may place or read cookies or use
-            similar technologies when advertising functionality is active.
+            If Google AdSense is approved and enabled, Google advertising
+            services may place or read cookies or use similar technologies
+            when advertising functionality is active.
             These technologies can be used for purposes such as advertising,
             frequency management, measurement, and personalization, depending
             on the applicable configuration and user choices.
@@ -391,8 +426,9 @@ export default function PrivacyPage() {
               <strong>Vercel</strong> for hosting and infrastructure.
             </li>
             <li>
-              <strong>Google advertising services, including AdSense</strong>{" "}
-              for advertising and related measurement technologies.
+              <strong>Google advertising services, including AdSense (when
+              approved and enabled)</strong>{" "}for advertising and related
+              measurement technologies.
             </li>
           </ul>
 
@@ -421,9 +457,9 @@ export default function PrivacyPage() {
 
           <p className="mt-4">
             Information processed by third-party providers, including
-            analytics, transliteration, hosting, and advertising providers, is
-            subject to the applicable provider&apos;s policies and retention
-            practices.
+            analytics, Google Input Tools for transliteration, hosting, and
+            advertising providers (if and when enabled), is subject to the
+            applicable provider&apos;s policies and retention practices.
           </p>
 
           <p className="mt-4">
