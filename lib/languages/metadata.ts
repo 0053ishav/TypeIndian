@@ -41,8 +41,8 @@ export function createLearnMetadata(
   language: Language,
 ): Metadata {
   return {
-    title: language.learn.meta.title,
-    description: language.learn.meta.description,
+    title: language.learn.seo.title,
+    description: language.learn.seo.description,
 
     keywords: 
       language.learn.seo.keywords,
