@@ -6,7 +6,7 @@ import Breadcrumbs from "@/components/common/Breadcrumbs";
 import PageSchema from "@/components/common/PageSchema";
 import { EMAIL } from "@/lib/config/email";
 
-const LAST_UPDATED = "September 2, 2026";
+const LAST_UPDATED = "November 21, 2026";
 
 const DESCRIPTION =
   "Learn how TypeIndian handles information, browser storage, analytics, third-party transliteration services, and advertising technologies.";
@@ -126,10 +126,11 @@ export default function PrivacyPage() {
           </p>
 
           <p className="mt-4">
-            Some transliteration functionality uses Google Input Tools. When
-            this functionality is used, entered text and the relevant language
-            configuration may be sent to Google&apos;s transliteration service
-            at{" "}
+            TypeIndian currently uses Google Input Tools for certain
+            transliteration suggestions. When you request transliteration or
+            use a feature that generates suggestions, the relevant text you
+            enter and the language configuration needed for that request are
+            sent to Google&apos;s transliteration service at{" "}
             <a
               href="https://inputtools.google.com/request"
               target="_blank"
@@ -142,9 +143,11 @@ export default function PrivacyPage() {
           </p>
 
           <p className="mt-4">
-            Because third-party services are involved, TypeIndian cannot
-            describe all typing or transliteration activity as remaining
-            entirely within your browser.
+            This means the text used for a transliteration request is processed
+            by Google, not exclusively on your device. Other typing and learning
+            interactions that do not invoke this third-party transliteration
+            service may be handled in your browser. Do not assume that text
+            submitted for transliteration remains private to your device.
           </p>
 
           <p className="mt-4">
@@ -259,8 +262,11 @@ export default function PrivacyPage() {
           </h2>
 
           <p>
-            TypeIndian uses Google advertising services, including Google
-            AdSense, as part of its monetization and advertising setup.
+            TypeIndian is preparing to use Google AdSense. Google AdSense
+            advertising will be used only if the website is approved and the
+            advertising service is enabled. If ads are displayed, Google and
+            its advertising partners may process information as described
+            below.
           </p>
 
           <p className="mt-4">
@@ -346,8 +352,9 @@ export default function PrivacyPage() {
           </p>
 
           <p className="mt-4">
-            Google advertising services may place or read cookies or use
-            similar technologies when advertising functionality is active.
+            If Google AdSense is approved and enabled, Google advertising
+            services may place or read cookies or use similar technologies
+            when advertising functionality is active.
             These technologies can be used for purposes such as advertising,
             frequency management, measurement, and personalization, depending
             on the applicable configuration and user choices.
@@ -391,8 +398,9 @@ export default function PrivacyPage() {
               <strong>Vercel</strong> for hosting and infrastructure.
             </li>
             <li>
-              <strong>Google advertising services, including AdSense</strong>{" "}
-              for advertising and related measurement technologies.
+              <strong>Google advertising services, including AdSense (when
+              approved and enabled)</strong>{" "}for advertising and related
+              measurement technologies.
             </li>
           </ul>
 
@@ -421,9 +429,9 @@ export default function PrivacyPage() {
 
           <p className="mt-4">
             Information processed by third-party providers, including
-            analytics, transliteration, hosting, and advertising providers, is
-            subject to the applicable provider&apos;s policies and retention
-            practices.
+            analytics, Google Input Tools for transliteration, hosting, and
+            advertising providers (if and when enabled), is subject to the
+            applicable provider&apos;s policies and retention practices.
           </p>
 
           <p className="mt-4">
