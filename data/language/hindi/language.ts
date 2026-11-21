@@ -300,11 +300,6 @@ export const hindi: Language = {
           { input: "kshama", output: "क्षमा", explanation: "Forgiveness / pardon." },
           { input: "namaste dosto", output: "नमस्ते दोस्तों", explanation: "Hello, friends." },
         ],
-        notes: [
-          "These outputs were observed in a live Hindi Google Input Tools test on 21 November 2026. Suggestions can vary with context and provider behaviour.",
-          "Review the suggestions before using them in formal, published, or important text.",
-          "Roman spellings are not one-to-one: the same input can represent different Hindi words. Use the surrounding sentence to choose the intended result.",
-        ],
       },
 
       commonMistakes: {
