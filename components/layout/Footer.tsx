@@ -46,7 +46,7 @@ export default function Footer() {
 
             <div className="mt-6 flex flex-wrap gap-2">
               <span className="badge badge-success">Free</span>
-              <span className="badge badge-gradient">No Login</span>
+              <span className="badge badge-gradient">No account required</span>
               <Link href="/privacy" className="badge badge-success hover:underline">Third-party processing disclosed</Link>
             </div>
           </div>
