@@ -46,7 +46,7 @@ export const marathiResearch: LearnResource[] = [
     url: "https://scholarworks.iu.edu/journals/index.php/iulcwp/article/download/26234/31855/61943",
     summary: "Corpus-based study reporting Marathi consonant and vowel frequency data and reviewing phonological inventory research. Use it as a research perspective, not as a normative alphabet chart.",
     topics: ["consonantClassification", "vowelSigns", "examples"],
-    metadataStatus: "verify",
+    metadataStatus: "reviewed",
   },
   {
     id: "MAR-R03",
@@ -80,13 +80,23 @@ export const marathiResearch: LearnResource[] = [
   },
   {
     id: "MAR-R06",
-    title: "Marathi Language Processing: A Survey of NLP Resources, Tools, and Techniques",
+    title: "A Survey on NLP Resources, Tools, and Techniques for Marathi Language Processing",
     type: "paper",
     publisher: "ACM Computing Surveys",
     doi: "10.1145/3548457",
     url: "https://doi.org/10.1145/3548457",
     summary: "Survey of Marathi language technology and linguistic characteristics, including Balbodh Devanagari, morphology, and orthographic units.",
     topics: ["history", "writingSystem", "consonantClassification"],
+    metadataStatus: "reviewed",
+  },
+  {
+    id: "MAR-R07",
+    title: "Classical Language Status to Marathi Language",
+    type: "institutional-reference",
+    publisher: "Ministry of Culture, Government of India",
+    url: "https://sansad.in/getFile/loksabhaquestions/annex/183/AU2148_kbvuot.pdf?source=pqals",
+    summary: "Official Lok Sabha answer confirming that Marathi was declared a Classical Language by notification dated 4 October 2024.",
+    topics: ["history"],
     metadataStatus: "reviewed",
   },
 ];
