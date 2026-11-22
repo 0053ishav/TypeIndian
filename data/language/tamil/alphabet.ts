@@ -63,6 +63,7 @@ export const tamilAlphabet: Alphabet = {
 
   symbols: [
     { letter: "்", sound: "pulli / virama" },
+    { letter: "ஃ", sound: "āytam" },
   ],
 
   numerals: [
