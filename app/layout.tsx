@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import Footer from "@/components/layout/Footer";
 import { Analytics } from "@vercel/analytics/next";
 import { GLOBAL_KEYWORDS } from "@/lib/seo/keywords";
@@ -73,8 +74,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
+        <script
+          id="theme-initializer"
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var s=localStorage.getItem("typeindian-theme");var p=s==="light"||s==="dark"||s==="system"?s:"system";var d=window.matchMedia("(prefers-color-scheme: dark)").matches;var t=p==="system"?(d?"dark":"light"):p;var r=document.documentElement;r.dataset.theme=t;r.dataset.themePreference=p;r.style.colorScheme=t;}catch(e){}})();`,
+          }}
+        />
         {ADSENSE_ENABLED && (
           <>
             <meta name="google-adsense-account" content={ADSENSE_PUBLISHER_ID} />
@@ -91,19 +98,21 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SiteSchema />
-        <Navbar />
-        <div id="main-content" className="min-h-screen">
-          {children}
-        </div>
-        <Footer />
-        <Toaster
-          position="bottom-center"
-          richColors
-          closeButton
-          duration={2500}
-        />
-        <Analytics />
+        <ThemeProvider>
+          <SiteSchema />
+          <Navbar />
+          <div id="main-content" className="min-h-screen">
+            {children}
+          </div>
+          <Footer />
+          <Toaster
+            position="bottom-center"
+            richColors
+            closeButton
+            duration={2500}
+          />
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   );
