@@ -354,13 +354,17 @@ export const urdu: Language = {
       title: "Learn Urdu Letters",
 
       description:
-        "Explore common Urdu letters and numerals. Click a character to insert it directly into the typing editor.",
+        "Explore Urdu vowel carriers, consonant letters, additional characters, pronunciation marks, and numerals. Select a character to insert it into the typing editor.",
 
       vowels: "Vowel Letters (حروفِ علت)",
 
       consonants: "Urdu Letters (حروف)",
 
-      extensions: "Additional Urdu Letters",
+      extensions: "Additional Urdu Characters",
+
+      vowelSigns: "Vowel and Pronunciation Marks",
+
+      symbols: "Other Diacritics",
 
       numerals: "Urdu Numerals",
     },
