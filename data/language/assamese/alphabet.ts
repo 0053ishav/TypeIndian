@@ -64,9 +64,9 @@ export const assameseAlphabet: Alphabet = {
   // Modified consonant forms used in Assamese orthography.
   // ক্ষ is intentionally not listed here: it is a ক্ + ষ conjunct sequence.
   extensions: [
-    { letter: "ড়", sound: "ṛa (modified ড)" },
-    { letter: "ঢ়", sound: "ṛha (modified ঢ)" },
-    { letter: "য়", sound: "ẏa (modified য)" },
+    { letter: "ড়", sound: "ṛa (modified ড)" },
+    { letter: "ঢ়", sound: "ṛha (modified ঢ)" },
+    { letter: "য়", sound: "ẏa (modified য)" },
   ],
 
   vowelSigns: [
