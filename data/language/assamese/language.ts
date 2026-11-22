@@ -351,7 +351,7 @@ export const assamese: Language = {
       title: "Ready to start typing in Assamese?",
 
       description:
-        "Skip complicated keyboard layouts. Type naturally in English and TypeIndian instantly converts your words into the Assamese script.",
+        "Skip complicated keyboard layouts. Type Assamese words with Roman letters and choose the Assamese-script suggestion you want.",
 
       button: "Open Assamese Typing Tool →",
     },
