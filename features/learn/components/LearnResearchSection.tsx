@@ -25,60 +25,88 @@ function CurriculumResearchMap({ resources }: Props) {
   const topicIds = Object.keys(TOPIC_LABELS).filter((topic) =>
     resources.some((resource) => resource.topics.includes(topic)),
   );
-  const height = Math.max(260, topicIds.length * 66, resources.length * 44);
-  const topicY = (index: number) => ((index + 1) * height) / (topicIds.length + 1);
-  const resourceY = (index: number) => ((index + 1) * height) / (resources.length + 1);
 
   return (
-    <div className="card p-4 md:p-6 space-y-3">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <h3 className="font-semibold text-(--color-text-heading)">Curriculum-to-source map</h3>
-        <p className="text-xs text-(--color-text-muted)">Topic relevance, not citation links</p>
+    <div className="card p-5 md:p-7 space-y-5">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div className="space-y-1">
+          <h3 className="font-semibold text-(--color-text-heading)">Curriculum-to-source map</h3>
+          <p className="text-sm text-(--color-text-muted)">
+            Each circle represents a source connected to that topic.
+          </p>
+        </div>
+        <p className="text-xs text-(--color-text-muted)">Hover or focus a circle to preview</p>
       </div>
-      <div className="overflow-x-auto">
-        <svg
-          viewBox={`0 0 760 ${height}`}
-          role="img"
-          aria-label="Map connecting curriculum topics with relevant research and reference sources"
-          className="w-full min-w-[620px]"
-          style={{ height: "auto", maxHeight: 620 }}
-        >
-          {resources.flatMap((resource, resourceIndex) =>
-            resource.topics.filter((topic) => topicIds.includes(topic)).map((topic) => {
-              const topicIndex = topicIds.indexOf(topic);
-              return (
-                <line
-                  key={`${topic}-${resource.id}`}
-                  x1="250"
-                  y1={topicY(topicIndex)}
-                  x2="510"
-                  y2={resourceY(resourceIndex)}
-                  stroke="currentColor"
-                  strokeOpacity="0.2"
-                  strokeWidth="1.5"
+
+      <div className="space-y-1">
+        {topicIds.map((topic) => {
+          const related = resources.filter((resource) => resource.topics.includes(topic));
+
+          return (
+            <div
+              key={topic}
+              className="grid grid-cols-[minmax(118px,180px)_1fr] items-center gap-3 border-b border-(--color-border) py-4 last:border-b-0"
+            >
+              <h4 className="text-sm font-medium leading-snug text-(--color-text-body)">
+                {TOPIC_LABELS[topic]}
+              </h4>
+
+              <div className="relative flex min-h-12 flex-wrap items-center gap-x-3 gap-y-3">
+                <span
+                  aria-hidden="true"
+                  className="absolute left-0 right-0 top-1/2 border-t border-dashed border-(--color-border)"
                 />
-              );
-            }),
-          )}
-          {topicIds.map((topic, index) => (
-            <g key={topic}>
-              <rect x="12" y={topicY(index) - 17} width="238" height="34" rx="9" fill="var(--color-surface, #f4f4f5)" stroke="currentColor" strokeOpacity="0.18" />
-              <text x="24" y={topicY(index) + 5} fontSize="12" fill="currentColor">{TOPIC_LABELS[topic]}</text>
-            </g>
-          ))}
-          {resources.map((resource, index) => (
-            <g key={resource.id}>
-              <circle cx="520" cy={resourceY(index)} r="6" fill="var(--color-accent, #d97706)" />
-              <text x="536" y={resourceY(index) + 4} fontSize="11" fill="currentColor">
-                {resource.id} · {resource.title.length > 28 ? `${resource.title.slice(0, 28)}…` : resource.title}
-              </text>
-            </g>
-          ))}
-        </svg>
+                {related.map((resource) => {
+                  const index = resources.findIndex((item) => item.id === resource.id) + 1;
+                  const number = String(index).padStart(2, "0");
+
+                  return (
+                    <a
+                      key={resource.id}
+                      href={resource.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`Open ${resource.title}`}
+                      className="group relative z-10 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-(--color-border) bg-(--color-background) text-xs font-semibold tabular-nums text-(--color-text-body) shadow-sm transition duration-150 hover:scale-110 hover:border-(--color-accent) hover:bg-(--color-accent) hover:text-white hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-2"
+                    >
+                      {number}
+
+                      <span
+                        role="tooltip"
+                        className="pointer-events-none absolute bottom-full left-1/2 z-30 mb-3 w-64 -translate-x-1/2 translate-y-1 rounded-xl border border-(--color-border) bg-(--color-background) p-4 text-left text-(--color-text-body) opacity-0 shadow-xl transition duration-150 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100"
+                      >
+                        <span className="mb-2 block text-[10px] font-semibold uppercase tracking-wider text-(--color-text-muted)">
+                          {TYPE_LABELS[resource.type]} · {number}
+                        </span>
+                        <span className="block text-sm font-semibold leading-snug text-(--color-text-heading)">
+                          {resource.title}
+                        </span>
+                        <span className="mt-1 block text-xs text-(--color-text-muted)">
+                          {[resource.authors?.join(", "), resource.year, resource.publisher].filter(Boolean).join(" · ") || "Publication details"}
+                        </span>
+                        <span className="mt-2 block text-xs leading-relaxed text-(--color-text-body)">
+                          {resource.summary}
+                        </span>
+                        <span className="mt-3 block text-xs font-semibold text-(--color-link)">
+                          Open source ↗
+                        </span>
+                      </span>
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
       </div>
-      <p className="text-xs text-(--color-text-muted)">
-        Lines show which curriculum topics a source can help explain. They do not represent a paper's citation network.
-      </p>
+
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-(--color-border) pt-4 text-xs text-(--color-text-muted)">
+        <span className="inline-flex items-center gap-2">
+          <span className="h-3 w-3 rounded-full border border-(--color-border) bg-(--color-background)" />
+          Research or reference source
+        </span>
+        <span>Same source may appear under multiple relevant topics</span>
+      </div>
     </div>
   );
 }
@@ -100,37 +128,9 @@ export default function LearnResearchSection({ resources }: Props) {
 
       <CurriculumResearchMap resources={resources} />
 
-      <div className="grid gap-4 md:grid-cols-2">
-        {resources.map((resource) => (
-          <article className="card p-5 space-y-3" key={resource.id}>
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="text-xs font-medium rounded-full px-2 py-1 bg-(--color-surface-muted) text-(--color-text-muted)">
-                {TYPE_LABELS[resource.type]}
-              </span>
-              {resource.metadataStatus === "verify" ? (
-                <span className="text-xs font-medium rounded-full px-2 py-1 bg-amber-100 text-amber-900">
-                  Metadata needs review
-                </span>
-              ) : null}
-            </div>
-            <h3 className="font-semibold leading-snug text-(--color-text-heading)">{resource.title}</h3>
-            <p className="text-sm text-(--color-text-muted)">
-              {[resource.authors?.join(", "), resource.year, resource.publisher].filter(Boolean).join(" · ")}
-            </p>
-            <p className="text-sm text-(--color-text-body)">{resource.summary}</p>
-            <div className="flex flex-wrap gap-2">
-              {resource.topics.map((topic) => (
-                <span key={topic} className="text-xs rounded-full border border-(--color-border) px-2 py-1">
-                  {TOPIC_LABELS[topic] ?? topic}
-                </span>
-              ))}
-            </div>
-            <a className="inline-flex text-sm font-semibold text-(--color-link) underline underline-offset-2" href={resource.url} target="_blank" rel="noreferrer">
-              Read source
-            </a>
-          </article>
-        ))}
-      </div>
+      <p className="text-xs text-(--color-text-muted)">
+        Connections indicate editorial relevance to curriculum topics. They are not citation relationships between papers.
+      </p>
     </section>
   );
 }
