@@ -213,7 +213,7 @@ export const tamil: Language = {
         paragraphs: [
           "Tamil teaching traditionally distinguishes uyir (vowels), mei (consonants), and uyirmei (consonant-vowel combinations). The standard school inventory is 12 uyir letters, 18 mei letters, and 216 uyirmei combinations.",
           "A dependent vowel sign attaches to a consonant to represent a vowel other than its inherent vowel. For example, க + ா forms கா, க + ி forms கி, and க + ீ forms கீ.",
-          "The signs ெ, ே, and ை render to the left of their consonant. The forms ொ, ோ, and ௌ are composite vowel signs whose glyph components can appear on both sides of the consonant. Store the normal logical character sequence and let the shaping engine position the glyphs.",
+          "The signs ெ, ே, and ை render to the left of their consonant. The forms ொ, ோ, and ௌ are composite vowel signs whose glyph components can appear on both sides of the consonant. Store the normal logical character sequence in logical Unicode order and let the shaping engine position the glyphs.",
           "Independent vowels are not interchangeable with dependent vowel signs. Unicode encodes independent Tamil vowel letters atomically, even when their visual forms might appear decomposable.",
         ],
         bullets: [
