@@ -24,7 +24,7 @@ export const GUJARATI_FAQ: FAQItem[] = [
   {
     question: "Can I paste English text and convert it to Gujarati?",
     answer:
-      "Yes. You can paste full sentences or paragraphs written in English and instantly convert them into the Gujarati script.",
+      "No. This is transliteration, not translation. Enter Gujarati words using Roman letters; an English sentence will not be translated into Gujarati.",
   },
   {
     question: "Is this a Gujarati translation tool?",
@@ -57,17 +57,17 @@ export const LEARN_GUJARATI_FAQ: FAQItem[] = [
   {
     question: "What is the script used to write Gujarati?",
     answer:
-      "Gujarati is written using the Gujarati script, an Indic writing system derived from Devanagari. It is primarily used to write the Gujarati language.",
+      "Gujarati is written in the Gujarati script, a left-to-right abugida closely related to Devanagari. It is distinguished visually by the absence of Devanagari's continuous headline.",
   },
   {
     question: "How many vowels are there in Gujarati?",
     answer:
-      "Gujarati has 14 independent vowels, including traditional Sanskrit vowels and modern vowels used in everyday writing.",
+      "A traditional Gujarati chart commonly teaches the core independent vowels અ, આ, ઇ, ઈ, ઉ, ઊ, ઋ, એ, ઐ, ઓ, ઔ. Additional signs such as ઍ and ઑ and Sanskrit letters are documented separately; a chart count depends on what it includes.",
   },
   {
     question: "How many consonants are there in Gujarati?",
     answer:
-      "Gujarati has 34 primary consonants. Additional conjunct letters and extended characters are also used for Sanskrit and foreign loanwords.",
+      "Gujarati has 34 consonant letters in the W3C script overview. Forms such as ક્ષ and જ્ઞ are conjuncts formed from consonant sequences, not additional basic consonant letters.",
   },
   {
     question: "Is Gujarati written from left to right?",
@@ -77,6 +77,16 @@ export const LEARN_GUJARATI_FAQ: FAQItem[] = [
   {
     question: "What are Gujarati matras (vowel signs)?",
     answer:
-      "Gujarati matras are vowel signs added to consonants to change their vowel sound. They are an essential part of reading and writing Gujarati correctly.",
+      "Gujarati matras are dependent vowel signs attached to consonants. They modify the inherent vowel; the sign િ is encoded after its consonant but displayed visually to its left.",
+  },
+  {
+    question: "What is the Gujarati virama or halant?",
+    answer:
+      "The virama (્), also called halant, suppresses the inherent vowel of a consonant and helps form consonant clusters such as ક્ષ.",
+  },
+  {
+    question: "Does Gujarati use a headline like Devanagari?",
+    answer:
+      "No. Gujarati script is closely related to Devanagari but its letters do not use the continuous horizontal headline found across Devanagari words.",
   },
 ];
