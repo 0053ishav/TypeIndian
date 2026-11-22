@@ -165,13 +165,6 @@ export const marathi: Language = {
           "Marathi consonants represent the primary sounds used to write native Marathi words and combine with vowel signs to form syllables.",
       },
 
-      extensions: {
-        resourceIds: ["MAR-R01", "MAR-P01"],
-        title: "Extended Vowels and Signs",
-        description:
-          "Marathi uses ॲ and ऑ for additional vowel qualities in some words, particularly loanwords. Their dependent signs are ॅ and ॉ. Conjuncts such as क्ष and ज्ञ are combinations of consonants, not extra independent consonant letters.",
-      },
-
       vowelSigns: {
         resourceIds: ["MAR-R01", "MAR-R04"],
         title: "Vowel Signs (मात्रा)",
@@ -322,8 +315,6 @@ export const marathi: Language = {
       vowels: "Vowels (स्वर)",
 
       consonants: "Consonants (व्यंजन)",
-
-      extensions: "Extended Vowels and Signs",
 
       vowelSigns: "Vowel Signs (मात्रा)",
 
