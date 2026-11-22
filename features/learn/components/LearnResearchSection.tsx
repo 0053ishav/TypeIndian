@@ -75,7 +75,7 @@ function ResearchNetwork({ resources }: Props) {
   return (
     <div className="card w-full max-w-3xl space-y-2 p-3 md:p-4">
       <div className="flex items-center justify-between gap-3">
-        <h3 className="text-sm font-semibold text-(--color-text-heading)">Hindi research map</h3>
+        <h3 className="text-sm font-semibold text-(--color-text-heading)">Research map</h3>
         <span className="text-[10px] text-(--color-text-muted)">{resources.length} sources</span>
       </div>
 
