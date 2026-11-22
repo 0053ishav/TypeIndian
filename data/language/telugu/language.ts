@@ -228,7 +228,7 @@ export const telugu: Language = {
           "The common independent-vowel inventory has 14 letters: అ, ఆ, ఇ, ఈ, ఉ, ఊ, ఋ, ఌ, ఎ, ఏ, ఐ, ఒ, ఓ, and ఔ. ఌ is rare in everyday Telugu. The obsolete or extended Sanskrit vocalic letters ౠ and ౡ are treated separately.",
           "A vowel following a consonant is usually written with a dependent sign rather than as a separate independent vowel. The sign replaces the consonant's inherent /a/ vowel.",
           "Telugu has dependent signs for ā, i, ī, u, ū, vocalic r, vocalic rr, e, ē, ai, o, ō, and au. The sign ై is encoded as one character; do not manually replace it with visually similar component signs.",
-          "Unicode defines logical character sequences. Some vowel signs have visible parts around the consonant, but their encoded order must not be rearranged to imitate the rendered glyph."
+          "Unicode defines logical character sequences and logical Unicode order. Some vowel signs have visible parts around the consonant, but their encoded order must not be rearranged to imitate the rendered glyph."
         ],
         bullets: [
           "క + ా → కా",
