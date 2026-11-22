@@ -342,7 +342,11 @@ export const gujarati: Language = {
 
       consonants: "Consonants (વ્યંજન)",
 
-      extensions: "Additional Letters",
+      extensions: "Extended and Sanskrit Letters",
+
+      vowelSigns: "Vowel Signs (માત્રાઓ)",
+
+      symbols: "Special Signs and Symbols",
 
       numerals: "Gujarati Numerals (અંકો)",
     },
