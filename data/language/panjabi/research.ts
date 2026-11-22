@@ -38,7 +38,7 @@ export const panjabiResearch: LearnResource[] = [
   {
     id: "PAN-R04",
     title: "Panjabi: A Comprehensive Grammar",
-    type: "book-chapter",
+    type: "book",
     authors: ["Mangat Rai Bhardwaj"],
     year: 2016,
     publisher: "Routledge",
