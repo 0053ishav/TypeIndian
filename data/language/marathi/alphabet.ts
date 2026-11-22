@@ -64,13 +64,6 @@ export const marathiAlphabet: Alphabet = {
     { letter: "ळ", sound: "ḷa" },
   ],
 
-  // Extended vowel signs used in Marathi for sounds such as ॲ and ऑ.
-  extensions: [
-    { letter: "ॅ", sound: "candra e sign" },
-    { letter: "ॉ", sound: "candra o sign" },
-    { letter: "़", sound: "nukta (in relevant borrowed spellings)" },
-  ],
-
   vowelSigns: [
     { letter: "ा", sound: "ā" },
     { letter: "ि", sound: "i" },
@@ -82,6 +75,8 @@ export const marathiAlphabet: Alphabet = {
     { letter: "ै", sound: "ai" },
     { letter: "ो", sound: "o" },
     { letter: "ौ", sound: "au" },
+    { letter: "ॅ", sound: "candra e vowel sign" },
+    { letter: "ॉ", sound: "candra o vowel sign" },
   ],
 
   symbols: [
