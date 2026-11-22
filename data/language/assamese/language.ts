@@ -2,6 +2,7 @@ import type { Language } from "@/types/language";
 
 import { assameseAlphabet } from "./alphabet";
 import { ASSAMESE_FAQ, LEARN_ASSAMESE_FAQ } from "./faq";
+import { assameseResearch } from "./research";
 
 export const assamese: Language = {
   id: "assamese",
@@ -24,10 +25,10 @@ export const assamese: Language = {
     title: "Assamese Typing Tool",
 
     subtitle:
-      "Type in English and convert instantly to অসমীয়া",
+      "Type Assamese words using English letters",
 
     intro:
-      "Write Assamese naturally using English letters with TypeIndian's Assamese typing tool. Simply type phonetically in English and instantly convert your words into the Assamese script. No keyboard installation, no login - fast, accurate, and browser-based Assamese transliteration directly in your browser.",
+      "Write Assamese words with Roman letters and choose Assamese-script suggestions. This is transliteration, not English-to-Assamese translation. No Assamese keyboard layout is required.",
 
     learnLink: {
       href: "/learn/assamese",
@@ -42,7 +43,7 @@ export const assamese: Language = {
       title: "Assamese Typing Tool (English to Assamese)",
 
       description:
-        "Free English to Assamese typing tool. Type using English letters and instantly convert your text into the Assamese script. Fast, accurate phonetic transliteration with no login or installation required.",
+        "Type Assamese words using English letters and convert them to the Assamese script with transliteration suggestions. No keyboard installation is required.",
 
       keywords: [
         "English to Assamese typing",
@@ -59,7 +60,7 @@ export const assamese: Language = {
         title: "Assamese Typing Tool - TypeIndian",
 
         description:
-          "Type in English and instantly write in Assamese using accurate phonetic transliteration.",
+          "Type Assamese words with Roman letters and choose Assamese-script transliteration suggestions.",
 
         locale: "as_IN",
       },
@@ -68,7 +69,7 @@ export const assamese: Language = {
         title: "Assamese Typing Tool - TypeIndian",
 
         description:
-          "Fast, free, and browser-based English to Assamese typing.",
+          "A free browser-based tool for typing Assamese with Roman-letter input.",
       },
     },
   },
@@ -78,7 +79,7 @@ export const assamese: Language = {
       title: "Learn Assamese Typing",
 
       description:
-        "Learn how to type Assamese using English letters with this beginner-friendly guide. Explore the Assamese language, Assamese script, vowels, consonants, pronunciation, and phonetic typing.",
+        "Learn Assamese writing in the Eastern Nagari tradition: independent vowels, consonants, vowel signs, Assamese-specific letters, conjuncts, numerals, and Roman-to-Assamese typing.",
 
       cta: "Start Typing in Assamese →",
     },
@@ -88,7 +89,7 @@ export const assamese: Language = {
         "Learn Assamese Typing (English to Assamese) – Beginner Guide",
 
       description:
-        "Learn Assamese typing with an easy beginner guide. Understand the Assamese script, vowels, consonants, numerals, and English to Assamese phonetic typing.",
+        "A practical Assamese guide to Eastern Nagari writing, vowels, consonants, vowel signs, special letters, numerals, and Roman-to-Assamese transliteration.",
 
       keywords: [
         "learn Assamese typing",
@@ -107,7 +108,7 @@ export const assamese: Language = {
           "Learn Assamese Typing - Beginner Guide | TypeIndian",
 
         description:
-          "Master Assamese typing with a beginner-friendly guide covering the Assamese script, pronunciation, alphabet, and phonetic typing.",
+          "Learn the Assamese writing system, alphabet, vowel signs, Assamese-specific letters, numerals, and Roman-input typing.",
 
         locale: "as_IN",
       },
@@ -116,7 +117,7 @@ export const assamese: Language = {
         title: "Learn Assamese Typing - TypeIndian",
 
         description:
-          "Learn to type Assamese naturally using English letters with our complete beginner guide.",
+          "Learn Assamese letters and type Assamese words using Roman-letter transliteration.",
       },
     },
 
@@ -124,8 +125,8 @@ export const assamese: Language = {
       title: "About Assamese Language",
 
       paragraphs: [
-        "Assamese (অসমীয়া) is the official language of Assam and one of the major Indo-Aryan languages spoken in northeastern India. More than 15 million people speak Assamese worldwide.",
-        "Assamese has a literary tradition spanning several centuries and is closely associated with the works of Srimanta Sankardeva, whose writings and cultural contributions greatly influenced Assamese literature.",
+        "Assamese (অসমীয়া) is an Indo-Aryan language spoken primarily in Assam and by Assamese-speaking communities elsewhere. The Assam Official Language Act, 1960 provides for Assamese to be used for official purposes of the state, subject to safeguards and provisions for other language communities and regions.",
+        "Assamese has a long literary tradition. Srimanta Sankardeva (15th–16th century) was a major religious, literary, and cultural figure whose works helped shape Assamese literature and performance traditions. The Government of India announced Classical Language status for Assamese in October 2024.",
         "Assamese is written using the Assamese (Eastern Nagari) script. Although it shares many characters with the Bengali script, Assamese has its own pronunciation, vocabulary, and distinctive letters such as 'ৰ' and 'ৱ'.",
       ],
     },
@@ -134,15 +135,17 @@ export const assamese: Language = {
       title: "Assamese Script",
 
       paragraphs: [
-        "The Assamese script is an abugida writing system where every consonant carries an inherent vowel unless modified by a vowel sign or the virama (্).",
-        "The script includes independent vowels, consonants, vowel signs (matras), numerals, and conjunct letters. It belongs to the Eastern Nagari writing tradition.",
+        "Assamese uses an abugida writing system written from left to right. A consonant normally carries an inherent vowel; dependent vowel signs modify that vowel and the virama or hasanta (্) suppresses it.",
+        "The writing system includes independent vowels, consonants, dependent vowel signs, combining marks, conjuncts, and Eastern Nagari digits. The traditional chart is an orthographic inventory, not a direct count of modern Assamese phonemes.",
       ],
 
       bullets: [
         "Written from left to right",
         "Uses the Assamese (Eastern Nagari) script",
-        "Contains vowels and consonants",
-        "Uses vowel signs (matras)",
+        "Uses independent vowels and dependent vowel signs",
+        "Includes the Assamese letters ৰ and ৱ",
+        "Forms conjuncts using the virama (্)",
+        "Uses Eastern Nagari digits (০–৯)",
       ],
     },
 
