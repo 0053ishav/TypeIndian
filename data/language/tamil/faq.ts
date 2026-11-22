@@ -29,7 +29,7 @@ export const TAMIL_FAQ: FAQItem[] = [
   {
     question: "Is this a Tamil translation tool?",
     answer:
-      "No. It transliterates phonetic Roman input into Tamil script. Translation changes the language; transliteration changes how the same language is written.",
+      "No. It transliterates phonetic Roman input into Tamil script. It does not translate English into Tamil; transliteration changes the script used to write the same language.",
   },
   {
     question: "How accurate is English-to-Tamil transliteration?",
