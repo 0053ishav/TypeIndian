@@ -67,7 +67,7 @@ export const LEARN_TELUGU_FAQ: FAQItem[] = [
   {
     question: "How many consonants are there in Telugu?",
     answer:
-      "A traditional Telugu alphabet chart commonly presents 36 consonants: 25 arranged in five varga groups and 11 additional consonants. Some letters have limited, historical, or context-specific use, so a chart count is not the same as a count of everyday speech sounds.",
+      "A traditional Telugu alphabet chart commonly presents 35 consonants: 25 arranged in five varga groups and 10 additional consonants. Some letters have limited, historical, or context-specific use, so a chart count is not the same as a count of everyday speech sounds.",
   },
   {
     question: "What is the virama in Telugu?",
