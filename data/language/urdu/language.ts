@@ -197,7 +197,7 @@ export const urdu: Language = {
         title: "How Urdu Script Works",
         resourceIds: ["URD-R01", "URD-R02", "URD-R03"],
         paragraphs: [
-          "Urdu is written from right to left. The script is cursive: many letters join to neighboring letters, and their visible forms change according to whether they appear isolated, initially, medially, or finally.",
+          "Urdu is written from right to left. Short vowels are usually omitted in everyday writing and are added with marks when pronunciation needs clarification. The script is cursive: many letters join to neighboring letters, and their visible forms change according to whether they appear isolated, initially, medially, or finally.",
           "Letters are often described as connectors and non-connectors. A non-connector does not join to the following letter, creating a break in the cursive flow. This behavior is part of the orthography and should be handled by the text-shaping engine, not by manually choosing positional glyphs.",
           "Nastaliq has a characteristic diagonal baseline and extended ascenders and descenders. A font designed for Nastaliq is important for a natural Urdu reading experience; generic Arabic Naskh typography may look different.",
           "Urdu text can contain numbers and Latin words. These embedded runs follow the Unicode Bidirectional Algorithm, so an Urdu paragraph is not simply a string that should be reversed character by character."
