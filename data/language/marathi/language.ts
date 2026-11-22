@@ -197,12 +197,12 @@ export const marathi: Language = {
     curriculum: {
       research: marathiResearch,
       history: {
-        resourceIds: ["MAR-R02", "MAR-R06"],
+        resourceIds: ["MAR-R02", "MAR-R06", "MAR-R07"],
         title: "Marathi Language and Its Writing History",
         paragraphs: [
           "Marathi is an Indo-Aryan language with a long regional and literary history. Historical accounts connect its development with Middle Indo-Aryan varieties, including Maharashtri Prakrit, and later regional forms. These stages form a complex history rather than a simple one-step transformation.",
           "Modern Marathi is conventionally written in Balbodh, the Marathi form of Devanagari. Modi was also historically used for Marathi, especially in administrative records. Modi is important historical context, but it is not the script used by this modern typing guide.",
-          "Marathi is the official language of Maharashtra under the Maharashtra Official Languages Act, which identifies Marathi in Devanagari script.",
+          "Marathi is the official language of Maharashtra under the Maharashtra Official Languages Act, which identifies Marathi in Devanagari script. The Government of India declared Marathi a Classical Language by notification dated 4 October 2024.",
         ],
       },
       writingSystem: {
