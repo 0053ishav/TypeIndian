@@ -165,17 +165,31 @@ export const assamese: Language = {
       },
 
       extensions: {
-        title: "Additional Letters",
-
+        resourceIds: ["ASM-R01", "ASM-R05"],
+        title: "Modified Letters and Special Forms",
         description:
-          "These additional letters include traditional Assamese characters and conjunct letters used in classical and Sanskrit-derived words.",
+          "Modified forms such as ড়, ঢ়, and য় appear in Assamese orthography. The Assamese letters ৰ and ৱ are part of the main consonant chart. ক্ষ is a conjunct sequence, not an extra independently encoded letter.",
+      },
+
+      vowelSigns: {
+        resourceIds: ["ASM-R01", "ASM-R02", "ASM-R05"],
+        title: "Vowel Signs (কাৰ)",
+        description:
+          "Dependent vowel signs attach to consonants or consonant clusters. Their visual position does not always match their logical Unicode order.",
+      },
+
+      symbols: {
+        resourceIds: ["ASM-R01", "ASM-R02"],
+        title: "Special Signs and Marks",
+        description:
+          "Assamese writing uses candrabindu, anusvara, visarga, virama (hasanta), khanda ta, and other marks. These have distinct roles and should not be grouped as ordinary consonants.",
       },
 
       numerals: {
+        resourceIds: ["ASM-R01", "ASM-R02"],
         title: "Assamese Numerals",
-
         description:
-          "Assamese uses the traditional Eastern Nagari numeral system, which is shared with the Bengali script.",
+          "The Eastern Nagari digit forms are ০ ১ ২ ৩ ৪ ৫ ৬ ৭ ৮ ৯. Western digits are also common in modern digital text.",
       },
     },
 
@@ -204,7 +218,11 @@ export const assamese: Language = {
 
       consonants: "Consonants (ব্যঞ্জনবৰ্ণ)",
 
-      extensions: "Additional Letters",
+      extensions: "Modified Letters",
+
+      vowelSigns: "Vowel Signs (কাৰ)",
+
+      symbols: "Special Signs",
 
       numerals: "Assamese Numerals",
     },
