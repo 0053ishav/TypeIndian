@@ -21,16 +21,7 @@ function shortLabel(resource: LearnResource) {
 }
 
 function ResearchNetwork({ resources }: Props) {
-  const { points, edges, years } = useMemo(() => {
-    const dated = resources.filter((resource) => resource.year);
-    const minYear = Math.min(...dated.map((resource) => resource.year as number), 2000);
-    const maxYear = Math.max(...dated.map((resource) => resource.year as number), minYear + 1);
-    const plotLeft = 42;
-    const plotRight = 520;
-    const plotTop = 28;
-    const plotBottom = 194;
-    const undatedX = 580;
-
+  const { points, edges } = useMemo(() => {
     const ordered = [...resources].sort((a, b) => {
       if (!a.year && !b.year) return a.id.localeCompare(b.id);
       if (!a.year) return 1;
@@ -38,50 +29,48 @@ function ResearchNetwork({ resources }: Props) {
       return a.year - b.year || a.id.localeCompare(b.id);
     });
 
-    const datedIndex = new Map<string, number>();
-    let datedCount = 0;
-    ordered.forEach((resource) => {
-      if (resource.year) datedIndex.set(resource.id, datedCount++);
-    });
-    const datedTotal = Math.max(1, datedCount);
-    const undated = ordered.filter((resource) => !resource.year);
-    const undatedIndex = new Map(undated.map((resource, index) => [resource.id, index]));
-
-    const nodes: Point[] = ordered.map((resource) => {
-      const year = resource.year;
-      const x = year
-        ? plotLeft + ((year - minYear) / (maxYear - minYear)) * (plotRight - plotLeft)
-        : undatedX;
-      const index = year ? datedIndex.get(resource.id) ?? 0 : undatedIndex.get(resource.id) ?? 0;
-      const count = year ? datedTotal : Math.max(1, undated.length);
-      const y = plotTop + ((index + 0.5) / count) * (plotBottom - plotTop);
-      return { resource, x, y, label: shortLabel(resource) };
-    });
-
-    // Editorial relationship: connect each source to its strongest shared-topic match.
-    // This is deliberately not presented as a citation edge.
+    // Build editorial topic-overlap links. These are not citation relationships.
     const pairs = new Set<string>();
-    const links: Array<{ from: Point; to: Point }> = [];
-    nodes.forEach((point) => {
-      const matches = nodes
-        .filter((candidate) => candidate.resource.id !== point.resource.id)
+    const links: Array<{ fromId: string; toId: string }> = [];
+    ordered.forEach((resource) => {
+      const matches = ordered
+        .filter((candidate) => candidate.id !== resource.id)
         .map((candidate) => ({
           candidate,
-          overlap: point.resource.topics.filter((topic) => candidate.resource.topics.includes(topic)).length,
+          overlap: resource.topics.filter((topic) => candidate.topics.includes(topic)).length,
         }))
         .filter((match) => match.overlap > 0)
-        .sort((a, b) => b.overlap - a.overlap || a.candidate.resource.id.localeCompare(b.candidate.resource.id));
-      const best = matches[0]?.candidate;
-      if (!best) return;
-      const key = [point.resource.id, best.resource.id].sort().join("|");
-      if (pairs.has(key)) return;
-      pairs.add(key);
-      links.push({ from: point, to: best });
+        .sort((a, b) => b.overlap - a.overlap || a.candidate.id.localeCompare(b.candidate.id));
+
+      // Keep up to two strongest shared-topic connections per source.
+      matches.slice(0, 2).forEach(({ candidate }) => {
+        const key = [resource.id, candidate.id].sort().join("|");
+        if (pairs.has(key)) return;
+        pairs.add(key);
+        links.push({ fromId: resource.id, toId: candidate.id });
+      });
     });
 
-    const ticks = [...new Set(dated.map((resource) => resource.year as number))].sort((a, b) => a - b);
-    return { points: nodes, edges: links, years: ticks };
+    // A compact force-like radial layout: years determine ordering around the
+    // network, while the graph itself has no timeline axis.
+    const centerX = 320;
+    const centerY = 132;
+    const radiusX = resources.length > 8 ? 218 : 175;
+    const radiusY = resources.length > 8 ? 88 : 72;
+    const points = ordered.map((resource, index) => {
+      const angle = -Math.PI / 2 + (index / Math.max(1, ordered.length)) * Math.PI * 2;
+      return {
+        resource,
+        x: centerX + Math.cos(angle) * radiusX,
+        y: centerY + Math.sin(angle) * radiusY,
+        label: shortLabel(resource),
+      };
+    });
+
+    return { points, edges: links };
   }, [resources]);
+
+  const pointById = new Map(points.map((point) => [point.resource.id, point]));
 
   return (
     <div className="card w-full max-w-3xl space-y-2 p-3 md:p-4">
@@ -93,37 +82,25 @@ function ResearchNetwork({ resources }: Props) {
       <div className="overflow-x-auto">
         <svg
           role="img"
-          aria-label="Chronological research map. Nodes represent sources, placed by publication year. Lines show shared curriculum coverage, not citations."
-          viewBox="0 0 640 238"
+          aria-label="Research network. Nodes represent sources, arranged as a connected network. Labels show author and publication year. Lines show shared curriculum coverage, not citations."
+          viewBox="0 0 640 264"
           className="block h-auto w-full min-w-[520px]"
         >
-          <line x1="34" y1="210" x2="606" y2="210" stroke="var(--color-border)" strokeWidth="1" />
-          {years.map((year) => {
-            const datedYears = years;
-            const min = Math.min(...datedYears, 2000);
-            const max = Math.max(...datedYears, min + 1);
-            const x = 42 + ((year - min) / (max - min)) * (520 - 42);
+          {edges.map(({ fromId, toId }) => {
+            const from = pointById.get(fromId);
+            const to = pointById.get(toId);
+            if (!from || !to) return null;
             return (
-              <g key={year}>
-                <line x1={x} y1="206" x2={x} y2="214" stroke="var(--color-text-muted)" strokeWidth="1" />
-                <text x={x} y="228" textAnchor="middle" fontSize="9" fill="var(--color-text-muted)">{year}</text>
-              </g>
+              <path
+                key={[fromId, toId].sort().join("-")}
+                d={`M ${from.x} ${from.y} Q 320 132 ${to.x} ${to.y}`}
+                fill="none"
+                stroke="var(--color-border)"
+                strokeWidth="1"
+                opacity="0.85"
+              />
             );
           })}
-          {points.filter((point) => !point.resource.year).length > 0 ? (
-            <text x="580" y="228" textAnchor="middle" fontSize="9" fill="var(--color-text-muted)">Undated</text>
-          ) : null}
-
-          {edges.map(({ from, to }) => (
-            <path
-              key={[from.resource.id, to.resource.id].sort().join("-")}
-              d={`M ${from.x} ${from.y} Q ${(from.x + to.x) / 2} ${(from.y + to.y) / 2 - 14} ${to.x} ${to.y}`}
-              fill="none"
-              stroke="var(--color-border)"
-              strokeWidth="1"
-              opacity="0.8"
-            />
-          ))}
 
           {points.map((point) => (
             <a
@@ -143,11 +120,11 @@ function ResearchNetwork({ resources }: Props) {
               <circle
                 cx={point.x}
                 cy={point.y}
-                r="5.5"
-                fill="var(--color-background)"
+                r="6"
+                fill="var(--color-accent)"
                 stroke="var(--color-accent)"
-                strokeWidth="1.7"
-                className="transition-all hover:fill-(--color-accent)"
+                strokeWidth="1.5"
+                className="transition-all hover:opacity-75"
               />
               <text
                 x={point.x}
@@ -165,7 +142,7 @@ function ResearchNetwork({ resources }: Props) {
       </div>
 
       <p className="text-[10px] text-(--color-text-muted)">
-        Horizontal position follows publication year. Lines indicate shared curriculum coverage, not verified citation links.
+        Years appear with each source label. Lines indicate shared curriculum coverage, not verified citation links.
       </p>
     </div>
   );
