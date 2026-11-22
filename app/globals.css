@@ -833,3 +833,98 @@ details[open] {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+
+
+/* =========================
+   Semantic surfaces
+   Keep the light palette as the default; dark mode overrides only these
+   reusable surfaces so component markup stays theme-agnostic.
+========================= */
+.surface-glass {
+  background: rgb(255 255 255 / 0.7);
+  border-color: var(--color-border);
+  backdrop-filter: blur(12px);
+}
+
+.surface-glass-soft {
+  background: rgb(255 255 255 / 0.6);
+}
+
+.surface-panel {
+  background-color: var(--color-bg-card);
+  border-color: var(--color-border);
+}
+
+.surface-panel-muted {
+  background-color: #f8fafc;
+  border-color: var(--color-border);
+}
+
+.surface-panel-green {
+  background-color: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.surface-panel-orange {
+  background-color: #fff7ed;
+  border-color: #fed7aa;
+}
+
+.surface-demo-accent {
+  background: linear-gradient(135deg, #fff7ed 0%, #f0fdf4 100%);
+}
+
+.virtual-keyboard-toggle {
+  border: 1px solid #fed7aa;
+  background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
+  color: #9a3412;
+}
+
+.virtual-keyboard-toggle:hover {
+  border-color: #fdba74;
+  background: linear-gradient(135deg, #ffedd5 0%, #fde68a 100%);
+}
+
+:root[data-theme="dark"] .surface-glass {
+  background: rgb(17 24 39 / 0.88);
+  border-color: var(--color-border);
+}
+
+:root[data-theme="dark"] .surface-glass-soft {
+  background: rgb(17 24 39 / 0.72);
+}
+
+:root[data-theme="dark"] .surface-panel {
+  background-color: var(--color-bg-card);
+  border-color: var(--color-border);
+}
+
+:root[data-theme="dark"] .surface-panel-muted {
+  background-color: #1e293b;
+  border-color: var(--color-border);
+}
+
+:root[data-theme="dark"] .surface-panel-green {
+  background-color: #052e16;
+  border-color: #14532d;
+}
+
+:root[data-theme="dark"] .surface-panel-orange {
+  background-color: #431407;
+  border-color: #7c2d12;
+}
+
+:root[data-theme="dark"] .surface-demo-accent {
+  background: linear-gradient(135deg, #431407 0%, #052e16 100%);
+}
+
+:root[data-theme="dark"] .virtual-keyboard-toggle {
+  border-color: #7c2d12;
+  background: linear-gradient(135deg, #431407 0%, #292014 100%);
+  color: #fed7aa;
+}
+
+:root[data-theme="dark"] .virtual-keyboard-toggle:hover {
+  border-color: #9a3412;
+  background: linear-gradient(135deg, #7c2d12 0%, #3f2b16 100%);
+}
