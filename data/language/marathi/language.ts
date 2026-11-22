@@ -126,9 +126,9 @@ export const marathi: Language = {
       title: "About Marathi Language",
 
       paragraphs: [
-        "Marathi (मराठी) is the official language of Maharashtra and one of the most widely spoken languages in India. More than 80 million people speak Marathi worldwide.",
-        "Marathi belongs to the Indo-Aryan language family and has a rich literary tradition dating back several centuries. It is the language of renowned saints and poets such as Dnyaneshwar, Tukaram, and Namdev.",
-        "Marathi is written using the Devanagari script. Although it shares the script with Hindi, Marathi has its own pronunciation, grammar, vocabulary, and unique letters such as 'ळ'.",
+        "Marathi (मराठी) is an Indo-Aryan language and the official language of Maharashtra. It is also spoken by communities in neighbouring states and around the world. Speaker estimates depend on the census year and whether first- or additional-language speakers are counted.",
+        "Marathi has a long literary history, including important devotional, courtly, and modern traditions. Its history is connected with earlier Indo-Aryan stages and regional literary cultures; it should not be reduced to a simple direct derivation from Sanskrit.",
+        "Modern Marathi is written in Balbodh, the Marathi form of Devanagari. Marathi shares the broad script framework with Hindi but has its own phonology, grammar, vocabulary, orthographic conventions, and the distinctive letter ळ.",
       ],
     },
 
@@ -136,15 +136,17 @@ export const marathi: Language = {
       title: "Devanagari Script",
 
       paragraphs: [
-        "Marathi is written using the Devanagari script, an abugida writing system where every consonant carries an inherent vowel unless modified by a vowel sign or the virama (्).",
-        "The script contains vowels, consonants, vowel signs (matras), numerals, and additional letters used in Sanskrit-derived and borrowed words.",
+        "Modern standard Marathi is written in Balbodh, the Marathi form of Devanagari, an abugida written from left to right. A consonant normally carries an inherent vowel; dependent vowel signs change that vowel and the virama (्) suppresses it.",
+        "The writing system uses independent vowels, consonants, dependent vowel signs (मात्रा), combining marks, conjuncts, and Devanagari digits. Marathi also uses ॲ and ऑ in some words, especially loanwords. Historical Modi writing should not be confused with the modern standard script.",
       ],
 
       bullets: [
         "Written from left to right",
         "Uses the Devanagari script",
-        "Contains vowels and consonants",
-        "Uses vowel signs (matras)",
+        "Uses Balbodh, the Marathi form of Devanagari",
+        "Uses independent vowels and dependent vowel signs (मात्रा)",
+        "Includes the distinctive consonant ळ and extended vowels ॲ, ऑ",
+        "Forms conjuncts using the virama (्)",
       ],
     },
 
