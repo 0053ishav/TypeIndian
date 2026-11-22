@@ -73,7 +73,7 @@ describe("Odia learning curriculum", () => {
   it("explains transliteration accurately without promising translation or fixed suggestions", () => {
     const guide = odia.learn.curriculum?.typingGuide;
     expect(guide?.paragraphs.join(" ")).toMatch(/transliteration/i);
-    expect(guide?.paragraphs.join(" ")).toMatch(/does not promise/i);
+    expect(guide?.paragraphs.join(" ")).toMatch(/do not promise/i);
     expect(odia.faq.find(({ question }) => question.includes("translation"))?.answer).toMatch(/does not translate/i);
     expect(odia.faq.find(({ question }) => question.includes("accurate"))?.answer).toMatch(/depend on the input/i);
   });
