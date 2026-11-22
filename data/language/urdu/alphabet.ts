@@ -2,11 +2,11 @@ import { Alphabet } from "@/types/alphabet";
 
 export const urduAlphabet: Alphabet = {
   vowels: [
-    { letter: "ا", sound: "a" },
-    { letter: "آ", sound: "aa" },
-    { letter: "و", sound: "o" },
-    { letter: "ی", sound: "i" },
-    { letter: "ے", sound: "e" },
+    { letter: "ا", sound: "alif; vowel carrier /aː/ and initial vowel carrier" },
+    { letter: "آ", sound: "alif madd; long /ā/" },
+    { letter: "و", sound: "vāo; /v/, /w/, /ō/, /ū/, /au/ by context" },
+    { letter: "ی", sound: "choṭī yē; /y/, /ī/, /ē/ by context" },
+    { letter: "ے", sound: "baṛī yē; /ē/ and /ai/ by context" },
   ],
 
   consonants: [
@@ -14,47 +14,61 @@ export const urduAlphabet: Alphabet = {
     { letter: "پ", sound: "p" },
     { letter: "ت", sound: "t" },
     { letter: "ٹ", sound: "ṭ" },
-    { letter: "ث", sound: "s" },
-
+    { letter: "ث", sound: "s (Arabic/Persian loan spelling)" },
     { letter: "ج", sound: "j" },
     { letter: "چ", sound: "ch" },
-    { letter: "ح", sound: "h" },
+    { letter: "ح", sound: "h (loan spelling)" },
     { letter: "خ", sound: "kh" },
-
     { letter: "د", sound: "d" },
     { letter: "ڈ", sound: "ḍ" },
-    { letter: "ذ", sound: "z" },
+    { letter: "ذ", sound: "z (loan spelling)" },
     { letter: "ر", sound: "r" },
-    { letter: "ڑ", sound: "ṛ" },
+    { letter: "ڑ", sound: "ṛ (retroflex flap)" },
     { letter: "ز", sound: "z" },
     { letter: "ژ", sound: "zh" },
-
     { letter: "س", sound: "s" },
     { letter: "ش", sound: "sh" },
-    { letter: "ص", sound: "s" },
-    { letter: "ض", sound: "z" },
-    { letter: "ط", sound: "t" },
-    { letter: "ظ", sound: "z" },
-
-    { letter: "ع", sound: "a" },
+    { letter: "ص", sound: "s (loan spelling)" },
+    { letter: "ض", sound: "z (loan spelling)" },
+    { letter: "ط", sound: "t (loan spelling)" },
+    { letter: "ظ", sound: "z (loan spelling)" },
+    { letter: "ع", sound: "ʿ (often context-dependent in modern pronunciation)" },
     { letter: "غ", sound: "gh" },
-
     { letter: "ف", sound: "f" },
     { letter: "ق", sound: "q" },
-
     { letter: "ک", sound: "k" },
     { letter: "گ", sound: "g" },
     { letter: "ل", sound: "l" },
     { letter: "م", sound: "m" },
     { letter: "ن", sound: "n" },
-
     { letter: "ہ", sound: "h" },
   ],
 
   extensions: [
-    { letter: "ں", sound: "n" },
-    { letter: "ھ", sound: "h" },
-    { letter: "ء", sound: "hamza" },
+    { letter: "ں", sound: "nūn ghunna; word-final nasalization marker" },
+    { letter: "ھ", sound: "do cashmī hē; aspiration element in digraphs" },
+    { letter: "ء", sound: "hamza; glottal/orthographic marker and vowel-sequence role" },
+    { letter: "ؤ", sound: "vāo with hamza; orthographic combination" },
+    { letter: "ئ", sound: "choṭī yē with hamza; orthographic combination" },
+    { letter: "ۂ", sound: "hamza above choṭī hē; orthographic form" },
+    { letter: "ۓ", sound: "hamza above baṛī yē; orthographic form" },
+  ],
+
+  vowelSigns: [
+    { letter: "َ", sound: "zabar / fatḥa; short a" },
+    { letter: "ِ", sound: "zer / kasra; short i" },
+    { letter: "ُ", sound: "pesh / ḍamma; short u" },
+    { letter: "ٰ", sound: "dagger alif; long ā marker in specific forms" },
+    { letter: "ٓ", sound: "maddah; vowel-length / alif madd marker" },
+  ],
+
+  symbols: [
+    { letter: "ْ", sound: "jazm / sukūn; no following vowel" },
+    { letter: "ّ", sound: "tashdīd / shadda; consonant gemination" },
+    { letter: "ً", sound: "fatḥatān / tanwīn; mainly in Arabic-derived forms" },
+    { letter: "ٍ", sound: "kasratān / tanwīn; mainly in Arabic-derived forms" },
+    { letter: "ٌ", sound: "ḍammatān / tanwīn; mainly in Arabic-derived forms" },
+    { letter: "ٔ", sound: "hamza above; combining orthographic mark" },
   ],
 
   numerals: [

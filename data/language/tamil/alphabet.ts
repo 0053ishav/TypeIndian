@@ -3,56 +3,67 @@ import { Alphabet } from "@/types/alphabet";
 export const tamilAlphabet: Alphabet = {
   vowels: [
     { letter: "அ", sound: "a" },
-    { letter: "ஆ", sound: "aa" },
+    { letter: "ஆ", sound: "ā" },
     { letter: "இ", sound: "i" },
-    { letter: "ஈ", sound: "ee" },
+    { letter: "ஈ", sound: "ī" },
     { letter: "உ", sound: "u" },
-    { letter: "ஊ", sound: "oo" },
+    { letter: "ஊ", sound: "ū" },
     { letter: "எ", sound: "e" },
-    { letter: "ஏ", sound: "ee" },
+    { letter: "ஏ", sound: "ē" },
     { letter: "ஐ", sound: "ai" },
     { letter: "ஒ", sound: "o" },
-    { letter: "ஓ", sound: "oo" },
+    { letter: "ஓ", sound: "ō" },
     { letter: "ஔ", sound: "au" },
   ],
 
   consonants: [
     { letter: "க", sound: "ka" },
-    { letter: "ங", sound: "nga" },
-
-    { letter: "ச", sound: "cha" },
-    { letter: "ஞ", sound: "nya" },
-
+    { letter: "ங", sound: "ṅa" },
+    { letter: "ச", sound: "ca" },
+    { letter: "ஞ", sound: "ña" },
     { letter: "ட", sound: "ṭa" },
     { letter: "ண", sound: "ṇa" },
-
     { letter: "த", sound: "ta" },
     { letter: "ந", sound: "na" },
-
     { letter: "ப", sound: "pa" },
     { letter: "ம", sound: "ma" },
-
     { letter: "ய", sound: "ya" },
     { letter: "ர", sound: "ra" },
     { letter: "ல", sound: "la" },
     { letter: "வ", sound: "va" },
-
-    { letter: "ழ", sound: "zha" },
+    { letter: "ழ", sound: "ḻa" },
     { letter: "ள", sound: "ḷa" },
     { letter: "ற", sound: "ṟa" },
     { letter: "ன", sound: "ṉa" },
   ],
 
   extensions: [
-    { letter: "ஃ", sound: "ah" },     // Aytham
+    { letter: "ஜ", sound: "ja (Grantha)" },
+    { letter: "ஶ", sound: "śa (Grantha)" },
+    { letter: "ஷ", sound: "ṣa (Grantha)" },
+    { letter: "ஸ", sound: "sa (Grantha)" },
+    { letter: "ஹ", sound: "ha (Grantha)" },
+    { letter: "க்ஷ", sound: "kṣa (conjunct)" },
+    { letter: "ஸ்ரீ", sound: "śrī (traditional ligature)" },
+  ],
 
-    { letter: "ஜ", sound: "ja" },
-    { letter: "ஶ", sound: "sha" },
-    { letter: "ஷ", sound: "ṣha" },
-    { letter: "ஸ", sound: "sa" },
-    { letter: "ஹ", sound: "ha" },
+  vowelSigns: [
+    { letter: "ா", sound: "ā" },
+    { letter: "ி", sound: "i" },
+    { letter: "ீ", sound: "ī" },
+    { letter: "ு", sound: "u" },
+    { letter: "ூ", sound: "ū" },
+    { letter: "ெ", sound: "e" },
+    { letter: "ே", sound: "ē" },
+    { letter: "ை", sound: "ai" },
+    { letter: "ொ", sound: "o" },
+    { letter: "ோ", sound: "ō" },
+    { letter: "ௌ", sound: "au" },
+  ],
 
-    { letter: "க்ஷ", sound: "ksha" },
+  symbols: [
+    { letter: "்", sound: "pulli / virama" },
+    { letter: "ஃ", sound: "āytam" },
   ],
 
   numerals: [

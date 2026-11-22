@@ -1,37 +1,38 @@
 import { Alphabet } from "@/types/alphabet";
 
 export const marathiAlphabet: Alphabet = {
+  // Contemporary Marathi core vowels. ऋ occurs mainly in Sanskrit-derived vocabulary.
+  // ॲ and ऑ are included as extended vowels used especially in loanwords.
   vowels: [
     { letter: "अ", sound: "a" },
-    { letter: "आ", sound: "aa" },
+    { letter: "आ", sound: "ā" },
     { letter: "इ", sound: "i" },
-    { letter: "ई", sound: "ee" },
+    { letter: "ई", sound: "ī" },
     { letter: "उ", sound: "u" },
-    { letter: "ऊ", sound: "oo" },
-    { letter: "ऋ", sound: "ri" },
-    { letter: "ॠ", sound: "ree" },
-    { letter: "ऌ", sound: "li" },
-    { letter: "ॡ", sound: "lee" },
+    { letter: "ऊ", sound: "ū" },
+    { letter: "ऋ", sound: "ṛ" },
     { letter: "ए", sound: "e" },
     { letter: "ऐ", sound: "ai" },
     { letter: "ओ", sound: "o" },
     { letter: "औ", sound: "au" },
-    { letter: "अं", sound: "an" },
-    { letter: "अः", sound: "ah" },
+    { letter: "ॲ", sound: "ă / æ" },
+    { letter: "ऑ", sound: "ŏ / ɔ" },
   ],
 
+  // Traditional Devanagari consonant order, with Marathi's distinctive ळ.
+  // Phonetic inventories and the status of marginal sounds vary by analysis.
   consonants: [
     { letter: "क", sound: "ka" },
     { letter: "ख", sound: "kha" },
     { letter: "ग", sound: "ga" },
     { letter: "घ", sound: "gha" },
-    { letter: "ङ", sound: "nga" },
+    { letter: "ङ", sound: "ṅa" },
 
-    { letter: "च", sound: "cha" },
-    { letter: "छ", sound: "chha" },
+    { letter: "च", sound: "ca" },
+    { letter: "छ", sound: "cha" },
     { letter: "ज", sound: "ja" },
     { letter: "झ", sound: "jha" },
-    { letter: "ञ", sound: "nya" },
+    { letter: "ञ", sound: "ña" },
 
     { letter: "ट", sound: "ṭa" },
     { letter: "ठ", sound: "ṭha" },
@@ -56,26 +57,36 @@ export const marathiAlphabet: Alphabet = {
     { letter: "ल", sound: "la" },
     { letter: "व", sound: "va" },
 
-    { letter: "श", sound: "sha" },
-    { letter: "ष", sound: "ṣha" },
+    { letter: "श", sound: "śa" },
+    { letter: "ष", sound: "ṣa" },
     { letter: "स", sound: "sa" },
     { letter: "ह", sound: "ha" },
-
     { letter: "ळ", sound: "ḷa" },
   ],
 
-  extensions: [
-    { letter: "क़", sound: "qa" },
-    { letter: "ख़", sound: "kha" },
-    { letter: "ग़", sound: "ga" },
-    { letter: "ज़", sound: "za" },
-    { letter: "ड़", sound: "ṛa" },
-    { letter: "ढ़", sound: "ṛha" },
-    { letter: "फ़", sound: "fa" },
-    { letter: "य़", sound: "ya" },
+  vowelSigns: [
+    { letter: "ा", sound: "ā" },
+    { letter: "ि", sound: "i" },
+    { letter: "ी", sound: "ī" },
+    { letter: "ु", sound: "u" },
+    { letter: "ू", sound: "ū" },
+    { letter: "ृ", sound: "ṛ" },
+    { letter: "े", sound: "e" },
+    { letter: "ै", sound: "ai" },
+    { letter: "ो", sound: "o" },
+    { letter: "ौ", sound: "au" },
+    { letter: "ॅ", sound: "candra e vowel sign" },
+    { letter: "ॉ", sound: "candra o vowel sign" },
+  ],
 
-    { letter: "क्ष", sound: "ksha" },
-    { letter: "ज्ञ", sound: "gya" },
+  symbols: [
+    { letter: "ं", sound: "anusvāra" },
+    { letter: "ँ", sound: "candrabindu" },
+    { letter: "ः", sound: "visarga" },
+    { letter: "्", sound: "virāma / halant" },
+    { letter: "ऽ", sound: "avagraha" },
+    { letter: "।", sound: "daṇḍa" },
+    { letter: "॥", sound: "double daṇḍa" },
   ],
 
   numerals: [

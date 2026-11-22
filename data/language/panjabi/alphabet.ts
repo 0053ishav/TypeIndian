@@ -64,6 +64,27 @@ export const panjabiAlphabet: Alphabet = {
     { letter: "ਲ਼", sound: "la" },
   ],
 
+  vowelSigns: [
+    { letter: "ਾ", sound: "ā (kā)" },
+    { letter: "ਿ", sound: "i (ki)" },
+    { letter: "ੀ", sound: "ī (kī)" },
+    { letter: "ੁ", sound: "u (ku)" },
+    { letter: "ੂ", sound: "ū (kū)" },
+    { letter: "ੇ", sound: "ē (kē)" },
+    { letter: "ੈ", sound: "ai (kai)" },
+    { letter: "ੋ", sound: "ō (kō)" },
+    { letter: "ੌ", sound: "au (kau)" },
+  ],
+
+  symbols: [
+    { letter: "ਂ", sound: "bindi (nasal sign)" },
+    { letter: "ੰ", sound: "tippi (nasal sign)" },
+    { letter: "ੱ", sound: "addak (gemination mark)" },
+    { letter: "਼", sound: "pairī̃ bindī (nukta)" },
+    { letter: "੍", sound: "virama" },
+    { letter: "ਃ", sound: "visarga" },
+  ],
+
   numerals: [
     { latin: "0", native: "੦" },
     { latin: "1", native: "੧" },

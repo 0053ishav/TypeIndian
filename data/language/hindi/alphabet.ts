@@ -1,34 +1,36 @@
 import { Alphabet } from "@/types/alphabet";
 
 export const hindiAlphabet: Alphabet = {
+  // Traditional core independent vowels. ऋ is mainly found in Sanskrit-derived
+  // vocabulary in contemporary Hindi; its pronunciation varies by speaker.
   vowels: [
     { letter: "अ", sound: "a" },
-    { letter: "आ", sound: "aa" },
+    { letter: "आ", sound: "ā" },
     { letter: "इ", sound: "i" },
-    { letter: "ई", sound: "ee" },
+    { letter: "ई", sound: "ī" },
     { letter: "उ", sound: "u" },
-    { letter: "ऊ", sound: "oo" },
-    { letter: "ऋ", sound: "ri" },
+    { letter: "ऊ", sound: "ū" },
+    { letter: "ऋ", sound: "ṛ" },
     { letter: "ए", sound: "e" },
     { letter: "ऐ", sound: "ai" },
     { letter: "ओ", sound: "o" },
     { letter: "औ", sound: "au" },
-    { letter: "अं", sound: "an" },
-    { letter: "अः", sound: "ah" },
   ],
 
+  // Traditional varṇamālā order. Some letters are uncommon as independent
+  // sounds in everyday Hindi, and the chart is not a one-to-one phoneme list.
   consonants: [
     { letter: "क", sound: "ka" },
     { letter: "ख", sound: "kha" },
     { letter: "ग", sound: "ga" },
     { letter: "घ", sound: "gha" },
-    { letter: "ङ", sound: "nga" },
+    { letter: "ङ", sound: "ṅa" },
 
-    { letter: "च", sound: "cha" },
-    { letter: "छ", sound: "chha" },
+    { letter: "च", sound: "ca" },
+    { letter: "छ", sound: "cha" },
     { letter: "ज", sound: "ja" },
     { letter: "झ", sound: "jha" },
-    { letter: "ञ", sound: "nya" },
+    { letter: "ञ", sound: "ña" },
 
     { letter: "ट", sound: "ṭa" },
     { letter: "ठ", sound: "ṭha" },
@@ -53,21 +55,48 @@ export const hindiAlphabet: Alphabet = {
     { letter: "ल", sound: "la" },
     { letter: "व", sound: "va" },
 
-    { letter: "श", sound: "sha" },
-    { letter: "ष", sound: "ṣha" },
+    { letter: "श", sound: "śa" },
+    { letter: "ष", sound: "ṣa" },
     { letter: "स", sound: "sa" },
     { letter: "ह", sound: "ha" },
   ],
 
+  // Extended forms are deliberately separate from the core alphabet.
+  // Nukta forms modify base consonants; ऍ and ऑ are extended vowel letters.
   extensions: [
     { letter: "क़", sound: "qa" },
-    { letter: "ख़", sound: "kha" },
-    { letter: "ग़", sound: "ga" },
+    { letter: "ख़", sound: "xa" },
+    { letter: "ग़", sound: "ġa" },
     { letter: "ज़", sound: "za" },
     { letter: "ड़", sound: "ṛa" },
     { letter: "ढ़", sound: "ṛha" },
     { letter: "फ़", sound: "fa" },
-    { letter: "य़", sound: "ya" },
+    { letter: "ऍ", sound: "æ" },
+    { letter: "ऑ", sound: "ɔ" },
+  ],
+
+  vowelSigns: [
+    { letter: "ा", sound: "ā" },
+    { letter: "ि", sound: "i" },
+    { letter: "ी", sound: "ī" },
+    { letter: "ु", sound: "u" },
+    { letter: "ू", sound: "ū" },
+    { letter: "ृ", sound: "ṛ" },
+    { letter: "े", sound: "e" },
+    { letter: "ै", sound: "ai" },
+    { letter: "ो", sound: "o" },
+    { letter: "ौ", sound: "au" },
+  ],
+
+  symbols: [
+    { letter: "ं", sound: "anusvāra" },
+    { letter: "ँ", sound: "candrabindu" },
+    { letter: "ः", sound: "visarga" },
+    { letter: "़", sound: "nukta" },
+    { letter: "्", sound: "virāma / halant" },
+    { letter: "ऽ", sound: "avagraha" },
+    { letter: "।", sound: "daṇḍa" },
+    { letter: "॥", sound: "double daṇḍa" },
   ],
 
   numerals: [

@@ -84,7 +84,7 @@ export const LEARN_PANJABI_FAQ: FAQItem[] = [
   {
     question: "Is Panjabi a tonal language?",
     answer:
-      "Yes. Panjabi is the only tonal Indo-Aryan language. Tone can change the meaning of words even if the spelling looks similar.",
+      "Yes. Panjabi is one of the relatively few Indo-Aryan languages with lexical tone. Pitch can help distinguish words, although tone is not written with a dedicated mark in Gurmukhi.",
   },
   {
     question: "Do I need to memorize all letters before typing?",

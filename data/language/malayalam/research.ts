@@ -1,0 +1,83 @@
+import type { LearnResource } from "@/types/language";
+
+/**
+ * Malayalam learning references.
+ * Topic links indicate editorial relevance, not formal citation relationships.
+ */
+export const malayalamResearch: LearnResource[] = [
+  {
+    id: "MAL-R01",
+    title: "The Unicode Standard, Chapter 12: Malayalam",
+    type: "standard",
+    publisher: "The Unicode Consortium",
+    year: 2025,
+    url: "https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-12/",
+    summary: "Normative description of the Malayalam block U+0D00–U+0D7F, atomic vowel encoding, dependent vowel signs, virama (candrakkala), conjuncts, chillu forms, and shaping behaviour.",
+    topics: ["writingSystem", "consonantClassification", "vowelSigns", "specialCharacters"],
+    metadataStatus: "reviewed",
+  },
+  {
+    id: "MAL-R02",
+    title: "Malayalam Character Names List",
+    type: "standard",
+    publisher: "The Unicode Consortium",
+    url: "https://www.unicode.org/Public/UCD/latest/charts/nameslist/0d00/",
+    summary: "Official Unicode character names and code points for Malayalam letters, signs, dependent vowel signs, chillus, and native digits.",
+    topics: ["writingSystem", "vowelSigns", "specialCharacters", "numerals"],
+    metadataStatus: "reviewed",
+  },
+  {
+    id: "MAL-R03",
+    title: "The Kerala Official Languages Act, 1969",
+    type: "institutional-reference",
+    publisher: "India Code, Ministry of Law and Justice",
+    year: 1969,
+    url: "https://www.indiacode.nic.in/bitstream/123456789/20272/1/the_kerala_official_languages_act_1969.pdf",
+    summary: "State legislation adopting Malayalam and English for official purposes in Kerala. The legal status should not be simplified to Malayalam being the only official language.",
+    topics: ["history"],
+    metadataStatus: "reviewed",
+  },
+  {
+    id: "MAL-R04",
+    title: "Malayalam Language",
+    type: "institutional-reference",
+    publisher: "Government of Kerala",
+    url: "https://kerala.gov.in/subsubdetail/MTYzOTAxNDc0Ljg4/utttt",
+    summary: "Government of Kerala overview of Malayalam, its Dravidian language family, regions of use, literary history, and Classical Language recognition in 2013.",
+    topics: ["history"],
+    metadataStatus: "reviewed",
+  },
+  {
+    id: "MAL-R05",
+    title: "ISO 15919:2001 — Transliteration of Devanagari and Related Indic Scripts into Latin Characters",
+    type: "standard",
+    publisher: "International Organization for Standardization",
+    year: 2001,
+    url: "https://www.iso.org/standard/28333.html",
+    summary: "International transliteration standard whose covered scripts include Malayalam. ISO lists the 2001 edition as current while ISO/DIS 15919 is under development; formal romanization differs from informal phonetic typing.",
+    topics: ["typingGuide", "examples"],
+    metadataStatus: "reviewed",
+  },
+  {
+    id: "MAL-R06",
+    title: "Malayalam Orthography Notes",
+    type: "article",
+    publisher: "Writing Systems Technical Resources",
+    url: "https://r12a.github.io/scripts/mlym/ml.html",
+    summary: "Technical overview of Malayalam consonants, chillu forms, vowel signs, syllable codas, and orthographic behaviour. Used as a supplementary explanation alongside Unicode.",
+    topics: ["writingSystem", "consonantClassification", "vowelSigns", "specialCharacters"],
+    metadataStatus: "reviewed",
+  },
+  {
+    id: "MAL-R07",
+    title: "Malayalam-English Code-Switched: Grapheme to Phoneme System",
+    type: "paper",
+    authors: ["Manghat et al."],
+    year: 2020,
+    publisher: "INTERSPEECH",
+    url: "https://www.isca-archive.org/interspeech_2020/manghat20_interspeech.pdf",
+    summary: "Research paper discussing Malayalam grapheme-to-phoneme mapping, phonological inventory, inherent vowels, chandrakala, and consonant combinations. Its reported inventory counts are presented as one research convention, not a universal alphabet-chart count.",
+    topics: ["consonantClassification", "vowelSigns", "specialCharacters"],
+    metadataStatus: "reviewed",
+  },
+];

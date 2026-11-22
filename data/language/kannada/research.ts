@@ -1,0 +1,83 @@
+import type { LearnResource } from "@/types/language";
+
+/**
+ * Kannada learning references.
+ * Topic links indicate editorial relevance, not formal citation relationships.
+ */
+export const kannadaResearch: LearnResource[] = [
+  {
+    id: "KAN-R01",
+    title: "The Unicode Standard, Chapter 12: Kannada",
+    type: "standard",
+    publisher: "The Unicode Consortium",
+    year: 2024,
+    url: "https://www.unicode.org/versions/Unicode16.0.0/core-spec/chapter-12/",
+    summary: "Normative description of the Kannada block U+0C80–U+0CFF, inherent vowel, virama, vowel letters, conjunct formation, and shaping behaviour.",
+    topics: ["writingSystem", "consonantClassification", "vowelSigns", "specialCharacters"],
+    metadataStatus: "reviewed",
+  },
+  {
+    id: "KAN-R02",
+    title: "Kannada Character Code Chart",
+    type: "standard",
+    publisher: "The Unicode Consortium",
+    url: "https://www.unicode.org/Public/UCD/latest/charts/nameslist/0c80/",
+    summary: "Official character names and code points for Kannada letters, vowel signs, combining marks, archaic characters, and native digits.",
+    topics: ["writingSystem", "vowelSigns", "specialCharacters", "numerals"],
+    metadataStatus: "reviewed",
+  },
+  {
+    id: "KAN-R03",
+    title: "Proposal for a Kannada Script Root Zone Label Generation Ruleset",
+    type: "institutional-reference",
+    publisher: "Internet Corporation for Assigned Names and Numbers",
+    year: 2019,
+    url: "https://www.icann.org/en/system/files/files/proposal-kannada-lgr-06mar19-en.pdf",
+    summary: "Describes the modern Kannada aksharamale, its 13-vowel inventory, vowel signs, consonant classes, yogavahas, and conjuncts. Used as a script-structure reference, not as a substitute for a contemporary school textbook.",
+    topics: ["writingSystem", "consonantClassification", "vowelSigns", "numerals"],
+    metadataStatus: "reviewed",
+  },
+  {
+    id: "KAN-R04",
+    title: "Kannada Romanization Table",
+    type: "standard",
+    publisher: "Library of Congress",
+    url: "https://www.loc.gov/catdir/cpso/romanization/kannada.pdf",
+    summary: "Formal cataloguing romanization reference. Its scholarly conventions differ from casual Roman-letter input used by consumer transliteration tools.",
+    topics: ["typingGuide", "examples"],
+    metadataStatus: "verify",
+  },
+  {
+    id: "KAN-R05",
+    title: "ISO 15919:2001 — Transliteration of Devanagari and Related Indic Scripts into Latin Characters",
+    type: "standard",
+    publisher: "International Organization for Standardization",
+    year: 2001,
+    url: "https://www.iso.org/standard/28333.html",
+    summary: "International transliteration standard whose covered scripts include Kannada. ISO lists the 2001 edition as current while ISO/DIS 15919 is under development; do not treat this formal scheme as informal phonetic typing.",
+    topics: ["typingGuide", "examples"],
+    metadataStatus: "reviewed",
+  },
+  {
+    id: "KAN-R06",
+    title: "The Karnataka Official Language Act, 1963",
+    type: "institutional-reference",
+    publisher: "India Code, Ministry of Law and Justice",
+    year: 1963,
+    url: "https://www.indiacode.nic.in/bitstream/123456789/7524/1/26_of_1963_%28e%29.pdf",
+    summary: "State legislation adopting Kannada as the official language of Karnataka and describing continued use of English for specified official purposes.",
+    topics: ["history"],
+    metadataStatus: "reviewed",
+  },
+  {
+    id: "KAN-R07",
+    title: "Vyavaharika Kannada: Kannada Alphabets and Pronunciation",
+    type: "article",
+    publisher: "Visvesvaraya Technological University",
+    year: 2019,
+    url: "https://vtu.ac.in/pdf/cbcs/201718/kan2.pdf",
+    summary: "Educational reference discussing Kannada aksharamale, traditional letter categories, pronunciation, and the distinction between current and obsolete vowel forms. The source identifies itself as a draft copy.",
+    topics: ["history", "consonantClassification", "vowelSigns"],
+    metadataStatus: "verify",
+  },
+];
