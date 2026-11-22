@@ -1,11 +1,12 @@
-import type { LearnContentSection, LearnCurriculum } from "@/types/language";
+import type { LearnContentSection, LearnCurriculum, LearnResource } from "@/types/language";
+import LearnResearchSection from "./LearnResearchSection";
 
 type Props = {
   curriculum?: LearnCurriculum;
   direction: "ltr" | "rtl";
 };
 
-function ContentSection({ section }: { section?: LearnContentSection }) {
+function ContentSection({ section, resources }: { section?: LearnContentSection; resources: LearnResource[] }) {
   if (!section) return null;
 
   return (
@@ -23,6 +24,20 @@ function ContentSection({ section }: { section?: LearnContentSection }) {
               <li key={`${section.title}-bullet-${index}`}>{bullet}</li>
             ))}
           </ul>
+        ) : null}
+        {section.resourceIds?.length ? (
+          <div className="border-t border-(--color-border) pt-4 space-y-2">
+            <h3 className="text-sm font-semibold text-(--color-text-heading)">Related research</h3>
+            <ul className="space-y-1 text-sm">
+              {section.resourceIds.map((id) => resources.find((resource) => resource.id === id)).filter((resource): resource is LearnResource => Boolean(resource)).map((resource) => (
+                <li key={resource.id}>
+                  <a className="text-(--color-link) underline underline-offset-2" href={resource.url} target="_blank" rel="noreferrer">
+                    {resource.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
         ) : null}
       </div>
     </section>
@@ -52,7 +67,11 @@ export default function LearnCurriculumSections({ curriculum, direction }: Props
   return (
     <div className="space-y-14">
       {sections.map((section, index) => (
-        <ContentSection key={section?.title ?? `empty-${index}`} section={section} />
+        <ContentSection
+          key={section?.title ?? `empty-${index}`}
+          section={section}
+          resources={curriculum.research ?? []}
+        />
       ))}
 
       {curriculum.examples?.items.length ? (
@@ -129,6 +148,8 @@ export default function LearnCurriculumSections({ curriculum, direction }: Props
           </div>
         </section>
       ) : null}
+
+      <LearnResearchSection resources={curriculum.research ?? []} />
     </div>
   );
 }

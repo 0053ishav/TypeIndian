@@ -15,6 +15,23 @@ export interface LearnContentSection {
   title: string;
   paragraphs: string[];
   bullets?: string[];
+  /** Research sources that support or deepen this curriculum section. */
+  resourceIds?: string[];
+}
+
+export interface LearnResource {
+  id: string;
+  title: string;
+  type: "paper" | "article" | "standard" | "institutional-reference" | "book-chapter";
+  authors?: string[];
+  year?: number;
+  publisher?: string;
+  url: string;
+  doi?: string;
+  summary: string;
+  /** Curriculum section keys this source is relevant to; not citation edges. */
+  topics: string[];
+  metadataStatus?: "reviewed" | "verify";
 }
 
 export interface LearnTypingExample {
@@ -61,6 +78,8 @@ export interface LearnCurriculum {
     introduction?: string;
     items: LearnMistake[];
   };
+  /** Language-specific research library; sources are linked to curriculum topics. */
+  research?: LearnResource[];
 }
 
 export interface LanguageLearn {

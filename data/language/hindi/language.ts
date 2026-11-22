@@ -2,6 +2,7 @@ import type { Language } from "@/types/language";
 
 import { HINDI_FAQ, LEARN_HINDI_FAQ } from "./faq";
 import { hindiAlphabet } from "./alphabet";
+import { hindiResearch } from "./research";
 
 export const hindi: Language = {
   id: "hindi",
@@ -164,6 +165,7 @@ export const hindi: Language = {
       },
 
       vowelSigns: {
+        resourceIds: ["HIN-P01", "HIN-R01", "HIN-R02"],
         title: "Vowel Signs (मात्राएँ)",
 
         description:
@@ -178,6 +180,7 @@ export const hindi: Language = {
       },
 
       numerals: {
+        resourceIds: ["HIN-R01"],
         title: "Devanagari Numerals",
 
         description:
@@ -186,7 +189,10 @@ export const hindi: Language = {
     },
 
     curriculum: {
+      research: hindiResearch,
+
       history: {
+        resourceIds: ["HIN-R07", "HIN-R08", "HIN-R03", "HIN-R05", "HIN-R06"],
         title: "A Short History of Hindi and Devanagari",
         paragraphs: [
           "Modern Standard Hindi is based primarily on Khari Boli, a speech variety associated with the Delhi and western Uttar Pradesh region. Hindi developed through a complex history of Indo-Aryan speech and literary traditions; it should not be reduced to a simple, uninterrupted Sanskrit-to-Hindi sequence.",
@@ -195,6 +201,7 @@ export const hindi: Language = {
       },
 
       writingSystem: {
+        resourceIds: ["HIN-P01", "HIN-P03", "HIN-R01"],
         title: "How Devanagari Works",
         paragraphs: [
           "Devanagari is an abugida: a consonant letter normally includes an inherent vowel, commonly described for beginners as a short 'a' or schwa-like sound. An independent vowel letter is used when a vowel begins a syllable without a preceding consonant.",
@@ -211,6 +218,7 @@ export const hindi: Language = {
       },
 
       consonantClassification: {
+        resourceIds: ["HIN-R02", "HIN-R04"],
         title: "Hindi Consonant Groups",
         paragraphs: [
           "The traditional consonant chart arranges five groups (vargas) by place of articulation. Within each group, the first two letters are voiceless unaspirated and aspirated, the next two are voiced unaspirated and aspirated, and the fifth is a nasal.",
@@ -257,6 +265,7 @@ export const hindi: Language = {
       },
 
       specialCharacters: {
+        resourceIds: ["HIN-P03", "HIN-R01", "HIN-R02"],
         title: "Special Marks, Nukta, and Conjuncts",
         paragraphs: [
           "Anusvara (ं) and chandrabindu (ँ) are nasal marks, but they are not universally interchangeable. Chandrabindu commonly marks vowel nasalization; anusvara can represent a nasal sound or nasalization depending on the word and context.",
