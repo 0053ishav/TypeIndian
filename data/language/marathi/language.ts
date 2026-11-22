@@ -166,17 +166,31 @@ export const marathi: Language = {
       },
 
       extensions: {
-        title: "Additional Letters",
-
+        resourceIds: ["MAR-R01", "MAR-P01"],
+        title: "Extended Vowels and Signs",
         description:
-          "These additional letters include Nukta characters and common conjuncts used in borrowed words and traditional writing.",
+          "Marathi uses ॲ and ऑ for additional vowel qualities in some words, particularly loanwords. Their dependent signs are ॅ and ॉ. Conjuncts such as क्ष and ज्ञ are combinations of consonants, not extra independent consonant letters.",
+      },
+
+      vowelSigns: {
+        resourceIds: ["MAR-R01", "MAR-R04"],
+        title: "Vowel Signs (मात्रा)",
+        description:
+          "Dependent vowel signs attach to a consonant or consonant cluster. The sign ि is encoded after its consonant but appears visually before it.",
+      },
+
+      symbols: {
+        resourceIds: ["MAR-R01", "MAR-R05"],
+        title: "Special Marks and Punctuation (चिन्हे)",
+        description:
+          "Marks such as anusvāra, candrabindu, visarga, and virāma have distinct orthographic roles. Their use depends on the word and writing convention.",
       },
 
       numerals: {
-        title: "Marathi Numerals",
-
+        resourceIds: ["MAR-R01", "MAR-R05"],
+        title: "Devanagari Numerals",
         description:
-          "Marathi has its own native numeral system written using the Devanagari script, although Arabic numerals are commonly used today.",
+          "Devanagari includes native digits from ० to ९. Western digits (0–9) are also widely used in contemporary Marathi text.",
       },
     },
 
@@ -309,9 +323,13 @@ export const marathi: Language = {
 
       consonants: "Consonants (व्यंजन)",
 
-      extensions: "Additional Letters",
+      extensions: "Extended Vowels and Signs",
 
-      numerals: "Marathi Numerals",
+      vowelSigns: "Vowel Signs (मात्रा)",
+
+      symbols: "Special Marks",
+
+      numerals: "Devanagari Numerals",
     },
   },
 
