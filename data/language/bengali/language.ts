@@ -309,7 +309,15 @@ export const bengali: Language = {
 
       consonants: "Consonants (ব্যঞ্জনবর্ণ)",
 
-      extensions: "Additional Letters",
+      extensions: "Modified Letters",
+
+      vowelSigns: "Vowel Signs (কার)",
+
+      symbols: "Special Signs",
+
+      vowelSigns: "Vowel Signs (কার)",
+
+      symbols: "Special Signs",
 
       numerals: "Bengali Numerals",
     },
