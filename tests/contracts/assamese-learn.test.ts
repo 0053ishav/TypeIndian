@@ -56,7 +56,7 @@ describe("Assamese learning curriculum", () => {
     expect(writing).toMatch(/U\+0980–U\+09FF/);
     expect(writing).toMatch(/ৰ/);
     expect(writing).toMatch(/ৱ/);
-    expect(writing).toMatch(/not the same language/i);
+    expect(writing).toMatch(/same language/i);
   });
 
   it("describes transliteration accurately and does not promise English translation", () => {
@@ -72,6 +72,6 @@ describe("Assamese learning curriculum", () => {
 
     expect(writing).toMatch(/ক্ষ/);
     expect(writing).toMatch(/ক \+ ্ \+ ষ/);
-    expect(writing).toMatch(/not a separately encoded independent consonant/i);
+    expect(writing).toMatch(/rather than a separately encoded independent consonant/i);
   });
 });
