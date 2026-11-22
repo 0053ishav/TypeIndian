@@ -71,9 +71,6 @@ export const kannadaAlphabet: Alphabet = {
     { letter: "ಽ", sound: "avagraha" },
     { letter: "ೕ", sound: "length mark" },
     { letter: "ೖ", sound: "ai length mark" },
-    { letter: "ೱ", sound: "vedic tone mark (specialized)" },
-    { letter: "ೲ", sound: "vedic tone mark (specialized)" },
-    { letter: "ೞ", sound: "archaic letter; not a punctuation mark" },
   ],
   numerals: [
     { latin: "0", native: "೦" }, { latin: "1", native: "೧" },
