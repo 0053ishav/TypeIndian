@@ -115,13 +115,6 @@ function ResearchNetwork({ resources }: Props) {
               rel="noreferrer"
               aria-label={`Open ${point.resource.title}`}
             >
-              <title>
-                {point.resource.title}
-                {"\n"}
-                {[point.resource.authors?.join(", "), point.resource.year, point.resource.publisher].filter(Boolean).join(" · ")}
-                {"\n"}
-                {point.resource.summary}
-              </title>
               <circle
                 cx={point.x}
                 cy={point.y}
