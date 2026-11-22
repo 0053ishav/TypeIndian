@@ -72,6 +72,8 @@ export const teluguAlphabet: Alphabet = {
     { letter: "ూ", sound: "ū" },
     { letter: "ృ", sound: "ṛ" },
     { letter: "ౄ", sound: "ṝ" },
+    { letter: "ౢ", sound: "ḷ (extended)" },
+    { letter: "ౣ", sound: "ḹ (extended)" },
     { letter: "ె", sound: "e" },
     { letter: "ే", sound: "ē" },
     { letter: "ై", sound: "ai" },
