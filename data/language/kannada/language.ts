@@ -1,6 +1,7 @@
 import type { Language } from "@/types/language";
 
 import { kannadaAlphabet } from "./alphabet";
+import { kannadaResearch } from "./research";
 import { KANNADA_FAQ, LEARN_KANNADA_FAQ } from "./faq";
 
 export const kannada: Language = {
@@ -123,57 +124,154 @@ export const kannada: Language = {
 
     about: {
       title: "About Kannada Language",
-
       paragraphs: [
-        "Kannada (ಕನ್ನಡ) is the official language of Karnataka and one of the oldest continuously spoken languages in India. More than 45 million people speak Kannada worldwide.",
-        "Kannada belongs to the Dravidian language family and has a literary tradition spanning over 1,500 years. It is recognized as one of the Classical Languages of India.",
-        "Kannada is written using the Kannada script, a Brahmic writing system known for its rounded letterforms and rich literary heritage.",
+        "Kannada (ಕನ್ನಡ) is a major Dravidian language spoken primarily in Karnataka and by communities across India and the world. It is one of the languages listed in the Eighth Schedule of the Constitution of India.",
+        "Kannada has a long documented literary history. The Government of India recognized Kannada as a Classical Language in 2008.",
+        "Kannada is written using the Kannada script, a Brahmic writing system closely related to Telugu in letter shapes and conjunct behaviour.",
       ],
     },
 
     script: {
       title: "Kannada Script",
-
       paragraphs: [
-        "The Kannada script is an abugida writing system in which every consonant carries an inherent vowel unless modified by a vowel sign or the virama (್).",
-        "The script contains independent vowels, consonants, vowel signs (matras), numerals, and conjunct letters. Its rounded appearance developed from centuries of writing on palm leaves.",
+        "The Kannada script is a left-to-right abugida. A consonant normally carries the inherent vowel ಅ; dependent vowel signs replace that vowel, while the virama (್) suppresses it.",
+        "The script contains independent vowels, consonants, dependent vowel signs, yogavahas such as anusvara and visarga, conjuncts, and native digits. Its letterforms evolved through historical writing and manuscript traditions.",
       ],
-
       bullets: [
         "Written from left to right",
-        "Uses the Kannada script",
-        "Contains vowels and consonants",
-        "Uses vowel signs (matras)",
+        "Uses the Kannada script (U+0C80–U+0CFF)",
+        "Consonants carry an inherent vowel ಅ",
+        "Uses dependent vowel signs and virama",
       ],
     },
 
     alphabet: {
       vowels: {
         title: "Vowels (ಸ್ವರಗಳು)",
-
-        description:
-          "Kannada vowels represent independent vowel sounds and form the foundation of pronunciation in the Kannada writing system.",
+        description: "The modern Kannada learner chart commonly presents 13 independent vowels. Historical and Sanskrit-related vocalic letters are shown separately.",
       },
-
       consonants: {
         title: "Consonants (ವ್ಯಂಜನಗಳು)",
-
-        description:
-          "Kannada consonants represent the primary sounds used to write native Kannada words and combine with vowel signs to form syllables.",
+        description: "Kannada consonants are traditionally organized into five groups of five and a further nine ungrouped consonants. This is an orthographic chart, not a complete inventory of spoken sounds.",
       },
-
       extensions: {
-        title: "Additional Letters",
-
-        description:
-          "These additional characters include common conjunct letters used in Sanskrit-derived words and traditional Kannada writing.",
+        title: "Historical and Sanskrit Letters",
+        description: "These specialist or historical characters are separate from the modern core vowel and consonant chart. Conjuncts such as ಕ್ಷ and ಜ್ಞ are sequences, not independent letters.",
       },
-
+      vowelSigns: {
+        title: "Vowel Signs (ಮಾತ್ರೆಗಳು)",
+        description: "Dependent vowel signs attach to consonants to replace the inherent vowel. Their logical Unicode order and visible glyph placement are handled by script shaping.",
+      },
+      symbols: {
+        title: "Special Signs and Symbols",
+        description: "Anusvara, visarga, virama, nukta, avagraha, and length marks have distinct functions and are not independent vowels.",
+      },
       numerals: {
         title: "Kannada Numerals",
+        description: "Kannada has ten native digits, although Western digits are also widely used in modern digital text.",
+      },
+    },
 
-        description:
-          "Kannada has its own traditional numeral system, although Arabic numerals are commonly used in everyday writing.",
+    curriculum: {
+      research: kannadaResearch,
+      history: {
+        title: "Kannada Language and Its History",
+        resourceIds: ["KAN-R03", "KAN-R06", "KAN-R07"],
+        paragraphs: [
+          "Kannada (ಕನ್ನಡ) is a Dravidian language spoken primarily in Karnataka and by communities in other parts of India and abroad. It has a substantial literary tradition and a long history of inscriptional and manuscript use.",
+          "Kannada is one of the languages in the Eighth Schedule of the Constitution of India. The Karnataka Official Language Act, 1963 adopts Kannada as the official language of the State while allowing continued use of English for specified official purposes.",
+          "The Government of India recognized Kannada as a Classical Language in 2008. This recognition relates to its historical literary record and does not mean that modern Kannada is no longer a living language.",
+        ],
+      },
+      writingSystem: {
+        title: "How the Kannada Script Works",
+        resourceIds: ["KAN-R01", "KAN-R02", "KAN-R03"],
+        paragraphs: [
+          "Kannada is a left-to-right abugida. A consonant normally carries an inherent vowel ಅ. A dependent vowel sign changes that vowel, while the virama (್), also called halant, suppresses it.",
+          "The Kannada script occupies the Unicode block U+0C80–U+0CFF. Kannada is closely related to Telugu in letter shapes and conjunct behaviour, while retaining its own orthographic conventions.",
+          "Consonant clusters are written using sequences of consonants and virama. The familiar forms ಕ್ಷ and ಜ್ಞ are conjuncts, not independent basic consonant letters. Their visible shapes depend on shaping rules and fonts.",
+          "Unicode stores text in logical character order. Rendering software shapes consonants, vowel signs, and conjuncts into their visible forms; do not manually reorder characters based only on how a glyph appears.",
+        ],
+        bullets: ["Independent vowel: ಆ", "Consonant with inherent vowel: ಕ", "Dependent vowel sign: ಕಾ", "Another vowel sign: ಕಿ", "Virama: ಕ್", "Conjunct examples: ಕ್ಷ and ಜ್ಞ", "Native digits: ೦ ೧ ೨ ೩ ೪ ೫ ೬ ೭ ೮ ೯"],
+      },
+      consonantClassification: {
+        title: "Kannada Consonants and Their Traditional Groups",
+        resourceIds: ["KAN-R03", "KAN-R07"],
+        paragraphs: [
+          "A commonly used modern Kannada alphabet chart lists 34 consonants: 25 grouped consonants arranged in five varga rows, followed by 9 ungrouped consonants. This is a traditional orthographic inventory, not a count of every consonant sound in contemporary speech.",
+          "The five varga groups are velar, palatal, retroflex, dental, and bilabial. Each row is traditionally arranged by voicing and aspiration, ending with a nasal consonant.",
+          "The ungrouped series includes ಯ ರ ಲ ವ ಶ ಷ ಸ ಹ ಳ. The letter ಳ is a distinct retroflex lateral consonant and should not be confused with ಲ.",
+          "Conjuncts such as ಕ್ಷ and ಜ್ಞ are combinations of consonants with virama. They should not be counted as additional independent consonants.",
+        ],
+        bullets: ["Velar: ಕ ಖ ಗ ಘ ಙ", "Palatal: ಚ ಛ ಜ ಝ ಞ", "Retroflex: ಟ ಠ ಡ ಢ ಣ", "Dental: ತ ಥ ದ ಧ ನ", "Bilabial: ಪ ಫ ಬ ಭ ಮ", "Ungrouped: ಯ ರ ಲ ವ ಶ ಷ ಸ ಹ ಳ"],
+      },
+      vowelSigns: {
+        title: "Independent Vowels and Kannada Matras",
+        resourceIds: ["KAN-R01", "KAN-R02", "KAN-R03"],
+        paragraphs: [
+          "A commonly taught modern independent-vowel series contains 13 letters: ಅ, ಆ, ಇ, ಈ, ಉ, ಊ, ಋ, ಎ, ಏ, ಐ, ಒ, ಓ, and ಔ. The historical letter ಌ and Sanskrit vocalic extensions such as ೠ and ೡ should be distinguished from this modern core set.",
+          "When a vowel follows a consonant, it is usually written as a dependent vowel sign rather than as a separate independent letter. The sign replaces the consonant's inherent ಅ.",
+          "Kannada has signs for ā, i, ī, u, ū, vocalic r, e, ē, ai, o, ō, and au. Some signs have multi-code-point canonical decompositions in Unicode; applications should preserve normalized text and rely on proper shaping.",
+        ],
+        bullets: ["ಕ + ಾ → ಕಾ", "ಕ + ಿ → ಕಿ", "ಕ + ೀ → ಕೀ", "ಕ + ು → ಕು", "ಕ + ೂ → ಕೂ", "ಕ + ೃ → ಕೃ", "ಕ + ೆ → ಕೆ", "ಕ + ೇ → ಕೇ", "ಕ + ೈ → ಕೈ", "ಕ + ೊ → ಕೊ", "ಕ + ೋ → ಕೋ", "ಕ + ೌ → ಕೌ"],
+      },
+      numerals: {
+        title: "Kannada Numerals",
+        resourceIds: ["KAN-R02", "KAN-R03"],
+        paragraphs: [
+          "Kannada has ten native digits: ೦ ೧ ೨ ೩ ೪ ೫ ೬ ೭ ೮ ೯. They correspond to Western digits 0 through 9.",
+          "Western digits are also widely used in modern digital contexts. A typing tool should preserve the user's chosen numeral system unless conversion is explicitly requested.",
+        ],
+      },
+      specialCharacters: {
+        title: "Virama, Yogavahas, and Other Signs",
+        resourceIds: ["KAN-R01", "KAN-R02"],
+        paragraphs: [
+          "The virama (್) suppresses the inherent vowel and helps form consonant clusters. A conjunct is a sequence of encoded consonants and virama, even when the font displays a compact ligature.",
+          "Anusvara (ಂ) and visarga (ಃ) are called yogavahas in traditional Kannada teaching. They are not independent vowels or ordinary consonants.",
+          "The nukta (಼) and avagraha (ಽ) are encoded signs with specialized uses. The length marks (ೕ and ೖ) participate in vowel representation and should not be confused with standalone vowel letters.",
+          "The Unicode block also contains historical and specialist characters, including archaic forms. Their presence in Unicode does not make them part of everyday modern Kannada spelling.",
+        ],
+      },
+      examples: {
+        title: "Everyday Kannada Words",
+        introduction: "These examples pair common Kannada words with practical Roman learner cues. Roman spellings are illustrative rather than a single formal transliteration scheme.",
+        items: [
+          { native: "ಕನ್ನಡ", roman: "kannaḍa", meaning: "Kannada" },
+          { native: "ನಮಸ್ಕಾರ", roman: "namaskāra", meaning: "hello / greetings" },
+          { native: "ಧನ್ಯವಾದ", roman: "dhanyavāda", meaning: "thank you" },
+          { native: "ನೀರು", roman: "nīru", meaning: "water" },
+          { native: "ಮನೆ", roman: "mane", meaning: "house / home" },
+          { native: "ಹೇಗಿದ್ದೀರಾ?", roman: "hēgiddīrā?", meaning: "How are you? (polite)" },
+          { native: "ನಾನು", roman: "nānu", meaning: "I" },
+        ],
+      },
+      typingGuide: {
+        title: "Typing Kannada with Roman Letters",
+        paragraphs: [
+          "Type Kannada words using Roman letters and select the Kannada-script suggestion that matches the word you intend. This is transliteration: it changes the script, not the language or meaning.",
+          "Informal Roman input is flexible and may represent long vowels, retroflex consonants, and aspirated consonants in several ways. Formal Library of Congress and ISO 15919 romanization use scholarly conventions and are not the same as casual typing.",
+          "The same Roman input can be ambiguous. Use the surrounding sentence to select the intended suggestion and proofread names, grammatical endings, and formal writing.",
+          "TypeIndian uses its configured Google Input Tools provider for Kannada suggestions. The examples in this guide are language-learning examples and do not guarantee the provider's exact suggestion order.",
+        ],
+        examples: [
+          { input: "namaskara", output: "ನಮಸ್ಕಾರ", explanation: "A common greeting." },
+          { input: "kannada", output: "ಕನ್ನಡ", explanation: "The name of the language." },
+          { input: "neeru", output: "ನೀರು", explanation: "The word for water." },
+          { input: "dhanyavada", output: "ಧನ್ಯವಾದ", explanation: "A common expression of thanks." },
+        ],
+        notes: ["Choose suggestions by meaning and sentence context.", "Roman input is not a one-to-one spelling standard.", "Use the virama and vowel signs correctly when editing Kannada script directly.", "The typing tool transliterates Kannada words; it does not translate English sentences."],
+      },
+      commonMistakes: {
+        title: "Common Kannada Writing and Typing Mistakes",
+        introduction: "These mistakes come from mixing up the modern core alphabet, dependent signs, conjuncts, and transliteration conventions.",
+        items: [
+          { incorrect: "Counting ಌ, ೠ, and ೡ as ordinary modern core vowels", correct: "Learn the 13-vowel modern chart first and study historical or Sanskrit forms separately.", explanation: "The Unicode repertoire includes characters beyond the everyday core alphabet." },
+          { incorrect: "Counting ಕ್ಷ and ಜ್ಞ as independent consonants", correct: "Learn them as conjunct sequences formed with consonants and virama.", explanation: "They are not separately encoded basic consonant letters." },
+          { incorrect: "Confusing ಲ and ಳ", correct: "Recognize them as distinct letters with different articulation.", explanation: "The retroflex lateral ಳ is not interchangeable with ಲ." },
+          { incorrect: "Treating vowel signs as independent vowel letters", correct: "Learn each dependent sign in combination with a consonant.", explanation: "A sign modifies the inherent vowel of the consonant it attaches to." },
+          { incorrect: "Assuming casual Roman input follows ISO 15919", correct: "Treat consumer transliteration input as flexible and select suggestions by context.", explanation: "Formal romanization and practical phonetic typing serve different purposes." },
+        ],
       },
     },
 
@@ -202,7 +300,11 @@ export const kannada: Language = {
 
       consonants: "Consonants (ವ್ಯಂಜನಗಳು)",
 
-      extensions: "Additional Letters",
+      extensions: "Historical and Sanskrit Letters",
+
+      vowelSigns: "Vowel Signs (ಮಾತ್ರೆಗಳು)",
+
+      symbols: "Special Signs and Symbols",
 
       numerals: "Kannada Numerals",
     },
