@@ -1,4 +1,4 @@
-import { Alphabet } from "@/types/alphabet";
+import type { Alphabet } from "@/types/alphabet";
 
 export const nepaliAlphabet: Alphabet = {
   vowels: [
@@ -8,7 +8,7 @@ export const nepaliAlphabet: Alphabet = {
     { letter: "ई", sound: "ī" },
     { letter: "उ", sound: "u" },
     { letter: "ऊ", sound: "ū" },
-    { letter: "ऋ", sound: "r̥" },
+    { letter: "ऋ", sound: "ṛ" },
     { letter: "ए", sound: "e" },
     { letter: "ऐ", sound: "ai" },
     { letter: "ओ", sound: "o" },
@@ -21,36 +21,30 @@ export const nepaliAlphabet: Alphabet = {
     { letter: "ग", sound: "ga" },
     { letter: "घ", sound: "gha" },
     { letter: "ङ", sound: "ṅa" },
-
     { letter: "च", sound: "ca" },
     { letter: "छ", sound: "cha" },
     { letter: "ज", sound: "ja" },
     { letter: "झ", sound: "jha" },
     { letter: "ञ", sound: "ña" },
-
     { letter: "ट", sound: "ṭa" },
     { letter: "ठ", sound: "ṭha" },
     { letter: "ड", sound: "ḍa" },
     { letter: "ढ", sound: "ḍha" },
     { letter: "ण", sound: "ṇa" },
-
     { letter: "त", sound: "ta" },
     { letter: "थ", sound: "tha" },
     { letter: "द", sound: "da" },
     { letter: "ध", sound: "dha" },
     { letter: "न", sound: "na" },
-
     { letter: "प", sound: "pa" },
     { letter: "फ", sound: "pha" },
     { letter: "ब", sound: "ba" },
     { letter: "भ", sound: "bha" },
     { letter: "म", sound: "ma" },
-
     { letter: "य", sound: "ya" },
     { letter: "र", sound: "ra" },
     { letter: "ल", sound: "la" },
     { letter: "व", sound: "va" },
-
     { letter: "श", sound: "śa" },
     { letter: "ष", sound: "ṣa" },
     { letter: "स", sound: "sa" },
@@ -58,9 +52,33 @@ export const nepaliAlphabet: Alphabet = {
   ],
 
   extensions: [
-    { letter: "क्ष", sound: "kṣa" },
-    { letter: "त्र", sound: "tra" },
-    { letter: "ज्ञ", sound: "jña" },
+    { letter: "क्ष", sound: "kṣa (conjunct)" },
+    { letter: "त्र", sound: "tra (conjunct)" },
+    { letter: "ज्ञ", sound: "jña (conjunct)" },
+    { letter: "ॠ", sound: "ṝ (Sanskrit-related)" },
+    { letter: "ऌ", sound: "ḷ (Sanskrit-related)" },
+    { letter: "ॡ", sound: "ḹ (Sanskrit-related)" },
+  ],
+
+  vowelSigns: [
+    { letter: "ा", sound: "ā" },
+    { letter: "ि", sound: "i" },
+    { letter: "ी", sound: "ī" },
+    { letter: "ु", sound: "u" },
+    { letter: "ू", sound: "ū" },
+    { letter: "ृ", sound: "ṛ" },
+    { letter: "े", sound: "e" },
+    { letter: "ै", sound: "ai" },
+    { letter: "ो", sound: "o" },
+    { letter: "ौ", sound: "au" },
+  ],
+
+  symbols: [
+    { letter: "्", sound: "hal / virama" },
+    { letter: "ं", sound: "anusvara / shirbindu" },
+    { letter: "ँ", sound: "chandrabindu" },
+    { letter: "ः", sound: "visarga / bisarga" },
+    { letter: "।", sound: "purna viram / danda" },
   ],
 
   numerals: [
