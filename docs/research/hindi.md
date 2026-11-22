@@ -141,37 +141,102 @@ Important distinction:
 ## Source register
 
 1. Unicode Standard, Chapter 12 — South and Central Asia scripts, Devanagari encoding, abugida behaviour, vowel signs, conjuncts, and punctuation:
-   https://unicode.org/versions/Unicode18.0.0/core-spec/chapter-12/
+   [Unicode Standard, Chapter 12 — Devanagari](https://unicode.org/versions/Unicode18.0.0/core-spec/chapter-12/)
 
 2. Central Hindi Directorate — Devanagari script and Hindi spelling standardization:
-   https://www.chd.education.gov.in/en/devanagari-lipi-tatha-hindi-vartani-manakikaran
+   [Central Hindi Directorate — Devanagari script and Hindi spelling standardization](https://www.chd.education.gov.in/en/devanagari-lipi-tatha-hindi-vartani-manakikaran)
 
 3. Archaeological Survey of India, Bharat SHRI epigraphy — historical script development and inscriptions:
-   https://bharatshri.asi.gov.in/AboutEpigraphy?lang=en
+   [Archaeological Survey of India — Bharat SHRI epigraphy](https://bharatshri.asi.gov.in/AboutEpigraphy?lang=en)
 
 4. Census of India, Linguistic Survey of India: Uttar Pradesh — regional Hindi phonological description. Treat as a regional study, not a universal description of all Hindi varieties:
-   https://censusindia.gov.in/nada/index.php/catalog/45240/download/48950/LSI_UTTAR_PRADESH.pdf
+   [Census of India — Linguistic Survey of India: Uttar Pradesh](https://censusindia.gov.in/nada/index.php/catalog/45240/download/48950/LSI_UTTAR_PRADESH.pdf)
 
 5. IGNOU, BHIC-112, Unit 2 — Hindi language history and literary traditions:
-   https://www.egyankosh.ac.in/bitstream/123456789/82878/1/Unit-2.pdf
+   [IGNOU — BHIC-112, Unit 2: Hindi history and literary traditions](https://www.egyankosh.ac.in/bitstream/123456789/82878/1/Unit-2.pdf)
 
 6. McGregor, Cambridge — early Hindi prose and the emergence of standard Hindi:
-   https://doi.org/10.1017/S0035869X00125730
+   [McGregor — Cambridge research on early Hindi prose and standard Hindi](https://doi.org/10.1017/S0035869X00125730)
 
 7. Narasimhan, Sproat, and Kiraz — schwa deletion in Hindi text-to-speech:
-   https://bethmardutho.org/wp-content/uploads/2020/07/Kiraz_Narasimhan_Sproat_2004_Schwa-Deletion-in-Hindi-Text-to-Speech.pdf
+   [Narasimhan, Sproat & Kiraz (2004) — Schwa-Deletion in Hindi Text-to-Speech Synthesis](https://bethmardutho.org/wp-content/uploads/2020/07/Kiraz_Narasimhan_Sproat_2004_Schwa-Deletion-in-Hindi-Text-to-Speech.pdf)
 
 8. Constitution of India, Article 343:
-   https://www.indiacode.nic.in/bitstream/123456789/19632/1/the_constitution_of_india.pdf
+   [Constitution of India — Article 343](https://www.indiacode.nic.in/bitstream/123456789/19632/1/the_constitution_of_india.pdf)
 
 9. Official Languages Act, 1963:
-   https://rajbhasha.gov.in/sites/default/files/rajbhasha_act_1963e.pdf
+   [Official Languages Act, 1963](https://rajbhasha.gov.in/sites/default/files/rajbhasha_act_1963e.pdf)
 
 10. Google APIs Terms of Service:
-    https://developers.google.com/terms/
+    [Google APIs Terms of Service](https://developers.google.com/terms/)
 
 11. Google API Services User Data Policy:
-    https://developers.google.com/terms/api-services-user-data-policy
+    [Google APIs Terms of Service](https://developers.google.com/terms/)api-services-user-data-policy
 
 12. Google Transliterate documentation (marked deprecated; separate from the tested Input Tools HTTP endpoint):
-    https://developers.google.com/transliterate
+    [Google Transliterate documentation — deprecated](https://developers.google.com/transliterate)
+
+
+## Literature mapping — Litmaps preparation
+
+Map title to use: **Hindi and Devanagari — Language, Orthography, and Input Methods**
+
+Map status: **Seed collection prepared; Litmaps map itself has not yet been created in the user's Litmaps account.** This repository note must not imply that a map URL exists.
+
+### Recommended academic seed publications
+
+| Seed | Publication | Research theme | Why include it | Link |
+|---|---|---|---|---|
+| HIN-P01 | Jyotsna Vaid & Ashum Gupta (2002), *Exploring Word Recognition in a Semi-Alphabetic Script: The Case of Devanagari* | Script structure, reading and orthography | Empirical work on Devanagari's mixed syllabic/phonemic properties and vowel-sign placement | [DOI: 10.1006/brln.2001.2556](https://doi.org/10.1006/brln.2001.2556) |
+| HIN-P02 | Bhuvana Narasimhan, Richard Sproat & George Kiraz (2004), *Schwa-Deletion in Hindi Text-to-Speech Synthesis* | Phonology, pronunciation, G2P | Foundational treatment of inherent schwa deletion and morphological effects in Hindi TTS | [PDF — International Journal of Speech Technology](https://bethmardutho.org/wp-content/uploads/2020/07/Kiraz_Narasimhan_Sproat_2004_Schwa-Deletion-in-Hindi-Text-to-Speech.pdf) |
+| HIN-P03 | Pramod Pandey (2007/2008 online), *Phonology–orthography interface in Devanāgarī for Hindi* | Orthography, akshara and phonology | Explains the relationship between Devanagari's akshara structure and Hindi sound patterns | [DOI: 10.1075/wll.10.2.06pan](https://doi.org/10.1075/wll.10.2.06pan) |
+| HIN-P04 | Aryaman Arora, Luke Gessler & Nathan Schneider (2020), *Supervised Grapheme-to-Phoneme Conversion of Orthographic Schwas in Hindi and Punjabi* | Computational linguistics, pronunciation | Modern computational follow-up to rule-based schwa deletion; includes a Hindi model and reusable data resources | [ACL Anthology — 2020.acl-main.696](https://aclanthology.org/2020.acl-main.696/) |
+| HIN-P05 | Pramod Pandey, *Akshara-to-Sound Rules for Hindi* | Grapheme-to-phoneme conversion | Useful additional seed for pronunciation rules and the orthography-to-speech interface | [PDF hosted by IIT Kanpur](https://cse.iitk.ac.in/users/cs671/2015/resources/pandey-14_akshara-to-sound-rules-for-hindi.pdf) |
+| HIN-P06 | *Rule-Based Grapheme-to-Phoneme Mapping for Hindi* | G2P and text-to-speech | Technical perspective on schwa deletion, syllabification and nasal-mark pronunciation | [PDF hosted by IIT Kanpur](https://cse.iitk.ac.in/users/cs671/2015/resources/choudhury-03_rule-based-grapheme-to-phoneme-mapping-hindi.pdf) |
+
+Publication metadata and relevance should be checked against each original record before treating these as a final bibliography. The Unicode Standard and Central Hindi Directorate standardization publication are essential authoritative references, but they are standards/institutional sources rather than academic paper seeds.
+
+### Litmaps workflow
+
+1. Open [Litmaps](https://app.litmaps.com/).
+2. Create a map titled **Hindi and Devanagari — Language, Orthography, and Input Methods**.
+3. Search for and add seed papers HIN-P01 through HIN-P06 by title or DOI.
+4. Select **Explore Related Articles**.
+5. Review backward references and forward citations for each seed.
+6. Add relevant papers discovered through citation links; do not bulk-accept every suggestion.
+7. Use tags or map annotations to separate: script/orthography, phonology/G2P, language history, Unicode/encoding, and transliteration/input methods.
+8. Save the resulting map URL here after creating it in the account.
+
+Litmaps' own guide describes starting with selected articles and using **Explore Related Articles** to discover connected publications: [Litmaps Help — Create a Litmap](https://docs.litmaps.com/en/articles/9057179-create-a-litmap).
+
+### Research synthesis and open limits
+
+- **Established for product content:** Devanagari is an abugida; independent vowels and dependent vowel signs are distinct; consonants carry an inherent vowel; virama suppresses it; vowel signs may be rendered in a position different from their encoded order. See [Unicode Chapter 12](https://unicode.org/versions/Unicode18.0.0/core-spec/chapter-12/).
+- **Established for pronunciation guidance:** Written inherent schwa is not pronounced in every position, and deletion depends on phonological and morphological context. Do not promise deterministic Roman-to-Hindi conversion from a simple character mapping. See [Narasimhan et al. (2004)](https://bethmardutho.org/wp-content/uploads/2020/07/Kiraz_Narasimhan_Sproat_2004_Schwa-Deletion-in-Hindi-Text-to-Speech.pdf) and [Arora et al. (2020)](https://aclanthology.org/2020.acl-main.696/).
+- **Official status wording:** Article 343 concerns the official language of the Union. Do not call Hindi the national language. English use is separately addressed by the [Official Languages Act, 1963](https://rajbhasha.gov.in/sites/default/files/rajbhasha_act_1963e.pdf).
+- **Open research task:** The Litmaps citation network has not been reviewed yet. No claim is made that all relevant or recent papers have been discovered.
+- **Open implementation blocker:** The live Input Tools endpoint test is technical evidence only. Production permission, support and service guarantees remain unverified.
+
+## Claim-to-source traceability
+
+| Claim / decision | Supporting source | Use in TypeIndian |
+|---|---|---|
+| Devanagari encoding, vowel letters/signs, virama, conjuncts and character order | [Unicode Standard, Chapter 12](https://unicode.org/versions/Unicode18.0.0/core-spec/chapter-12/) | Alphabet data and writing-system explanation |
+| Standard Hindi spelling and Devanagari standardization | [Central Hindi Directorate](https://www.chd.education.gov.in/en/devanagari-lipi-tatha-hindi-vartani-manakikaran) | Core/extended character treatment and spelling conventions |
+| Devanagari's akshara structure and Hindi phonology/orthography interface | [Pandey](https://doi.org/10.1075/wll.10.2.06pan) | Script and vowel-sign teaching |
+| Vowel-sign placement and word recognition in Devanagari | [Vaid & Gupta](https://doi.org/10.1006/brln.2001.2556) | Explain visible placement of ि |
+| Hindi schwa deletion | [Narasimhan et al. (2004)](https://bethmardutho.org/wp-content/uploads/2020/07/Kiraz_Narasimhan_Sproat_2004_Schwa-Deletion-in-Hindi-Text-to-Speech.pdf); [Arora et al. (2020)](https://aclanthology.org/2020.acl-main.696/) | Common mistakes and pronunciation caveat |
+| Official language of the Union | [Constitution, Article 343](https://www.indiacode.nic.in/bitstream/123456789/19632/1/the_constitution_of_india.pdf); [Official Languages Act](https://rajbhasha.gov.in/sites/default/files/rajbhasha_act_1963e.pdf) | Avoid inaccurate national-language claim |
+| Hindi spelling and language history context | [IGNOU unit](https://www.egyankosh.ac.in/bitstream/123456789/82878/1/Unit-2.pdf); [McGregor](https://doi.org/10.1017/S0035869X00125730) | Short history section |
+
+## Research completion status
+
+- [x] Core language/script facts recorded.
+- [x] Unicode and official spelling references identified.
+- [x] Academic seed papers identified for a Litmaps map.
+- [x] Descriptive clickable links added to the source register.
+- [x] Main product decisions linked to supporting sources.
+- [ ] Litmaps map created in account and URL recorded.
+- [ ] Forward/backward citation exploration completed.
+- [ ] Native-speaker review of pronunciation and extended forms completed.
+- [ ] Google Input Tools production-use permission/support status resolved.
