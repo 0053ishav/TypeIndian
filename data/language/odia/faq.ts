@@ -29,7 +29,7 @@ export const ODIA_FAQ: FAQItem[] = [
   {
     question: "Is this an Odia translation tool?",
     answer:
-      "No. It transliterates phonetic Roman input into Odia script. Translation changes the language; transliteration changes how the same language is written.",
+      "No. It transliterates phonetic Roman input into Odia script. It does not translate English into Odia; transliteration changes the script used to write the same language.",
   },
   {
     question: "How accurate is English-to-Odia transliteration?",
