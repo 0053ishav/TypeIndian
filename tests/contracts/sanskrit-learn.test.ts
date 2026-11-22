@@ -38,7 +38,6 @@ describe("Sanskrit learning curriculum", () => {
     expect(curriculum?.vowelSigns?.paragraphs.length).toBeGreaterThan(0);
     expect(curriculum?.numerals?.paragraphs.length).toBeGreaterThan(0);
     expect(curriculum?.specialCharacters?.paragraphs.length).toBeGreaterThan(0);
-    expect(curriculum?.vedicRecitation?.paragraphs.length).toBeGreaterThan(0);
     expect(curriculum?.examples?.items.length).toBeGreaterThan(0);
     expect(curriculum?.typingGuide?.examples.length).toBeGreaterThan(0);
     expect(curriculum?.commonMistakes?.items.length).toBeGreaterThan(0);
@@ -54,7 +53,6 @@ describe("Sanskrit learning curriculum", () => {
       curriculum?.vowelSigns,
       curriculum?.numerals,
       curriculum?.specialCharacters,
-      curriculum?.vedicRecitation,
     ].forEach((section) => {
       section?.resourceIds?.forEach((id) => expect(ids.has(id)).toBe(true));
     });
@@ -90,10 +88,10 @@ describe("Sanskrit learning curriculum", () => {
   });
 
   it("treats Vedic accents as advanced notation, not ordinary typing decoration", () => {
-    const content = sanskrit.learn.curriculum?.vedicRecitation?.paragraphs.join(" ") ?? "";
+    const content = sanskrit.learn.curriculum?.specialCharacters?.paragraphs.join(" ") ?? "";
     expect(content).toMatch(/udātta/i);
     expect(content).toMatch(/anudātta/i);
     expect(content).toMatch(/svarita/i);
-    expect(content).toMatch(/not be advertised as a complete Vedic/i);
+    expect(content).toMatch(/not be treated as a complete Vedic/i);
   });
 });
