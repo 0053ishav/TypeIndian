@@ -153,30 +153,27 @@ export const bengali: Language = {
     alphabet: {
       vowels: {
         title: "Vowels (স্বরবর্ণ)",
-
-        description:
-          "Bengali vowels represent independent vowel sounds and form the foundation of pronunciation in the Bengali writing system.",
+        description: "These independent vowel letters are part of the traditional Bengali orthographic chart; their count is not a direct count of modern spoken vowel phonemes.",
       },
-
       consonants: {
         title: "Consonants (ব্যঞ্জনবর্ণ)",
-
-        description:
-          "Bengali consonants represent the primary sounds used to write native Bengali words and combine with vowel signs to form syllables.",
+        description: "The primary Bengali consonant letters are traditionally grouped by place and manner of articulation.",
       },
-
       extensions: {
-        title: "Additional Letters",
-
-        description:
-          "These additional letters are mainly used for traditional Bengali spelling and Sanskrit-derived words.",
+        title: "Modified Letters",
+        description: "Modified letters such as ড়, ঢ়, and য় have distinct orthographic roles. Conjuncts such as ক্ষ are combinations, not extra independent letters.",
       },
-
+      vowelSigns: {
+        title: "Vowel Signs (কার)",
+        description: "Dependent vowel signs combine with consonants or consonant clusters. Some signs appear visually before or around the base consonant.",
+      },
+      symbols: {
+        title: "Special Signs",
+        description: "Candrabindu, anusvara, visarga, hasanta, khanda ta, and nukta have distinct orthographic roles.",
+      },
       numerals: {
         title: "Bengali Numerals",
-
-        description:
-          "Bengali has its own native numeral system, although Arabic numerals are commonly used in everyday writing.",
+        description: "Bengali has native digit forms ০ through ৯, although Western digits are also common in digital writing.",
       },
     },
 
@@ -301,24 +298,12 @@ export const bengali: Language = {
   labels: {
     alphabet: {
       title: "Learn Bengali Letters",
-
-      description:
-        "These are the core Bengali letters. Click any letter to insert it directly into the typing editor above.",
-
+      description: "Explore Bengali letters and signs. Select a character to insert it into the typing editor.",
       vowels: "Vowels (স্বরবর্ণ)",
-
       consonants: "Consonants (ব্যঞ্জনবর্ণ)",
-
       extensions: "Modified Letters",
-
       vowelSigns: "Vowel Signs (কার)",
-
       symbols: "Special Signs",
-
-      vowelSigns: "Vowel Signs (কার)",
-
-      symbols: "Special Signs",
-
       numerals: "Bengali Numerals",
     },
   },
