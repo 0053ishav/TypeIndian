@@ -105,7 +105,7 @@ function CurriculumResearchMap({ resources }: Props) {
   }, [filteredResources, groupBy]);
 
   const layout = useMemo(() => {
-    const left = 190;
+    const left = 172;
     const firstGroupX = 430;
     const groupGap = 250;
     const rowGap = 94;
@@ -237,11 +237,11 @@ function CurriculumResearchMap({ resources }: Props) {
               return (
                 <div
                   key={topic}
-                  className="absolute flex -translate-y-1/2 items-center gap-3"
+                  className="absolute flex -translate-y-1/2 flex-row-reverse items-center justify-between gap-2"
                   style={{ left: 22, top: y, width: 155 }}
                 >
                   <span className="h-8 w-8 shrink-0 rounded-full border-2 border-(--color-accent) bg-(--color-background) shadow-sm" />
-                  <span className="text-xs font-semibold leading-snug text-(--color-text-body)">
+                  <span className="max-w-28 text-right text-xs font-semibold leading-snug text-(--color-text-body)">
                     {TOPIC_LABELS[topic]}
                   </span>
                 </div>
