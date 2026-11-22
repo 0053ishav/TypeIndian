@@ -207,7 +207,7 @@ export const telugu: Language = {
         title: "Telugu Consonants and Varga Groups",
         resourceIds: ["TEL-R02", "TEL-R03"],
         paragraphs: [
-          "The traditional Telugu consonant chart has 36 letters. The first 25 are arranged into five varga groups of five, followed by 11 additional consonants. The chart describes conventional orthography and Sanskrit-derived distinctions; it should not be read as a direct inventory of every contrast in everyday pronunciation.",
+          "The traditional Telugu consonant chart has 35 letters. The first 25 are arranged into five varga groups of five, followed by 10 additional consonants. The chart describes conventional orthography and Sanskrit-derived distinctions; it should not be read as a direct inventory of every contrast in everyday pronunciation.",
           "The five varga rows are velar, palatal, retroflex, dental, and bilabial. Each row traditionally orders unaspirated and aspirated voiceless stops, voiced and voiced aspirated stops, and a nasal.",
           "The additional letters are య ర ఱ ల ళ వ శ ష స హ. ఱ is retained in traditional charts but is uncommon in much contemporary standard usage. ళ is a distinct retroflex lateral and should not be confused with ల.",
           "Clusters such as క్ష and జ్ఞ are formed from consonant sequences and virama. They are familiar written forms, not additional independent basic consonants."
