@@ -38,7 +38,6 @@ export const tamilAlphabet: Alphabet = {
   ],
 
   extensions: [
-    { letter: "ஃ", sound: "āytam" },
     { letter: "ஜ", sound: "ja (Grantha)" },
     { letter: "ஶ", sound: "śa (Grantha)" },
     { letter: "ஷ", sound: "ṣa (Grantha)" },
@@ -64,7 +63,6 @@ export const tamilAlphabet: Alphabet = {
 
   symbols: [
     { letter: "்", sound: "pulli / virama" },
-    { letter: "ஃ", sound: "āytam" },
   ],
 
   numerals: [
