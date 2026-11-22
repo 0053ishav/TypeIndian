@@ -9,7 +9,7 @@ describe("Marathi learning curriculum", () => {
     expect(marathi.alphabet.vowels.map(({ letter }) => letter)).not.toContain("ॠ");
     expect(marathi.alphabet.vowels.map(({ letter }) => letter)).not.toContain("अं");
     expect(marathi.alphabet.consonants.map(({ letter }) => letter)).toContain("ळ");
-    expect(marathi.alphabet.extensions?.map(({ letter }) => letter)).toContain("ॅ");
+    expect(marathi.alphabet.vowelSigns?.map(({ letter }) => letter)).toContain("ॅ");
     expect(marathi.alphabet.vowelSigns?.map(({ letter }) => letter)).toContain("ि");
     expect(marathi.alphabet.symbols?.map(({ letter }) => letter)).toContain("ं");
     expect(marathi.alphabet.numerals).toHaveLength(10);
