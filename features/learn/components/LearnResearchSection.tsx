@@ -31,7 +31,7 @@ function ResearchNetwork({ resources }: Props) {
       if (!a.year && !b.year) return compareIds(a.id, b.id);
       if (!a.year) return 1;
       if (!b.year) return -1;
-      return a.year - b.year || a.id.localeCompare(b.id);
+      return a.year - b.year || compareIds(a.id, b.id);
     });
 
     // Build editorial topic-overlap links. These are not citation relationships.
