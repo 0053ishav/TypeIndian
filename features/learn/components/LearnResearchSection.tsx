@@ -5,6 +5,11 @@ import type { LearnResource } from "@/types/language";
 
 type Props = { resources: LearnResource[] };
 
+// Avoid locale-dependent ordering differences between the server and browser.
+function compareIds(a: string, b: string) {
+  return a < b ? -1 : a > b ? 1 : 0;
+}
+
 type Point = {
   resource: LearnResource;
   x: number;
@@ -23,7 +28,7 @@ function shortLabel(resource: LearnResource) {
 function ResearchNetwork({ resources }: Props) {
   const { points, edges } = useMemo(() => {
     const ordered = [...resources].sort((a, b) => {
-      if (!a.year && !b.year) return a.id.localeCompare(b.id);
+      if (!a.year && !b.year) return compareIds(a.id, b.id);
       if (!a.year) return 1;
       if (!b.year) return -1;
       return a.year - b.year || a.id.localeCompare(b.id);
@@ -40,7 +45,7 @@ function ResearchNetwork({ resources }: Props) {
           overlap: resource.topics.filter((topic) => candidate.topics.includes(topic)).length,
         }))
         .filter((match) => match.overlap > 0)
-        .sort((a, b) => b.overlap - a.overlap || a.candidate.id.localeCompare(b.candidate.id));
+        .sort((a, b) => b.overlap - a.overlap || compareIds(a.candidate.id, b.candidate.id));
 
       // Keep up to two strongest shared-topic connections per source.
       matches.slice(0, 2).forEach(({ candidate }) => {
