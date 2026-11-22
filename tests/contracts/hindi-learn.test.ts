@@ -48,7 +48,7 @@ describe("Hindi learning curriculum", () => {
       explanation: "Hello, friends.",
     });
     expect(
-      hindi.learn.faq.some(
+      hindi.faq.some(
         ({ question, answer }) =>
           question.includes("paste English text") && /does not translate English prose/i.test(answer),
       ),
