@@ -1,4 +1,76 @@
+import type { Alphabet } from "./alphabet";
 import type { FAQItem } from "./faq";
+
+export type LanguageDirection = "ltr" | "rtl";
+export type TransliterationEngine = "google" | "internal";
+
+export interface LanguageTransliteration {
+  engine: TransliterationEngine;
+  languageCode: string;
+}
+
+export interface LanguageLearnLink {
+  href: string;
+  label: string;
+  description: string;
+}
+
+export interface LanguagePageSEO {
+  title: string;
+  description: string;
+  keywords: string[];
+  openGraph: { title: string; description: string; locale: string };
+  twitter: { title: string; description: string };
+}
+
+export interface LanguageTyping {
+  title: string;
+  subtitle: string;
+  intro: string;
+  learnLink: LanguageLearnLink;
+  seo: LanguagePageSEO;
+}
+
+export interface LanguageCapabilities {
+  typing: boolean;
+  learn: boolean;
+  translation: boolean;
+  speechToText: boolean;
+  textToSpeech: boolean;
+  ocr: boolean;
+  ai: boolean;
+}
+
+export interface LanguageLabels {
+  alphabet: {
+    title: string;
+    description: string;
+    vowels: string;
+    consonants: string;
+    extensions?: string;
+    vowelSigns?: string;
+    symbols?: string;
+    numerals: string;
+  };
+}
+
+/** Complete configuration consumed by the language registry and app routes. */
+export interface Language {
+  id: string;
+  slug: string;
+  name: string;
+  nativeName: string;
+  locale: string;
+  direction: LanguageDirection;
+  script: string;
+  transliteration: LanguageTransliteration;
+  typing: LanguageTyping;
+  learn: LanguageLearn;
+  alphabet: Alphabet;
+  labels: LanguageLabels;
+  faq: FAQItem[];
+  capabilities: LanguageCapabilities;
+}
 
 export interface LearnExample {
   /** A real word or short phrase in the target language. */
