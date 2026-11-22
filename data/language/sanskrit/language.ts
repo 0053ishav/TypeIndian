@@ -148,7 +148,7 @@ export const sanskrit: Language = {
         resourceIds: ["SAN-R01", "SAN-R05"],
       },
       symbols: {
-        title: "Anusvāra, Visarga, Avagraha, and Vedic Marks",
+        title: "Anusvāra, Visarga, Avagraha, and Vedic Accent Marks",
         description:
           "These signs have distinct phonetic, grammatical, or recitational functions. Vedic marks require specialized reading conventions.",
         resourceIds: ["SAN-R01", "SAN-R06"],
@@ -250,17 +250,12 @@ export const sanskrit: Language = {
           "Visarga (ः) is a distinct post-vocalic sound, often described as a breath-like release. Sanskrit grammar and recitation traditions also discuss context-sensitive visarga realizations, so it should not be reduced to a punctuation mark.",
           "Avagraha (ऽ) is used in Sanskrit orthography, including to mark the elision of an initial अ in certain sandhi contexts. It is not a general apostrophe and should be interpreted according to the grammatical context.",
           "Virama (्) suppresses the inherent vowel and participates in conjunct formation. Danda (।) and double danda (॥) are traditional punctuation marks used to delimit phrases, verses, or textual units.",
-        ],
-      },
-      vedicRecitation: {
-        title: "Vedic Accents and Recitation Marks",
-        resourceIds: ["SAN-R01", "SAN-R06"],
-        paragraphs: [
-          "Vedic recitation preserves pitch distinctions that are not normally represented in ordinary unaccented Sanskrit text. Commonly discussed accent categories include udātta, anudātta, and svarita, although the exact notation and interpretation depend on the Vedic textual tradition.",
+          "Vedic recitation preserves pitch distinctions that are not normally represented in ordinary unaccented Sanskrit text. Commonly discussed accent categories include udātta, anudātta, and svarita, although notation and interpretation depend on the Vedic textual tradition.",
           "Devanagari encodes accent marks such as ॑ and ॒, alongside additional Vedic marks in other Unicode ranges. Vedic manuscripts and editions may also use specialized signs for nasalization, visarga, and chant notation.",
-          "These marks are not decorative diacritics. They carry recitational information, and accurate use requires knowledge of the relevant śākhā and editorial convention. TypeIndian's basic transliteration workflow should not be advertised as a complete Vedic chanting or critical-edition tool.",
+          "These marks carry recitational information, not decoration. Accurate use requires knowledge of the relevant śākhā and editorial convention. TypeIndian's basic transliteration workflow should not be treated as a complete Vedic chanting or critical-edition tool.",
         ],
       },
+
       examples: {
         title: "Common Sanskrit Words and Phrases",
         introduction: "Roman forms use IAST-style diacritics as learner references. They are not guaranteed to match casual keyboard input or the provider's suggestion order.",
