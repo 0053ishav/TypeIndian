@@ -173,12 +173,12 @@ export interface LanguageLearn {
   script: { title: string; paragraphs: string[]; bullets?: string[] };
 
   alphabet: {
-    vowels: { title: string; description: string };
-    consonants: { title: string; description?: string };
-    extensions?: { title: string; description?: string };
-    vowelSigns?: { title: string; description?: string };
-    symbols?: { title: string; description?: string };
-    numerals: { title: string; description: string };
+    vowels: { title: string; description: string; resourceIds?: string[] };
+    consonants: { title: string; description?: string; resourceIds?: string[] };
+    extensions?: { title: string; description?: string; resourceIds?: string[] };
+    vowelSigns?: { title: string; description?: string; resourceIds?: string[] };
+    symbols?: { title: string; description?: string; resourceIds?: string[] };
+    numerals: { title: string; description: string; resourceIds?: string[] };
   };
 
   /** Detailed modules unique to each language and writing system. */
