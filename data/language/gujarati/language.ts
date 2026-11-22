@@ -200,7 +200,7 @@ export const gujarati: Language = {
         paragraphs: [
           "Gujarati is an abugida written from left to right. A consonant normally carries an inherent vowel, often described as schwa-like. A dependent vowel sign replaces that inherent vowel with another vowel quality.",
           "The Gujarati script does not use the continuous horizontal headline (shirorekha) associated with Devanagari. This is one of its most visible visual distinctions, although the two scripts share historical and structural relationships.",
-          "Consonant clusters can be written with the virama (્), which suppresses the inherent vowel and allows consonants to join. Depending on the letters and font, clusters may appear as half-forms, stacked forms, or ligated shapes.",
+          "Consonant clusters are formed by joining consonants and a virama (્), which suppresses the inherent vowel. A common example is ક્ષ, formed from ક + ્ + ષ; it is a conjunct sequence, not a separate basic consonant letter. Depending on the letters and font, clusters may appear as half-forms, stacked forms, or ligated shapes.",
           "The Unicode sequence is the logical text order; shaping determines the visible form. For example, િ is encoded after its consonant but rendered to the left of it."
         ],
         bullets: [
