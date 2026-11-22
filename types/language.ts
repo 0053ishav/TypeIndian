@@ -22,7 +22,7 @@ export interface LearnContentSection {
 export interface LearnResource {
   id: string;
   title: string;
-  type: "paper" | "article" | "standard" | "institutional-reference" | "book-chapter";
+  type: "paper" | "article" | "standard" | "institutional-reference" | "book-chapter" | "book";
   authors?: string[];
   year?: number;
   publisher?: string;
