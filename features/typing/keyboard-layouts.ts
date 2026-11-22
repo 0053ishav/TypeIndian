@@ -250,9 +250,14 @@ export function getVirtualKeyboardLayout(language: Language): VirtualKeyboardLay
     if (language.id === "bengali" || language.id === "assamese") {
       addToken(outputs, "J", "ৎ");
       addToken(outputs, "z", "ʼ");
-      language.alphabet.extensions?.forEach(({ letter, sound }) => {
-        if (sound === "ẏa") addToken(outputs, "/", letter);
-      });
+    }
+
+    // Bengali distinguishes য (shifted slash) from য় (base slash).
+    // Keep these explicit: the alphabet's descriptive sound labels are not
+    // physical-key mappings and must not be interpreted as such.
+    if (language.id === "bengali") {
+      addToken(outputs, "?", "য");
+      addToken(outputs, "/", "য়");
     }
 
     if (language.id === "odia") {
