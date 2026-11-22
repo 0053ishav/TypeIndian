@@ -213,7 +213,7 @@ export default function Home() {
             </h1>
 
             <div className="mt-10">
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gray-200 bg-white/70 backdrop-blur-sm text-sm text-(--color-text-muted) shadow-sm">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border surface-glass text-sm text-(--color-text-muted) shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                 Free · No account required
               </span>
@@ -256,7 +256,7 @@ export default function Home() {
         ========================================================= */}
 
         <section>
-          <div className="rounded-3xl border border-gray-200/80 bg-white/70 backdrop-blur-sm p-7 md:p-10 shadow-sm">
+          <div className="rounded-3xl border surface-glass p-7 md:p-10 shadow-sm">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.18em] text-(--color-text-muted)">
@@ -293,8 +293,8 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="max-w-5xl mx-auto rounded-3xl border border-gray-200 bg-white shadow-xl shadow-gray-200/40 overflow-hidden">
-            <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+          <div className="max-w-5xl mx-auto rounded-3xl border surface-panel shadow-xl shadow-gray-200/40 overflow-hidden">
+            <div className="px-6 py-4 border-b border-(--color-border) flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <span className="w-3 h-3 rounded-full bg-red-300" />
                 <span className="w-3 h-3 rounded-full bg-yellow-300" />
@@ -307,7 +307,7 @@ export default function Home() {
             </div>
 
             <div className="grid md:grid-cols-2">
-              <div className="p-8 md:p-12 border-b md:border-b-0 md:border-r border-gray-100">
+              <div className="p-8 md:p-12 border-b md:border-b-0 md:border-r border-(--color-border)">
                 <p className="text-xs font-semibold uppercase tracking-[0.15em] text-(--color-text-muted)">
                   English input
                 </p>
@@ -322,7 +322,7 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="p-8 md:p-12 bg-linear-to-br from-orange-50 to-green-50">
+              <div className="p-8 md:p-12 surface-demo-accent">
                 <p className="text-xs font-semibold uppercase tracking-[0.15em] text-(--color-text-muted)">
                   Native script
                 </p>
@@ -350,11 +350,11 @@ export default function Home() {
             description="TypeIndian stays out of your way. You already know how to use a keyboard-we simply make it work for your language."
           />
 
-          <div className="grid md:grid-cols-3 gap-px rounded-3xl overflow-hidden border border-gray-200 bg-gray-200">
+          <div className="grid md:grid-cols-3 gap-px rounded-3xl overflow-hidden border border-(--color-border) bg-(--color-border)">
             {steps.map((step, index) => (
               <div
                 key={step.number}
-                className="bg-white p-8 md:p-10 min-h-64 relative"
+                className="surface-panel p-8 md:p-10 min-h-64 relative"
               >
                 <span className="text-sm font-bold text-(--color-text-muted)">
                   {step.number}
@@ -398,9 +398,9 @@ export default function Home() {
             {useCases.map((useCase) => (
               <div
                 key={useCase.title}
-                className="group rounded-2xl border border-gray-200 bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-gray-200/50"
+                className="group rounded-2xl border surface-panel p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-gray-200/50"
               >
-                <div className="w-12 h-12 rounded-xl bg-gray-50 flex items-center justify-center text-2xl transition-transform duration-300 group-hover:scale-110">
+                <div className="w-12 h-12 rounded-xl surface-panel-muted flex items-center justify-center text-2xl transition-transform duration-300 group-hover:scale-110">
                   {useCase.icon}
                 </div>
 
@@ -460,7 +460,7 @@ export default function Home() {
                 </div>
 
                 {/* Visual side */}
-                <div className="relative border-t lg:border-t-0 lg:border-l border-orange-200/70 bg-white/60 p-8 md:p-12 flex items-center">
+                <div className="relative border-t lg:border-t-0 lg:border-l border-orange-200/70 surface-glass-soft p-8 md:p-12 flex items-center">
                   <div className="w-full">
                     <p className="text-xs font-semibold uppercase tracking-[0.18em] text-(--color-text-muted)">
                       The idea
@@ -555,7 +555,7 @@ export default function Home() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-5">
-              <div className="rounded-2xl border border-green-200 bg-green-50/60 p-7">
+              <div className="rounded-2xl border surface-panel-green p-7">
                 <div className="flex items-center gap-3">
                   <div className="icon-box icon-box-green w-11 h-11">✓</div>
 
@@ -567,7 +567,7 @@ export default function Home() {
                   pronunciation.
                 </p>
 
-                <div className="mt-6 rounded-xl bg-white border border-green-100 p-5">
+                <div className="mt-6 rounded-xl border surface-panel p-5">
                   <p className="font-mono">namaste</p>
                   <p className="mt-2 text-3xl font-bold">नमस्ते</p>
                   <p className="mt-2 text-xs text-(--color-text-muted)">
@@ -576,9 +576,9 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-gray-200 bg-white p-7">
+              <div className="rounded-2xl border surface-panel p-7">
                 <div className="flex items-center gap-3">
-                  <div className="icon-box w-11 h-11 bg-gray-100 text-gray-500">
+                  <div className="icon-box w-11 h-11 surface-panel-muted text-(--color-text-muted)">
                     ×
                   </div>
 
@@ -590,7 +590,7 @@ export default function Home() {
                   meaning.
                 </p>
 
-                <div className="mt-6 rounded-xl bg-gray-50 border border-gray-100 p-5">
+                <div className="mt-6 rounded-xl border surface-panel-muted p-5">
                   <p className="font-mono">hello</p>
                   <p className="mt-2 text-3xl font-bold">नमस्ते</p>
                   <p className="mt-2 text-xs text-(--color-text-muted)">
