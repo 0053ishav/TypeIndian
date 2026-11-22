@@ -47,6 +47,11 @@ describe("Hindi learning curriculum", () => {
       output: "नमस्ते दोस्तों",
       explanation: "Hello, friends.",
     });
-    expect(hindi.learn.faq.some(({ question }) => question.includes("paste English text"))).toBe(true);
+    expect(
+      hindi.learn.faq.some(
+        ({ question, answer }) =>
+          question.includes("paste English text") && /does not translate English prose/i.test(answer),
+      ),
+    ).toBe(true);
   });
 });
