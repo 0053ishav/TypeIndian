@@ -39,7 +39,6 @@ export const marathiResearch: LearnResource[] = [
     id: "MAR-P02",
     title: "Phonological Frequency in Marathi",
     type: "paper",
-    authors: ["Emily C. M."],
     publisher: "Indiana University Linguistics",
     url: "https://scholarworks.iu.edu/journals/index.php/iulcwp/article/download/26234/31855/61943",
     summary: "Corpus-based study reporting Marathi consonant and vowel frequency data and reviewing phonological inventory research. Use it as a research perspective, not as a normative alphabet chart.",
