@@ -227,10 +227,13 @@ export default function TypingTool({ language }: { language: Language }) {
       const insertedLength = newEnd - editStart;
       const groupable = kind === "typing" || kind === "deletion" || kind === "virtual-keyboard";
       const previousCursor = previous?.selectionStart;
+      // Virtual-keyboard clicks are a single short typing burst. Focus changes
+      // between the keyboard and editor can make the browser-reported caret
+      // differ from the previous snapshot, so group this input by time window.
       const adjacent =
+        kind === "virtual-keyboard" ||
         previousCursor === editStart ||
-        previousCursor === oldEnd ||
-        (kind === "virtual-keyboard" && previousCursor === previous?.selectionEnd);
+        previousCursor === oldEnd;
 
       const canGroup =
         groupable &&
