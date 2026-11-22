@@ -3,10 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import ThemeAwareToaster from "@/components/theme/ThemeAwareToaster";
 import Footer from "@/components/layout/Footer";
 import { Analytics } from "@vercel/analytics/next";
 import { GLOBAL_KEYWORDS } from "@/lib/seo/keywords";
-import { Toaster } from "sonner";
 import { SITE_URL } from "@/lib/config/site";
 import SiteSchema from "@/components/common/SiteSchema";
 import Script from "next/script";
@@ -105,12 +105,7 @@ export default function RootLayout({
             {children}
           </div>
           <Footer />
-          <Toaster
-            position="bottom-center"
-            richColors
-            closeButton
-            duration={2500}
-          />
+          <ThemeAwareToaster />
           <Analytics />
         </ThemeProvider>
       </body>
