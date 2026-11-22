@@ -288,7 +288,7 @@ export const panjabi: Language = {
         paragraphs: [
           "Bindi (ਂ) and tippi (ੰ) are distinct nasal signs with distribution patterns shaped by the vowel and spelling context. They are not interchangeable decorations. Bindi commonly appears with several long-vowel contexts, while tippi is used in other nasalization environments. Exact spelling should be learned from standard words and examples.",
           "Addak (ੱ) marks gemination: the following consonant is pronounced longer or doubled. It is written before the consonant it affects, as in ਪੱਕਾ. It does not mean that the addak itself is pronounced as a consonant.",
-          "Pairī̃-bindī forms use a subjoined dot with a base consonant to represent additional sounds. Common forms include ਸ਼, ਖ਼, ਗ਼, ਜ਼, ਫ਼, and ਲ਼. Usage varies by word, register, and speaker; not every speaker maintains every distinction in the same way.",
+          "Additional forms commonly grouped under pairī̃-bindī include ਸ਼, ਖ਼, ਗ਼, ਜ਼, ਫ਼, and ਲ਼. Their Unicode representation is not identical in every case: some letters have dedicated code points rather than being encoded as a base consonant plus a combining nukta. Usage varies by word, register, and speaker; not every speaker maintains every distinction in the same way.",
           "The virama (੍) has a more restricted role in Gurmukhi than in some related Indic scripts. It is used in specific conjuncts, including subjoined ਰ, ਹ, and ਵ forms. Visarga (ਃ) exists in the encoded script but is uncommon in ordinary contemporary Panjabi prose.",
           "The danda (।) and double danda (॥) occur in Indic textual traditions, while modern Panjabi prose also uses familiar punctuation such as commas, full stops, question marks, and quotation marks."
         ],
@@ -306,7 +306,7 @@ export const panjabi: Language = {
         title: "Everyday Panjabi Words and Phrases",
         introduction: "Roman forms are practical learner cues, not a single official transliteration standard. Pronunciation and vocabulary can vary by region.",
         items: [
-          { native: "ਸਤ ਸ੍ਰੀ ਅਕਾਲ", roman: "sat srī akāl", meaning: "A widely used greeting" },
+          { native: "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ", roman: "sat srī akāl", meaning: "A widely used greeting" },
           { native: "ਪੰਜਾਬ", roman: "Panjāb", meaning: "Punjab" },
           { native: "ਪੰਜਾਬੀ", roman: "Panjābī", meaning: "Panjabi / Punjabi" },
           { native: "ਪਾਣੀ", roman: "pāṇī", meaning: "Water" },
@@ -327,7 +327,7 @@ export const panjabi: Language = {
           "This tool transliterates sounds into Gurmukhi; it does not translate English meaning into Panjabi. For example, typing a Romanized Panjabi phrase is different from entering an English sentence and asking for its translation."
         ],
         examples: [
-          { input: "sat sri akaal", output: "ਸਤ ਸ੍ਰੀ ਅਕਾਲ", explanation: "A common greeting; spacing and word segmentation matter." },
+          { input: "sat sri akaal", output: "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ", explanation: "A common greeting; spacing and word segmentation matter." },
           { input: "panjaab", output: "ਪੰਜਾਬ", explanation: "Punjab; transliteration spelling can vary by input convention." },
           { input: "paani", output: "ਪਾਣੀ", explanation: "Water." },
           { input: "ghar", output: "ਘਰ", explanation: "Home or house." },
