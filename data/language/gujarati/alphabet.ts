@@ -13,7 +13,7 @@ export const gujaratiAlphabet: Alphabet = {
     { letter: "ઈ", sound: "ii" },
     { letter: "ઉ", sound: "u" },
     { letter: "ઊ", sound: "uu" },
-    { letter: "ઋ", sound: " vocalic r" },
+    { letter: "ઋ", sound: "vocalic r" },
     { letter: "એ", sound: "e" },
     { letter: "ઐ", sound: "ai" },
     { letter: "ઓ", sound: "o" },
