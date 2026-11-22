@@ -24,7 +24,7 @@ export const GUJARATI_FAQ: FAQItem[] = [
   {
     question: "Can I paste English text and convert it to Gujarati?",
     answer:
-      "No. This is transliteration, not translation. Enter Gujarati words using Roman letters; an English sentence will not be translated into Gujarati.",
+      "No. This is transliteration, not translation; it does not translate English sentences into Gujarati. Enter Gujarati words using Roman letters and select the matching Gujarati-script suggestion.",
   },
   {
     question: "Is this a Gujarati translation tool?",
