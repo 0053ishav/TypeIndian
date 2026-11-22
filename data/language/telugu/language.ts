@@ -154,7 +154,7 @@ export const telugu: Language = {
       },
       consonants: {
         title: "Consonants (హల్లులు)",
-        description: "The traditional chart presents 36 consonants: five varga groups of five letters each, followed by 11 additional consonants. This is an orthographic chart, not a count of distinct speech sounds."
+        description: "The traditional chart presents 35 consonants: five varga groups of five letters each, followed by 10 additional consonants. This is an orthographic chart, not a count of distinct speech sounds."
       },
       extensions: {
         title: "Historical and Extended Characters",
@@ -192,7 +192,7 @@ export const telugu: Language = {
           "Telugu is an abugida: a consonant normally includes the inherent vowel /a/. For example, క represents ka. A dependent vowel sign changes that vowel, as in కా (kā), కి (ki), and కు (ku).",
           "The script is encoded in Unicode block U+0C00–U+0C7F. Unicode stores Telugu vowel letters and several vowel signs atomically, even when their visual construction might suggest multiple parts. Use the encoded character rather than decomposing it into look-alike pieces.",
           "The virama (్) removes the inherent vowel. Consonant clusters are represented through consonant-plus-virama sequences, and shaping software determines the visible conjunct or subscript form.",
-          "Many Telugu consonants have a headstroke known as talakattu. The appearance of this stroke can change when a virama or certain vowel signs are attached. Rendering should be left to a Unicode-aware shaping engine."
+          "Many Telugu consonants have a headstroke known as talakattu (తలకట్టు). The appearance of this stroke can change when a virama or certain vowel signs are attached. Rendering should be left to a Unicode-aware shaping engine."
         ],
         bullets: [
           "Independent vowel: ఆ",
