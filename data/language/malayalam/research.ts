@@ -12,7 +12,7 @@ export const malayalamResearch: LearnResource[] = [
     publisher: "The Unicode Consortium",
     year: 2025,
     url: "https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-12/",
-    summary: "Normative description of the Malayalam block U+0D00–U+0D7F, atomic vowel encoding, dependent vowel signs, virama (cand्रakkala), conjuncts, chillu forms, and shaping behaviour.",
+    summary: "Normative description of the Malayalam block U+0D00–U+0D7F, atomic vowel encoding, dependent vowel signs, virama (candrakkala), conjuncts, chillu forms, and shaping behaviour.",
     topics: ["writingSystem", "consonantClassification", "vowelSigns", "specialCharacters"],
     metadataStatus: "reviewed",
   },
