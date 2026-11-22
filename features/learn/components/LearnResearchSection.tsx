@@ -105,19 +105,19 @@ function CurriculumResearchMap({ resources }: Props) {
   }, [filteredResources, groupBy]);
 
   const layout = useMemo(() => {
-    const left = 172;
-    const firstGroupX = 430;
-    const groupGap = 250;
-    const rowGap = 94;
-    const top = 94;
+    const left = 150;
+    const firstGroupX = 350;
+    const groupGap = 205;
+    const rowGap = 76;
+    const top = 76;
     const maxRows = Math.max(1, ...groups.map(([, items]) => items.length));
-    const height = Math.max(360, top + maxRows * rowGap + 70);
-    const width = Math.max(900, firstGroupX + Math.max(0, groups.length - 1) * groupGap + 190);
+    const height = Math.max(300, top + maxRows * rowGap + 55);
+    const width = Math.max(760, firstGroupX + Math.max(0, groups.length - 1) * groupGap + 150);
     const topicPositions = new Map<string, number>();
     topicIds.forEach((topic, index) => {
       topicPositions.set(
         topic,
-        topicIds.length === 1 ? height / 2 : 82 + (index * (height - 164)) / (topicIds.length - 1),
+        topicIds.length === 1 ? height / 2 : 66 + (index * (height - 132)) / (topicIds.length - 1),
       );
     });
 
@@ -149,21 +149,21 @@ function CurriculumResearchMap({ resources }: Props) {
   };
 
   return (
-    <div className="card space-y-5 p-4 md:p-6">
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+    <div className="card space-y-4 p-3 md:p-4">
+      <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
         <div className="space-y-1">
           <h3 className="font-semibold text-(--color-text-heading)">Research map</h3>
           <p className="max-w-2xl text-sm text-(--color-text-muted)">
             Explore how the learning topics connect to papers, standards, and references.
           </p>
         </div>
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
-          <label className="space-y-1 text-xs font-medium text-(--color-text-muted)">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-end">
+          <label className="space-y-1 text-[11px] font-medium text-(--color-text-muted)">
             <span>Group by</span>
             <select
               value={groupBy}
               onChange={(event) => setGroupBy(event.target.value as GroupBy)}
-              className="block min-w-44 rounded-lg border border-(--color-border) bg-(--color-background) px-3 py-2 text-sm text-(--color-text-body) outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent)"
+              className="block h-8 min-w-40 rounded-md border border-(--color-border) bg-(--color-background) px-2.5 py-1 text-xs text-(--color-text-body) outline-none focus-visible:outline focus-visible:outline-1 focus-visible:outline-(--color-border) focus-visible:outline-offset-1"
             >
               <option value="topic">Curriculum topic</option>
               <option value="type">Source type</option>
@@ -177,13 +177,13 @@ function CurriculumResearchMap({ resources }: Props) {
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search title, author, year…"
-              className="block w-full min-w-52 rounded-lg border border-(--color-border) bg-(--color-background) px-3 py-2 text-sm text-(--color-text-body) outline-none placeholder:text-(--color-text-muted) focus-visible:ring-2 focus-visible:ring-(--color-accent)"
+              className="block h-8 w-full min-w-44 rounded-md border border-(--color-border) bg-(--color-background) px-2.5 py-1 text-xs text-(--color-text-body) outline-none placeholder:text-(--color-text-muted) focus-visible:outline focus-visible:outline-1 focus-visible:outline-(--color-border) focus-visible:outline-offset-1"
             />
           </label>
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-(--color-text-muted)">
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] text-(--color-text-muted)">
         <span>{filteredResources.length} sources</span>
         <span>{groups.length} groups</span>
         <span className="inline-flex items-center gap-2">
@@ -216,8 +216,8 @@ function CurriculumResearchMap({ resources }: Props) {
                 node.linkedTopics.map((topic) => {
                   const topicY = layout.topicPositions.get(topic);
                   if (topicY === undefined) return null;
-                  const startX = layout.left + 17;
-                  const endX = node.x - 17;
+                  const startX = layout.left + 14;
+                  const endX = node.x - 14;
                   const control = (startX + endX) / 2;
                   return (
                     <path
@@ -238,10 +238,10 @@ function CurriculumResearchMap({ resources }: Props) {
                 <div
                   key={topic}
                   className="absolute flex -translate-y-1/2 flex-row-reverse items-center justify-between gap-2"
-                  style={{ left: 22, top: y, width: 155 }}
+                  style={{ left: 16, top: y, width: 125 }}
                 >
-                  <span className="h-8 w-8 shrink-0 rounded-full border-2 border-(--color-accent) bg-(--color-background) shadow-sm" />
-                  <span className="max-w-28 text-right text-xs font-semibold leading-snug text-(--color-text-body)">
+                  <span className="h-7 w-7 shrink-0 rounded-full border-2 border-(--color-accent) bg-(--color-background) shadow-sm" />
+                  <span className="max-w-20 text-right text-[11px] font-semibold leading-snug text-(--color-text-body)">
                     {TOPIC_LABELS[topic]}
                   </span>
                 </div>
@@ -251,8 +251,8 @@ function CurriculumResearchMap({ resources }: Props) {
             {groups.map(([group], groupIndex) => (
               <div
                 key={group}
-                className="absolute top-5 -translate-x-1/2 text-center text-xs font-semibold text-(--color-text-muted)"
-                style={{ left: 430 + groupIndex * 250, width: 210 }}
+                className="absolute top-4 -translate-x-1/2 text-center text-[11px] font-semibold text-(--color-text-muted)"
+                style={{ left: 350 + groupIndex * 205, width: 175 }}
               >
                 {groupLabel(group)}
               </div>
@@ -267,24 +267,24 @@ function CurriculumResearchMap({ resources }: Props) {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={`Open ${node.resource.title}`}
-                  className="group absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-(--color-accent) bg-(--color-accent) text-xs font-semibold tabular-nums text-white shadow-md transition duration-150 hover:scale-110 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-4"
-                  style={{ left: node.x, top: node.y, width: 38, height: 38 }}
+                  className="group absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-(--color-accent) bg-(--color-accent) text-[10px] font-semibold tabular-nums text-white shadow-md transition duration-150 hover:scale-110 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--color-accent) focus-visible:ring-offset-4"
+                  style={{ left: node.x, top: node.y, width: 32, height: 32 }}
                 >
                   {number}
                   <span
                     role="tooltip"
-                    className="pointer-events-none absolute bottom-full left-1/2 z-30 mb-3 w-72 -translate-x-1/2 translate-y-1 rounded-xl border border-(--color-border) bg-(--color-background) p-4 text-left text-(--color-text-body) opacity-0 shadow-xl transition duration-150 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100"
+                    className="pointer-events-none absolute bottom-full left-1/2 z-30 mb-3 w-64 -translate-x-1/2 translate-y-1 rounded-lg border border-(--color-border) bg-(--color-background) p-3 text-left text-(--color-text-body) opacity-0 shadow-xl transition duration-150 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100"
                   >
                     <span className="mb-2 block text-[10px] font-semibold uppercase tracking-wider text-(--color-text-muted)">
                       {TYPE_SHORT_LABELS[node.resource.type]} · {number}
                     </span>
-                    <span className="block text-sm font-semibold leading-snug text-(--color-text-heading)">
+                    <span className="block text-xs font-semibold leading-snug text-(--color-text-heading)">
                       {node.resource.title}
                     </span>
-                    <span className="mt-1 block text-xs text-(--color-text-muted)">
+                    <span className="mt-1 block text-[11px] text-(--color-text-muted)">
                       {[node.resource.authors?.join(", "), node.resource.year, node.resource.publisher].filter(Boolean).join(" · ") || "Publication details"}
                     </span>
-                    <span className="mt-2 block text-xs leading-relaxed text-(--color-text-body)">
+                    <span className="mt-2 block text-[11px] leading-relaxed text-(--color-text-body)">
                       {node.resource.summary}
                     </span>
                     <span className="mt-3 block text-xs font-semibold text-(--color-link)">
