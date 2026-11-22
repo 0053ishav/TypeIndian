@@ -4,52 +4,52 @@ export const URDU_FAQ: FAQItem[] = [
   {
     question: "What is Urdu typing using English letters?",
     answer:
-      "Urdu typing using English letters means typing Urdu words phonetically with a Roman keyboard and converting the input into the Urdu script. For example, typing 'assalamualaikum' can produce 'السلام علیکم'.",
+      "Urdu typing with English letters means entering Roman Urdu phonetically and selecting Urdu-script suggestions. Roman Urdu spelling is not fully standardized, so choose the suggestion that matches the intended word and context.",
   },
   {
     question: "Which script does the Urdu typing tool use?",
     answer:
-      "TypeIndian's Urdu typing tool uses the Perso-Arabic script traditionally used for Urdu, commonly rendered in Nastaliq-style typography.",
+      "TypeIndian uses the Urdu form of the Arabic script, often displayed in Nastaliq typography. Nastaliq is a calligraphic style, not a separate Unicode script.",
   },
   {
-    question: "Does the Urdu typing tool work from right to left?",
+    question: "Does Urdu typing work from right to left?",
     answer:
-      "Yes. Urdu is written from right to left. TypeIndian's Urdu page is designed to support RTL text direction while you type and edit Urdu text.",
+      "Yes. Urdu text runs from right to left. Embedded Latin text and numbers follow bidirectional text rules and may display left to right within an Urdu sentence.",
   },
   {
     question: "Do I need to install an Urdu keyboard?",
     answer:
-      "No. You can type Urdu phonetically using ordinary English keyboard keys. TypeIndian converts your Roman input into Urdu script without requiring a separate keyboard layout.",
+      "No. You can enter Roman-letter phonetic input and choose an Urdu-script suggestion. You can also paste or edit existing Urdu text.",
   },
   {
     question: "Is the Urdu typing tool free?",
     answer:
-      "Yes. TypeIndian's Urdu typing tool is free to use without requiring an account or keyboard installation.",
+      "Yes. TypeIndian's Urdu typing tool is currently free to use without an account or keyboard installation.",
   },
   {
     question: "Is this an Urdu translation tool?",
     answer:
-      "No. TypeIndian provides transliteration rather than translation. It converts phonetic Roman input into Urdu script; it does not translate the meaning into another language.",
+      "No. It transliterates phonetic Roman Urdu input into Urdu script. It does not translate English sentences into Urdu or change the language of the text.",
   },
   {
-    question: "Can I paste Urdu or Roman Urdu text?",
+    question: "Why can the same Urdu letter look different in a word?",
     answer:
-      "Yes. You can paste text into the editor. Roman Urdu can be processed for transliteration, while existing Urdu text can be edited and copied like normal text.",
+      "Urdu is cursive. Many letters have isolated, initial, medial, or final glyph forms depending on which neighboring letters they join. A Unicode-aware shaping engine and suitable font determine the displayed forms.",
   },
   {
-    question: "Can I type Urdu paragraphs and documents?",
+    question: "Can I type short vowels in Urdu?",
     answer:
-      "Yes. You can use the editor for messages, notes, articles, and longer passages. Transliteration requests are sent to Google Input Tools and may be subject to provider or technical limits. For large passages, work in smaller sections, and avoid submitting sensitive or confidential text.",
+      "Urdu has short vowel sounds, but zabar, zer, and pesh are usually omitted in ordinary writing. They can be added when pronunciation needs to be made explicit, such as in learning materials or dictionaries.",
   },
   {
     question: "Does TypeIndian store my Urdu text?",
     answer:
-      "The typing editor does not save your text as a cloud document. However, when you use transliteration suggestions, the relevant input is sent to Google Input Tools for processing. Text you add to the Session Board is stored in your browser's local storage on that device. Vercel Analytics may collect website usage information. See the Privacy Policy for details, and avoid submitting sensitive or confidential text for transliteration.",
+      "The typing editor does not save your text as a cloud document. Transliteration input is sent to the configured Google Input Tools provider for suggestions. Text added to the Session Board is stored in your browser's local storage on that device, and Vercel Analytics may collect website usage information. See the Privacy Policy for details and avoid submitting sensitive or confidential text.",
   },
   {
     question: "Can I use the Urdu text created with TypeIndian commercially?",
     answer:
-      "Yes. You can use the Urdu text you create for personal, educational, professional, and commercial writing.",
+      "You can use the Urdu text you create for personal, educational, professional, and commercial writing. Proofread names, diacritics, and formal documents before publishing.",
   },
 ];
 
@@ -57,46 +57,56 @@ export const LEARN_URDU_FAQ: FAQItem[] = [
   {
     question: "What script is used to write Urdu?",
     answer:
-      "Urdu is written using a Perso-Arabic script. In South Asian Urdu publishing and calligraphy, Nastaliq is the characteristic traditional style associated with Urdu writing.",
+      "Urdu is written in a modified Perso-Arabic form of the Arabic script. Nastaliq is the characteristic traditional style used for Urdu handwriting and publishing.",
   },
   {
     question: "Is Urdu written from right to left?",
     answer:
-      "Yes. Urdu is written from right to left, unlike Hindi and most other major Indian languages, which are written from left to right.",
+      "Yes. Urdu script runs right to left. Numbers and embedded Latin text generally run left to right within mixed-direction text.",
   },
   {
-    question: "What makes Urdu script different from Devanagari?",
+    question: "Is Nastaliq a separate script?",
     answer:
-      "Urdu uses a Perso-Arabic alphabet and is written from right to left, while Hindi uses Devanagari and is written from left to right. Urdu also relies heavily on contextual letter forms and generally omits short-vowel marks in ordinary writing.",
+      "No. Nastaliq is a calligraphic style of the Arabic script. Unicode encodes the underlying letters and marks; a Nastaliq-capable font and shaping engine render the style.",
   },
   {
-    question: "What is Nastaliq?",
+    question: "How many letters are in the Urdu alphabet?",
     answer:
-      "Nastaliq is a distinctive calligraphic style traditionally used for Urdu. Its letters and words have a characteristic flowing and diagonal appearance.",
+      "A traditional Urdu alphabet chart commonly lists 36 letters. Modern orthography references also describe additional important characters, vowel carriers, nasalization and aspiration signs, and 18 aspirated consonant digraphs. Counts vary depending on whether these combinations and auxiliary signs are included.",
   },
   {
-    question: "Does Urdu have short vowels?",
+    question: "Does Urdu have vowels?",
     answer:
-      "Urdu has short vowel sounds, but they are generally not written as separate letters in ordinary text. Optional diacritics such as zabar, zer, and pesh can be used when pronunciation needs to be made explicit.",
+      "Yes. Urdu has short and long vowel sounds. Long vowels are represented using letters such as ا, آ, و, ی, and ے, with their values depending on position and context. Short-vowel marks are usually omitted in everyday text.",
   },
   {
-    question: "Why do some Urdu letters have similar sounds?",
+    question: "What are zabar, zer, and pesh?",
     answer:
-      "Several Urdu letters preserve distinctions from Arabic and Persian spelling even when their pronunciation overlaps in modern Urdu. For example, ث, س, and ص can all represent an 's' sound in different words.",
+      "Zabar (َ), zer (ِ), and pesh (ُ) are combining marks that indicate short a, i, and u sounds. They are generally used when pronunciation needs clarification rather than in ordinary unvowelled writing.",
   },
   {
-    question: "What are the special Urdu letters ٹ, ڈ, and ڑ?",
+    question: "Why do ث, س, and ص sometimes sound alike?",
     answer:
-      "These letters represent retroflex sounds characteristic of South Asian languages. ٹ represents ṭ, ڈ represents ḍ, and ڑ represents the retroflex flap ṛ.",
+      "Urdu preserves Arabic and Persian spelling distinctions in many loanwords even where the letters have overlapping modern pronunciations. Similar overlaps occur with several z- and t-sounding letters.",
   },
   {
-    question: "Where is Urdu spoken?",
+    question: "What are ٹ, ڈ, and ڑ?",
     answer:
-      "Urdu is spoken widely in India and Pakistan and by Urdu-speaking communities around the world. It has an important literary and cultural tradition in South Asia.",
+      "These are Urdu letters used for South Asian retroflex sounds: ٹ is ṭ, ڈ is ḍ, and ڑ is the retroflex flap ṛ.",
   },
   {
-    question: "Can I learn Urdu typing without learning the Urdu keyboard?",
+    question: "What are nūn ghunna and do cashmī hē?",
     answer:
-      "Yes. Phonetic typing lets beginners enter Urdu sounds using familiar Roman letters and then select the appropriate Urdu-script suggestion.",
+      "Nūn ghunna (ں) marks nasalization, especially at the end of a word. Do cashmī hē (ھ) combines with a preceding consonant to represent aspiration, as in بھ, پھ, تھ, and کھ.",
+  },
+  {
+    question: "Why do Urdu letters join differently?",
+    answer:
+      "Arabic-derived cursive writing has joining behavior. Letters can have isolated, initial, medial, and final forms, and some letters do not join to the following letter. The font and text-shaping engine select the appropriate glyph forms.",
+  },
+  {
+    question: "Which numerals are used in Urdu?",
+    answer:
+      "Urdu commonly uses Eastern Arabic-Indic digits ۰ ۱ ۲ ۳ ۴ ۵ ۶ ۷ ۸ ۹. These are Unicode characters shared with other languages, with some glyph shapes varying by language and font.",
   },
 ];
