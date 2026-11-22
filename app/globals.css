@@ -928,3 +928,15 @@ details[open] {
   border-color: #9a3412;
   background: linear-gradient(135deg, #7c2d12 0%, #3f2b16 100%);
 }
+
+
+/* Decorative native-script watermark for language cards */
+.script-watermark {
+  color: #c2410c;
+  opacity: 0.09;
+}
+
+:root[data-theme="dark"] .script-watermark {
+  color: #fb923c;
+  opacity: 0.14;
+}
