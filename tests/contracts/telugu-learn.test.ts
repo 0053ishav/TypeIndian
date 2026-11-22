@@ -74,7 +74,7 @@ describe("Telugu learning curriculum", () => {
 
   it("explains atomic vowel encoding and logical character order", () => {
     const content = telugu.learn.curriculum?.vowelSigns?.paragraphs.join(" ") ?? "";
-    expect(content).toMatch(/Unicode encodes/i);
+    expect(content).toMatch(/Unicode defines logical character sequences/i);
     expect(content).toMatch(/logical Unicode order/i);
     expect(content).toContain("ై");
   });
