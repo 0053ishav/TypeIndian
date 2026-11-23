@@ -45,7 +45,7 @@ export default function ScriptPreview({
   const visibleLetters = chunks[activeChunk] ?? [];
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-gray-200 bg-white/70 p-6">
+    <div className="relative overflow-hidden rounded-2xl border border-(--color-border) surface-glass p-6">
       {/* Decorative glow */}
       <div className="absolute -top-16 -right-16 h-40 w-40 rounded-full bg-gradient-radial-orange opacity-20 pointer-events-none" />
 
@@ -62,7 +62,7 @@ export default function ScriptPreview({
             </p>
           </div>
 
-          <div className="h-9 w-9 rounded-full border border-gray-200 flex items-center justify-center text-sm">
+          <div className="h-9 w-9 rounded-full border border-(--color-border) flex items-center justify-center text-sm text-(--color-text-muted)">
             Aa
           </div>
         </div>
@@ -79,9 +79,9 @@ export default function ScriptPreview({
                 items-center
                 justify-center
                 rounded-xl
-                bg-gray-50
+                surface-panel-muted
                 border
-                border-gray-100
+                border-(--color-border)
                 px-2
                 text-2xl
                 sm:text-3xl
@@ -110,7 +110,7 @@ export default function ScriptPreview({
               className={`h-1.5 rounded-full transition-all duration-500 ${
                 index === activeChunk
                   ? "w-6 bg-(--color-primary)"
-                  : "w-1.5 bg-gray-200"
+                  : "w-1.5 bg-(--color-border)"
               }`}
             />
           ))}

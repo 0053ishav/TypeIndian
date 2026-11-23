@@ -107,7 +107,7 @@ export default function TypingIndexPage() {
               "
             >
               {/* Decorative script background */}
-              <div className="absolute -right-8 -top-8 text-[7rem] leading-none font-bold opacity-[0.035] select-none pointer-events-none transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-6">
+              <div className="script-watermark absolute -right-8 -top-8 text-[7rem] leading-none font-bold select-none pointer-events-none transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-6">
                 {language.nativeName}
               </div>
               <div className="relative">

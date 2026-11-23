@@ -106,7 +106,10 @@ export default function LearnIndexPage() {
               "
             >
               {/* Decorative script background */}
-              <div className="absolute -right-8 -top-8 text-[7rem] leading-none font-bold opacity-[0.035] select-none pointer-events-none transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-6">
+              <div
+                aria-hidden="true"
+                className="script-watermark absolute -right-8 -top-8 text-[7rem] leading-none font-bold select-none pointer-events-none transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-6"
+              >
                 {language.nativeName}
               </div>
 
@@ -133,20 +136,20 @@ export default function LearnIndexPage() {
                 </div>
 
                 {/* Script preview */}
-                <div className="mt-7 rounded-2xl border border-gray-200 bg-white/70 p-6">
+                <div className="mt-7 rounded-2xl border surface-glass p-6">
                   <p className="text-xs uppercase tracking-[0.15em] text-(--color-text-muted)">
                     What you&apos;ll explore
                   </p>
 
                   <div className="mt-5 flex flex-wrap gap-3">
-                    <span className="rounded-xl border border-gray-100 bg-gray-50 px-4 py-3 text-2xl font-bold">
+                    <span className="rounded-xl border surface-panel-muted px-4 py-3 text-2xl font-bold text-(--color-text-heading)">
                       {language.alphabet.vowels
                         .slice(0, 4)
                         .map((item) => item.letter)
                         .join(" ")}
                     </span>
 
-                    <span className="rounded-xl border border-gray-100 bg-gray-50 px-4 py-3 text-2xl font-bold">
+                    <span className="rounded-xl border surface-panel-muted px-4 py-3 text-2xl font-bold text-(--color-text-heading)">
                       {language.alphabet.consonants
                         .slice(0, 4)
                         .map((item) => item.letter)

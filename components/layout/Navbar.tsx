@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 
 import { getLanguages } from "@/lib/languages/loader";
 import Image from "next/image";
+import ThemeToggle from "@/components/theme/ThemeToggle";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -183,22 +184,26 @@ export default function Navbar() {
         </nav>
 
         {/* Desktop CTA */}
-        <div className="hidden md:flex items-center">
+        <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle />
           <Link href="/typing" className="btn-primary text-sm">
             Start Typing →
           </Link>
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          type="button"
-          onClick={() => setMobileOpen((open) => !open)}
-          className="md:hidden btn-secondary text-sm"
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          aria-expanded={mobileOpen}
-        >
-          {mobileOpen ? "Close" : "Menu"}
-        </button>
+        {/* Mobile controls */}
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            onClick={() => setMobileOpen((open) => !open)}
+            className="btn-secondary text-sm"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+          >
+            {mobileOpen ? "Close" : "Menu"}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Navigation */}
